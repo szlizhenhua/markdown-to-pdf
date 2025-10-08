@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { marked } from "marked"
 import { markedHighlight } from "marked-highlight"
+import type { Tokens } from "marked"
 
 interface MarkdownRendererProps {
   content: string
@@ -165,6 +166,20 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
       return `<${tag} ${align}>${token.text}</${tag}>`;
     };
 
+    // 确保 strong 文本正确渲染
+    renderer.strong = ({ tokens }: Pick<Tokens.Strong, 'tokens'>) => {
+      if (!tokens) return '<strong></strong>';
+      const text = tokens.map(token => 'raw' in token ? token.raw : '').join('');
+      return `<strong>${text}</strong>`;
+    };
+
+    // 确保 emphasis 文本正确渲染
+    renderer.em = ({ tokens }: Pick<Tokens.Em, 'tokens'>) => {
+      if (!tokens) return '<em></em>';
+      const text = tokens.map(token => 'raw' in token ? token.raw : '').join('');
+      return `<em>${text}</em>`;
+    };
+
     marked.setOptions({ renderer })
 
     // Process markdown
@@ -204,7 +219,7 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
     if (onHeadingsChange) {
       onHeadingsChange(headings)
     }
-  }, [content, onHeadingsChange, librariesLoaded, hljs, katex, mermaid])
+}, [content, onHeadingsChange, librariesLoaded, hljs, katex, mermaid])
 
   useEffect(() => {
     // Render mermaid diagrams after HTML is set
