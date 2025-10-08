@@ -137,7 +137,7 @@ export default function MarkdownToPDF() {
       </header>
 
       <div className="container mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* Settings Sidebar */}
           <div className="lg:col-span-1 space-y-4 no-print">
             <Card>
@@ -193,19 +193,20 @@ export default function MarkdownToPDF() {
           </div>
 
           {/* Main Content */}
-          <div className={`${showPreview ? "lg:col-span-3 grid lg:grid-cols-2 gap-6" : "lg:col-span-3"}`}>
+          <div className={showPreview ? "md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6" : "md:col-span-3"}>
             {/* Editor */}
-            <div className={showPreview ? "" : "max-w-4xl mx-auto"}>
-              <Card className="h-full no-print">
+            <div className={showPreview ? "flex flex-col h-[70vh]" : "max-w-4xl mx-auto flex flex-col h-[70vh]"}>
+              <Card className="flex-1 h-full no-print overflow-auto">
                 <CardHeader>
                   <CardTitle>Markdown Editor</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="h-full">
                   <Textarea
                     value={markdown}
                     onChange={(e) => setMarkdown(e.target.value)}
                     placeholder="Enter your Markdown content here..."
-                    className="min-h-[600px] font-mono text-sm resize-none"
+                    className="h-full min-h-[300px] font-mono text-sm resize-none"
+                    style={{height: '100%', minHeight: '300px'}}
                   />
                 </CardContent>
               </Card>
@@ -213,8 +214,8 @@ export default function MarkdownToPDF() {
 
             {/* Preview */}
             {showPreview && (
-              <div className="print:col-span-full">
-                <Card className="h-full">
+              <div className="flex flex-col h-[70vh] print:col-span-full">
+                <Card className="flex-1 h-full overflow-auto">
                   <CardHeader className="no-print">
                     <CardTitle className="flex items-center gap-2">
                       <Eye className="h-5 w-5" />
@@ -224,7 +225,7 @@ export default function MarkdownToPDF() {
                       </Badge>
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="print:p-0">
+                  <CardContent className="print:p-0 h-full">
                     <MarkdownRenderer content={markdown} theme={selectedTheme} onHeadingsChange={setHeadings} />
                   </CardContent>
                 </Card>
