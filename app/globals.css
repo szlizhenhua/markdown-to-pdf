@@ -243,6 +243,102 @@
   font-family: system-ui, sans-serif;
 }
 
+/* 添加表格边框样式 */
+.table-bordered {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.table-bordered th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.table-bordered tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.table-bordered tr:hover {
+  background-color: #f1f3f5;
+}
+
+/* 确保列表项有正确的样式 */
+.prose ul,
+.prose ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin: 0.5rem 0;
+}
+
+/* 确保代码块有正确的样式 */
+.prose pre {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+.prose code {
+  background-color: #f1f1f1;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+}
+
+/* 确保标题有正确的样式 */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+.prose h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+.prose h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.prose h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.prose h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.prose h5 {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.prose h6 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

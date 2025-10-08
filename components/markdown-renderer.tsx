@@ -126,6 +126,45 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
       return `<pre class="hljs"><code class="language-${language}">${highlighted}</code></pre>`
     }
 
+    // 添加对列表项的正确渲染
+    renderer.listitem = (token: any) => {
+      return `<li>${token.text}</li>`;
+    };
+
+    // 添加对无序列表的正确渲染
+    renderer.list = (token: any) => {
+      const type = token.ordered ? 'ol' : 'ul';
+      const body = token.items.map((item: any) => renderer.listitem(item)).join('');
+      return `<${type}>${body}</${type}>`;
+    };
+
+    // 添加对表格的正确渲染
+    renderer.table = (token: any) => {
+      const headerContent = token.header.map((cell: any) => renderer.tablecell(cell)).join('');
+      const headerRow = renderer.tablerow({ text: headerContent });
+      
+      const bodyRows = token.rows
+        .map((row: any) => {
+          const rowContent = row.map((cell: any) => renderer.tablecell(cell)).join('');
+          return renderer.tablerow({ text: rowContent });
+        })
+        .join('');
+        
+      return `<table class="table-bordered">${headerRow}${bodyRows}</table>`;
+    };
+
+    // 添加对表格头的正确渲染
+    renderer.tablerow = (token: any) => {
+      return `<tr>${token.text}</tr>`;
+    };
+
+    // 添加对表格单元格的正确渲染
+    renderer.tablecell = (token: any) => {
+      const tag = token.header ? 'th' : 'td';
+      const align = token.align ? `align="${token.align}"` : '';
+      return `<${tag} ${align}>${token.text}</${tag}>`;
+    };
+
     marked.setOptions({ renderer })
 
     // Process markdown
