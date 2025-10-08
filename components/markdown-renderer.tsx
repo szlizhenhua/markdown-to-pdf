@@ -114,31 +114,26 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
     }
 
     // Custom renderer for code blocks to handle mermaid
-    renderer.code = ({ text, lang }: { text: string; lang?: string }) => {
-      const codeString = text
-      console.log('codeString: ', codeString)
-      
-      const langString = lang || ""
-      console.log('langString: ', langString)
-
+    renderer.code = (token: any) => {
+      // console.log('code token:', token);
+      const { raw, text, lang } = token;
+      const langString = lang || "";
+      // console.log('langString: ', langString);
       if (langString === "mermaid") {
-        // 使用textarea来存储mermaid代码，避免HTML解析
-        const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`
+        const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
         return `
           <div class="mermaid-container">
             <div class="mermaid-diagram" id="${id}">
-              <textarea style="display:none;">${codeString}</textarea>
+              <textarea style="display:none;">${text}</textarea>
               <div class="mermaid-loading">Loading diagram...</div>
             </div>
-          </div>`
+          </div>`;
       }
-      const language = hljs.getLanguage(langString) ? langString : "plaintext"
-      const isAlreadyHighlighted = /class="hljs-/.test(codeString)
-      console.log('isAlreadyHighlighted: ', isAlreadyHighlighted)
-      const highlighted = isAlreadyHighlighted ? codeString : hljs.highlight(codeString, { language }).value
-      console.log('highlighted: ', highlighted)
-      return `<pre class="hljs"><code class="language-${language}">${highlighted}</code></pre>`
-    }
+      // 用 highlight.js 高亮原始代码
+      const language = langString || "plaintext";
+      const highlighted = hljs.highlight(raw.replace(/^```[^\n]*\n?/, '').replace(/```$/, ''), { language }).value;
+      return `<pre class="hljs language-${language}"><code>${highlighted}</code></pre>`;
+    };
 
     // 添加对列表项的正确渲染，保留标识符"-"
     renderer.listitem = (token: any) => {
@@ -208,20 +203,49 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
       pedantic: false
     });
 
-    // 预处理内容，确保格式符号不被干扰
-    const formatPreserve = (content: string) => {
-      return content
-        .replace(/(\*\*\*)([^*]+?)(\*\*\*)/g, '<strong><em>$2</em></strong>') // ***bold italic***
-        .replace(/(\*\*)([^*]+?)(\*\*)/g, '<strong>$2</strong>') // **bold**
-        .replace(/(\*)([^*\s]+?)(\*)/g, '<em>$2</em>')    // *italic*
-        .replace(/(_)([^_\s]+?)(_)/g, '<em>$2</em>')      // _italic_
-        .replace(/(~~)([^~]+?)(~~)/g, '<del>$2</del>');   // ~~strikethrough~~
+    // 只对非代码块做格式替换
+    const splitMarkdown = (content: string) => {
+      // 按代码块分割
+      const parts = content.split(/(```[\s\S]*?```)/g);
+      return parts.map(part => {
+        if (part.startsWith("```")) {
+          // 代码块，原样返回
+          return part;
+        } else {
+          // 非代码块，做格式替换和 KaTeX 替换
+          let replaced = part
+            .replace(/(\*\*\*)([^*]+?)(\*\*\*)/g, '<strong><em>$2</em></strong>')
+            .replace(/(\*\*)([^*]+?)(\*\*)/g, '<strong>$2</strong>')
+            .replace(/(\*)([^*\s]+?)(\*)/g, '<em>$2</em>')
+            .replace(/(_)([^_\s]+?)(_)/g, '<em>$2</em>')
+            .replace(/(~~)([^~]+?)(~~)/g, '<del>$2</del>');
+          // Block math: $$...$$
+          replaced = replaced.replace(/\$\$([^$]+)\$\$/g, (match, math) => {
+            try {
+              return `<div style="text-align: center; margin: 1em 0;">${katex.renderToString(math, { displayMode: true })}</div>`
+            } catch (e) {
+              return match
+            }
+          });
+          // Inline math: $...$
+          replaced = replaced.replace(/\*?\*?\$([^$\n]+)\$\*?\*?/g, (match, math) => {
+            try {
+              return `<strong>${katex.renderToString(math, { displayMode: false })}</strong>`
+            } catch (e) {
+              return match
+            }
+          });
+          return replaced;
+        }
+      }).join('');
     };
-    content = formatPreserve(content);
+
+    content = splitMarkdown(content);
 
     // Process markdown
     let processedContent = content
 
+    /*
     // Handle KaTeX math expressions with bold formatting
     // Block math: $$...$$
     processedContent = processedContent.replace(/\$\$([^$]+)\$\$/g, (match, math) => {
@@ -240,23 +264,23 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
         return match
       }
     })
+    */
 
     // Render markdown
-    const html = marked(processedContent)
+    const html = marked(processedContent, { renderer });
     if (typeof html === 'string') {
-      setRenderedHtml(html)
+      setRenderedHtml(html);
     } else {
-      // If it's a Promise, await it then set the state
       html.then((resolvedHtml: string) => {
-        setRenderedHtml(resolvedHtml)
-      })
+        setRenderedHtml(resolvedHtml);
+      });
     }
 
     // Update headings
     if (onHeadingsChange) {
       onHeadingsChange(headings)
     }
-}, [content, onHeadingsChange, librariesLoaded, hljs, katex, mermaid])
+  }, [content, onHeadingsChange, librariesLoaded, hljs, katex, mermaid])
 
   useEffect(() => {
     if (containerRef.current && renderedHtml && mermaid) {
