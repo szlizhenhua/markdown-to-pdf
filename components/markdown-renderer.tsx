@@ -135,16 +135,18 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
       return `<pre class="hljs"><code class="language-${language}">${highlighted}</code></pre>`
     }
 
-    // 添加对列表项的正确渲染
+    // 添加对列表项的正确渲染，保留标识符"-"
     renderer.listitem = (token: any) => {
-      return `<li>${token.text}</li>`;
+      const prefix = token.raw.match(/^(\s*[-*+]\s+)/)?.[0] || '';
+      return `<li>${prefix}${token.text}</li>`;
     };
 
-    // 添加对无序列表的正确渲染
+    // 添加对无序列表的正确渲染，保留原始缩进
     renderer.list = (token: any) => {
       const type = token.ordered ? 'ol' : 'ul';
+      const indent = token.raw.match(/^(\s*)/)?.[0] || '';
       const body = token.items.map((item: any) => renderer.listitem(item)).join('');
-      return `<${type}>${body}</${type}>`;
+      return `${indent}<${type}>${body}</${type}>`;
     };
 
     // 添加对表格的正确渲染
