@@ -1,6 +1,41 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+/* 移动端优化 */
+body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.container {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+  .card, .prose, .print\:col-span-full {
+    border-radius: 0.5rem;
+    box-shadow: none;
+    margin-bottom: 0.5rem;
+  }
+  .no-print {
+    margin-bottom: 0.5rem;
+  }
+  .flex, .grid {
+    gap: 0.5rem !important;
+  }
+  h1, h2, h3, h4 {
+    font-size: 1.1em;
+  }
+  .font-mono {
+    font-size: 0.95em;
+  }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {

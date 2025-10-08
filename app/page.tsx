@@ -110,7 +110,7 @@ export default function MarkdownToPDF() {
       {/* Header */}
       <header className="border-b bg-card no-print">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <FileText className="h-8 w-8 text-primary" />
               <div>
@@ -118,16 +118,16 @@ export default function MarkdownToPDF() {
                 <p className="text-sm text-muted-foreground">Professional document converter</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()}>
+            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+              <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()} className="w-full sm:w-auto">
                 <Upload className="h-4 w-4 mr-2" />
                 Upload
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setShowPreview(!showPreview)}>
+              <Button variant="outline" size="sm" onClick={() => setShowPreview(!showPreview)} className="w-full sm:w-auto">
                 <Eye className="h-4 w-4 mr-2" />
                 {showPreview ? "Hide" : "Show"} Preview
               </Button>
-              <Button onClick={handleDownloadPDF} className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Button onClick={handleDownloadPDF} className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto">
                 <Download className="h-4 w-4 mr-2" />
                 Download PDF
               </Button>
@@ -136,10 +136,10 @@ export default function MarkdownToPDF() {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="container mx-auto px-2 py-4 sm:px-4 sm:py-6">
+        <div className="flex flex-col md:grid md:grid-cols-4 gap-4 md:gap-6">
           {/* Settings Sidebar */}
-          <div className="lg:col-span-1 space-y-4 no-print">
+          <div className="md:col-span-1 space-y-4 no-print order-2 md:order-1">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -189,13 +189,15 @@ export default function MarkdownToPDF() {
             </Card>
 
             {/* Table of Contents */}
-            <TableOfContents headings={headings} />
+            <div className="hidden md:block">
+              <TableOfContents headings={headings} />
+            </div>
           </div>
 
           {/* Main Content */}
-          <div className={showPreview ? "md:col-span-3 grid grid-cols-1 grid-cols-2 gap-6" : "md:col-span-3"}>
+          <div className={showPreview ? "md:col-span-3 flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-6 order-1 md:order-2" : "md:col-span-3 order-1 md:order-2"}>
             {/* Editor */}
-            <div className={showPreview ? "flex flex-col h-[70vh]" : "max-w-4xl mx-auto flex flex-col h-[70vh]"}>
+            <div className={showPreview ? "flex flex-col h-[60vh] md:h-[70vh]" : "max-w-4xl mx-auto flex flex-col h-[60vh] md:h-[70vh]"}>
               <Card className="flex-1 h-full no-print overflow-auto">
                 <CardHeader>
                   <CardTitle>Markdown Editor</CardTitle>
@@ -205,8 +207,8 @@ export default function MarkdownToPDF() {
                     value={markdown}
                     onChange={(e) => setMarkdown(e.target.value)}
                     placeholder="Enter your Markdown content here..."
-                    className="h-full min-h-[300px] font-mono text-sm resize-none"
-                    style={{height: '100%', minHeight: '300px'}}
+                    className="h-full min-h-[200px] md:min-h-[300px] font-mono text-sm resize-none"
+                    style={{height: '100%', minHeight: '200px'}}
                   />
                 </CardContent>
               </Card>
@@ -214,7 +216,7 @@ export default function MarkdownToPDF() {
 
             {/* Preview */}
             {showPreview && (
-              <div className="flex flex-col h-[70vh] print:col-span-full">
+              <div className="flex flex-col h-[60vh] md:h-[70vh] print:col-span-full">
                 <Card className="flex-1 h-full overflow-auto">
                   <CardHeader className="no-print">
                     <CardTitle className="flex items-center gap-2">
