@@ -80,6 +80,28 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
     }
   }, [librariesLoaded])
 
+  // 只在库加载完成后初始化 marked 配置
+  useEffect(() => {
+    if (!librariesLoaded || !hljs || !katex || !mermaid) return;
+
+    marked.use(
+      markedHighlight({
+        langPrefix: "hljs language-",
+        highlight(code, lang) {
+          const language = hljs.getLanguage(lang) ? lang : "plaintext";
+          return hljs.highlight(code, { language }).value;
+        },
+      })
+    );
+
+    marked.setOptions({
+      gfm: true,
+      breaks: true,
+      pedantic: false,
+    });
+  }, [librariesLoaded, hljs, katex, mermaid]);
+
+  // 内容变化时只新建 renderer 并渲染
   useEffect(() => {
     if (!librariesLoaded || !hljs || !katex || !mermaid) return
 
@@ -90,17 +112,6 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
       securityLevel: "loose",
       maxTextSize: 90000
     })
-
-    // Configure marked with syntax highlighting
-    marked.use(
-      markedHighlight({
-        langPrefix: "hljs language-",
-        highlight(code, lang) {
-          const language = hljs.getLanguage(lang) ? lang : "plaintext"
-          return hljs.highlight(code, { language }).value
-        },
-      }),
-    )
 
     // Custom renderer for headings with IDs
     const renderer = new marked.Renderer()
@@ -118,7 +129,8 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
       // console.log('code token:', token);
       const { raw, text, lang } = token;
       const langString = lang || "";
-      // console.log('langString: ', langString);
+      console.log('text: ', text);
+      console.log('langString: ', langString);
       if (langString === "mermaid") {
         const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
         return `
@@ -194,14 +206,6 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
     renderer.del = ({ text }: { text: string }) => {
       return `<del>${text}</del>`;
     };
-
-    // 配置marked使用自定义渲染器并启用所有Markdown特性
-    marked.setOptions({
-      renderer,
-      gfm: true,
-      breaks: true,
-      pedantic: false
-    });
 
     // 只对非代码块做格式替换
     const splitMarkdown = (content: string) => {
