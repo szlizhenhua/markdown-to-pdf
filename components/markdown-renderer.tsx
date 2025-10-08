@@ -129,8 +129,8 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
       // console.log('code token:', token);
       const { raw, text, lang } = token;
       const langString = lang || "";
-      console.log('text: ', text);
-      console.log('langString: ', langString);
+      // console.log('text: ', text);
+      // console.log('langString: ', langString);
       if (langString === "mermaid") {
         const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
         return `
