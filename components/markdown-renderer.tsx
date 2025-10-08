@@ -116,8 +116,10 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
     // Custom renderer for code blocks to handle mermaid
     renderer.code = ({ text, lang }: { text: string; lang?: string }) => {
       const codeString = text
+      console.log('codeString: ', codeString)
       
       const langString = lang || ""
+      console.log('langString: ', langString)
 
       if (langString === "mermaid") {
         // 使用textarea来存储mermaid代码，避免HTML解析
@@ -131,7 +133,10 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
           </div>`
       }
       const language = hljs.getLanguage(langString) ? langString : "plaintext"
-      const highlighted = hljs.highlight(codeString, { language }).value
+      const isAlreadyHighlighted = /class="hljs-/.test(codeString)
+      console.log('isAlreadyHighlighted: ', isAlreadyHighlighted)
+      const highlighted = isAlreadyHighlighted ? codeString : hljs.highlight(codeString, { language }).value
+      console.log('highlighted: ', highlighted)
       return `<pre class="hljs"><code class="language-${language}">${highlighted}</code></pre>`
     }
 
