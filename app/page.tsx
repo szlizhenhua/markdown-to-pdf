@@ -77,6 +77,30 @@ const paperSizes = [
 ]
 
 export default function MarkdownToPDF() {
+  // 递归覆盖所有子元素样式，彻底移除oklch影响
+  function forcePlainColor(element) {
+    if (!element) return;
+    element.style.background = '#fff';
+    element.style.color = '#222';
+    element.style.borderColor = '#ddd';
+    element.style.boxShadow = 'none';
+    element.style.setProperty('--background', '#fff');
+    element.style.setProperty('--foreground', '#222');
+    element.style.setProperty('--card', '#fff');
+    element.style.setProperty('--card-foreground', '#222');
+    element.style.setProperty('--primary', '#222');
+    element.style.setProperty('--primary-foreground', '#fff');
+    element.style.setProperty('--secondary', '#ddd');
+    element.style.setProperty('--secondary-foreground', '#222');
+    element.style.setProperty('--muted', '#eee');
+    element.style.setProperty('--muted-foreground', '#222');
+    element.style.setProperty('--accent', '#eee');
+    element.style.setProperty('--accent-foreground', '#222');
+    element.style.setProperty('--border', '#ddd');
+    element.style.setProperty('--input', '#fff');
+    element.style.setProperty('--ring', '#ddd');
+    Array.from(element.children).forEach(forcePlainColor);
+  }
   const [markdown, setMarkdown] = useState(defaultMarkdown)
   const [selectedTheme, setSelectedTheme] = useState("default")
   const [selectedPaperSize, setSelectedPaperSize] = useState("a4")
@@ -100,9 +124,46 @@ export default function MarkdownToPDF() {
     window.print()
   }
 
-  const handleDownloadPDF = () => {
-    // Trigger browser's print dialog which can save as PDF
-    window.print()
+  const handleDownloadPDF = async () => {
+    // 只在浏览器端执行
+    if (typeof window === 'undefined') return;
+    const html2pdf = (await import('html2pdf.js')).default;
+    const previewCard = document.querySelector('.markdown-preview-pdf') as HTMLElement;
+    if (!previewCard) return;
+
+    // 纸张规格映射
+    const paperSizeMap: Record<string, { format: string; orientation: "portrait" | "landscape" }> = {
+      a4: { format: 'a4', orientation: 'portrait' },
+      letter: { format: 'letter', orientation: 'portrait' },
+      legal: { format: 'legal', orientation: 'portrait' },
+    };
+    const paper = paperSizeMap[selectedPaperSize] || paperSizeMap.a4;
+
+    // 主题样式映射（可扩展）
+    const themeClass = {
+      default: 'prose prose-lg',
+      academic: 'prose prose-lg prose-academic',
+      modern: 'prose prose-lg prose-modern',
+      minimal: 'prose prose-lg prose-minimal',
+    }[selectedTheme] || 'prose prose-lg';
+    previewCard.className = `markdown-preview-pdf ${themeClass} pdf-export-plain`;
+    // 递归覆盖所有子元素样式
+    forcePlainColor(previewCard);
+
+    html2pdf()
+      .set({
+        margin: 0.5,
+        filename: 'document.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: paper.format, orientation: paper.orientation },
+      })
+      .from(previewCard)
+      .save()
+      .finally(() => {
+        // 移除导出专用样式
+        previewCard.classList.remove('pdf-export-plain');
+      });
   }
 
   return (
@@ -228,7 +289,10 @@ export default function MarkdownToPDF() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="print:p-0 h-full">
-                    <MarkdownRenderer content={markdown} theme={selectedTheme} onHeadingsChange={setHeadings} />
+                    {/* PDF导出专用容器，动态应用主题 */}
+                    <div className="markdown-preview-pdf prose prose-lg">
+                      <MarkdownRenderer content={markdown} theme={selectedTheme} onHeadingsChange={setHeadings} />
+                    </div>
                   </CardContent>
                 </Card>
               </div>

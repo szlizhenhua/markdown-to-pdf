@@ -1,3 +1,25 @@
+/* PDF导出专用样式，强制所有颜色为标准格式，避免oklch报错 */
+.pdf-export-plain, .pdf-export-plain * {
+  background: #fff !important;
+  color: #222 !important;
+  border-color: #ddd !important;
+  box-shadow: none !important;
+  --background: #fff !important;
+  --foreground: #222 !important;
+  --card: #fff !important;
+  --card-foreground: #222 !important;
+  --primary: #222 !important;
+  --primary-foreground: #fff !important;
+  --secondary: #ddd !important;
+  --secondary-foreground: #222 !important;
+  --muted: #eee !important;
+  --muted-foreground: #222 !important;
+  --accent: #eee !important;
+  --accent-foreground: #222 !important;
+  --border: #ddd !important;
+  --input: #fff !important;
+  --ring: #ddd !important;
+}
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
