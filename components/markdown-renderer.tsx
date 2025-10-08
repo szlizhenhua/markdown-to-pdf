@@ -104,46 +104,25 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
     const renderer = new marked.Renderer()
     const headings: Array<{ id: string; text: string; level: number }> = []
 
-    renderer.heading = (text, level) => {
-      let textString = ""
-      if (typeof text === "string") {
-        textString = text
-      } else if (text && typeof text === "object" && "tokens" in text) {
-        // Handle marked token object
-        textString = text.tokens?.map((token: any) => token.raw || token.text || "").join("") || ""
-      } else {
-        textString = text?.toString() || ""
-      }
-
+    renderer.heading = ({ text, depth }: { text: string; depth: number }) => {
+      const textString = text
       const id = textString.toLowerCase().replace(/[^\w]+/g, "-")
-      headings.push({ id, text: textString, level })
-      return `<h${level} id="${id}" class="heading-${level}">${textString}</h${level}>`
+      headings.push({ id, text: textString, level: depth })
+      return `<h${depth} id="${id}" class="heading-${depth}">${textString}</h${depth}>`
     }
 
     // Custom renderer for code blocks to handle mermaid
-    renderer.code = (code, lang) => {
-      let codeString = ""
-      if (typeof code === "string") {
-        codeString = code
-      } else if (code && typeof code === "object" && "raw" in code) {
-        codeString = code.raw || code.text || ""
-      } else {
-        codeString = code?.toString() || ""
-      }
-
-      let langString = ""
-      if (typeof lang === "string") {
-        langString = lang
-      } else {
-        langString = lang?.toString() || ""
-      }
+    renderer.code = ({ text, lang }: { text: string; lang?: string }) => {
+      const codeString = text
+      
+      const langString = lang || ""
 
       if (langString === "mermaid") {
         const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`
         return `<div class="mermaid-container"><div class="mermaid" id="${id}">${codeString}</div></div>`
       }
-      const language = hljs.getLanguage(langString || "") ? langString : "plaintext"
-      const highlighted = hljs.highlight(codeString, { language: language || "plaintext" }).value
+      const language = hljs.getLanguage(langString) ? langString : "plaintext"
+      const highlighted = hljs.highlight(codeString, { language }).value
       return `<pre class="hljs"><code class="language-${language}">${highlighted}</code></pre>`
     }
 
@@ -173,7 +152,14 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
 
     // Render markdown
     const html = marked(processedContent)
-    setRenderedHtml(html)
+    if (typeof html === 'string') {
+      setRenderedHtml(html)
+    } else {
+      // If it's a Promise, await it then set the state
+      html.then((resolvedHtml: string) => {
+        setRenderedHtml(resolvedHtml)
+      })
+    }
 
     // Update headings
     if (onHeadingsChange) {
