@@ -255,8 +255,10 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
         // 保留原始mermaid代码，并确保箭头符号正确
         const diagramDefinition = textarea.value
           .replace(/--&gt;/g, "-->") // 确保箭头符号不被转义
-          .replace(/--&amp;gt;/g, "-->");
+          .replace(/--&(amp;)+gt;/g, "-->");
         
+        // console.log('diagramDefinition: ', diagramDefinition);
+
         if (!diagramDefinition.trim()) return;
         
         // Add loading indicator
@@ -265,6 +267,7 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
         // Render with retry mechanism
         const renderWithRetry = async (retryCount = 0) => {
           try {
+            // console.log('mermaid: ', mermaid);
             const { svg, bindFunctions } = await mermaid.render(
               element.id + "-svg", 
               diagramDefinition
@@ -297,7 +300,6 @@ graph TD
     A[Start] --&gt; B{Decision}
     B --&gt;|Yes| C[OK]
     B --&gt;|No| D[Retry]</pre>
-    <div style="margin-top: 10px;">注意：请使用 "--&gt;" 而不是 "-->"</div>
               </div>
             `;
           }
