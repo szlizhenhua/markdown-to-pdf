@@ -218,19 +218,19 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
     let processedContent = content
 
     // Handle KaTeX math expressions with bold formatting
-    // Inline math: $...$ or **$...$**
-    processedContent = processedContent.replace(/\*?\*?\$([^$\n]+)\$\*?\*?/g, (match, math) => {
+    // Block math: $$...$$
+    processedContent = processedContent.replace(/\$\$([^$]+)\$\$/g, (match, math) => {
       try {
-        return `<strong>${katex.renderToString(math, { displayMode: false })}</strong>`
+        return `<div style="text-align: center; margin: 1em 0;">${katex.renderToString(math, { displayMode: true })}</div>`
       } catch (e) {
         return match
       }
     })
 
-    // Block math: $$...$$
-    processedContent = processedContent.replace(/\$\$([^$]+)\$\$/g, (match, math) => {
+    // Inline math: $...$ or **$...$**
+    processedContent = processedContent.replace(/\*?\*?\$([^$\n]+)\$\*?\*?/g, (match, math) => {
       try {
-        return katex.renderToString(math, { displayMode: true })
+        return `<strong>${katex.renderToString(math, { displayMode: false })}</strong>`
       } catch (e) {
         return match
       }
