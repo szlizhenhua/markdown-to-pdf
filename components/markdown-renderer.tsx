@@ -174,30 +174,52 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
       return `<${tag} ${align}>${token.text}</${tag}>`;
     };
 
-    // 确保 strong 文本正确渲染
-    renderer.strong = ({ tokens }: Pick<Tokens.Strong, 'tokens'>) => {
-      if (!tokens) return '<strong></strong>';
-      const text = tokens.map(token => 'raw' in token ? token.raw : '').join('');
-      return `<strong>${text}</strong>`;
+    // 处理 **bold** 语法
+    renderer.strong = ({ text, raw }: { text: string, raw: string }) => {
+      // 保留原始空白字符和列表标识符
+      const prefix = raw.match(/^(\s*)/)?.[0] || '';
+      return `${prefix}<strong>${text}</strong>`;
     };
 
-    // 确保 emphasis 文本正确渲染
-    renderer.em = ({ tokens }: Pick<Tokens.Em, 'tokens'>) => {
-      if (!tokens) return '<em></em>';
-      const text = tokens.map(token => 'raw' in token ? token.raw : '').join('');
-      return `<em>${text}</em>`;
+    // 处理 *italic* 和 _italic_ 语法
+    renderer.em = ({ text, raw }: { text: string, raw: string }) => {
+      // 保留原始空白字符和列表标识符
+      const prefix = raw.match(/^(\s*)/)?.[0] || '';
+      return `${prefix}<em>${text}</em>`;
     };
 
-    marked.setOptions({ renderer })
+    // 处理 ~~strikethrough~~ 语法
+    renderer.del = ({ text }: { text: string }) => {
+      return `<del>${text}</del>`;
+    };
+
+    // 配置marked使用自定义渲染器并启用所有Markdown特性
+    marked.setOptions({
+      renderer,
+      gfm: true,
+      breaks: true,
+      pedantic: false
+    });
+
+    // 预处理内容，确保格式符号不被干扰
+    const formatPreserve = (content: string) => {
+      return content
+        .replace(/(\*\*\*)([^*]+?)(\*\*\*)/g, '<strong><em>$2</em></strong>') // ***bold italic***
+        .replace(/(\*\*)([^*]+?)(\*\*)/g, '<strong>$2</strong>') // **bold**
+        .replace(/(\*)([^*\s]+?)(\*)/g, '<em>$2</em>')    // *italic*
+        .replace(/(_)([^_\s]+?)(_)/g, '<em>$2</em>')      // _italic_
+        .replace(/(~~)([^~]+?)(~~)/g, '<del>$2</del>');   // ~~strikethrough~~
+    };
+    content = formatPreserve(content);
 
     // Process markdown
     let processedContent = content
 
-    // Handle KaTeX math expressions
-    // Inline math: $...$
-    processedContent = processedContent.replace(/\$([^$\n]+)\$/g, (match, math) => {
+    // Handle KaTeX math expressions with bold formatting
+    // Inline math: $...$ or **$...$**
+    processedContent = processedContent.replace(/\*?\*?\$([^$\n]+)\$\*?\*?/g, (match, math) => {
       try {
-        return katex.renderToString(math, { displayMode: false })
+        return `<strong>${katex.renderToString(math, { displayMode: false })}</strong>`
       } catch (e) {
         return match
       }
