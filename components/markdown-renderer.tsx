@@ -83,17 +83,12 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
   useEffect(() => {
     if (!librariesLoaded || !hljs || !katex || !mermaid) return
 
-    // Initialize mermaid
+    // Initialize mermaid with simpler config
     mermaid.initialize({
-      startOnLoad: false,
+      startOnLoad: true,  // 启用自动渲染
       theme: "default",
       securityLevel: "loose",
-      flowchart: {
-        useMaxWidth: false,
-        htmlLabels: true,
-      },
-      // 添加更多配置确保兼容性
-      maxTextSize: 90000,
+      maxTextSize: 90000
     })
 
     // Configure marked with syntax highlighting
@@ -235,74 +230,83 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
 }, [content, onHeadingsChange, librariesLoaded, hljs, katex, mermaid])
 
   useEffect(() => {
-    // Render mermaid diagrams after HTML is set
     if (containerRef.current && renderedHtml && mermaid) {
-      const mermaidElements = containerRef.current.querySelectorAll(".mermaid-diagram")
-      mermaidElements.forEach(async (element) => {
-        try {
-          const textarea = element.querySelector('textarea')
-          if (!textarea) return
-            
-          const diagramDefinition = textarea.value
-          if (!diagramDefinition.trim()) return
-            
-          // 使用更精确的方法处理Mermaid代码
-          let processedDefinition = diagramDefinition;
-          
-          // 直接使用原始代码渲染，不进行任何处理
-          const { svg, bindFunctions } = await mermaid.render(
-            element.id + "-svg", 
-            diagramDefinition
-          )
-          
-          // Clear the element and add the rendered SVG
-          element.innerHTML = ''
-          const svgElement = document.createElement('div')
-          svgElement.innerHTML = svg
-          element.appendChild(svgElement)
-          
-          // If there are binding functions, call them
-          if (bindFunctions) {
-            bindFunctions(element)
-          }
-        } catch (error) {
-          console.error("Mermaid rendering error:", error)
-          // 如果处理后的代码仍有问题，则尝试使用原始代码
+      // Reset mermaid state before rendering
+      try {
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: "default",
+          securityLevel: "loose",
+          maxTextSize: 90000
+        });
+        mermaid.contentLoaded();
+      } catch (error) {
+        console.error("Mermaid initialization error:", error);
+      }
+
+      // Manual rendering as fallback
+      const mermaidElements = containerRef.current.querySelectorAll(".mermaid-diagram");
+      mermaidElements.forEach(element => {
+        if (element.querySelector('svg')) return; // Skip already rendered
+        
+        const textarea = element.querySelector('textarea');
+        if (!textarea) return;
+        
+        // 保留原始mermaid代码，并确保箭头符号正确
+        const diagramDefinition = textarea.value
+          .replace(/--&gt;/g, "-->") // 确保箭头符号不被转义
+          .replace(/--&amp;gt;/g, "-->");
+        
+        if (!diagramDefinition.trim()) return;
+        
+        // Add loading indicator
+        element.innerHTML = '<div class="mermaid-loading">Rendering diagram...</div>';
+        
+        // Render with retry mechanism
+        const renderWithRetry = async (retryCount = 0) => {
           try {
-            const textarea = element.querySelector('textarea')
-            if (!textarea) return
-            
-            const diagramDefinition = textarea.value
             const { svg, bindFunctions } = await mermaid.render(
               element.id + "-svg", 
               diagramDefinition
-            )
+            );
             
-            element.innerHTML = ''
-            const svgElement = document.createElement('div')
-            svgElement.innerHTML = svg
-            element.appendChild(svgElement)
+            element.innerHTML = '';
+            const svgElement = document.createElement('div');
+            svgElement.innerHTML = svg;
+            element.appendChild(svgElement);
             
             if (bindFunctions) {
-              bindFunctions(element)
+              bindFunctions(element);
             }
-          } catch (fallbackError) {
-            console.error("Mermaid fallback rendering error:", fallbackError)
-            const errorDiv = document.createElement('div')
-            errorDiv.className = 'mermaid-error'
-            errorDiv.innerHTML = `
+          } catch (error) {
+            if (retryCount < 2) {
+              console.warn(`Mermaid渲染尝试 ${retryCount + 1} 失败，将在100ms后重试`);
+              await new Promise(resolve => setTimeout(resolve, 100));
+              return renderWithRetry(retryCount + 1);
+            }
+            
+            console.error("Mermaid渲染最终失败:", error);
+            element.innerHTML = `
               <div style="color: red; padding: 10px; border: 1px solid red; border-radius: 4px; background: #ffe6e6;">
                 <strong>Mermaid渲染错误:</strong>
-                <pre style="margin-top: 10px; white-space: pre-wrap;">${fallbackError instanceof Error ? fallbackError.message : '未知错误'}</pre>
+                <div style="margin-top: 5px;">请检查Mermaid语法是否正确</div>
+                <pre style="margin-top: 10px; white-space: pre-wrap;">${error instanceof Error ? error.message : '未知错误'}</pre>
+                <div style="margin-top: 10px;">示例语法:</div>
+                <pre style="margin: 5px 0; padding: 5px; background: #f5f5f5; border-radius: 3px;">
+graph TD
+    A[Start] --&gt; B{Decision}
+    B --&gt;|Yes| C[OK]
+    B --&gt;|No| D[Retry]</pre>
+    <div style="margin-top: 10px;">注意：请使用 "--&gt;" 而不是 "-->"</div>
               </div>
-            `
-            element.innerHTML = ''
-            element.appendChild(errorDiv)
+            `;
           }
-        }
-      })
+        };
+        
+        renderWithRetry();
+      });
     }
-  }, [renderedHtml, mermaid])
+  }, [renderedHtml, mermaid]);
 
   const getThemeClasses = () => {
     switch (theme) {
