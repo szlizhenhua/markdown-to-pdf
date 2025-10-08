@@ -86,7 +86,7 @@ export default function MarkdownToPDF() {
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
-    if ((file && file.type === "text/markdown") || file.name.endsWith(".md")) {
+    if (file && (file.type === "text/markdown" || file.name.endsWith(".md"))) {
       const reader = new FileReader()
       reader.onload = (e) => {
         const content = e.target?.result as string
@@ -193,7 +193,7 @@ export default function MarkdownToPDF() {
           </div>
 
           {/* Main Content */}
-          <div className={showPreview ? "md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6" : "md:col-span-3"}>
+          <div className={showPreview ? "md:col-span-3 grid grid-cols-1 grid-cols-2 gap-6" : "md:col-span-3"}>
             {/* Editor */}
             <div className={showPreview ? "flex flex-col h-[70vh]" : "max-w-4xl mx-auto flex flex-col h-[70vh]"}>
               <Card className="flex-1 h-full no-print overflow-auto">
