@@ -88,6 +88,12 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
       startOnLoad: false,
       theme: "default",
       securityLevel: "loose",
+      flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true,
+      },
+      // 添加更多配置确保兼容性
+      maxTextSize: 90000,
     })
 
     // Configure marked with syntax highlighting
@@ -119,8 +125,15 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
       const langString = lang || ""
 
       if (langString === "mermaid") {
+        // 使用textarea来存储mermaid代码，避免HTML解析
         const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`
-        return `<div class="mermaid-container"><div class="mermaid" id="${id}">${codeString}</div></div>`
+        return `
+          <div class="mermaid-container">
+            <div class="mermaid-diagram" id="${id}">
+              <textarea style="display:none;">${codeString}</textarea>
+              <div class="mermaid-loading">Loading diagram...</div>
+            </div>
+          </div>`
       }
       const language = hljs.getLanguage(langString) ? langString : "plaintext"
       const highlighted = hljs.highlight(codeString, { language }).value
@@ -224,14 +237,68 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
   useEffect(() => {
     // Render mermaid diagrams after HTML is set
     if (containerRef.current && renderedHtml && mermaid) {
-      const mermaidElements = containerRef.current.querySelectorAll(".mermaid")
-      mermaidElements.forEach(async (element, index) => {
+      const mermaidElements = containerRef.current.querySelectorAll(".mermaid-diagram")
+      mermaidElements.forEach(async (element) => {
         try {
-          const { svg } = await mermaid.render(`mermaid-${index}`, element.textContent || "")
-          element.innerHTML = svg
+          const textarea = element.querySelector('textarea')
+          if (!textarea) return
+            
+          const diagramDefinition = textarea.value
+          if (!diagramDefinition.trim()) return
+            
+          // 使用更精确的方法处理Mermaid代码
+          let processedDefinition = diagramDefinition;
+          
+          // 直接使用原始代码渲染，不进行任何处理
+          const { svg, bindFunctions } = await mermaid.render(
+            element.id + "-svg", 
+            diagramDefinition
+          )
+          
+          // Clear the element and add the rendered SVG
+          element.innerHTML = ''
+          const svgElement = document.createElement('div')
+          svgElement.innerHTML = svg
+          element.appendChild(svgElement)
+          
+          // If there are binding functions, call them
+          if (bindFunctions) {
+            bindFunctions(element)
+          }
         } catch (error) {
           console.error("Mermaid rendering error:", error)
-          element.innerHTML = `<pre>Error rendering diagram: ${element.textContent}</pre>`
+          // 如果处理后的代码仍有问题，则尝试使用原始代码
+          try {
+            const textarea = element.querySelector('textarea')
+            if (!textarea) return
+            
+            const diagramDefinition = textarea.value
+            const { svg, bindFunctions } = await mermaid.render(
+              element.id + "-svg", 
+              diagramDefinition
+            )
+            
+            element.innerHTML = ''
+            const svgElement = document.createElement('div')
+            svgElement.innerHTML = svg
+            element.appendChild(svgElement)
+            
+            if (bindFunctions) {
+              bindFunctions(element)
+            }
+          } catch (fallbackError) {
+            console.error("Mermaid fallback rendering error:", fallbackError)
+            const errorDiv = document.createElement('div')
+            errorDiv.className = 'mermaid-error'
+            errorDiv.innerHTML = `
+              <div style="color: red; padding: 10px; border: 1px solid red; border-radius: 4px; background: #ffe6e6;">
+                <strong>Mermaid渲染错误:</strong>
+                <pre style="margin-top: 10px; white-space: pre-wrap;">${fallbackError instanceof Error ? fallbackError.message : '未知错误'}</pre>
+              </div>
+            `
+            element.innerHTML = ''
+            element.appendChild(errorDiv)
+          }
         }
       })
     }
