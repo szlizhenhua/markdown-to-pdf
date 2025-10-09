@@ -4,6 +4,21 @@ import { useEffect, useRef, useState } from "react"
 import { marked } from "marked"
 import { markedHighlight } from "marked-highlight"
 import type { Tokens } from "marked"
+import hljs from 'highlight.js'
+import javascript from 'highlight.js/lib/languages/javascript'
+import typescript from 'highlight.js/lib/languages/typescript'
+import python from 'highlight.js/lib/languages/python'
+import json from 'highlight.js/lib/languages/json'
+import bash from 'highlight.js/lib/languages/bash'
+import katex from 'katex'
+import mermaid from 'mermaid'
+
+// 注册highlight.js语言
+hljs.registerLanguage('javascript', javascript)
+hljs.registerLanguage('typescript', typescript)
+hljs.registerLanguage('python', python)
+hljs.registerLanguage('json', json)
+hljs.registerLanguage('bash', bash)
 
 interface MarkdownRendererProps {
   content: string
@@ -13,82 +28,11 @@ interface MarkdownRendererProps {
 
 export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownRendererProps) {
   const [renderedHtml, setRenderedHtml] = useState("")
-  const [hljs, setHljs] = useState<any>(null)
-  const [katex, setKatex] = useState<any>(null)
-  const [mermaid, setMermaid] = useState<any>(null)
-  const [librariesLoaded, setLibrariesLoaded] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
-<<<<<<< HEAD
   // 只在库加载完成后初始化 marked 配置
   useEffect(() => {
     if (!hljs || !katex || !mermaid) return;
-=======
-  useEffect(() => {
-    const loadLibraries = async () => {
-      try {
-        // Load highlight.js
-        if (!(window as any).hljs) {
-          const hljsScript = document.createElement("script")
-          hljsScript.src = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
-          document.head.appendChild(hljsScript)
-
-          const hljsLink = document.createElement("link")
-          hljsLink.rel = "stylesheet"
-          hljsLink.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
-          document.head.appendChild(hljsLink)
-
-          await new Promise((resolve) => {
-            hljsScript.onload = resolve
-          })
-        }
-
-        // Load KaTeX
-        if (!(window as any).katex) {
-          const katexScript = document.createElement("script")
-          katexScript.src = "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"
-          document.head.appendChild(katexScript)
-
-          const katexLink = document.createElement("link")
-          katexLink.rel = "stylesheet"
-          katexLink.href = "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css"
-          document.head.appendChild(katexLink)
-
-          await new Promise((resolve) => {
-            katexScript.onload = resolve
-          })
-        }
-
-        // Load Mermaid
-        if (!(window as any).mermaid) {
-          const mermaidScript = document.createElement("script")
-          mermaidScript.src = "https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"
-          document.head.appendChild(mermaidScript)
-
-          await new Promise((resolve) => {
-            mermaidScript.onload = resolve
-          })
-        }
-
-        // Set libraries from global
-        setHljs((window as any).hljs)
-        setKatex((window as any).katex)
-        setMermaid((window as any).mermaid)
-        setLibrariesLoaded(true)
-      } catch (error) {
-        console.error("Failed to load libraries:", error)
-      }
-    }
-
-    if (!librariesLoaded) {
-      loadLibraries()
-    }
-  }, [librariesLoaded])
-
-  // 只在库加载完成后初始化 marked 配置
-  useEffect(() => {
-    if (!librariesLoaded || !hljs || !katex || !mermaid) return;
->>>>>>> parent of 101a348 (Refactor code structure for improved readability and maintainability)
 
     marked.use(
       markedHighlight({
@@ -105,19 +49,11 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
       breaks: true,
       pedantic: false,
     });
-<<<<<<< HEAD
   }, [hljs, katex, mermaid]);
 
   // 内容变化时只新建 renderer 并渲染
   useEffect(() => {
     if (!hljs || !katex || !mermaid) return
-=======
-  }, [librariesLoaded, hljs, katex, mermaid]);
-
-  // 内容变化时只新建 renderer 并渲染
-  useEffect(() => {
-    if (!librariesLoaded || !hljs || !katex || !mermaid) return
->>>>>>> parent of 101a348 (Refactor code structure for improved readability and maintainability)
 
     // Initialize mermaid with simpler config
     mermaid.initialize({
@@ -320,11 +256,7 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
     if (onHeadingsChange) {
       onHeadingsChange(headings)
     }
-<<<<<<< HEAD
   }, [content, onHeadingsChange, hljs, katex, mermaid])
-=======
-  }, [content, onHeadingsChange, librariesLoaded, hljs, katex, mermaid])
->>>>>>> parent of 101a348 (Refactor code structure for improved readability and maintainability)
 
   useEffect(() => {
     if (containerRef.current && renderedHtml && mermaid) {
@@ -418,17 +350,6 @@ graph TD
       default:
         return "prose-default"
     }
-  }
-
-  if (!librariesLoaded) {
-    return (
-      <div className="flex items-center justify-center p-8">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2"></div>
-          <p className="text-sm text-muted-foreground">Loading libraries...</p>
-        </div>
-      </div>
-    )
   }
 
   return (
