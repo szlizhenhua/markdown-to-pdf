@@ -30,33 +30,30 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
   const [renderedHtml, setRenderedHtml] = useState("")
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // 初始化mermaid配置
-  mermaid.initialize({
-    startOnLoad: true,
-    theme: "default",
-    securityLevel: "loose",
-    maxTextSize: 90000
-  })
-
-  // 初始化marked配置
-  marked.use(
-    markedHighlight({
-      langPrefix: "hljs language-",
-      highlight(code, lang) {
-        const language = hljs.getLanguage(lang) ? lang : "plaintext"
-        return hljs.highlight(code, { language }).value
-      },
-    })
-  )
-
-  marked.setOptions({
-    gfm: true,
-    breaks: true,
-    pedantic: false
-  })
-
-  // 内容变化时渲染
+  // 只在库加载完成后初始化 marked 配置
   useEffect(() => {
+    if (!hljs || !katex || !mermaid) return;
+
+    marked.use(
+      markedHighlight({
+        langPrefix: "hljs language-",
+        highlight(code, lang) {
+          const language = hljs.getLanguage(lang) ? lang : "plaintext";
+          return hljs.highlight(code, { language }).value;
+        },
+      })
+    );
+
+    marked.setOptions({
+      gfm: true,
+      breaks: true,
+      pedantic: false,
+    });
+  }, [hljs, katex, mermaid]);
+
+  // 内容变化时只新建 renderer 并渲染
+  useEffect(() => {
+    if (!hljs || !katex || !mermaid) return
 
     // Initialize mermaid with simpler config
     mermaid.initialize({
@@ -169,35 +166,51 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
           // 代码块，原样返回
           return part;
         } else {
-          // 非代码块，做格式替换和 KaTeX 替换
+          // 先处理 KaTeX 公式，彻底移除原始 $...$、$$...$$
+          // Block math: $$...$$
+          part = part.replace(/\$\$([^$]+)\$\$/g, (match, math) => {
+            try {
+              // console.log('match$$: ', match);
+              // console.log('渲染块级公式math$$:', math);
+              const katexHtml = katex.renderToString(math, { displayMode: true });
+              // console.log('katexHtml: ', katexHtml);
+              const katexRendered =  `<div style="text-align: center; margin: 1em 0;">${katexHtml}</div>`;
+              // console.log('渲染结果rendered: ', rendered);
+              return katexRendered;
+            } catch (e) {
+              console.error('KaTeX渲染错误:', e);
+              return match;
+            }
+          });
+          // Inline math: $...$
+          part = part.replace(/\*?\*?\$([^$\n]+)\$\*?\*?/g, (match, math) => {
+            try {
+              // console.log('replaced: ', replaced);
+              // console.log('match$: ', match);
+              // console.log('math$: ', math);
+              const katexHtml = katex.renderToString(math, { displayMode: false });
+              // console.log('渲染结果katexHtml: ', katexHtml);
+              return katexHtml;
+            } catch (e) {
+              return match
+            }
+          });
+
+          // 再做粗体/斜体/删除线等格式替换，避免包裹公式
           let replaced = part
             .replace(/(\*\*\*)([^*]+?)(\*\*\*)/g, '<strong><em>$2</em></strong>')
             .replace(/(\*\*)([^*]+?)(\*\*)/g, '<strong>$2</strong>')
             .replace(/(\*)([^*\s]+?)(\*)/g, '<em>$2</em>')
             .replace(/(_)([^_\s]+?)(_)/g, '<em>$2</em>')
             .replace(/(~~)([^~]+?)(~~)/g, '<del>$2</del>');
-          // Block math: $$...$$
-          replaced = replaced.replace(/\$\$([^$]+)\$\$/g, (match, math) => {
-            try {
-              return `<div style="text-align: center; margin: 1em 0;">${katex.renderToString(math, { displayMode: true })}</div>`
-            } catch (e) {
-              return match
-            }
-          });
-          // Inline math: $...$
-          replaced = replaced.replace(/\*?\*?\$([^$\n]+)\$\*?\*?/g, (match, math) => {
-            try {
-              return `<strong>${katex.renderToString(math, { displayMode: false })}</strong>`
-            } catch (e) {
-              return match
-            }
-          });
+          // console.log('replaced00: ', replaced);
           return replaced;
         }
       }).join('');
     };
 
     content = splitMarkdown(content);
+    // console.log('content: ', content);
 
     // Process markdown
     let processedContent = content
@@ -237,7 +250,7 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
     if (onHeadingsChange) {
       onHeadingsChange(headings)
     }
-  }, [content, onHeadingsChange])
+  }, [content, onHeadingsChange, hljs, katex, mermaid])
 
   useEffect(() => {
     if (containerRef.current && renderedHtml && mermaid) {
