@@ -5,9 +5,21 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'Markdown to PDF Converter | Professional Document Export',
+  description: 'Convert Markdown to publication-quality PDF documents with math, code, diagrams, TOC, and custom themes. Perfect for academic and business use.',
+  generator: 'markdown-to-pdf',
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/placeholder-logo.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/placeholder-logo.png", sizes: "180x180", type: "image/png" }],
+    other: [
+      { rel: "icon", type: "image/png", sizes: "32x32", url: "/placeholder-logo.png" },
+      { rel: "icon", type: "image/png", sizes: "16x16", url: "/placeholder-logo.png" },
+    ],
+  },
 }
 
 export default function RootLayout({

@@ -76,6 +76,9 @@ const paperSizes = [
   { id: "legal", name: "Legal", description: "8.5 × 14 in" },
 ]
 
+import Head from 'next/head'
+import Image from 'next/image'
+
 export default function MarkdownToPDF() {
   // 递归覆盖所有子元素样式，彻底移除oklch影响
   function forcePlainColor(element: HTMLElement) {
@@ -171,35 +174,40 @@ export default function MarkdownToPDF() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card no-print">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <FileText className="h-8 w-8 text-primary" />
-              <div>
-                <h1 className="text-2xl font-bold text-foreground">Markdown to PDF</h1>
-                <p className="text-sm text-muted-foreground">Professional document converter</p>
+    <>
+      <Head>
+        <title>Markdown to PDF Converter | Professional Document Export</title>
+        <meta name="description" content="Convert Markdown to professional PDF documents with math, code, diagrams, TOC, themes. Publication-quality output for academic and business use." />
+        <meta name="keywords" content="Markdown, PDF, converter, KaTeX, Mermaid, code highlighting, table of contents, themes, export, academic, professional" />
+        <meta name="author" content="Markdown to PDF Team" />
+        <meta property="og:title" content="Markdown to PDF Converter" />
+        <meta property="og:description" content="Convert Markdown to professional PDF documents with math, code, diagrams, TOC, themes." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/placeholder-logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Markdown to PDF Converter" />
+        <meta name="twitter:description" content="Convert Markdown to professional PDF documents with math, code, diagrams, TOC, themes." />
+        <meta name="twitter:image" content="/placeholder-logo.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" href="/placeholder-logo.png" />
+      </Head>
+      <div className="min-h-screen bg-background">
+        {/* Header */}
+        <header className="border-b bg-card no-print">
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <Image src="/placeholder-logo.png" alt="Markdown to PDF Logo" width={80} height={80} className="rounded" />
+                <div>
+                  <h1 className="text-3xl font-extrabold text-foreground tracking-tight">Markdown to PDF Converter</h1>
+                  <div>
+                    <p className="text-base text-muted-foreground">Convert Markdown to publication-quality PDF documents with math, code, diagrams, TOC, and custom themes.</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
-              <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()} className="w-full sm:w-auto">
-                <Upload className="h-4 w-4 mr-2" />
-                Upload
-              </Button>
-              <Button variant="outline" size="sm" onClick={() => setShowPreview(!showPreview)} className="w-full sm:w-auto">
-                <Eye className="h-4 w-4 mr-2" />
-                {showPreview ? "Hide" : "Show"} Preview
-              </Button>
-              <Button onClick={handleDownloadPDF} className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto">
-                <Download className="h-4 w-4 mr-2" />
-                Download PDF
-              </Button>
-            </div>
           </div>
-        </div>
-      </header>
+        </header>
 
       <div className="container mx-auto px-2 py-4 sm:px-4 sm:py-6">
         <div className="flex flex-col md:grid md:grid-cols-4 gap-4 md:gap-6">
@@ -266,6 +274,20 @@ export default function MarkdownToPDF() {
               <Card className="flex-1 h-full no-print overflow-auto">
                 <CardHeader>
                   <CardTitle>Markdown Editor</CardTitle>
+                  <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                    <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()} className="w-full sm:w-auto">
+                      <Upload className="h-4 w-4 mr-2" />
+                      Upload
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={() => setShowPreview(!showPreview)} className="w-full sm:w-auto">
+                      <Eye className="h-4 w-4 mr-2" />
+                      {showPreview ? "Hide" : "Show"} Preview
+                    </Button>
+                    <Button onClick={handleDownloadPDF} className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto">
+                      <Download className="h-4 w-4 mr-2" />
+                      Download PDF
+                    </Button>
+                  </div>
                 </CardHeader>
                 <CardContent className="h-full">
                   <Textarea
@@ -307,6 +329,7 @@ export default function MarkdownToPDF() {
 
       {/* Hidden file input */}
       <input ref={fileInputRef} type="file" accept=".md,.markdown" onChange={handleFileUpload} className="hidden" />
-    </div>
+  </div>
+  </>
   )
 }
