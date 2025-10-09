@@ -19,6 +19,11 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
   const [librariesLoaded, setLibrariesLoaded] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
+<<<<<<< HEAD
+  // 只在库加载完成后初始化 marked 配置
+  useEffect(() => {
+    if (!hljs || !katex || !mermaid) return;
+=======
   useEffect(() => {
     const loadLibraries = async () => {
       try {
@@ -83,6 +88,7 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
   // 只在库加载完成后初始化 marked 配置
   useEffect(() => {
     if (!librariesLoaded || !hljs || !katex || !mermaid) return;
+>>>>>>> parent of 101a348 (Refactor code structure for improved readability and maintainability)
 
     marked.use(
       markedHighlight({
@@ -99,11 +105,19 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
       breaks: true,
       pedantic: false,
     });
+<<<<<<< HEAD
+  }, [hljs, katex, mermaid]);
+
+  // 内容变化时只新建 renderer 并渲染
+  useEffect(() => {
+    if (!hljs || !katex || !mermaid) return
+=======
   }, [librariesLoaded, hljs, katex, mermaid]);
 
   // 内容变化时只新建 renderer 并渲染
   useEffect(() => {
     if (!librariesLoaded || !hljs || !katex || !mermaid) return
+>>>>>>> parent of 101a348 (Refactor code structure for improved readability and maintainability)
 
     // Initialize mermaid with simpler config
     mermaid.initialize({
@@ -306,7 +320,11 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
     if (onHeadingsChange) {
       onHeadingsChange(headings)
     }
+<<<<<<< HEAD
+  }, [content, onHeadingsChange, hljs, katex, mermaid])
+=======
   }, [content, onHeadingsChange, librariesLoaded, hljs, katex, mermaid])
+>>>>>>> parent of 101a348 (Refactor code structure for improved readability and maintainability)
 
   useEffect(() => {
     if (containerRef.current && renderedHtml && mermaid) {
