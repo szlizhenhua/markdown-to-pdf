@@ -78,8 +78,8 @@ const paperSizes = [
 
 export default function MarkdownToPDF() {
   // 递归覆盖所有子元素样式，彻底移除oklch影响
-  function forcePlainColor(element) {
-    if (!element) return;
+  function forcePlainColor(element: Element) {
+    if (!(element instanceof HTMLElement)) return;
     element.style.background = '#fff';
     element.style.color = '#222';
     element.style.borderColor = '#ddd';
