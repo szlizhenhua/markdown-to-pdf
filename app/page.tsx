@@ -78,7 +78,7 @@ const paperSizes = [
 
 export default function MarkdownToPDF() {
   // 递归覆盖所有子元素样式，彻底移除oklch影响
-  function forcePlainColor(element: HTMLElement) {
+  function forcePlainColor(element) {
     if (!element) return;
     element.style.background = '#fff';
     element.style.color = '#222';
@@ -99,11 +99,7 @@ export default function MarkdownToPDF() {
     element.style.setProperty('--border', '#ddd');
     element.style.setProperty('--input', '#fff');
     element.style.setProperty('--ring', '#ddd');
-    Array.from(element.children).forEach(child => {
-      if (child instanceof HTMLElement) {
-        forcePlainColor(child);
-      }
-    });
+    Array.from(element.children).forEach(forcePlainColor);
   }
   const [markdown, setMarkdown] = useState(defaultMarkdown)
   const [selectedTheme, setSelectedTheme] = useState("default")
