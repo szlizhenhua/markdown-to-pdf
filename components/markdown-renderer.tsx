@@ -172,7 +172,10 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
             try {
               // console.log('match$$: ', match);
               // console.log('渲染块级公式math$$:', math);
-              const katexHtml = katex.renderToString(math, { displayMode: true });
+              const katexHtml = katex.renderToString(math, { 
+                displayMode: false, 
+                output: "mathml" // 仅输出MathML
+              });
               // console.log('katexHtml: ', katexHtml);
               const katexRendered =  `<div style="text-align: center; margin: 1em 0;">${katexHtml}</div>`;
               // console.log('渲染结果rendered: ', rendered);
@@ -188,7 +191,10 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
               // console.log('replaced: ', replaced);
               // console.log('match$: ', match);
               // console.log('math$: ', math);
-              const katexHtml = katex.renderToString(math, { displayMode: false });
+              const katexHtml = katex.renderToString(math, { 
+                displayMode: false, 
+                output: "mathml" // 仅输出MathML
+              });
               // console.log('渲染结果katexHtml: ', katexHtml);
               return katexHtml;
             } catch (e) {
