@@ -151,25 +151,6 @@ export function MarkdownRenderer({ content, theme, paperSizes, onHeadingsChange 
       return `<${tag} ${align}>${token.text}</${tag}>`;
     };
 
-    // 处理 **bold** 语法
-    renderer.strong = ({ text, raw }: { text: string, raw: string }) => {
-      // 保留原始空白字符和列表标识符
-      const prefix = raw.match(/^(\s*)/)?.[0] || '';
-      return `${prefix}<strong>${text}</strong>`;
-    };
-
-    // 处理 *italic* 和 _italic_ 语法
-    renderer.em = ({ text, raw }: { text: string, raw: string }) => {
-      // 保留原始空白字符和列表标识符
-      const prefix = raw.match(/^(\s*)/)?.[0] || '';
-      return `${prefix}<em>${text}</em>`;
-    };
-
-    // 处理 ~~strikethrough~~ 语法
-    renderer.del = ({ text }: { text: string }) => {
-      return `<del>${text}</del>`;
-    };
-
     // 只对非代码块做格式替换
     const splitMarkdown = (content: string) => {
       // 按代码块分割
@@ -227,8 +208,8 @@ export function MarkdownRenderer({ content, theme, paperSizes, onHeadingsChange 
           let replaced = part
             .replace(/(\*\*\*)([^*]+?)(\*\*\*)/g, '<strong><em>$2</em></strong>')
             .replace(/(\*\*)([^*]+?)(\*\*)/g, '<strong>$2</strong>')
-            .replace(/(\*)([^*\s]+?)(\*)/g, '<em>$2</em>')
-            .replace(/(_)([^_\s]+?)(_)/g, '<em>$2</em>')
+            .replace(/(\`)([^`]+?)(\`)/g, '<code class="inline-code">$2</code>')
+            .replace(/(\*)([^*]+?)(\*)/g, '<em>$2</em>')
             .replace(/(~~)([^~]+?)(~~)/g, '<del>$2</del>');
           // console.log('replaced00: ', replaced);
           return replaced;
