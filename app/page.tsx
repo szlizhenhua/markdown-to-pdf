@@ -315,13 +315,26 @@ export default function MarkdownToPDF() {
         <header className="border-b bg-card no-print">
           <div className="container mx-auto px-4 py-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <Image src="/placeholder-logo.png" alt="Markdown to PDF Logo" width={80} height={80} className="rounded" />
-                <div>
-                  <h1 className="text-3xl font-extrabold text-foreground tracking-tight">Markdown to PDF Converter</h1>
-                  <div>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full">
+                <div className="flex items-center gap-3 flex-1">
+                  <Image src="/placeholder-logo.png" alt="Markdown to PDF Logo" width={80} height={80} className="rounded" />
+                  <div className="flex-1 min-w-0">
+                    <h1 className="text-3xl font-extrabold text-foreground tracking-tight">Markdown to PDF Converter</h1>
                     <p className="text-base text-muted-foreground">Convert Markdown to publication-quality PDF documents with math, code, diagrams, TOC, and custom themes.</p>
                   </div>
+                </div>
+                <div className="w-full sm:w-auto">
+                  <Button 
+                    onClick={handleDownloadPDF} 
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto"
+                    style={{
+                      whiteSpace: 'nowrap',
+                      minWidth: '120px'
+                    }}
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Download PDF
+                  </Button>
                 </div>
               </div>
             </div>
@@ -401,10 +414,6 @@ export default function MarkdownToPDF() {
                     <Button variant="outline" size="sm" onClick={() => setShowPreview(!showPreview)} className="w-full sm:w-auto">
                       <Eye className="h-4 w-4 mr-2" />
                       {showPreview ? "Hide" : "Show"} Preview
-                    </Button>
-                    <Button onClick={handleDownloadPDF} className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto">
-                      <Download className="h-4 w-4 mr-2" />
-                      Download PDF
                     </Button>
                   </div>
                 </CardHeader>
