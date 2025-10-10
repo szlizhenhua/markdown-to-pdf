@@ -173,11 +173,15 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
               // console.log('match$$: ', match);
               // console.log('渲染块级公式math$$:', math);
               const katexHtml = katex.renderToString(math, { 
-                displayMode: false, 
-                output: "mathml" // 仅输出MathML
+                displayMode: true, // 改为 true 以正确渲染块级公式
+                output: "mathml", // 仅输出MathML
+                fleqn: false,
+                leqno: false,
+                throwOnError: false
               });
               // console.log('katexHtml: ', katexHtml);
-              const katexRendered =  `<div style="text-align: center; margin: 1em 0;">${katexHtml}</div>`;
+              // 添加特殊类名和属性以便在PDF导出时识别
+              const katexRendered =  `<div class="katex-display" data-tex="${math}">${katexHtml}</div>`;
               // console.log('渲染结果rendered: ', rendered);
               return katexRendered;
             } catch (e) {
@@ -193,10 +197,14 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
               // console.log('math$: ', math);
               const katexHtml = katex.renderToString(math, { 
                 displayMode: false, 
-                output: "mathml" // 仅输出MathML
+                output: "mathml", // 仅输出MathML
+                fleqn: false,
+                leqno: false,
+                throwOnError: false
               });
               // console.log('渲染结果katexHtml: ', katexHtml);
-              return katexHtml;
+              // 添加特殊类名和属性以便在PDF导出时识别
+              return `<span class="katex" data-tex="${math}">${katexHtml}</span>`;
             } catch (e) {
               return match
             }
