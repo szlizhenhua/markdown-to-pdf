@@ -108,18 +108,20 @@ export function MarkdownRenderer({ content, theme, paperSizes, onHeadingsChange 
       return `<pre class="hljs language-${language}"><code>${highlighted}</code></pre>`;
     };
 
-    // 添加对列表项的正确渲染，保留标识符"-"
+    // 自定义列表项渲染，使用实心圆点替代"-"
     renderer.listitem = (token: any) => {
-      const prefix = token.raw.match(/^(\s*[-*+]\s+)/)?.[0] || '';
-      return `<li>${prefix}${token.text}</li>`;
+      const indent = token.raw.match(/^(\s*)/)?.[0] || '';
+      return `${indent}<li style="list-style-type: none; position: relative; padding-left: 1.5em;">
+        <span style="position: absolute; left: 0;">•</span>${token.text}
+      </li>`;
     };
 
-    // 添加对无序列表的正确渲染，保留原始缩进
+    // 自定义无序列表渲染，确保一致的缩进和间距
     renderer.list = (token: any) => {
       const type = token.ordered ? 'ol' : 'ul';
       const indent = token.raw.match(/^(\s*)/)?.[0] || '';
       const body = token.items.map((item: any) => renderer.listitem(item)).join('');
-      return `${indent}<${type}>${body}</${type}>`;
+      return `${indent}<${type} style="padding-left: 1.5em; margin: 0.5em 0;">${body}</${type}>`;
     };
 
     // 添加对表格的正确渲染
