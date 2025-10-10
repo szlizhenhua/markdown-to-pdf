@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { FileText, Download, Upload, Eye, Settings } from "lucide-react"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
 import { TableOfContents } from "@/components/table-of-contents"
+import katex from "katex"
 
 const defaultMarkdown = `# Markdown to PDF Converter
 
@@ -157,19 +158,78 @@ export default function MarkdownToPDF() {
     // 递归覆盖所有子元素样式
     forcePlainColor(previewCard);
 
+    // 临时修改katex输出为SVG格式
+    const katexElements = previewCard.querySelectorAll('.katex');
+    katexElements.forEach(el => {
+      try {
+        const tex = el.getAttribute('data-tex');
+        if (tex) {
+          const rendered = katex.renderToString(tex, {
+            displayMode: el.classList.contains('katex-display'),
+            output: 'htmlAndMathml', // 修改为同时输出HTML和MathML
+            throwOnError: false
+          });
+          el.innerHTML = rendered;
+        }
+      } catch (e) {
+        console.error('KaTeX render error:', e);
+      }
+    });
+
+    // 添加延迟确保DOM更新完成
+    await new Promise(resolve => setTimeout(resolve, 100));
+
     html2pdf()
       .set({
         margin: 0.5,
         filename: 'document.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: paper.format, orientation: paper.orientation },
+        html2canvas: { 
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          logging: true,
+          letterRendering: true,
+          // 优化分页处理
+          onclone: (clonedDoc: Document) => {
+            const clonedPreview = clonedDoc.querySelector('.markdown-preview-pdf');
+            if (clonedPreview) {
+              // 确保内容不会因为分页被切断
+              (clonedPreview as HTMLElement).style.breakInside = 'avoid';
+              clonedPreview.querySelectorAll('*').forEach((el: Element) => {
+                (el as HTMLElement).style.breakInside = 'avoid';
+              });
+            }
+          }
+        },
+        jsPDF: { 
+          unit: 'in', 
+          format: paper.format, 
+          orientation: paper.orientation,
+          // 根据纸张大小调整边距
+        },
       })
       .from(previewCard)
       .save()
       .finally(() => {
         // 移除导出专用样式
         previewCard.classList.remove('pdf-export-plain');
+        // 恢复原始katex渲染
+        katexElements.forEach(el => {
+          const tex = el.getAttribute('data-tex');
+          if (tex) {
+            try {
+              const rendered = katex.renderToString(tex, {
+                displayMode: el.classList.contains('katex-display'),
+                output: 'mathml',
+                throwOnError: false
+              });
+              el.innerHTML = rendered;
+            } catch (e) {
+              console.error('KaTeX restore error:', e);
+            }
+          }
+        });
       });
   }
 
