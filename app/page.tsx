@@ -436,7 +436,7 @@ export default function MarkdownToPDF() {
                   <CardContent className="print:p-0 h-full">
                     {/* PDF导出专用容器，动态应用主题 */}
                     <div className="markdown-preview-pdf prose prose-lg">
-                      <MarkdownRenderer content={markdown} theme={selectedTheme} onHeadingsChange={setHeadings} />
+                      <MarkdownRenderer content={markdown} theme={selectedTheme} paperSizes={selectedPaperSize} onHeadingsChange={setHeadings} />
                     </div>
                   </CardContent>
                 </Card>

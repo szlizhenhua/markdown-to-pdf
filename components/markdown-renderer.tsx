@@ -23,10 +23,11 @@ hljs.registerLanguage('bash', bash)
 interface MarkdownRendererProps {
   content: string
   theme: string
+  paperSizes: string
   onHeadingsChange?: (headings: Array<{ id: string; text: string; level: number }>) => void
 }
 
-export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownRendererProps) {
+export function MarkdownRenderer({ content, theme, paperSizes, onHeadingsChange }: MarkdownRendererProps) {
   const [renderedHtml, setRenderedHtml] = useState("")
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -51,16 +52,26 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
     });
   }, [hljs, katex, mermaid]);
 
-  // 内容变化时只新建 renderer 并渲染
+  // 内容或主题变化时重新渲染
   useEffect(() => {
     if (!hljs || !katex || !mermaid) return
 
-    // Initialize mermaid with simpler config
+    // Initialize mermaid with theme-specific config
     mermaid.initialize({
-      startOnLoad: true,  // 启用自动渲染
-      theme: "default",
-      securityLevel: "loose",
-      maxTextSize: 90000
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose',
+      maxTextSize: 90000,
+      fontFamily: 'inherit',
+      // 添加更好的错误处理配置
+      logLevel: 1, // 减少日志输出
+      flowchart: {
+        useMaxWidth: true,
+        htmlLabels: true,
+      },
+      sequence: {
+        useMaxWidth: true,
+      }
     })
 
     // Custom renderer for headings with IDs
@@ -264,18 +275,20 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
     if (onHeadingsChange) {
       onHeadingsChange(headings)
     }
-  }, [content, onHeadingsChange, hljs, katex, mermaid])
+  }, [content, theme, paperSizes, onHeadingsChange, hljs, katex, mermaid])
 
   useEffect(() => {
     if (containerRef.current && renderedHtml && mermaid) {
-      // Reset mermaid state before rendering
+      // 确保使用当前主题重新初始化
       try {
         mermaid.initialize({
           startOnLoad: true,
-          theme: "default",
-          securityLevel: "loose",
-          maxTextSize: 90000
+          theme: 'default',
+          securityLevel: 'loose',
+          maxTextSize: 90000,
+          fontFamily: 'inherit'
         });
+        // 强制重新渲染所有Mermaid图表
         mermaid.contentLoaded();
       } catch (error) {
         console.error("Mermaid initialization error:", error);
@@ -306,7 +319,7 @@ export function MarkdownRenderer({ content, theme, onHeadingsChange }: MarkdownR
           try {
             // console.log('mermaid: ', mermaid);
             const { svg, bindFunctions } = await mermaid.render(
-              element.id + "-svg", 
+              element.id + "-svg",
               diagramDefinition
             );
             
