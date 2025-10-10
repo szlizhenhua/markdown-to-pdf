@@ -155,42 +155,34 @@ export default function MarkdownToPDF() {
       modern: 'prose prose-lg prose-modern',
       minimal: 'prose prose-lg prose-minimal',
     }[selectedTheme] || 'prose prose-lg';
-    previewCard.className = `markdown-preview-pdf ${themeClass} pdf-export-plain`;
+    previewCard.className = `markdown-preview-pdf ${themeClass} pdf-export-plain pdf-export-mathml`;
     // 递归覆盖所有子元素样式
     forcePlainColor(previewCard);
-    // 临时修改katex输出为兼容PDF的SVG格式
+
+    // 确保所有KaTeX公式已正确渲染
     const katexElements = previewCard.querySelectorAll('.katex');
     const originalContents = new Map<Element, string>();
     
-    await Promise.all(Array.from(katexElements).map(async (el) => {
+    katexElements.forEach((el) => {
       try {
         const tex = el.getAttribute('data-tex');
         if (tex) {
+          // 保存原始内容以便后续恢复
           originalContents.set(el, el.innerHTML);
-          const tempDiv = document.createElement('div');
-          // 强制使用SVG渲染，确保PDF兼容性
-          const options: katex.KatexOptions = {
-            displayMode: el.classList.contains('katex-display'),
-            output: 'html' as const,
-            throwOnError: false,
-            // 添加额外样式确保SVG在PDF中可见
-            fleqn: false,
-            strict: false
-          };
-          katex.render(tex, tempDiv, options);
-          el.innerHTML = tempDiv.innerHTML;
-          // 添加样式确保SVG在PDF中正确缩放
-          const svg = el.querySelector('svg');
-          if (svg) {
-            svg.style.maxWidth = '100%';
-            svg.style.height = 'auto';
-            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+          
+          // 确保公式元素具有正确的显示样式
+          if (el.classList.contains('katex-display')) {
+            (el as HTMLElement).style.display = 'block';
+            (el as HTMLElement).style.textAlign = 'center';
+            (el as HTMLElement).style.margin = '1em 0';
+          } else {
+            (el as HTMLElement).style.display = 'inline-block';
           }
         }
       } catch (e) {
-        console.error('KaTeX render error:', e);
+        console.error('KaTeX processing error:', e);
       }
-    }));
+    });
 
     // 确保所有DOM更新完成
     await new Promise(resolve => setTimeout(resolve, 300));
@@ -206,47 +198,27 @@ export default function MarkdownToPDF() {
           allowTaint: true,
           logging: true,
           letterRendering: true,
-          // 添加对SVG的特殊处理
           onclone: (clonedDoc: Document) => {
             const clonedPreview = clonedDoc.querySelector('.markdown-preview-pdf') as HTMLElement | null;
             if (clonedPreview) {
               // 确保内容不会因为分页被切断
               clonedPreview.style.breakInside = 'avoid';
               clonedPreview.style.pageBreakInside = 'avoid';
+              
+              // 统一处理所有元素的分页问题
               clonedPreview.querySelectorAll('*').forEach((el: Element) => {
                 (el as HTMLElement).style.breakInside = 'avoid';
                 (el as HTMLElement).style.pageBreakInside = 'avoid';
               });
-              // 特殊处理SVG元素
-              clonedPreview.querySelectorAll('svg').forEach((svg: Element) => {
-                (svg as SVGElement).style.maxWidth = '100%';
-                (svg as SVGElement).style.height = 'auto';
-                (svg as SVGElement).style.pageBreakInside = 'avoid';
-              });
               
-              // 特殊处理KaTeX公式元素，确保它们在PDF中可见
+              // 特殊处理公式元素
               clonedPreview.querySelectorAll('.katex').forEach((katexEl: Element) => {
-                (katexEl as HTMLElement).style.display = 'inline-block';
-                (katexEl as HTMLElement).style.pageBreakInside = 'avoid';
-              });
-              
-              // 特殊处理KaTeX块级公式
-              clonedPreview.querySelectorAll('.katex-display').forEach((katexEl: Element) => {
-                (katexEl as HTMLElement).style.display = 'block';
-                (katexEl as HTMLElement).style.textAlign = 'center';
-                (katexEl as HTMLElement).style.pageBreakInside = 'avoid';
-                (katexEl as HTMLElement).style.margin = '1em 0';
-              });
-              
-              // 特殊处理代码块
-              clonedPreview.querySelectorAll('pre').forEach((preEl: Element) => {
-                (preEl as HTMLElement).style.pageBreakInside = 'avoid';
-                (preEl as HTMLElement).style.breakInside = 'avoid';
-              });
-              
-              // 特殊处理表格
-              clonedPreview.querySelectorAll('table').forEach((tableEl: Element) => {
-                (tableEl as HTMLElement).style.pageBreakInside = 'avoid';
+                const el = katexEl as HTMLElement;
+                el.style.display = el.classList.contains('katex-display') ? 'block' : 'inline-block';
+                if (el.classList.contains('katex-display')) {
+                  el.style.textAlign = 'center';
+                  el.style.margin = '1em 0';
+                }
               });
             }
           }
@@ -268,28 +240,26 @@ export default function MarkdownToPDF() {
       } as any)
       .save();  // 添加这行来触发PDF下载
       
-    worker.then(() => {
-      // 移除导出专用样式
-      previewCard.classList.remove('pdf-export-plain');
-      // 恢复原始katex内容
-      katexElements.forEach((el: Element) => {
-        const originalContent = originalContents.get(el);
-        if (originalContent !== undefined) {
-          el.innerHTML = originalContent;
-        }
+      worker.then(() => {
+        // 恢复原始katex内容
+        katexElements.forEach(el => {
+          if (originalContents.has(el)) {
+            el.innerHTML = originalContents.get(el)!;
+          }
+        });
+        // 移除导出专用样式
+        previewCard.classList.remove('pdf-export-plain', 'pdf-export-mathml');
+      }).catch((error: Error) => {
+        console.error('PDF generation error:', error);
+        // 恢复原始katex内容
+        katexElements.forEach(el => {
+          if (originalContents.has(el)) {
+            el.innerHTML = originalContents.get(el)!;
+          }
+        });
+        // 移除导出专用样式
+        previewCard.classList.remove('pdf-export-plain', 'pdf-export-mathml');
       });
-    }).catch((error: Error) => {
-      console.error('PDF generation error:', error);
-      // 移除导出专用样式
-      previewCard.classList.remove('pdf-export-plain');
-      // 恢复原始katex内容
-      katexElements.forEach((el: Element) => {
-        const originalContent = originalContents.get(el);
-        if (originalContent !== undefined) {
-          el.innerHTML = originalContent;
-        }
-      });
-    });
   }
 
   return (

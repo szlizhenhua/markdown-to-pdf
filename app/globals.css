@@ -297,6 +297,30 @@
   font-family: monospace;
 }
 
+/* 导出PDF时使用MathML可视化，隐藏KaTeX HTML结构 */
+.pdf-export-mathml .katex .katex-mathml {
+  position: static !important;
+  clip: auto !important;
+  height: auto !important;
+  width: auto !important;
+  overflow: visible !important;
+  display: inline-block !important;
+  white-space: normal !important;
+}
+
+.pdf-export-mathml .katex-display .katex-mathml {
+  display: block !important;
+  margin: 0 auto;
+}
+
+.pdf-export-mathml .katex .katex-html {
+  display: none !important;
+}
+
+.pdf-export-mathml .katex-display {
+  text-align: center;
+}
+
 /* 确保标题有正确的样式 */
 .prose h1,
 .prose h2,
