@@ -2,13 +2,13 @@
 
 import type React from "react"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { FileText, Download, Upload, Eye, Settings } from "lucide-react"
+import { FileText, Download, Upload, Eye, Settings, FileUp } from "lucide-react"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
 import { TableOfContents } from "@/components/table-of-contents"
 import katex from "katex"
@@ -24,6 +24,12 @@ This is a **professional** Markdown to PDF converter that supports:
 - **Code highlighting**
 - **Table of contents** with page numbers
 - **Custom themes** and styling
+
+### Format Supports
+- **Bold text**
+- *Italic text*
+- \`Inline code\`
+- [Links](https://markdown-to-pdf.org/)
 
 ## Mathematical Expressions
 
@@ -77,49 +83,69 @@ const paperSizes = [
   { id: "legal", name: "Legal", description: "8.5 × 14 in" },
 ]
 
+const fontSizes = [
+  { id: "10", name: "10pt" },
+  { id: "11", name: "11pt" },
+  { id: "12", name: "12pt" },
+  { id: "14", name: "14pt" },
+  { id: "16", name: "16pt" },
+]
+
 import Head from 'next/head'
 import Image from 'next/image'
 
 export default function MarkdownToPDF() {
   // 递归覆盖所有子元素样式，彻底移除oklch影响
-  function forcePlainColor(element: HTMLElement) {
-    if (!element) return;
-    element.style.background = '#fff';
-    element.style.color = '#222';
-    element.style.borderColor = '#ddd';
-    element.style.boxShadow = 'none';
-    element.style.setProperty('--background', '#fff');
-    element.style.setProperty('--foreground', '#222');
-    element.style.setProperty('--card', '#fff');
-    element.style.setProperty('--card-foreground', '#222');
-    element.style.setProperty('--primary', '#222');
-    element.style.setProperty('--primary-foreground', '#fff');
-    element.style.setProperty('--secondary', '#ddd');
-    element.style.setProperty('--secondary-foreground', '#222');
-    element.style.setProperty('--muted', '#eee');
-    element.style.setProperty('--muted-foreground', '#222');
-    element.style.setProperty('--accent', '#eee');
-    element.style.setProperty('--accent-foreground', '#222');
-    element.style.setProperty('--border', '#ddd');
-    element.style.setProperty('--input', '#fff');
-    element.style.setProperty('--ring', '#ddd');
-    Array.from(element.children).forEach(child => {
-      if (child instanceof HTMLElement) {
-        forcePlainColor(child);
-      }
-    });
-  }
-  
   const [markdown, setMarkdown] = useState(defaultMarkdown)
   const [selectedTheme, setSelectedTheme] = useState("default")
   const [selectedPaperSize, setSelectedPaperSize] = useState("a4")
+  const [selectedFontSize, setSelectedFontSize] = useState("12")
   const [showPreview, setShowPreview] = useState(true)
   const [headings, setHeadings] = useState<Array<{ id: string; text: string; level: number }>>([])
+  const [isDragging, setIsDragging] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const dropRef = useRef<HTMLDivElement>(null)
+
+  // 处理文件拖拽事件
+  const handleDragEnter = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(true)
+  }, [])
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(false)
+  }, [])
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }, [])
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(false)
+    
+    const files = e.dataTransfer.files
+    if (files && files.length > 0) {
+      const file = files[0]
+      if (file && (file.type === "text/markdown" || file.name.endsWith(".md") || file.type === "text/plain")) {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          const content = e.target?.result as string
+          setMarkdown(content)
+        }
+        reader.readAsText(file)
+      }
+    }
+  }, [])
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
-    if (file && (file.type === "text/markdown" || file.name.endsWith(".md"))) {
+    if (file && (file.type === "text/markdown" || file.name.endsWith(".md") || file.type === "text/plain")) {
       const reader = new FileReader()
       reader.onload = (e) => {
         const content = e.target?.result as string
@@ -155,37 +181,6 @@ export default function MarkdownToPDF() {
       modern: 'prose prose-lg prose-modern',
       minimal: 'prose prose-lg prose-minimal',
     }[selectedTheme] || 'prose prose-lg';
-    previewCard.className = `markdown-preview-pdf ${themeClass} pdf-export-plain pdf-export-mathml`;
-    // 递归覆盖所有子元素样式
-    forcePlainColor(previewCard);
-
-    // 确保所有KaTeX公式已正确渲染
-    const katexElements = previewCard.querySelectorAll('.katex');
-    const originalContents = new Map<Element, string>();
-    
-    katexElements.forEach((el) => {
-      try {
-        const tex = el.getAttribute('data-tex');
-        if (tex) {
-          // 保存原始内容以便后续恢复
-          originalContents.set(el, el.innerHTML);
-          
-          // 确保公式元素具有正确的显示样式
-          if (el.classList.contains('katex-display')) {
-            (el as HTMLElement).style.display = 'block';
-            (el as HTMLElement).style.textAlign = 'center';
-            (el as HTMLElement).style.margin = '1em 0';
-          } else {
-            (el as HTMLElement).style.display = 'inline-block';
-          }
-        }
-      } catch (e) {
-        console.error('KaTeX processing error:', e);
-      }
-    });
-
-    // 确保所有DOM更新完成
-    await new Promise(resolve => setTimeout(resolve, 300));
 
     const worker = html2pdf()
       .set({
@@ -201,6 +196,9 @@ export default function MarkdownToPDF() {
           onclone: (clonedDoc: Document) => {
             const clonedPreview = clonedDoc.querySelector('.markdown-preview-pdf') as HTMLElement | null;
             if (clonedPreview) {
+              // 应用导出专用样式到克隆文档
+              clonedPreview.classList.add('pdf-export-plain', 'pdf-export-mathml');
+              
               // 确保内容不会因为分页被切断
               clonedPreview.style.breakInside = 'avoid';
               clonedPreview.style.pageBreakInside = 'avoid';
@@ -211,13 +209,26 @@ export default function MarkdownToPDF() {
                 (el as HTMLElement).style.pageBreakInside = 'avoid';
               });
               
-              // 特殊处理公式元素
-              clonedPreview.querySelectorAll('.katex').forEach((katexEl: Element) => {
-                const el = katexEl as HTMLElement;
-                el.style.display = el.classList.contains('katex-display') ? 'block' : 'inline-block';
-                if (el.classList.contains('katex-display')) {
-                  el.style.textAlign = 'center';
-                  el.style.margin = '1em 0';
+              // 重新应用KaTeX样式
+              const katexElements = clonedPreview.querySelectorAll('.katex, .katex-display');
+              katexElements.forEach(element => {
+                // 确保MathML内容可见
+                element.style.display = 'block';
+                element.style.visibility = 'visible';
+                
+                // 重新渲染公式
+                const texText = element.getAttribute('data-tex');
+                if (texText) {
+                  try {
+                    const katexHtml = katex.renderToString(texText, { 
+                      displayMode: element.classList.contains('katex-display'),
+                      output: 'html',
+                      throwOnError: false
+                    });
+                    element.innerHTML = katexHtml;
+                  } catch (e) {
+                    console.error('KaTeX重新渲染失败:', e);
+                  }
                 }
               });
             }
@@ -239,27 +250,13 @@ export default function MarkdownToPDF() {
         }
       } as any)
       .save();  // 添加这行来触发PDF下载
-      
-      worker.then(() => {
-        // 恢复原始katex内容
-        katexElements.forEach(el => {
-          if (originalContents.has(el)) {
-            el.innerHTML = originalContents.get(el)!;
-          }
-        });
-        // 移除导出专用样式
-        previewCard.classList.remove('pdf-export-plain', 'pdf-export-mathml');
-      }).catch((error: Error) => {
-        console.error('PDF generation error:', error);
-        // 恢复原始katex内容
-        katexElements.forEach(el => {
-          if (originalContents.has(el)) {
-            el.innerHTML = originalContents.get(el)!;
-          }
-        });
-        // 移除导出专用样式
-        previewCard.classList.remove('pdf-export-plain', 'pdf-export-mathml');
-      });
+  }
+
+  const resetToDefault = () => {
+    setMarkdown(defaultMarkdown)
+    setSelectedTheme("default")
+    setSelectedPaperSize("a4")
+    setSelectedFontSize("12")
   }
 
   return (
@@ -293,7 +290,7 @@ export default function MarkdownToPDF() {
                     <p className="text-base text-muted-foreground">Convert Markdown to publication-quality PDF documents with math, code, diagrams, TOC, and custom themes.</p>
                   </div>
                 </div>
-                <div className="w-full sm:w-auto">
+                <div className="flex flex-wrap gap-2 w-full sm:w-auto">
                   <Button 
                     onClick={handleDownloadPDF} 
                     className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto"
@@ -304,6 +301,13 @@ export default function MarkdownToPDF() {
                   >
                     <Download className="h-4 w-4 mr-2" />
                     Download PDF
+                  </Button>
+                  <Button 
+                    onClick={resetToDefault}
+                    variant="outline"
+                    className="w-full sm:w-auto"
+                  >
+                    Reset
                   </Button>
                 </div>
               </div>
@@ -360,6 +364,22 @@ export default function MarkdownToPDF() {
                     </SelectContent>
                   </Select>
                 </div>
+
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Font Size</label>
+                  <Select value={selectedFontSize} onValueChange={setSelectedFontSize}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {fontSizes.map((size) => (
+                        <SelectItem key={size.id} value={size.id}>
+                          <div className="font-medium">{size.name}</div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </CardContent>
             </Card>
 
@@ -373,28 +393,57 @@ export default function MarkdownToPDF() {
           <div className={showPreview ? "md:col-span-3 flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-6 order-1 md:order-2" : "md:col-span-3 order-1 md:order-2"}>
             {/* Editor */}
             <div className={showPreview ? "flex flex-col h-[60vh] md:h-[70vh]" : "max-w-4xl mx-auto flex flex-col h-[60vh] md:h-[70vh]"}>
-              <Card className="flex-1 h-full no-print overflow-auto">
+              <Card 
+                className="flex-1 h-full no-print overflow-auto"
+                onDragEnter={handleDragEnter}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                ref={dropRef}
+              >
                 <CardHeader>
-                  <CardTitle>Markdown Editor</CardTitle>
-                  <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
-                    <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()} className="w-full sm:w-auto">
-                      <Upload className="h-4 w-4 mr-2" />
-                      Upload
-                    </Button>
-                    <Button variant="outline" size="sm" onClick={() => setShowPreview(!showPreview)} className="w-full sm:w-auto">
-                      <Eye className="h-4 w-4 mr-2" />
-                      {showPreview ? "Hide" : "Show"} Preview
-                    </Button>
-                  </div>
+                  <CardTitle>
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span>Markdown Editor</span>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          onClick={() => fileInputRef.current?.click()} 
+                          className="w-full sm:w-auto"
+                        >
+                          <Upload className="h-4 w-4 mr-2" />
+                          Upload
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          onClick={() => setShowPreview(!showPreview)} 
+                          className="w-full sm:w-auto"
+                        >
+                          <Eye className="h-4 w-4 mr-2" />
+                          {showPreview ? "Hide" : "Show"} Preview
+                        </Button>
+                      </div>
+                    </div>
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="h-full">
-                  <Textarea
-                    value={markdown}
-                    onChange={(e) => setMarkdown(e.target.value)}
-                    placeholder="Enter your Markdown content here..."
-                    className="h-full min-h-[200px] md:min-h-[300px] font-mono text-sm resize-none"
-                    style={{height: '100%', minHeight: '200px'}}
-                  />
+                  {isDragging ? (
+                    <div className="h-full border-2 border-dashed border-primary rounded-lg flex flex-col items-center justify-center bg-primary/5">
+                      <FileUp className="h-12 w-12 text-primary mb-4" />
+                      <p className="text-lg font-medium text-primary">Drop your Markdown file here</p>
+                      <p className="text-muted-foreground">Supports .md and .txt files</p>
+                    </div>
+                  ) : (
+                    <Textarea
+                      value={markdown}
+                      onChange={(e) => setMarkdown(e.target.value)}
+                      placeholder="Enter your Markdown content here..."
+                      className="h-full min-h-[200px] md:min-h-[300px] font-mono text-sm resize-none"
+                      style={{height: '100%', minHeight: '200px'}}
+                    />
+                  )}
                 </CardContent>
               </Card>
             </div>
@@ -414,8 +463,16 @@ export default function MarkdownToPDF() {
                   </CardHeader>
                   <CardContent className="print:p-0 h-full">
                     {/* PDF导出专用容器，动态应用主题 */}
-                    <div className="markdown-preview-pdf prose prose-lg">
-                      <MarkdownRenderer content={markdown} theme={selectedTheme} paperSizes={selectedPaperSize} onHeadingsChange={setHeadings} />
+                    <div 
+                      className="markdown-preview-pdf prose prose-lg"
+                      style={{ fontSize: `${selectedFontSize}pt` }}
+                    >
+                      <MarkdownRenderer 
+                        content={markdown} 
+                        theme={selectedTheme} 
+                        paperSizes={selectedPaperSize} 
+                        onHeadingsChange={setHeadings} 
+                      />
                     </div>
                   </CardContent>
                 </Card>
@@ -426,8 +483,8 @@ export default function MarkdownToPDF() {
       </div>
 
       {/* Hidden file input */}
-      <input ref={fileInputRef} type="file" accept=".md,.markdown" onChange={handleFileUpload} className="hidden" />
-  </div>
+      <input ref={fileInputRef} type="file" accept=".md,.txt,text/markdown,text/plain" onChange={handleFileUpload} className="hidden" />
+    </div>
   </>
   )
 }

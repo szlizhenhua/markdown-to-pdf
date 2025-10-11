@@ -1,373 +1,337 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #333333;
+    --card: #ffffff;
+    --card-foreground: #333333;
+    --popover: #ffffff;
+    --popover-foreground: #333333;
+    --primary: #3b82f6;
+    --primary-foreground: #ffffff;
+    --secondary: #f3f4f6;
+    --secondary-foreground: #333333;
+    --muted: #f3f4f6;
+    --muted-foreground: #6b7280;
+    --accent: #f3f4f6;
+    --accent-foreground: #333333;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #e5e7eb;
+    --input: #e5e7eb;
+    --ring: #3b82f6;
+    --radius: 0.5rem;
+  }
 
-:root {
-  /* Updated color palette to professional green theme for document converter */
-  --background: #ffffff;
-  --foreground: #374151;
-  --card: #f0fdf4;
-  --card-foreground: #374151;
-  --popover: #ffffff;
-  --popover-foreground: #374151;
-  --primary: #15803d;
-  --primary-foreground: #ffffff;
-  --secondary: #84cc16;
-  --secondary-foreground: #374151;
-  --muted: #f0fdf4;
-  --muted-foreground: #374151;
-  --accent: #84cc16;
-  --accent-foreground: #374151;
-  --destructive: #dc2626;
-  --destructive-foreground: #dc2626;
-  --border: #d1d5db;
-  --input: #ffffff;
-  --ring: rgba(22, 163, 74, 0.5);
-  --chart-1: #d97706;
-  --chart-2: #059669;
-  --chart-3: #2563eb;
-  --chart-4: #84cc16;
-  --chart-5: #65a30d;
-  --radius: 0.5rem;
-  --sidebar: #f0fdf4;
-  --sidebar-foreground: #374151;
-  --sidebar-primary: #15803d;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #84cc16;
-  --sidebar-accent-foreground: #374151;
-  --sidebar-border: #d1d5db;
-  --sidebar-ring: rgba(22, 163, 74, 0.5);
+  .dark {
+    --background: #0c0a09;
+    --foreground: #fafaf9;
+    --card: #1c1917;
+    --card-foreground: #fafaf9;
+    --popover: #1c1917;
+    --popover-foreground: #fafaf9;
+    --primary: #3b82f6;
+    --primary-foreground: #0c0a09;
+    --secondary: #292524;
+    --secondary-foreground: #fafaf9;
+    --muted: #292524;
+    --muted-foreground: #a8a29e;
+    --accent: #292524;
+    --accent-foreground: #fafaf9;
+    --destructive: #ef4444;
+    --destructive-foreground: #0c0a09;
+    --border: #44403c;
+    --input: #44403c;
+    --ring: #3b82f6;
+  }
 }
 
-.dark {
-  --background: #1a1a1a;
-  --foreground: #f8f9fa;
-  --card: #1a1a1a;
-  --card-foreground: #f8f9fa;
-  --popover: #1a1a1a;
-  --popover-foreground: #f8f9fa;
-  --primary: #f8f9fa;
-  --primary-foreground: #2d2d2d;
-  --secondary: #343a40;
-  --secondary-foreground: #f8f9fa;
-  --muted: #343a40;
-  --muted-foreground: #adb5bd;
-  --accent: #343a40;
-  --accent-foreground: #f8f9fa;
-  --destructive: #dc3545;
-  --destructive-foreground: #f8d7da;
-  --border: #343a40;
-  --input: #343a40;
-  --ring: #495057;
-  --chart-1: #6f42c1;
-  --chart-2: #20c997;
-  --chart-3: #fd7e14;
-  --chart-4: #6610f2;
-  --chart-5: #d63384;
-  --sidebar: #2d2d2d;
-  --sidebar-foreground: #f8f9fa;
-  --sidebar-primary: #6f42c1;
-  --sidebar-primary-foreground: #f8f9fa;
-  --sidebar-accent: #343a40;
-  --sidebar-accent-foreground: #f8f9fa;
-  --sidebar-border: #343a40;
-  --sidebar-ring: #495057;
-}
-
-/* Added print styles for PDF generation */
-@media print {
-  @page {
-    size: A4;
-    margin: 2cm;
+@layer base {
+  * {
+    border-color: var(--border); /* 替代 @apply border-border */
   }
-
-  .no-print {
-    display: none !important;
-  }
-
-  .print-break-before {
-    page-break-before: always;
-  }
-
-  .print-break-after {
-    page-break-after: always;
-  }
-
-  .print-break-inside-avoid {
-    page-break-inside: avoid;
-  }
-
   body {
-    font-size: 12pt;
-    line-height: 1.5;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    page-break-after: avoid;
-  }
-
-  pre,
-  blockquote {
-    page-break-inside: avoid;
+    background-color: var(--background);
+    color: var(--foreground);
   }
 }
 
-@theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
-/* Prose styling for markdown content */
-.prose {
-  /* Table styling */
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 1rem 0;
-    border: 1px solid var(--color-border);
+@layer utilities {
+  .no-print {
+    @apply block;
   }
 
-  th,
-  td {
-    border: 1px solid var(--color-border);
-    padding: 0.75rem;
-    text-align: left;
-  }
-
-  th {
-    background-color: var(--color-muted);
-    font-weight: 600;
-  }
-
-  tr:nth-child(even) {
-    background-color: var(--color-muted);
-  }
-
-  /* Code block styling */
-  pre {
-    background-color: var(--color-muted);
-    border: 1px solid var(--color-border);
-    border-radius: 0.375rem;
-    padding: 1rem;
-    overflow-x: auto;
-    margin: 1rem 0;
-  }
-
-  code {
-    background-color: var(--color-muted);
-    padding: 0.125rem 0.25rem;
-    border-radius: 0.25rem;
-    font-size: 0.875em;
-  }
-
-  pre code {
-    background-color: transparent;
-    padding: 0;
-    border-radius: 0;
-  }
-
-  /* Mermaid container styling */
-  .mermaid-container {
-    margin: 1rem 0;
-    text-align: center;
-  }
-
-  .mermaid {
-    background-color: white;
-    border: 1px solid var(--color-border);
-    border-radius: 0.375rem;
-    padding: 1rem;
-    display: inline-block;
+  @media print {
+    .no-print {
+      @apply hidden;
+    }
+    
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      background: white !important;
+      color: black !important;
+    }
+    
+    /* 确保所有内容都能正确打印 */
+    * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
   }
 }
 
-/* Theme-specific prose styles */
+/* 学术风格样式 */
 .prose-academic {
   font-family: Georgia, serif;
   line-height: 1.8;
 }
 
+.prose-academic h1,
+.prose-academic h2,
+.prose-academic h3,
+.prose-academic h4,
+.prose-academic h5,
+.prose-academic h6 {
+  font-family: Georgia, serif;
+  color: #000;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose-academic p {
+  text-align: justify;
+  margin-bottom: 1em;
+}
+
+.prose-academic code {
+  font-family: Consolas, monospace;
+  background-color: #f5f5f5;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25em;
+  font-size: 0.9em;
+}
+
+.prose-academic pre {
+  background-color: #f5f5f5;
+  border-radius: 0.5em;
+  padding: 1em;
+  overflow-x: auto;
+}
+
+.prose-academic blockquote {
+  border-left: 4px solid #ccc;
+  padding-left: 1em;
+  margin-left: 0;
+  font-style: italic;
+}
+
+/* 现代风格样式 */
 .prose-modern {
   font-family: system-ui, sans-serif;
   font-size: 16px;
 }
 
+.prose-modern h1,
+.prose-modern h2,
+.prose-modern h3,
+.prose-modern h4,
+.prose-modern h5,
+.prose-modern h6 {
+  font-family: system-ui, sans-serif;
+  color: #111827;
+  font-weight: 700;
+}
+
+.prose-modern a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.prose-modern a:hover {
+  text-decoration: underline;
+}
+
+/* 最小风格样式 */
 .prose-minimal {
   font-family: system-ui, sans-serif;
   color: #333;
 }
 
+.prose-minimal h1,
+.prose-minimal h2,
+.prose-minimal h3,
+.prose-minimal h4,
+.prose-minimal h5,
+.prose-minimal h6 {
+  font-weight: 600;
+  color: #222;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+}
+
+/* 默认风格样式 */
 .prose-default {
   font-family: system-ui, sans-serif;
 }
 
-/* 添加表格边框样式 */
+.prose-default h1,
+.prose-default h2,
+.prose-default h3,
+.prose-default h4,
+.prose-default h5,
+.prose-default h6 {
+  color: #111827;
+  font-weight: 600;
+}
+
+/* PDF导出专用样式 */
+.pdf-export-plain {
+  background: white !important;
+  color: #222 !important;
+}
+
+.pdf-export-plain * {
+  color: #222 !important;
+  background: transparent !important;
+  border-color: #ddd !important;
+  box-shadow: none !important;
+}
+
+.pdf-export-mathml .katex .katex-mathml {
+  display: none;
+}
+
+.pdf-export-mathml .katex-display .katex-mathml {
+  display: none;
+}
+
+.pdf-export-mathml .katex .katex-html {
+  display: inline-block;
+}
+
+.pdf-export-mathml .katex-display {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+/* 表格样式 */
 .table-bordered {
   border-collapse: collapse;
   width: 100%;
-  margin: 1rem 0;
+  margin: 1em 0;
 }
 
 .table-bordered th,
 .table-bordered td {
   border: 1px solid #ddd;
-  padding: 0.75rem;
+  padding: 0.5em;
   text-align: left;
 }
 
 .table-bordered th {
-  background-color: #f8f9fa;
-  font-weight: 600;
+  background-color: #f5f5f5;
+  font-weight: bold;
 }
 
-.table-bordered tr:nth-child(even) {
-  background-color: #f8f9fa;
-}
-
-.table-bordered tr:hover {
-  background-color: #f1f3f5;
-}
-
-/* 确保列表项有正确的样式 */
-.prose ul,
-.prose ol {
-  margin: 1rem 0;
-  padding-left: 1.5rem;
-}
-
-.prose li {
-  margin: 0.5rem 0;
-}
-
-/* 确保代码块有正确的样式 */
-.prose pre {
+/* 代码块样式 */
+.hljs {
+  display: block;
   overflow-x: auto;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
+  padding: 1em;
+  background: #f5f5f5;
+  color: #222;
+  border-radius: 0.5em;
 }
 
-.prose code {
-  background-color: #f1f1f1;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  font-family: monospace;
+.inline-code {
+  font-family: Consolas, monospace;
+  background-color: #f5f5f5;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25em;
+  font-size: 0.9em;
 }
 
-/* 导出PDF时使用MathML可视化，隐藏KaTeX HTML结构 */
-.pdf-export-mathml .katex .katex-mathml {
-  position: static !important;
-  clip: auto !important;
-  height: auto !important;
-  width: auto !important;
-  overflow: visible !important;
-  display: inline-block !important;
-  white-space: normal !important;
-}
-
-.pdf-export-mathml .katex-display .katex-mathml {
-  display: block !important;
-  margin: 0 auto;
-}
-
-.pdf-export-mathml .katex .katex-html {
-  display: none !important;
-}
-
-.pdf-export-mathml .katex-display {
+/* Mermaid 图表容器 */
+.mermaid-container {
+  margin: 1em 0;
   text-align: center;
 }
 
-/* 确保标题有正确的样式 */
-.prose h1,
-.prose h2,
-.prose h3,
-.prose h4,
-.prose h5,
-.prose h6 {
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  line-height: 1.25;
+.mermaid-diagram {
+  display: inline-block;
+  position: relative;
 }
 
-.prose h1 {
-  font-size: 2.25rem;
-  font-weight: 700;
+.mermaid-loading {
+  padding: 1em;
+  text-align: center;
+  color: #666;
+  font-style: italic;
 }
 
-.prose h2 {
-  font-size: 1.875rem;
-  font-weight: 700;
-}
-
-.prose h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.prose h4 {
-  font-size: 1.25rem;
-  font-weight: 700;
-}
-
-.prose h5 {
-  font-size: 1.125rem;
-  font-weight: 700;
-}
-
-.prose h6 {
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .markdown-preview-pdf {
+    padding: 1rem;
   }
+  
+  .prose {
+    max-width: 100%;
+  }
+  
+  .table-bordered {
+    font-size: 0.9em;
+  }
+  
+  .table-bordered th,
+  .table-bordered td {
+    padding: 0.4em;
+  }
+}
+
+/* 打印样式 */
+@page {
+  margin: 0.5in;
+}
+
+@media print {
   body {
-    @apply bg-background text-foreground;
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+  
+  .markdown-preview-pdf {
+    padding: 0;
+    margin: 0;
+    background: white;
+    color: black;
+  }
+  
+  /* 避免在元素内部断页 */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+  
+  pre, code {
+    page-break-inside: avoid;
+  }
+  
+  /* 表格相关 */
+  table, tr, td, th {
+    page-break-inside: avoid;
+  }
+  
+  /* 图表相关 */
+  .mermaid-diagram {
+    page-break-inside: avoid;
+  }
+  
+  /* 公式相关 */
+  .katex, .katex-display {
+    page-break-inside: avoid;
   }
 }

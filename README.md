@@ -1,30 +1,126 @@
-# Markdown to PDF
+# Markdown to PDF Converter
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+A professional Markdown to PDF converter with support for mathematical expressions, diagrams, code highlighting, and custom themes.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/jeanlees-projects/v0-markdown-to-pdf)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/FmZWJl3w00H)
+## Features
 
-## Overview
+- **Real-time Preview**: See your document as you type with live preview
+- **Mathematical Expressions**: Full support for LaTeX-style math with KaTeX
+- **Diagrams**: Create flowcharts, sequence diagrams, and more with Mermaid
+- **Code Highlighting**: Syntax highlighting for multiple programming languages
+- **Custom Themes**: Choose from multiple themes (Default, Academic, Modern, Minimal)
+- **Multiple Paper Sizes**: Support for A4, Letter, and Legal formats
+- **Font Size Options**: Adjustable font size from 10pt to 16pt
+- **Drag & Drop**: Easily upload Markdown files by dragging and dropping
+- **Table of Contents**: Automatically generated table of contents
+- **Responsive Design**: Works on desktop and mobile devices
+- **Privacy Focused**: All processing happens in your browser - no server uploads
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+## Supported Markdown Elements
 
-## Deployment
+- Headers (H1-H6)
+- Text formatting (bold, italic, strikethrough)
+- Lists (ordered and unordered)
+- Links and images
+- Code blocks with syntax highlighting
+- Tables
+- Blockquotes
+- Horizontal rules
+- Inline and block math expressions
+- Mermaid diagrams
 
-Your project is live at:
+## How to Use
 
-**[https://vercel.com/jeanlees-projects/v0-markdown-to-pdf](https://vercel.com/jeanlees-projects/v0-markdown-to-pdf)**
+1. Type or paste your Markdown content in the editor
+2. Customize the appearance with themes, paper size, and font settings
+3. Preview your document in real-time
+4. Click "Download PDF" to export your document
 
-## Build your app
+You can also upload existing Markdown files by clicking the "Upload" button or dragging and dropping files into the editor area.
 
-Continue building your app on:
+## Technical Details
 
-**[https://v0.app/chat/projects/FmZWJl3w00H](https://v0.app/chat/projects/FmZWJl3w00H)**
+This converter uses modern web technologies to provide a seamless experience:
 
-## How It Works
+- **Next.js**: React-based framework for optimal performance
+- **Tailwind CSS**: Utility-first CSS framework for styling
+- **Marked**: Markdown parser with extensive customization
+- **KaTeX**: Fast math typesetting library
+- **Mermaid**: Diagram generation from text
+- **html2pdf.js**: Client-side PDF generation
+- **Highlight.js**: Code syntax highlighting
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+All processing happens directly in your browser - your documents are never uploaded to any server, ensuring complete privacy.
+
+## Browser Support
+
+The converter works in all modern browsers that support JavaScript and HTML5:
+
+- Chrome 65+
+- Firefox 60+
+- Safari 12+
+- Edge 79+
+
+## Export Options
+
+### PDF Export
+
+The converter generates high-quality PDF documents with:
+
+- Proper page breaks to avoid splitting content
+- Preserved formatting and styling
+- Embedded mathematical expressions
+- Rendered diagrams
+- Syntax-highlighted code blocks
+- Customizable paper sizes and themes
+
+## Privacy & Security
+
+Your documents are processed entirely in your browser. No data is sent to any server, ensuring:
+
+- Complete privacy
+- No storage of your documents
+- No tracking or analytics on your content
+- Secure processing
+
+## Customization
+
+### Themes
+
+- **Default**: Clean and professional look
+- **Academic**: Formal style with justified text and serif fonts
+- **Modern**: Contemporary design with sans-serif fonts
+- **Minimal**: Simple and clean presentation
+
+### Paper Sizes
+
+- A4 (210 × 297 mm)
+- Letter (8.5 × 11 in)
+- Legal (8.5 × 14 in)
+
+### Font Sizes
+
+Adjust the font size from 10pt to 16pt to match your preferences or requirements.
+
+## Getting Started
+
+To run this application locally:
+
+```bash
+# Install dependencies
+pnpm install
+
+# Run development server
+pnpm dev
+
+# Build for production
+pnpm build
+```
+
+## Contributing
+
+Contributions are welcome! Feel free to submit issues and pull requests.
+
+## License
+
+This project is licensed under the MIT License.

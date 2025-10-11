@@ -85,13 +85,11 @@ export function MarkdownRenderer({ content, theme, paperSizes, onHeadingsChange 
       return `<h${depth} id="${id}" class="heading-${depth}">${textString}</h${depth}>`
     }
 
-    // Custom renderer for code blocks to handle mermaid
+    // 自定义渲染器，处理数学公式
     renderer.code = (token: any) => {
-      // console.log('code token:', token);
       const { raw, text, lang } = token;
       const langString = lang || "";
-      // console.log('text: ', text);
-      // console.log('langString: ', langString);
+      
       if (langString === "mermaid") {
         const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
         return `
@@ -102,26 +100,11 @@ export function MarkdownRenderer({ content, theme, paperSizes, onHeadingsChange 
             </div>
           </div>`;
       }
+      
       // 用 highlight.js 高亮原始代码
       const language = langString || "plaintext";
       const highlighted = hljs.highlight(raw.replace(/^```[^\n]*\n?/, '').replace(/```$/, ''), { language }).value;
       return `<pre class="hljs language-${language}"><code>${highlighted}</code></pre>`;
-    };
-
-    // 自定义列表项渲染，使用实心圆点替代"-"
-    renderer.listitem = (token: any) => {
-      const indent = token.raw.match(/^(\s*)/)?.[0] || '';
-      return `${indent}<li style="list-style-type: none; position: relative; padding-left: 1.5em;">
-        <span style="position: absolute; left: 0;">•</span>${token.text}
-      </li>`;
-    };
-
-    // 自定义无序列表渲染，确保一致的缩进和间距
-    renderer.list = (token: any) => {
-      const type = token.ordered ? 'ol' : 'ul';
-      const indent = token.raw.match(/^(\s*)/)?.[0] || '';
-      const body = token.items.map((item: any) => renderer.listitem(item)).join('');
-      return `${indent}<${type} style="padding-left: 1.5em; margin: 0.5em 0;">${body}</${type}>`;
     };
 
     // 添加对表格的正确渲染
@@ -135,7 +118,7 @@ export function MarkdownRenderer({ content, theme, paperSizes, onHeadingsChange 
           return renderer.tablerow({ text: rowContent });
         })
         .join('');
-        
+      
       return `<table class="table-bordered">${headerRow}${bodyRows}</table>`;
     };
 
@@ -168,7 +151,7 @@ export function MarkdownRenderer({ content, theme, paperSizes, onHeadingsChange 
               // console.log('渲染块级公式math$$:', math);
               const katexHtml = katex.renderToString(math, { 
                 displayMode: true, // 改为 true 以正确渲染块级公式
-                output: "mathml", // 仅输出MathML
+                output: "html", // 输出HTML而不是MathML以获得更好的兼容性
                 fleqn: false,
                 leqno: false,
                 throwOnError: false
@@ -183,6 +166,7 @@ export function MarkdownRenderer({ content, theme, paperSizes, onHeadingsChange 
               return match;
             }
           });
+          
           // Inline math: $...$
           part = part.replace(/\*?\*?\$([^$\n]+)\$\*?\*?/g, (match, math) => {
             try {
@@ -191,7 +175,7 @@ export function MarkdownRenderer({ content, theme, paperSizes, onHeadingsChange 
               // console.log('math$: ', math);
               const katexHtml = katex.renderToString(math, { 
                 displayMode: false, 
-                output: "mathml", // 仅输出MathML
+                output: "html", // 改为html输出以确保兼容性
                 fleqn: false,
                 leqno: false,
                 throwOnError: false
@@ -331,8 +315,8 @@ export function MarkdownRenderer({ content, theme, paperSizes, onHeadingsChange 
                 <pre style="margin: 5px 0; padding: 5px; background: #f5f5f5; border-radius: 3px;">
 graph TD
     A[Start] --&gt; B{Decision}
-    B --&gt;|Yes| C[OK]
-    B --&gt;|No| D[Retry]</pre>
+    B -->|Yes| C[OK]
+    B -->|No| D[Retry]</pre>
               </div>
             `;
           }
