@@ -209,25 +209,34 @@ export default function MarkdownToPDF() {
                 (el as HTMLElement).style.pageBreakInside = 'avoid';
               });
               
-              // 重新应用KaTeX样式
+              // 特殊处理公式元素，确保KaTeX字体正确应用
               const katexElements = clonedPreview.querySelectorAll('.katex, .katex-display');
-              katexElements.forEach(element => {
-                // 确保MathML内容可见
-                element.style.display = 'block';
-                element.style.visibility = 'visible';
+              katexElements.forEach((element: Element) => {
+                const el = element as HTMLElement;
+                // 确保KaTeX元素使用正确的字体
+                el.style.fontFamily = 'KaTeX_Main, Times New Roman, serif';
                 
-                // 重新渲染公式
-                const texText = element.getAttribute('data-tex');
+                // 确保块级公式居中显示
+                if (el.classList.contains('katex-display')) {
+                  el.style.display = 'block';
+                  el.style.textAlign = 'center';
+                  el.style.margin = '1em 0';
+                } else {
+                  el.style.display = 'inline-block';
+                }
+                
+                // 如果元素有data-tex属性，重新渲染公式以确保正确显示
+                const texText = el.getAttribute('data-tex');
                 if (texText) {
                   try {
                     const katexHtml = katex.renderToString(texText, { 
-                      displayMode: element.classList.contains('katex-display'),
+                      displayMode: el.classList.contains('katex-display'),
                       output: 'html',
                       throwOnError: false
                     });
-                    element.innerHTML = katexHtml;
+                    el.innerHTML = katexHtml;
                   } catch (e) {
-                    console.error('KaTeX重新渲染失败:', e);
+                    console.error('KaTeX重新渲染错误:', e);
                   }
                 }
               });

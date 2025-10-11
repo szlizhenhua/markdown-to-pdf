@@ -166,7 +166,6 @@ export function MarkdownRenderer({ content, theme, paperSizes, onHeadingsChange 
               return match;
             }
           });
-          
           // Inline math: $...$
           part = part.replace(/\*?\*?\$([^$\n]+)\$\*?\*?/g, (match, math) => {
             try {
@@ -175,7 +174,7 @@ export function MarkdownRenderer({ content, theme, paperSizes, onHeadingsChange 
               // console.log('math$: ', math);
               const katexHtml = katex.renderToString(math, { 
                 displayMode: false, 
-                output: "html", // 改为html输出以确保兼容性
+                output: "html", // 输出HTML而不是MathML以获得更好的兼容性
                 fleqn: false,
                 leqno: false,
                 throwOnError: false
