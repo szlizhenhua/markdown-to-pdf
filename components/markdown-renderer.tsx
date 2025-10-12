@@ -83,7 +83,7 @@ export function MarkdownRenderer({ content, theme, paperSizes, fontSizes, onHead
       const textString = text
       const id = textString.toLowerCase().replace(/[^\w]+/g, "-")
       headings.push({ id, text: textString, level: depth })
-      return `<h${depth} id="${id}" class="heading-${depth}">${textString}</h${depth}>`
+      return `<h${depth} id="${id}" class="heading-${depth}" style="margin: 1em 0;">${textString}</h${depth}>`
     }
 
     // 自定义渲染器，处理数学公式
@@ -105,7 +105,7 @@ export function MarkdownRenderer({ content, theme, paperSizes, fontSizes, onHead
       // 用 highlight.js 高亮原始代码
       const language = langString || "plaintext";
       const highlighted = hljs.highlight(raw.replace(/^```[^\n]*\n?/, '').replace(/```$/, ''), { language }).value;
-      return `<pre class="hljs language-${language}"><code>${highlighted}</code></pre>`;
+      return `<pre class="hljs language-${language}" style="background-color: #f8f9fa; padding: 1em; border-radius: 4px; overflow-x: auto; margin: 1em 0;"><code>${highlighted}</code></pre>`;
     };
 
     // 添加对表格的正确渲染
@@ -120,7 +120,7 @@ export function MarkdownRenderer({ content, theme, paperSizes, fontSizes, onHead
         })
         .join('');
       
-      return `<table class="table-bordered">${headerRow}${bodyRows}</table>`;
+      return `<table class="table-bordered" style="margin: 1em 0; border-collapse: collapse; width: 100%;">${headerRow}${bodyRows}</table>`;
     };
 
     // 添加对表格头的正确渲染
@@ -327,39 +327,18 @@ graph TD
     }
   }, [renderedHtml, mermaid]);
 
-  const getThemeClasses = () => {
-    switch (theme) {
-      case "academic":
-        return "prose-academic"
-      case "modern":
-        return "prose-modern"
-      case "minimal":
-        return "prose-minimal"
-      default:
-        return "prose-default"
-    }
-  }
+  // 移除主题样式函数
 
-  return (
-    <div
-      ref={containerRef}
-      className={`prose prose-lg max-w-none ${getThemeClasses()}`}
-      dangerouslySetInnerHTML={{ __html: renderedHtml }}
-      style={{
-        // Theme-specific styles
-        ...(theme === "academic" && {
-          fontFamily: "Georgia, serif",
-          lineHeight: "1.8",
-        }),
-        ...(theme === "modern" && {
-          fontFamily: "system-ui, sans-serif",
-          fontSize: "16px",
-        }),
-        ...(theme === "minimal" && {
-          fontFamily: "system-ui, sans-serif",
-          color: "#333",
-        }),
-      }}
-    />
-  )
+    return (
+      <div
+        ref={containerRef}
+        className="markdown-body"
+        dangerouslySetInnerHTML={{ __html: renderedHtml }}
+        style={{
+          padding: '20px',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      />
+    )
 }
