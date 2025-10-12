@@ -401,11 +401,22 @@
 
 /* Upload/Toggle button styles (use CSS variables instead of Tailwind @apply) */
 .btn-upload {
-  background: var(--secondary);
+  background: linear-gradient(180deg,var(--primary), #b2f1cfff);
   border: 1px solid var(--border);
   color: var(--secondary-foreground);
   padding: 0.45rem 0.9rem;
   border-radius: 0.375rem;
+}
+
+.btn-upload:hover {
+  background: linear-gradient(180deg,var(--primary), #439467ff);
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-upload:active {
+  transform: scale(0.98);
+  background: linear-gradient(180deg, #3fbf78, var(--primary));
 }
 .btn-toggle {
   background: var(--card);
@@ -455,7 +466,7 @@
 }
 .cta-row { display:flex; gap:0.75rem; align-items:center }
 .cta-button {
-  background: linear-gradient(180deg,var(--primary), #3fbf78);
+  background: linear-gradient(180deg,var(--primary), #17b65eff);
   transition: all 0.2s ease;
   transform-origin: center;
   color: var(--primary-foreground);
@@ -466,14 +477,14 @@
 }
 
 .cta-button:hover {
-  background: linear-gradient(180deg,var(--primary), #439467ff);
+  background: linear-gradient(180deg,var(--primary), #57ee9bff);
   transform: scale(1.02);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .cta-button:active {
   transform: scale(0.98);
-  background: linear-gradient(180deg, #3fbf78, var(--primary));
+  background: linear-gradient(180deg, #77c99cff, var(--primary));
 }
 .cta-ghost {
   background: transparent;

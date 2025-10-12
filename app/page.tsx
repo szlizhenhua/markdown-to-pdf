@@ -103,8 +103,12 @@ export default function MarkdownToPDF() {
   const [showPreview, setShowPreview] = useState(true)
   const [headings, setHeadings] = useState<Array<{ id: string; text: string; level: number }>>([])
   const [isDragging, setIsDragging] = useState(false)
+  const [showSettings, setShowSettings] = useState(false)
+  const [showToc, setShowToc] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const dropRef = useRef<HTMLDivElement>(null)
+  const settingsRef = useRef<HTMLDivElement>(null)
+  const tocRef = useRef<HTMLDivElement>(null)
 
   // 处理文件拖拽事件
   const handleDragEnter = useCallback((e: React.DragEvent) => {
@@ -287,96 +291,114 @@ export default function MarkdownToPDF() {
         <link rel="icon" type="image/png" href="/placeholder-logo.png" />
       </Head>
       <div className="min-h-screen bg-background">
-        {/* Top header with Get PDF on right */}
-        <header className="border-b bg-card no-print">
+        {/* Top header with controls */}
+        <header className="border-b bg-card no-print relative">
           <div className="container mx-auto px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Image src="/placeholder-logo.png" alt="logo" width={40} height={40} className="rounded" />
               <div className="font-medium">Markdown → PDF</div>
             </div>
-            <div>
+            <div className="flex items-center gap-4">
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => setShowToc(!showToc)}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <FileText className="h-5 w-5" />
+              </Button>
               <Button onClick={handleDownloadPDF} className="cta-button">
                 <Download className="h-4 w-4 mr-2" />
                 Get PDF
               </Button>
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => setShowSettings(!showSettings)}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <Settings className="h-5 w-5" />
+              </Button>
             </div>
           </div>
+
+          {/* Settings Popover */}
+          {showSettings && (
+            <div className="absolute right-4 top-16 z-50 w-64 bg-popover shadow-lg rounded-md border border-border">
+              <div className="p-4">
+                <h3 className="font-medium mb-3">Settings</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">Theme</label>
+                    <Select value={selectedTheme} onValueChange={setSelectedTheme}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {themes.map((theme) => (
+                          <SelectItem key={theme.id} value={theme.id}>
+                            <div>
+                              <div className="font-medium">{theme.name}</div>
+                              <div className="text-xs text-muted-foreground">{theme.description}</div>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">Paper Size</label>
+                    <Select value={selectedPaperSize} onValueChange={setSelectedPaperSize}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {paperSizes.map((size) => (
+                          <SelectItem key={size.id} value={size.id}>
+                            <div>
+                              <div className="font-medium">{size.name}</div>
+                              <div className="text-xs text-muted-foreground">{size.description}</div>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">Font Size</label>
+                    <Select value={selectedFontSize} onValueChange={setSelectedFontSize}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {fontSizes.map((size) => (
+                          <SelectItem key={size.id} value={size.id}>
+                            <div className="font-medium">{size.name}</div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Table of Contents Popover */}
+          {showToc && (
+            <div className="absolute right-24 top-16 z-50 w-64 bg-popover shadow-lg rounded-md border border-border max-h-[70vh] overflow-auto">
+              <div className="p-4">
+                <h3 className="font-medium mb-3">Table of Contents</h3>
+                <TableOfContents headings={headings} />
+              </div>
+            </div>
+          )}
         </header>
 
       <div className="container mx-auto px-2 py-4 sm:px-4 sm:py-6">
-        <div className="flex flex-col md:grid md:grid-cols-4 gap-4 md:gap-6">
-          {/* Settings Sidebar */}
-          <div className="md:col-span-1 space-y-4 no-print order-2 md:order-1">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Settings className="h-5 w-5" />
-                  Settings
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium mb-2 block">Theme</label>
-                  <Select value={selectedTheme} onValueChange={setSelectedTheme}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {themes.map((theme) => (
-                        <SelectItem key={theme.id} value={theme.id}>
-                          <div>
-                            <div className="font-medium">{theme.name}</div>
-                            <div className="text-xs text-muted-foreground">{theme.description}</div>
-                          </div>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium mb-2 block">Paper Size</label>
-                  <Select value={selectedPaperSize} onValueChange={setSelectedPaperSize}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {paperSizes.map((size) => (
-                        <SelectItem key={size.id} value={size.id}>
-                          <div>
-                            <div className="font-medium">{size.name}</div>
-                            <div className="text-xs text-muted-foreground">{size.description}</div>
-                          </div>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label className="text-sm font-medium mb-2 block">Font Size</label>
-                  <Select value={selectedFontSize} onValueChange={setSelectedFontSize}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {fontSizes.map((size) => (
-                        <SelectItem key={size.id} value={size.id}>
-                          <div className="font-medium">{size.name}</div>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Table of Contents */}
-            <div className="hidden md:block">
-              <TableOfContents headings={headings} />
-            </div>
-          </div>
-
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-6">
           {/* Main Content */}
           <div className={showPreview ? "md:col-span-3 flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-6 order-1 md:order-2" : "md:col-span-3 order-1 md:order-2"}>
             {/* Editor */}
@@ -439,7 +461,7 @@ export default function MarkdownToPDF() {
             {/* Preview */}
             {showPreview && (
               <div className="flex flex-col h-[60vh] md:h-[70vh] print:col-span-full">
-          <Card className="flex-1 h-full overflow-auto card-editor">
+                <Card className="flex-1 h-full overflow-auto card-editor">
                   <CardHeader className="no-print">
                     <CardTitle className="flex items-center gap-2">
                       <Eye className="h-5 w-5" />
