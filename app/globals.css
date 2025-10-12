@@ -2,20 +2,21 @@
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #333333;
+    /* Apple-inspired light green theme */
+    --background: #f6fbf7; /* very pale green */
+    --foreground: #0b1220; /* dark text */
     --card: #ffffff;
-    --card-foreground: #333333;
+    --card-foreground: #06121a;
     --popover: #ffffff;
-    --popover-foreground: #333333;
-    --primary: #3b82f6;
+    --popover-foreground: #06121a;
+    --primary: #54c18a; /* apple-like green */
     --primary-foreground: #ffffff;
-    --secondary: #f3f4f6;
-    --secondary-foreground: #333333;
-    --muted: #f3f4f6;
-    --muted-foreground: #6b7280;
-    --accent: #f3f4f6;
-    --accent-foreground: #333333;
+    --secondary: #eaf8ef; /* pale green panel */
+    --secondary-foreground: #0b1220;
+    --muted: #eef7f0;
+    --muted-foreground: #5a6a63;
+    --accent: #dff6e9;
+    --accent-foreground: #0b1220;
     --destructive: #ef4444;
     --destructive-foreground: #ffffff;
     --border: #e5e7eb;
@@ -25,20 +26,20 @@
   }
 
   .dark {
-    --background: #0c0a09;
-    --foreground: #fafaf9;
-    --card: #1c1917;
-    --card-foreground: #fafaf9;
-    --popover: #1c1917;
-    --popover-foreground: #fafaf9;
-    --primary: #3b82f6;
-    --primary-foreground: #0c0a09;
-    --secondary: #292524;
-    --secondary-foreground: #fafaf9;
-    --muted: #292524;
-    --muted-foreground: #a8a29e;
-    --accent: #292524;
-    --accent-foreground: #fafaf9;
+    --background: #07120e;
+    --foreground: #e6f6ec;
+    --card: #0f1a17;
+    --card-foreground: #e6f6ec;
+    --popover: #0f1a17;
+    --popover-foreground: #e6f6ec;
+    --primary: #38a779;
+    --primary-foreground: #e6f6ec;
+    --secondary: #072018;
+    --secondary-foreground: #cfeee0;
+    --muted: #0b2a22;
+    --muted-foreground: #9fcfb6;
+    --accent: #093827;
+    --accent-foreground: #e6f6ec;
     --destructive: #ef4444;
     --destructive-foreground: #0c0a09;
     --border: #44403c;
@@ -397,6 +398,107 @@
   text-align: center;
   margin: 1em 0;
 }
+
+/* Upload/Toggle button styles (use CSS variables instead of Tailwind @apply) */
+.btn-upload {
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  color: var(--secondary-foreground);
+  padding: 0.45rem 0.9rem;
+  border-radius: 0.375rem;
+}
+.btn-toggle {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  padding: 0.45rem 0.9rem;
+  border-radius: 0.375rem;
+}
+
+/* Ensure preview background uses card color */
+.markdown-preview-pdf { background: var(--card); box-shadow: 0 6px 18px rgba(9,20,15,0.04); }
+
+/* Editor card background (editor wrapper uses Card component; ensure inner textarea stands out) */
+.card-editor { background: linear-gradient(180deg,var(--card),var(--secondary)); }
+
+/* Landing page / Hero */
+.hero {
+  background: linear-gradient(180deg, rgba(84,193,138,0.12) 0%, rgba(84,193,138,0.06) 50%, transparent 100%);
+  padding: 4rem 0;
+}
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  padding: 0 1rem;
+}
+@media (max-width: 768px) {
+  .hero-inner { flex-direction: column; gap: 1rem; padding: 1rem }
+  .hero-visual { order: -1 }
+  .hero-card { width: 100%; }
+  .hero-title { font-size: 1.5rem }
+  .cta-row { flex-wrap: wrap }
+}
+.hero-title {
+  font-size: 2.25rem;
+  line-height: 1.05;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+.hero-subtitle {
+  color: var(--muted-foreground);
+  font-size: 1.05rem;
+  margin-bottom: 1.25rem;
+}
+.cta-row { display:flex; gap:0.75rem; align-items:center }
+.cta-button {
+  background: linear-gradient(180deg,var(--primary), #3fbf78);
+  transition: all 0.2s ease;
+  transform-origin: center;
+  color: var(--primary-foreground);
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(84,193,138,0.18);
+}
+
+.cta-button:hover {
+  background: linear-gradient(180deg,var(--primary), #439467ff);
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cta-button:active {
+  transform: scale(0.98);
+  background: linear-gradient(180deg, #3fbf78, var(--primary));
+}
+.cta-ghost {
+  background: transparent;
+  border: 1px solid rgba(11,18,32,0.08);
+  color: var(--foreground);
+  padding: 0.55rem 0.95rem;
+  border-radius: 12px;
+}
+.hero-visual {
+  flex:1; display:flex; align-items:center; justify-content:center;
+}
+.hero-card {
+  background: linear-gradient(180deg, white, var(--secondary));
+  border-radius: 18px;
+  padding: 1rem;
+  width: 320px;
+  box-shadow: 0 10px 30px rgba(9,20,15,0.06);
+}
+
+/* Distinct section spacing */
+.section { padding: 3rem 0 }
+.section .section-inner { max-width:1100px; margin:0 auto; padding:0 1rem }
+
+/* Accent headings */
+.accent-heading { color: var(--primary); font-weight:700 }
 
 /* 表格样式 */
 .table-bordered {

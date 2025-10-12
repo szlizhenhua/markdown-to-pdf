@@ -287,39 +287,18 @@ export default function MarkdownToPDF() {
         <link rel="icon" type="image/png" href="/placeholder-logo.png" />
       </Head>
       <div className="min-h-screen bg-background">
-        {/* Header */}
+        {/* Top header with Get PDF on right */}
         <header className="border-b bg-card no-print">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full">
-                <div className="flex items-center gap-3 flex-1">
-                  <Image src="/placeholder-logo.png" alt="Markdown to PDF Logo" width={80} height={80} className="rounded" />
-                  <div className="flex-1 min-w-0">
-                    <h1 className="text-3xl font-extrabold text-foreground tracking-tight">Markdown to PDF Converter</h1>
-                    <p className="text-base text-muted-foreground">Convert Markdown to publication-quality PDF documents with math, code, diagrams, TOC, and custom themes.</p>
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-2 w-full sm:w-auto">
-                  <Button 
-                    onClick={handleDownloadPDF} 
-                    className="bg-primary text-primary-foreground hover:bg-primary/90 w-full sm:w-auto"
-                    style={{
-                      whiteSpace: 'nowrap',
-                      minWidth: '120px'
-                    }}
-                  >
-                    <Download className="h-4 w-4 mr-2" />
-                    Download PDF
-                  </Button>
-                  <Button 
-                    onClick={resetToDefault}
-                    variant="outline"
-                    className="w-full sm:w-auto"
-                  >
-                    Reset
-                  </Button>
-                </div>
-              </div>
+          <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Image src="/placeholder-logo.png" alt="logo" width={40} height={40} className="rounded" />
+              <div className="font-medium">Markdown → PDF</div>
+            </div>
+            <div>
+              <Button onClick={handleDownloadPDF} className="cta-button">
+                <Download className="h-4 w-4 mr-2" />
+                Get PDF
+              </Button>
             </div>
           </div>
         </header>
@@ -403,7 +382,7 @@ export default function MarkdownToPDF() {
             {/* Editor */}
             <div className={showPreview ? "flex flex-col h-[60vh] md:h-[70vh]" : "max-w-4xl mx-auto flex flex-col h-[60vh] md:h-[70vh]"}>
               <Card 
-                className="flex-1 h-full no-print overflow-auto"
+                className="flex-1 h-full no-print overflow-auto card-editor"
                 onDragEnter={handleDragEnter}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
@@ -419,7 +398,7 @@ export default function MarkdownToPDF() {
                           variant="outline" 
                           size="sm" 
                           onClick={() => fileInputRef.current?.click()} 
-                          className="w-full sm:w-auto"
+                          className="w-full sm:w-auto btn-upload"
                         >
                           <Upload className="h-4 w-4 mr-2" />
                           Upload
@@ -428,7 +407,7 @@ export default function MarkdownToPDF() {
                           variant="outline" 
                           size="sm" 
                           onClick={() => setShowPreview(!showPreview)} 
-                          className="w-full sm:w-auto"
+                          className="w-full sm:w-auto btn-toggle"
                         >
                           <Eye className="h-4 w-4 mr-2" />
                           {showPreview ? "Hide" : "Show"} Preview
@@ -460,7 +439,7 @@ export default function MarkdownToPDF() {
             {/* Preview */}
             {showPreview && (
               <div className="flex flex-col h-[60vh] md:h-[70vh] print:col-span-full">
-                <Card className="flex-1 h-full overflow-auto">
+          <Card className="flex-1 h-full overflow-auto card-editor">
                   <CardHeader className="no-print">
                     <CardTitle className="flex items-center gap-2">
                       <Eye className="h-5 w-5" />
