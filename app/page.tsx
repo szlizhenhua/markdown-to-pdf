@@ -480,6 +480,7 @@ export default function MarkdownToPDF() {
                         content={markdown} 
                         theme={selectedTheme} 
                         paperSizes={selectedPaperSize} 
+                        fontSizes = {selectedFontSize}
                         onHeadingsChange={setHeadings} 
                       />
                     </div>
