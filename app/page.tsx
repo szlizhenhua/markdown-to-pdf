@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useRef, useCallback } from "react"
+import { useState, useRef, useCallback, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
@@ -109,6 +109,29 @@ export default function MarkdownToPDF() {
   const dropRef = useRef<HTMLDivElement>(null)
   const settingsRef = useRef<HTMLDivElement>(null)
   const tocRef = useRef<HTMLDivElement>(null)
+
+  // 点击外部关闭菜单
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const settingsButton = document.querySelector('button[aria-label="Settings"]')
+      const tocButton = document.querySelector('button[aria-label="Table of Contents"]')
+
+      if (showSettings && settingsRef.current && !settingsRef.current.contains(event.target as Node) && 
+          !(event.target === settingsButton || settingsButton?.contains(event.target as Node))) {
+        setShowSettings(false)
+      }
+      
+      if (showToc && tocRef.current && !tocRef.current.contains(event.target as Node) && 
+          !(event.target === tocButton || tocButton?.contains(event.target as Node))) {
+        setShowToc(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showSettings, showToc])
 
   // 处理文件拖拽事件
   const handleDragEnter = useCallback((e: React.DragEvent) => {
@@ -304,6 +327,7 @@ export default function MarkdownToPDF() {
                 size="icon"
                 onClick={() => setShowToc(!showToc)}
                 className="text-muted-foreground hover:text-foreground"
+                aria-label="Table of Contents"
               >
                 <FileText className="h-5 w-5" />
               </Button>
@@ -316,6 +340,7 @@ export default function MarkdownToPDF() {
                 size="icon"
                 onClick={() => setShowSettings(!showSettings)}
                 className="text-muted-foreground hover:text-foreground"
+                aria-label="Settings"
               >
                 <Settings className="h-5 w-5" />
               </Button>
@@ -324,7 +349,7 @@ export default function MarkdownToPDF() {
 
           {/* Settings Popover */}
           {showSettings && (
-            <div className="absolute right-4 top-16 z-50 w-64 bg-white shadow-2xl rounded-lg border-2 border-gray-200">
+            <div ref={settingsRef} className="absolute right-4 top-16 z-50 w-64 bg-white shadow-2xl rounded-lg border-2 border-gray-200">
               <div className="p-4 bg-white">
                 <h3 className="font-medium mb-3">Settings</h3>
                 <div className="space-y-4">
@@ -400,7 +425,7 @@ export default function MarkdownToPDF() {
 
           {/* Table of Contents Popover */}
           {showToc && (
-            <div className="absolute right-24 top-16 z-50 w-64 bg-white shadow-2xl rounded-lg border-2 border-gray-200 max-h-[70vh] overflow-auto">
+            <div ref={tocRef} className="absolute right-24 top-16 z-50 w-64 bg-white shadow-2xl rounded-lg border-2 border-gray-200 max-h-[70vh] overflow-auto">
               <div className="p-4 bg-white">
                 <h3 className="font-medium mb-3">Table of Contents</h3>
                 <TableOfContents headings={headings} />
