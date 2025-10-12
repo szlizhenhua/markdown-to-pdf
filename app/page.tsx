@@ -428,7 +428,23 @@ export default function MarkdownToPDF() {
             <div ref={tocRef} className="absolute right-24 top-16 z-50 w-64 bg-white shadow-2xl rounded-lg border-2 border-gray-200 max-h-[70vh] overflow-auto">
               <div className="p-4 bg-white">
                 <h3 className="font-medium mb-3">Table of Contents</h3>
-                <TableOfContents headings={headings} />
+                <div className="space-y-1">
+                  {headings.map((heading) => (
+                    <a
+                      key={heading.id}
+                      href={`#${heading.id}`}
+                      className="block px-3 py-1.5 rounded hover:bg-gray-100 active:bg-gray-200 transition-colors"
+                      onClick={() => setShowToc(false)}
+                    >
+                      <div 
+                        className="text-sm"
+                        style={{ marginLeft: `${(heading.level - 2) * 0.75}rem` }}
+                      >
+                        {heading.text}
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           )}
