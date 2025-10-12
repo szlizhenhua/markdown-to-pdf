@@ -334,16 +334,20 @@ export default function MarkdownToPDF() {
                       <SelectTrigger className="w-full">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
-                        {themes.map((theme) => (
-                          <SelectItem key={theme.id} value={theme.id}>
-                            <div>
-                              <div className="font-medium">{theme.name}</div>
-                              <div className="text-xs text-muted-foreground">{theme.description}</div>
-                            </div>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
+                    <SelectContent className="bg-white">
+                      {themes.map((theme) => (
+                        <SelectItem 
+                          key={theme.id} 
+                          value={theme.id}
+                          className="hover:bg-gray-100 active:bg-gray-200 transition-colors"
+                        >
+                          <div>
+                            <div className="font-medium">{theme.name}</div>
+                            <div className="text-xs text-muted-foreground">{theme.description}</div>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
                     </Select>
                   </div>
 
@@ -353,16 +357,20 @@ export default function MarkdownToPDF() {
                       <SelectTrigger className="w-full">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
-                        {paperSizes.map((size) => (
-                          <SelectItem key={size.id} value={size.id}>
-                            <div>
-                              <div className="font-medium">{size.name}</div>
-                              <div className="text-xs text-muted-foreground">{size.description}</div>
-                            </div>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
+                    <SelectContent className="bg-white">
+                      {paperSizes.map((size) => (
+                        <SelectItem 
+                          key={size.id} 
+                          value={size.id}
+                          className="hover:bg-gray-100 active:bg-gray-200 transition-colors"
+                        >
+                          <div>
+                            <div className="font-medium">{size.name}</div>
+                            <div className="text-xs text-muted-foreground">{size.description}</div>
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
                     </Select>
                   </div>
 
@@ -372,13 +380,17 @@ export default function MarkdownToPDF() {
                       <SelectTrigger className="w-full">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
-                        {fontSizes.map((size) => (
-                          <SelectItem key={size.id} value={size.id}>
-                            <div className="font-medium">{size.name}</div>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
+                    <SelectContent className="bg-white">
+                      {fontSizes.map((size) => (
+                        <SelectItem 
+                          key={size.id} 
+                          value={size.id}
+                          className="hover:bg-gray-100 active:bg-gray-200 transition-colors"
+                        >
+                          <div className="font-medium">{size.name}</div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
                     </Select>
                   </div>
                 </div>
