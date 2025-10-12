@@ -324,8 +324,8 @@ export default function MarkdownToPDF() {
 
           {/* Settings Popover */}
           {showSettings && (
-            <div className="absolute right-4 top-16 z-50 w-64 bg-popover shadow-lg rounded-md border border-border">
-              <div className="p-4">
+            <div className="absolute right-4 top-16 z-50 w-64 bg-white shadow-2xl rounded-lg border-2 border-gray-200">
+              <div className="p-4 bg-white">
                 <h3 className="font-medium mb-3">Settings</h3>
                 <div className="space-y-4">
                   <div>
@@ -388,8 +388,8 @@ export default function MarkdownToPDF() {
 
           {/* Table of Contents Popover */}
           {showToc && (
-            <div className="absolute right-24 top-16 z-50 w-64 bg-popover shadow-lg rounded-md border border-border max-h-[70vh] overflow-auto">
-              <div className="p-4">
+            <div className="absolute right-24 top-16 z-50 w-64 bg-white shadow-2xl rounded-lg border-2 border-gray-200 max-h-[70vh] overflow-auto">
+              <div className="p-4 bg-white">
                 <h3 className="font-medium mb-3">Table of Contents</h3>
                 <TableOfContents headings={headings} />
               </div>
