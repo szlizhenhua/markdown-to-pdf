@@ -79,6 +79,18 @@ export function MarkdownRenderer({ content, theme, paperSizes, fontSizes, onHead
     const renderer = new marked.Renderer()
     const headings: Array<{ id: string; text: string; level: number }> = []
 
+    // Custom link renderer for PDF compatibility
+    renderer.link = ({ href, title, text }: { href: string; title?: string | null; text: string }) => {
+      return `<a href="${href}" 
+                title="${title || ''}" 
+                style="cursor: pointer; text-decoration: underline; color: #3b82f6;" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="pdf-link">
+              ${text}
+              </a>`
+    }
+
     renderer.heading = ({ text, depth }: { text: string; depth: number }) => {
       const textString = text
       const id = textString.toLowerCase().replace(/[^\w]+/g, "-")
@@ -105,7 +117,7 @@ export function MarkdownRenderer({ content, theme, paperSizes, fontSizes, onHead
       // 用 highlight.js 高亮原始代码
       const language = langString || "plaintext";
       const highlighted = hljs.highlight(raw.replace(/^```[^\n]*\n?/, '').replace(/```$/, ''), { language }).value;
-      return `<pre class="hljs language-${language}" style="background-color: #f8f9fa; padding: 1em; border-radius: 4px; overflow-x: auto; margin: 1em 0;"><code>${highlighted}</code></pre>`;
+      return `<pre class="hljs language-${language}" style="background-color: #334658ff; padding: 1em; border-radius: 4px; overflow-x: auto; margin: 1em 0;"><code>${highlighted}</code></pre>`;
     };
 
     // 添加对表格的正确渲染

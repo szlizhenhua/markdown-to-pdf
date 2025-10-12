@@ -25,7 +25,7 @@ This is a **professional** Markdown to PDF converter that supports:
 - **Table of contents** with page numbers
 - **Custom themes** and styling
 
-### Format Supports
+## Format Supports
 - **Bold text**
 - *Italic text*
 - \`Inline code\`
