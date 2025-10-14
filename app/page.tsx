@@ -277,7 +277,7 @@ export default function MarkdownToPDF() {
                 <Download className="h-4 w-4 mr-2" />
                 Get PDF
               </Button>
-              <Button 
+              {/*<Button 
                 variant="ghost" 
                 size="icon"
                 onClick={() => setShowSettings(!showSettings)}
@@ -285,7 +285,7 @@ export default function MarkdownToPDF() {
                 aria-label="Settings"
               >
                 <Settings className="h-5 w-5" />
-              </Button>
+              </Button>*/}
             </div>
           </div>
 
