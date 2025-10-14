@@ -72,7 +72,7 @@ export async function POST(request: Request) {
     await browser.close()
     
     // 返回PDF文件
-    return new NextResponse(pdf, {
+    return new NextResponse(new Uint8Array(pdf), {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': `attachment; filename="${fileName}"`,
