@@ -187,105 +187,47 @@ export default function MarkdownToPDF() {
   }
 
   const handleDownloadPDF = async () => {
-    // 只在浏览器端执行
-    if (typeof window === 'undefined') return;
-    const html2pdf = (await import('html2pdf.js')).default;
-    const previewCard = document.querySelector('.markdown-preview-pdf') as HTMLElement;
-    if (!previewCard) return;
+    try {
+      const previewCard = document.querySelector('.markdown-preview-pdf') as HTMLElement;
+      if (!previewCard) return;
 
-    // 纸张规格映射
-    const paperSizeMap: Record<string, { format: string; orientation: "portrait" | "landscape" }> = {
-      a4: { format: 'a4', orientation: 'portrait' },
-      letter: { format: 'letter', orientation: 'portrait' },
-      legal: { format: 'legal', orientation: 'portrait' },
-    };
-    const paperFormat = paperSizeMap[selectedPaperSize] || paperSizeMap.a4;
+      // 生成文件名，基于第一行标题或默认
+      const firstLine = markdown.split('\n')[0]?.replace(/^#+\s*/, '') || 'document';
+      const fileName = `${firstLine.trim().replace(/\s+/g, '-').toLowerCase()}.pdf`;
 
-    // 主题样式映射（可扩展）
-    const themeClass = {
-      default: 'prose prose-lg',
-      academic: 'prose prose-lg prose-academic',
-      modern: 'prose prose-lg prose-modern',
-      minimal: 'prose prose-lg prose-minimal',
-    }[selectedTheme] || 'prose prose-lg';
-
-    const worker = html2pdf()
-      .set({
-        margin: [0.5, 0.5, 0.5, 0.5], // 上、右、下、左的页边距
-        filename: 'document.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-          scale: 2,
-          useCORS: true,
-          allowTaint: true,
-          logging: true,
-          letterRendering: true,
-          onclone: (clonedDoc: Document) => {
-            const clonedPreview = clonedDoc.querySelector('.markdown-preview-pdf') as HTMLElement | null;
-            if (clonedPreview) {
-              // 应用导出专用样式到克隆文档
-              clonedPreview.classList.add('pdf-export-plain', 'pdf-export-mathml');
-              
-              // 确保内容不会因为分页被切断
-              clonedPreview.style.breakInside = 'avoid';
-              clonedPreview.style.pageBreakInside = 'avoid';
-              
-              // 统一处理所有元素的分页问题
-              clonedPreview.querySelectorAll('*').forEach((el: Element) => {
-                (el as HTMLElement).style.breakInside = 'avoid';
-                (el as HTMLElement).style.pageBreakInside = 'avoid';
-              });
-              
-              // 特殊处理公式元素，确保KaTeX字体正确应用
-              const katexElements = clonedPreview.querySelectorAll('.katex, .katex-display');
-              katexElements.forEach((element: Element) => {
-                const el = element as HTMLElement;
-                // 确保KaTeX元素使用正确的字体
-                el.style.fontFamily = 'KaTeX_Main, Times New Roman, serif';
-                
-                // 确保块级公式居中显示
-                if (el.classList.contains('katex-display')) {
-                  el.style.display = 'block';
-                  el.style.textAlign = 'center';
-                  el.style.margin = '1em 0';
-                } else {
-                  el.style.display = 'inline-block';
-                }
-                
-                // 如果元素有data-tex属性，重新渲染公式以确保正确显示
-                const texText = el.getAttribute('data-tex');
-                if (texText) {
-                  try {
-                    const katexHtml = katex.renderToString(texText, { 
-                      displayMode: el.classList.contains('katex-display'),
-                      output: 'html',
-                      throwOnError: false
-                    });
-                    el.innerHTML = katexHtml;
-                  } catch (e) {
-                    console.error('KaTeX重新渲染错误:', e);
-                  }
-                }
-              });
-            }
-          }
+      // 调用API生成PDF
+      const response = await fetch('/api/export-pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        jsPDF: { 
-          unit: 'in', 
-          format: paperFormat.format, 
-          orientation: paperFormat.orientation,
-        }
-      } as any)
-      .from(previewCard)
-      .set({
-        pagebreak: {
-          mode: ['avoid-all', 'css', 'legacy'],
-          before: '.break-before',
-          after: '.break-after',
-          avoid: 'tr, th, td, li, .katex, .katex-display, pre, code, h1, h2, h3, h4, h5, h6'
-        }
-      } as any)
-      .save();  // 添加这行来触发PDF下载
+        body: JSON.stringify({
+          htmlContent: previewCard.innerHTML,
+          fileName,
+          theme: selectedTheme,
+          paperSize: selectedPaperSize,
+          fontSize: selectedFontSize
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('PDF生成失败');
+      }
+
+      // 创建下载链接
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('PDF导出错误:', error);
+      alert('PDF导出失败，请检查控制台查看详情');
+    }
   }
 
   const resetToDefault = () => {
