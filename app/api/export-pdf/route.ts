@@ -2,11 +2,24 @@ import { NextResponse } from 'next/server'
 import { chromium } from 'playwright'
 
 export async function POST(request: Request) {
+  let browser = null
+
   try {
-    const { htmlContent, fileName = 'document.pdf', theme = 'default', paperSize = 'a4', fontSize = '12' } = await request.json()
-    
+    const { htmlContent, fileName = 'document.pdf', theme = 'default', paperSize = 'a4', fontSize = '12', language = 'en' } = await request.json()
+
+    // 确保文件名只包含ASCII字符，避免编码问题
+    const safeFileName = fileName.replace(/[^a-zA-Z0-9\-._]/g, '_');
+
+    // 调试信息
+    console.log('PDF API 调试信息:');
+    console.log('- 语言:', language);
+    console.log('- HTML内容长度:', htmlContent?.length || 0);
+    console.log('- 原始文件名:', fileName);
+    console.log('- 安全文件名:', safeFileName);
+    console.log('- 主题:', theme);
+
     // 启动浏览器
-    const browser = await chromium.launch()
+    browser = await chromium.launch()
     const page = await browser.newPage()
     
     // 根据主题选择代码高亮样式
@@ -14,22 +27,27 @@ export async function POST(request: Request) {
       ? 'github.min.css'
       : 'atom-one-dark.min.css';
 
-    // 设置HTML内容
+    // 设置HTML内容，增强对中文的支持
     await page.setContent(`
       <!DOCTYPE html>
       <html>
         <head>
           <meta charset="UTF-8">
+          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/${highlightTheme}">
           <style>
             body {
-              font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+              font-family: ${language === 'zh'
+                ? '"PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Heiti SC", "SimSun", sans-serif'
+                : '"Inter", "Helvetica Neue", "Arial", sans-serif'};
               padding: 20px;
               line-height: 1.6;
               color: #24292e;
               background: white;
               font-size: ${fontSize}pt;
+              word-wrap: break-word;
+              overflow-wrap: break-word;
             }
 
             /* 代码块样式 */
@@ -439,9 +457,14 @@ export async function POST(request: Request) {
         </body>
       </html>
     `)
-    
+
+    // 等待页面加载完成，特别是确保字体加载完成
+    await page.waitForLoadState('networkidle')
+
     // 生成PDF - 支持不同的纸张尺寸
     const pdfFormat = paperSize.toUpperCase();
+    console.log('开始生成PDF，格式:', pdfFormat);
+
     const pdf = await page.pdf({
       format: pdfFormat as any, // A4, LETTER, LEGAL
       margin: {
@@ -453,20 +476,40 @@ export async function POST(request: Request) {
       printBackground: true,
       preferCSSPageSize: true
     })
-    
+
+    console.log('PDF生成成功，大小:', pdf.length, 'bytes');
+
     await browser.close()
     
     // 返回PDF文件
     return new NextResponse(new Uint8Array(pdf), {
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="${fileName}"`,
+        'Content-Disposition': `attachment; filename="${safeFileName}"`,
       },
     })
   } catch (error) {
     console.error('PDF生成错误:', error)
+
+    // 确保浏览器资源被正确释放
+    try {
+      if (browser) {
+        await browser.close()
+      }
+    } catch (closeError) {
+      console.error('关闭浏览器时出错:', closeError)
+    }
+
+    // 返回详细的错误信息
+    const errorMessage = error instanceof Error ? error.message : '未知错误'
+    console.error('详细错误信息:', errorMessage)
+
     return NextResponse.json(
-      { error: 'PDF生成失败' },
+      {
+        error: 'PDF生成失败',
+        details: errorMessage,
+        timestamp: new Date().toISOString()
+      },
       { status: 500 }
     )
   }

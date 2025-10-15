@@ -13,7 +13,7 @@ import { MarkdownRenderer } from "@/components/markdown-renderer"
 import { TableOfContents } from "@/components/table-of-contents"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { useLanguage } from "@/lib/contexts/language-context"
-import { defaultContent } from "@/lib/default-content"
+import { locales } from "@/lib/locales"
 import katex from "katex"
 
 import Head from 'next/head'
@@ -47,7 +47,19 @@ export default function MarkdownToPDF() {
   const { language, t } = useLanguage()
 
   // 递归覆盖所有子元素样式，彻底移除oklch影响
-  const [markdown, setMarkdown] = useState(defaultContent[language])
+  const [markdown, setMarkdown] = useState(t.defaultContent)
+
+  // 确保语言切换时更新默认内容（仅当内容为默认内容时）
+  useEffect(() => {
+    // 检查当前markdown内容是否是对应语言的默认内容
+    const currentEnDefaultContent = locales.en.defaultContent
+    const currentZhDefaultContent = locales.zh.defaultContent
+
+    if (markdown === currentEnDefaultContent || markdown === currentZhDefaultContent) {
+      // 如果当前是默认内容，则切换到新语言的默认内容
+      setMarkdown(t.defaultContent)
+    }
+  }, [language, t.defaultContent, markdown])
   const [selectedTheme, setSelectedTheme] = useState("default")
   const [selectedPaperSize, setSelectedPaperSize] = useState("a4")
   const [selectedFontSize, setSelectedFontSize] = useState("12")
@@ -140,29 +152,47 @@ export default function MarkdownToPDF() {
   const handleDownloadPDF = async () => {
     try {
       const previewCard = document.querySelector('.markdown-preview-pdf') as HTMLElement;
-      if (!previewCard) return;
+      if (!previewCard) {
+        throw new Error('找不到预览内容容器');
+      }
 
-      // 生成文件名，基于第一行标题或默认
+      // 生成文件名，基于第一行标题或默认（处理中文字符）
       const firstLine = markdown.split('\n')[0]?.replace(/^#+\s*/, '') || 'document';
-      const fileName = `${firstLine.trim().replace(/\s+/g, '-').toLowerCase()}.pdf`;
+      // 对文件名进行URL编码处理，避免中文字符问题
+      const safeFileName = `${firstLine.trim().replace(/\s+/g, '-').toLowerCase()}`;
+      const fileName = language === 'zh'
+        ? `document.pdf` // 中文环境下使用默认文件名，避免编码问题
+        : `${safeFileName}.pdf`;
+
+      // 获取HTML内容并确保正确编码
+      let htmlContent = previewCard.innerHTML;
+
+      // 调试信息：输出HTML内容长度和语言
+      console.log('PDF导出调试信息:');
+      console.log('- 当前语言:', language);
+      console.log('- HTML内容长度:', htmlContent.length);
+      console.log('- 文件名:', fileName);
 
       // 调用API生成PDF
       const response = await fetch('/api/export-pdf', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json; charset=utf-8',
         },
         body: JSON.stringify({
-          htmlContent: previewCard.innerHTML,
+          htmlContent,
           fileName,
           theme: selectedTheme,
           paperSize: selectedPaperSize,
-          fontSize: selectedFontSize
+          fontSize: selectedFontSize,
+          language // 添加语言参数
         }),
       });
 
       if (!response.ok) {
-        throw new Error('PDF生成失败');
+        const errorText = await response.text();
+        console.error('服务器响应错误:', errorText);
+        throw new Error(`PDF生成失败: ${errorText}`);
       }
 
       // 创建下载链接
@@ -175,14 +205,17 @@ export default function MarkdownToPDF() {
       a.click();
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
+
+      console.log('PDF导出成功');
     } catch (error) {
       console.error('PDF导出错误:', error);
-      alert('PDF导出失败，请检查控制台查看详情');
+      const errorMessage = error instanceof Error ? error.message : '未知错误';
+      alert(`PDF导出失败: ${errorMessage}`);
     }
   }
 
   const resetToDefault = () => {
-    setMarkdown(defaultContent[language])
+    setMarkdown(t.defaultContent)
     setSelectedTheme("default")
     setSelectedPaperSize("a4")
     setSelectedFontSize("12")
