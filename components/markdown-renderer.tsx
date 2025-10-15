@@ -10,6 +10,10 @@ import typescript from 'highlight.js/lib/languages/typescript'
 import python from 'highlight.js/lib/languages/python'
 import json from 'highlight.js/lib/languages/json'
 import bash from 'highlight.js/lib/languages/bash'
+import css from 'highlight.js/lib/languages/css'
+import xml from 'highlight.js/lib/languages/xml'
+import sql from 'highlight.js/lib/languages/sql'
+import markdown from 'highlight.js/lib/languages/markdown'
 import katex from 'katex'
 import mermaid from 'mermaid'
 
@@ -19,6 +23,11 @@ hljs.registerLanguage('typescript', typescript)
 hljs.registerLanguage('python', python)
 hljs.registerLanguage('json', json)
 hljs.registerLanguage('bash', bash)
+hljs.registerLanguage('css', css)
+hljs.registerLanguage('xml', xml)
+hljs.registerLanguage('html', xml)  // HTML 使用 XML 解析器
+hljs.registerLanguage('sql', sql)
+hljs.registerLanguage('markdown', markdown)
 
 interface MarkdownRendererProps {
   content: string
@@ -98,11 +107,11 @@ export function MarkdownRenderer({ content, theme, paperSizes, fontSizes, onHead
       return `<h${depth} id="${id}" class="heading-${depth}" style="margin: 1em 0;">${textString}</h${depth}>`
     }
 
-    // 自定义渲染器，处理数学公式
+    // 自定义渲染器，处理数学公式和代码高亮
     renderer.code = (token: any) => {
       const { raw, text, lang } = token;
       const langString = lang || "";
-      
+
       if (langString === "mermaid") {
         const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
         return `
@@ -113,11 +122,35 @@ export function MarkdownRenderer({ content, theme, paperSizes, fontSizes, onHead
             </div>
           </div>`;
       }
-      
-      // 用 highlight.js 高亮原始代码
+
+      // 提取代码内容（移除 markdown 代码块标记）
+      const codeContent = raw.replace(/^```[^\n]*\n?/, '').replace(/```$/, '');
+
+      // 用 highlight.js 高亮代码
       const language = langString || "plaintext";
-      const highlighted = hljs.highlight(raw.replace(/^```[^\n]*\n?/, '').replace(/```$/, ''), { language }).value;
-      return `<pre class="hljs language-${language}" style="background-color: #334658ff; padding: 1em; border-radius: 4px; overflow-x: auto; margin: 1em 0;"><code>${highlighted}</code></pre>`;
+      let highlighted;
+
+      try {
+        // 确保语言已注册
+        if (hljs.getLanguage(language)) {
+          highlighted = hljs.highlight(codeContent, { language }).value;
+        } else {
+          // 如果语言不支持，使用纯文本
+          highlighted = hljs.highlight(codeContent, { language: 'plaintext' }).value;
+        }
+      } catch (error) {
+        console.warn(`Highlight.js error for language "${language}":`, error);
+        // 降级到纯文本
+        highlighted = hljs.highlight(codeContent, { language: 'plaintext' }).value;
+      }
+
+      // 构建代码块HTML，包含语言标识和正确的高亮样式
+      return `<div class="code-block-container" style="margin: 1em 0;">
+        <div class="code-block-header" style="background: rgba(255,255,255,0.1); padding: 0.5em 1em; border-radius: 0.5em 0.5em 0 0; font-size: 0.85em; color: #888;">
+          <span style="text-transform: uppercase; font-weight: 600;">${language}</span>
+        </div>
+        <pre class="hljs language-${language}" style="margin: 0; border-radius: 0 0 0.5em 0.5em;"><code>${highlighted}</code></pre>
+      </div>`;
     };
 
     // 添加对表格的正确渲染

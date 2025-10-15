@@ -530,22 +530,244 @@
   font-weight: bold;
 }
 
-/* 代码块样式 */
+/* 代码块样式 - 添加 highlight.js 主题支持 */
 .hljs {
   display: block;
   overflow-x: auto;
   padding: 1em;
-  background: #f5f5f5;
-  color: #222;
+  background: #2d2d2d;
+  color: #f8f8f2;
   border-radius: 0.5em;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+/* highlight.js VS2015 主题样式 */
+.hljs-comment,
+.hljs-quote {
+  color: #6a9955;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #569cd6;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #b5cea8;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #ce9178;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #dcdcaa;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #4ec9b0;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #569cd6;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #d16969;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #4ec9b0;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #dcdcaa;
+}
+
+.hljs-meta {
+  color: #d7ba7d;
+}
+
+.hljs-deletion {
+  background: #420e09;
+}
+
+.hljs-addition {
+  background: #2d4a1f;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+/* 浅色主题备选方案 */
+@media (prefers-color-scheme: light) {
+  .hljs {
+    background: #f6f8fa;
+    color: #24292e;
+  }
+
+  .hljs-comment,
+  .hljs-quote {
+    color: #6a737d;
+  }
+
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-subst {
+    color: #d73a49;
+  }
+
+  .hljs-number,
+  .hljs-literal,
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-tag .hljs-attr {
+    color: #005cc5;
+  }
+
+  .hljs-string,
+  .hljs-doctag {
+    color: #032f62;
+  }
+
+  .hljs-title,
+  .hljs-section,
+  .hljs-selector-id {
+    color: #6f42c1;
+  }
+
+  .hljs-type,
+  .hljs-class .hljs-title {
+    color: #22863a;
+  }
+
+  .hljs-tag,
+  .hljs-name,
+  .hljs-attribute {
+    color: #22863a;
+  }
+
+  .hljs-regexp,
+  .hljs-link {
+    color: #e36209;
+  }
+
+  .hljs-symbol,
+  .hljs-bullet {
+    color: #22863a;
+  }
+
+  .hljs-built_in,
+  .hljs-builtin-name {
+    color: #e36209;
+  }
+
+  .hljs-meta {
+    color: #005cc5;
+  }
 }
 
 .inline-code {
-  font-family: Consolas, monospace;
-  background-color: #f5f5f5;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  background-color: rgba(175, 184, 193, 0.2);
   padding: 0.2em 0.4em;
   border-radius: 0.25em;
   font-size: 0.9em;
+  color: #d73a49;
+  border: 1px solid rgba(175, 184, 193, 0.3);
+}
+
+/* 代码块容器样式 */
+.code-block-container {
+  margin: 1.5em 0;
+  border-radius: 0.75em;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.code-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75em 1em;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.code-block-header span {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 0.05em;
+}
+
+/* 确保 hljs 类的优先级 */
+.hljs {
+  background: #2d2d2d !important;
+  color: #f8f8f2 !important;
+  padding: 1.5em !important;
+  margin: 0 !important;
+  overflow-x: auto !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-size: 0.9em !important;
+  line-height: 1.6 !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+/* 强制语言特定样式 */
+.hljs.language-javascript,
+.hljs.language-typescript,
+.hljs.language-python,
+.hljs.language-json,
+.hljs.language-bash,
+.hljs.language-css,
+.hljs.language-html,
+.hljs.language-sql,
+.hljs.language-markdown {
+  background: #2d2d2d !important;
+  color: #f8f8f2 !important;
+}
+
+/* 代码块内部滚动条样式 */
+.hljs::-webkit-scrollbar {
+  height: 8px;
+}
+
+.hljs::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.hljs::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.hljs::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 /* Mermaid 图表容器 */
