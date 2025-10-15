@@ -31,13 +31,14 @@ hljs.registerLanguage('markdown', markdown)
 
 interface MarkdownRendererProps {
   content: string
+  language: string
   theme: string
   paperSizes: string
   fontSizes: string
   onHeadingsChange?: (headings: Array<{ id: string; text: string; level: number }>) => void
 }
 
-export function MarkdownRenderer({ content, theme, paperSizes, fontSizes, onHeadingsChange }: MarkdownRendererProps) {
+export function MarkdownRenderer({ content, language, theme, paperSizes, fontSizes, onHeadingsChange }: MarkdownRendererProps) {
   const [renderedHtml, setRenderedHtml] = useState("")
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -287,7 +288,7 @@ export function MarkdownRenderer({ content, theme, paperSizes, fontSizes, onHead
     if (onHeadingsChange) {
       onHeadingsChange(headings)
     }
-  }, [content, theme, paperSizes, fontSizes, onHeadingsChange, hljs, katex, mermaid])
+  }, [content, language, theme, paperSizes, fontSizes, onHeadingsChange, hljs, katex, mermaid])
 
   useEffect(() => {
     if (containerRef.current && renderedHtml && mermaid) {
