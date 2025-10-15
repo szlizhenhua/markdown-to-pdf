@@ -35,10 +35,11 @@ interface MarkdownRendererProps {
   theme: string
   paperSizes: string
   fontSizes: string
+  t: any  // Translation object
   onHeadingsChange?: (headings: Array<{ id: string; text: string; level: number }>) => void
 }
 
-export function MarkdownRenderer({ content, language, theme, paperSizes, fontSizes, onHeadingsChange }: MarkdownRendererProps) {
+export function MarkdownRenderer({ content, language, theme, paperSizes, fontSizes, t, onHeadingsChange }: MarkdownRendererProps) {
   const [renderedHtml, setRenderedHtml] = useState("")
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -119,7 +120,7 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
           <div class="mermaid-container">
             <div class="mermaid-diagram" id="${id}">
               <textarea style="display:none;">${text}</textarea>
-              <div class="mermaid-loading">Loading diagram...</div>
+              <div class="mermaid-loading">${t.messages.mermaidLoading}</div>
             </div>
           </div>`;
       }
@@ -140,7 +141,7 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
           highlighted = hljs.highlight(codeContent, { language: 'plaintext' }).value;
         }
       } catch (error) {
-        console.warn(`Highlight.js error for language "${language}":`, error);
+        console.warn(t.messages.highlightJsError.replace('{lang}', language), error);
         // 降级到纯文本
         highlighted = hljs.highlight(codeContent, { language: 'plaintext' }).value;
       }
@@ -209,7 +210,7 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
               // console.log('渲染结果rendered: ', rendered);
               return katexRendered;
             } catch (e) {
-              console.error('KaTeX渲染错误:', e);
+              console.error(t.messages.katexRenderError, e);
               return match;
             }
           });
@@ -304,7 +305,7 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
         // 强制重新渲染所有Mermaid图表
         mermaid.contentLoaded();
       } catch (error) {
-        console.error("Mermaid initialization error:", error);
+        console.error(t.messages.mermaidInitError, error);
       }
 
       // Manual rendering as fallback
@@ -325,7 +326,7 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
         if (!diagramDefinition.trim()) return;
         
         // Add loading indicator
-        element.innerHTML = '<div class="mermaid-loading">Rendering diagram...</div>';
+        element.innerHTML = `<div class="mermaid-loading">${t.messages.mermaidRendering}</div>`;
         
         // Render with retry mechanism
         const renderWithRetry = async (retryCount = 0) => {
@@ -346,18 +347,18 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
             }
           } catch (error) {
             if (retryCount < 2) {
-              console.warn(`Mermaid渲染尝试 ${retryCount + 1} 失败，将在100ms后重试`);
+              console.warn(t.messages.mermaidRenderRetry.replace('{count}', (retryCount + 1).toString()));
               await new Promise(resolve => setTimeout(resolve, 100));
               return renderWithRetry(retryCount + 1);
             }
             
-            console.error("Mermaid渲染最终失败:", error);
+            console.error(t.messages.mermaidFinalError, error);
             element.innerHTML = `
               <div style="color: red; padding: 10px; border: 1px solid red; border-radius: 4px; background: #ffe6e6;">
-                <strong>Mermaid渲染错误:</strong>
-                <div style="margin-top: 5px;">请检查Mermaid语法是否正确</div>
-                <pre style="margin-top: 10px; white-space: pre-wrap;">${error instanceof Error ? error.message : '未知错误'}</pre>
-                <div style="margin-top: 10px;">示例语法:</div>
+                <strong>${t.messages.mermaidRenderError}:</strong>
+                <div style="margin-top: 5px;">${t.messages.mermaidSyntaxError}</div>
+                <pre style="margin-top: 10px; white-space: pre-wrap;">${error instanceof Error ? error.message : t.messages.unknownError}</pre>
+                <div style="margin-top: 10px;">${t.messages.mermaidExampleSyntax}</div>
                 <pre style="margin: 5px 0; padding: 5px; background: #f5f5f5; border-radius: 3px;">
 graph TD
     A[Start] --&gt; B{Decision}

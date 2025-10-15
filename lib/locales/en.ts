@@ -72,7 +72,15 @@ export const en = {
     pdfExportError: "PDF export failed, please check console for details",
     mermaidRenderError: "Mermaid render error",
     mermaidSyntaxError: "Please check Mermaid syntax",
-    mermaidExampleSyntax: "Example syntax:"
+    mermaidExampleSyntax: "Example syntax:",
+    mermaidRenderRetry: "Mermaid render attempt {count} failed, will retry in 100ms",
+    mermaidFinalError: "Mermaid render final failed",
+    unknownError: "Unknown error",
+    highlightJsError: "Highlight.js error for language \"{lang}\":",
+    katexRenderError: "KaTeX render error:",
+    mermaidInitError: "Mermaid initialization error:",
+    mermaidLoading: "Loading diagram...",
+    mermaidRendering: "Rendering diagram..."
   },
 
   // SEO

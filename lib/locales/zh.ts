@@ -72,7 +72,15 @@ export const zh = {
     pdfExportError: "PDF 导出失败，请检查控制台查看详情",
     mermaidRenderError: "Mermaid 渲染错误",
     mermaidSyntaxError: "请检查 Mermaid 语法",
-    mermaidExampleSyntax: "示例语法："
+    mermaidExampleSyntax: "示例语法：",
+    mermaidRenderRetry: "Mermaid 渲染尝试 {count} 失败，将在100ms后重试",
+    mermaidFinalError: "Mermaid 渲染最终失败",
+    unknownError: "未知错误",
+    highlightJsError: "Highlight.js 语言 \"{lang}\" 错误：",
+    katexRenderError: "KaTeX 渲染错误：",
+    mermaidInitError: "Mermaid 初始化错误：",
+    mermaidLoading: "加载图表中...",
+    mermaidRendering: "渲染图表中..."
   },
 
   // SEO

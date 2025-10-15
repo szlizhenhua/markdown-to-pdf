@@ -424,13 +424,14 @@ export default function MarkdownToPDF() {
                       className="markdown-preview-pdf prose prose-lg"
                       style={{ fontSize: `${selectedFontSize}pt` }}
                     >
-                      <MarkdownRenderer 
-                        content={markdown} 
-                        language={language} 
-                        theme={selectedTheme} 
-                        paperSizes={selectedPaperSize} 
+                      <MarkdownRenderer
+                        content={markdown}
+                        language={language}
+                        theme={selectedTheme}
+                        paperSizes={selectedPaperSize}
                         fontSizes = {selectedFontSize}
-                        onHeadingsChange={setHeadings} 
+                        t={t}
+                        onHeadingsChange={setHeadings}
                       />
                     </div>
                   </CardContent>
