@@ -296,6 +296,84 @@ export async function POST(request: Request) {
               height: auto;
             }
 
+            /* 段落样式优化 */
+            p {
+              margin: 1.2em 0;
+              line-height: 1.7;
+              text-align: justify;
+              text-indent: 2em;
+              position: relative;
+              orphans: 3;
+              widows: 3;
+            }
+
+            /* 首段不缩进 */
+            p:first-of-type,
+            p:first-child {
+              text-indent: 0;
+            }
+
+            /* 标题后的段落不缩进 */
+            h1 + p,
+            h2 + p,
+            h3 + p,
+            h4 + p,
+            h5 + p,
+            h6 + p {
+              text-indent: 0;
+            }
+
+            /* 特殊元素后的段落不缩进 */
+            ul + p,
+            ol + p,
+            pre + p,
+            blockquote + p,
+            table + p,
+            hr + p {
+              text-indent: 0;
+            }
+
+            /* 段落标识符 - 根据主题调整颜色 */
+            p::before {
+              content: '';
+              position: absolute;
+              left: 0.5em;
+              top: 0.6em;
+              width: 3px;
+              height: 3px;
+              ${theme === 'academic' ? 'background: #586069;' :
+                theme === 'modern' ? 'background: #e06c75;' :
+                theme === 'minimal' ? 'background: #abb2bf;' :
+                'background: #54c18a;'}
+              border-radius: 50%;
+              opacity: 0.7;
+            }
+
+            /* 首段不显示标识符 */
+            p:first-of-type::before,
+            p:first-child::before,
+            h1 + p::before,
+            h2 + p::before,
+            h3 + p::before,
+            h4 + p::before,
+            h5 + p::before,
+            h6 + p::before {
+              display: none;
+            }
+
+            /* 段落间距调整 */
+            p + p {
+              margin-top: 1.5em;
+            }
+
+            /* 确保行内元素不破坏缩进 */
+            p code,
+            p strong,
+            p em,
+            p a {
+              text-indent: 0;
+            }
+
             /* 标题样式 */
             h1, h2, h3, h4, h5, h6 {
               color: #24292e;

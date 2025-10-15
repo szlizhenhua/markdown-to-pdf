@@ -17,7 +17,7 @@
     --muted-foreground: #5a6a63;
     --accent: #dff6e9;
     --accent-foreground: #0b1220;
-    --destructive: #ef4444;
+    --destructive: #efad44ff;
     --destructive-foreground: #ffffff;
     --border: #e5e7eb;
     --input: #e5e7eb;
@@ -40,7 +40,7 @@
     --muted-foreground: #9fcfb6;
     --accent: #093827;
     --accent-foreground: #e6f6ec;
-    --destructive: #ef4444;
+    --destructive: #ef8644ff;
     --destructive-foreground: #0c0a09;
     --border: #44403c;
     --input: #44403c;
@@ -637,7 +637,7 @@
   .hljs-keyword,
   .hljs-selector-tag,
   .hljs-subst {
-    color: #d73a49;
+    color: #bf3ad7ff;
   }
 
   .hljs-number,
@@ -672,7 +672,7 @@
 
   .hljs-regexp,
   .hljs-link {
-    color: #e36209;
+    color: #e39709ff;
   }
 
   .hljs-symbol,
@@ -682,7 +682,7 @@
 
   .hljs-built_in,
   .hljs-builtin-name {
-    color: #e36209;
+    color: #e39309ff;
   }
 
   .hljs-meta {
@@ -788,23 +788,193 @@
   font-style: italic;
 }
 
+/* 段落样式优化 */
+.markdown-body p {
+  margin: 1.2em 0;
+  line-height: 1.7;
+  text-align: justify;
+  text-indent: 2em; /* 段落首行缩进 */
+  position: relative;
+}
+
+/* 段落首行不缩进的特殊情况 */
+.markdown-body p:first-of-type {
+  text-indent: 0;
+}
+
+.markdown-body p:first-child {
+  text-indent: 0;
+}
+
+/* 跟在标题后的段落不缩进 */
+.markdown-body h1 + p,
+.markdown-body h2 + p,
+.markdown-body h3 + p,
+.markdown-body h4 + p,
+.markdown-body h5 + p,
+.markdown-body h6 + p {
+  text-indent: 0;
+}
+
+/* 列表、代码块、引用、图片等元素后的段落不缩进 */
+.markdown-body ul + p,
+.markdown-body ol + p,
+.markdown-body pre + p,
+.markdown-body blockquote + p,
+.markdown-body table + p,
+.markdown-body hr + p {
+  text-indent: 0;
+}
+
+/* 段落标识符 - 装饰性元素 */
+.markdown-body p::before {
+  content: '';
+  position: absolute;
+  left: 0.5em;
+  top: 0.6em;
+  width: 4px;
+  height: 4px;
+  background: var(--primary, #54c18a);
+  border-radius: 50%;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+/* 悬停效果 */
+.markdown-body p:hover::before {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* 首段不显示标识符 */
+.markdown-body p:first-of-type::before,
+.markdown-body p:first-child::before {
+  display: none;
+}
+
+/* 段落间距调整 */
+.markdown-body p + p {
+  margin-top: 1.5em;
+}
+
+/* 确保段落内的行内元素不破坏缩进 */
+.markdown-body p code,
+.markdown-body p strong,
+.markdown-body p em,
+.markdown-body p a {
+  text-indent: 0;
+}
+
+/* 浏览器兼容性修复 */
+@supports not (text-indent: 2em) {
+  .markdown-body p {
+    padding-left: 2em;
+  }
+}
+
+/* Webkit 浏览器优化 */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .markdown-body p {
+    text-indent: 2em;
+    -webkit-text-indent: 2em;
+    text-align: justify;
+    text-justify: inter-ideograph;
+  }
+}
+
+/* Firefox 浏览器优化 */
+@-moz-document url-prefix() {
+  .markdown-body p {
+    text-indent: 2em;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .markdown-preview-pdf {
     padding: 1rem;
   }
-  
+
   .prose {
     max-width: 100%;
   }
-  
+
   .table-bordered {
     font-size: 0.9em;
   }
-  
+
   .table-bordered th,
   .table-bordered td {
     padding: 0.4em;
+  }
+
+  /* 移动端段落优化 */
+  .markdown-body p {
+    text-indent: 1.5em;
+    margin: 1em 0;
+    line-height: 1.6;
+  }
+
+  .markdown-body p::before {
+    width: 3px;
+    height: 3px;
+    top: 0.4em;
+  }
+}
+
+/* 主题相关的段落样式 */
+.prose-academic .markdown-body p {
+  font-family: Georgia, serif;
+  line-height: 1.8;
+  text-align: justify;
+  text-justify: inter-ideograph;
+}
+
+.prose-academic .markdown-body p::before {
+  background: #6a737d;
+  left: 0.3em;
+}
+
+.prose-modern .markdown-body p {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.prose-modern .markdown-body p::before {
+  background: #3b82f6;
+  width: 5px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.prose-minimal .markdown-body p {
+  font-family: system-ui, sans-serif;
+  line-height: 1.7;
+  text-align: left;
+  font-weight: 300;
+}
+
+.prose-minimal .markdown-body p::before {
+  background: #9ca3af;
+  width: 2px;
+  height: 2px;
+}
+
+/* 确保在不同主题下的段落可见性 */
+@media (prefers-color-scheme: dark) {
+  .prose-academic .markdown-body p::before {
+    background: #9ca3af;
+  }
+
+  .prose-modern .markdown-body p::before {
+    background: #60a5fa;
+  }
+
+  .prose-minimal .markdown-body p::before {
+    background: #6b7280;
   }
 }
 
