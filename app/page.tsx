@@ -15,60 +15,304 @@ import katex from "katex"
 
 const defaultMarkdown = `# Markdown to PDF Converter
 
-## Introduction
+> 🎯 **Convert your Markdown documents to professional PDFs with math formulas, flowcharts, code highlighting, and multiple themes**
 
-This is a **professional** Markdown to PDF converter that supports:
+## ✨ Features
 
-- **KaTeX** math rendering: $E = mc^2$
-- **Mermaid** diagrams
-- **Code highlighting**
-- **Table of contents** with page numbers
-- **Custom themes** and styling
+### 📊 **Complete Markdown Support**
+- **Text Formatting**: **Bold**, *Italic*, ~~Strikethrough~~, \`Inline code\`
+- **Heading Levels**: Full H1-H6 heading structure support
+- **Lists**: Ordered lists, unordered lists, task lists
+- **Links & Images**: Automatic link recognition (Example: [https://markdown-to-pdf.org](https://markdown-to-pdf.org/)), image embedding support
+- **Tables**: Support for alignment and complex table structures
+- **Quotes**: Block quotes and nested quotes
 
-## Format Supports
-- **Bold text**
-- *Italic text*
-- \`Inline code\`
-- [Links](https://markdown-to-pdf.org/)
+### 🧮 **Math Formula Rendering (KaTeX)**
+**Inline Formula**: Einstein's mass-energy equation $E = mc^2$
 
-## Mathematical Expressions
-
-Inline math: $\\sum_{i=1}^{n} x_i = x_1 + x_2 + \\cdots + x_n$
-
-Block math:
+**Block Formula**:
 $$\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}$$
 
-## Code Example
+**Complex Formula**:
+$$\\sum_{i=1}^{n} x_i = x_1 + x_2 + \\cdots + x_n$$
 
+**Matrix Representation**:
+$$\\begin{bmatrix}
+a & b \\\\
+c & d
+\\end{bmatrix}$$
+
+### 📈 **Diagram Drawing (Mermaid)**
+
+#### Flowchart
+\`\`\`mermaid
+graph TD
+    A[Start] --> B{Condition}
+    B -->|Yes| C[Execute A]
+    B -->|No| D[Execute B]
+    C --> E[End]
+    D --> E
+\`\`\`
+
+#### Graph Diagram
+\`\`\`mermaid
+graph LR
+    A[User] --> B[System]
+    B --> A[Response]
+\`\`\`
+
+### 💻 **Code Highlighting**
+
+#### JavaScript Example
 \`\`\`javascript
 function fibonacci(n) {
   if (n <= 1) return n;
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
+
+// Usage example
+console.log(fibonacci(10)); // Output: 55
 \`\`\`
 
-## Mermaid Diagram
+#### Python Example
+\`\`\`python
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quicksort(left) + middle + quicksort(right)
+\`\`\`
 
+#### JSON Example
+\`\`\`json
+{
+  "name": "Markdown to PDF",
+  "version": "1.0.0",
+  "features": [
+    "Math rendering",
+    "Code highlighting",
+    "Diagram support"
+  ]
+}
+\`\`\`
+
+### 📋 **Table Features**
+
+| Feature | Status | Description | Shortcut |
+|---------|--------|-------------|----------|
+| Math Formulas | ✅ | Full KaTeX support | \`$...\$ |
+| Flowcharts | ✅ | Mermaid diagrams | \`mermaid |
+| Code Highlighting | ✅ | Multi-language support | \`lang |
+| Tables | ✅ | Complete table functionality | \| \| \| |
+| Links | ✅ | Automatic link recognition | [text](url) |
+
+### 🎨 **Theme Styles**
+- **Default**: Clean and professional default theme
+- **Academic**: Formal style suitable for academic papers
+- **Modern**: Contemporary design style
+- **Minimal**: Minimalist design
+
+### 📄 **Page Settings**
+- **Paper Sizes**: A4, Letter, Legal
+- **Font Sizes**: Adjustable from 10pt to 16pt
+- **Auto Pagination**: Smart content split to avoid truncation
+
+---
+
+## 📖 User Guide
+
+### 🚀 **Quick Start**
+
+1. **Edit Content**
+   - Type or paste Markdown content in the left editor
+   - Real-time preview with WYSIWYG
+
+2. **Upload Files**
+   - Click "Upload" button to select .md or .txt files
+   - Or drag and drop files directly into the editor area
+
+3. **Customize Styles**
+   - Choose theme style (Default/Academic/Modern/Minimal)
+   - Adjust paper size and font size
+   - Real-time preview of effects
+
+4. **Export PDF**
+   - Click "Get PDF" button
+   - Automatically download generated PDF document
+   - Filename auto-generated based on document title
+
+### ⌨️ **Markdown Syntax Cheat Sheet**
+
+#### Basic Syntax
+\`\`\`markdown
+# Level 1 Heading
+## Level 2 Heading
+### Level 3 Heading
+
+**Bold text** or __Bold text__
+*Italic text* or _Italic text__
+~~Strikethrough~~
+
+- Unordered list item
+  - Nested list item
+
+1. Ordered list item
+2. Second item
+   1. Nested ordered item
+
+> Quote text
+>> Nested quote
+
+[Link text](https://example.com)
+![Image description](image.jpg)
+
+\`Inline code\`
+
+\`\`\`language
+Code block
+\`\`\`
+\`\`\`
+
+#### Extended Syntax
+\`\`\`markdown
+| Header 1 | Header 2 | Header 3 |
+|----------|----------|----------|
+| Content 1 | Content 2 | Content 3 |
+
+Task lists:
+- [x] Completed task
+- [ ] Pending task
+
+Footnotes:
+Here is a footnote[^1]
+[^1]: Footnote content
+
+Inline formula: $x = y + z$
+
+Block formula:
+$$\\frac{d}{dx}x^n = nx^{n-1}$$
+
+Mermaid diagram:
 \`\`\`mermaid
-graph TD
-    A[Start] --> B{Is it working?}
-    B -->|Yes| C[Great!]
-    B -->|No| D[Debug]
-    D --> B
+graph LR
+    A-->B
+\`\`\`
 \`\`\`
 
-## Table Example
+### 💡 **Usage Tips**
 
-| Feature | Supported | Notes |
-|---------|-----------|-------|
-| KaTeX | ✅ | Math rendering |
-| Mermaid | ✅ | Diagrams |
-| Code | ✅ | Syntax highlighting |
-| TOC | ✅ | Auto-generated |
+1. **Math Formulas**
+   - Use \`$...\` to wrap inline formulas
+   - Use \`$$...$$\` to wrap block formulas
+   - Full LaTeX math syntax supported
 
-## Conclusion
+2. **Code Blocks**
+   - Specify language for syntax highlighting: \`\`\`javascript
+   - Supported languages: JavaScript, Python, JSON, Bash, etc.
 
-This converter provides publication-quality PDF output with professional formatting and advanced features.`
+3. **Diagram Drawing**
+   - Use Mermaid syntax to create flowcharts, graphs, etc.
+   - Support for multiple diagram types: graph, flowchart, etc.
+
+4. **Table Formatting**
+   - Use \`|\` to separate columns
+   - Use \`-\` to separate headers and content
+   - Support for alignment: \`:---\` (left), \`---:\` (right), \`:---:\` (center)
+
+---
+
+## ❓ Frequently Asked Questions (FAQ)
+
+### Q1: What Markdown syntax is supported?
+**A**: This tool supports standard Markdown syntax and GitHub Flavored Markdown (GFM) extensions, including tables, task lists, strikethrough, etc. It also supports math formulas (KaTeX) and diagram drawing (Mermaid).
+
+### Q2: What to do if math formulas don't display?
+**A**: Please ensure you use the correct syntax:
+- Inline formulas: \`$formula$\`
+- Block formulas: \`$$formula$$\`
+If still not displaying, please check if the formula syntax is correct.
+
+### Q3: Can I customize styles?
+**A**: Yes, we provide four preset themes:
+- **Default**: Clean and professional
+- **Academic**: Academic style
+- **Modern**: Modern design
+- **Minimal**: Minimalist style
+
+You can also adjust paper sizes (A4/Letter/Legal) and font sizes (10-16pt).
+
+### Q4: How is the quality of exported PDFs?
+**A**: We use professional PDF generation engines to ensure output quality:
+- High-definition vector graphics
+- Clear text rendering
+- Correct page pagination
+- Maintain original formatting
+
+### Q5: Is my data secure?
+**A**: Completely secure! All processing is done locally in your browser:
+- No data uploaded to any server
+- No storage of your document content
+- Data automatically cleared after processing
+
+### Q6: Which browsers are supported?
+**A**: Supports all modern browsers:
+- Chrome 65+
+- Firefox 60+
+- Safari 12+
+- Edge 79+
+
+### Q7: How to handle large documents?
+**A**: For large documents, we recommend:
+- Process in sections
+- Adjust font size appropriately
+- Use page breaks for reasonable segmentation
+- Preview to confirm effects before export
+
+### Q8: What is the exported PDF filename?
+**A**: Filename is auto-generated based on the first line title of the document, for example:
+- Title "Project Report" → "Project Report.pdf"
+- Use "document.pdf" when no title
+
+---
+
+## 📞 Technical Support
+
+### 🔧 **Tech Stack**
+- **Next.js** - React framework
+- **Tailwind CSS** - Styling framework
+- **Marked** - Markdown parser
+- **KaTeX** - Math formula rendering
+- **Mermaid** - Diagram drawing
+- **html2pdf.js** - PDF generation
+- **Highlight.js** - Code highlighting
+
+### 📧 **Contact Us**
+For questions or suggestions, please contact us through:
+- GitHub Issues: Report issues or request features
+- Email feedback: support@markdown-to-pdf.org
+
+### 🔄 **Changelog**
+- **v1.0.0** - Initial release
+- KaTeX math formula support
+- Mermaid diagram support
+- Multiple theme style selection
+- Responsive design optimization
+
+---
+
+<div style="text-align: center; margin-top: 3em; padding: 2em; border-top: 1px solid #eee; color: #666;">
+  <p><strong>Markdown to PDF Converter</strong></p>
+  <p>Professional Markdown to PDF Conversion Tool</p>
+  <p style="font-size: 0.9em; margin-top: 1em;">
+    Made with ❤️ | Open Source | Privacy First
+  </p>
+  <p style="font-size: 0.8em; margin-top: 0.5em;">
+    © 2024 Markdown to PDF. All rights reserved.
+  </p>
+</div>`
 
 const themes = [
   { id: "default", name: "Default", description: "Clean and professional" },
