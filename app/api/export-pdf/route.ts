@@ -3,58 +3,358 @@ import { chromium } from 'playwright'
 
 export async function POST(request: Request) {
   try {
-    const { htmlContent, fileName = 'document.pdf' } = await request.json()
+    const { htmlContent, fileName = 'document.pdf', theme = 'default', paperSize = 'a4', fontSize = '12' } = await request.json()
     
     // 启动浏览器
     const browser = await chromium.launch()
     const page = await browser.newPage()
     
+    // 根据主题选择代码高亮样式
+    const highlightTheme = theme === 'academic' || theme === 'default'
+      ? 'github.min.css'
+      : 'atom-one-dark.min.css';
+
     // 设置HTML内容
     await page.setContent(`
       <!DOCTYPE html>
       <html>
         <head>
           <meta charset="UTF-8">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/${highlightTheme}">
           <style>
-            body { 
-              font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            body {
+              font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
               padding: 20px;
               line-height: 1.6;
+              color: #24292e;
+              background: white;
+              font-size: ${fontSize}pt;
             }
-            pre {
-              background-color: #1e1e1e;
-              padding: 16px;
+
+            /* 代码块样式 */
+            .hljs {
+              display: block;
+              overflow-x: auto;
+              padding: 1em;
+              background: #282c34;
+              color: #abb2bf;
               border-radius: 6px;
-              overflow: auto;
-              margin: 10px 0;
+              font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+              font-size: ${Math.max(0.8, parseInt(fontSize) * 0.08)}em;
+              line-height: 1.5;
+              margin: 1em 0;
             }
+
+            /* 代码块容器样式 */
+            .code-block-container {
+              margin: 1.5em 0;
+              page-break-inside: avoid;
+            }
+
+            .code-block-header {
+              background: #21252b;
+              color: #9ca3af;
+              padding: 0.5em 1em;
+              border-radius: 6px 6px 0 0;
+              font-size: 0.8em;
+              font-weight: 600;
+              text-transform: uppercase;
+              letter-spacing: 0.05em;
+              border: 1px solid #3d424d;
+              border-bottom: none;
+            }
+
+            .code-block-container pre {
+              margin: 0;
+              border-radius: 0 0 6px 6px;
+              border: 1px solid #3d424d;
+              border-top: none;
+            }
+
+            /* 根据主题应用不同的代码高亮样式 */
+            ${theme === 'academic' || theme === 'default' ? `
+              /* GitHub 浅色主题 */
+              .hljs {
+                background: #f6f8fa;
+                color: #24292e;
+                border: 1px solid #e1e4e8;
+              }
+
+              .code-block-header {
+                background: #f1f3f4;
+                color: #586069;
+                border: 1px solid #e1e4e8;
+                border-bottom: none;
+              }
+
+              .code-block-container pre {
+                border: 1px solid #e1e4e8;
+                border-top: none;
+              }
+
+              .hljs-comment,
+              .hljs-quote {
+                color: #6a737d;
+              }
+
+              .hljs-keyword,
+              .hljs-selector-tag,
+              .hljs-subst {
+                color: #d73a49;
+              }
+
+              .hljs-number,
+              .hljs-literal,
+              .hljs-variable,
+              .hljs-template-variable,
+              .hljs-tag .hljs-attr {
+                color: #005cc5;
+              }
+
+              .hljs-string,
+              .hljs-doctag {
+                color: #032f62;
+              }
+
+              .hljs-title,
+              .hljs-section,
+              .hljs-selector-id {
+                color: #6f42c1;
+              }
+
+              .hljs-type,
+              .hljs-class .hljs-title {
+                color: #22863a;
+              }
+
+              .hljs-tag,
+              .hljs-name,
+              .hljs-attribute {
+                color: #22863a;
+              }
+
+              .hljs-regexp,
+              .hljs-link {
+                color: #e36209;
+              }
+
+              .hljs-symbol,
+              .hljs-bullet {
+                color: #22863a;
+              }
+
+              .hljs-built_in,
+              .hljs-builtin-name {
+                color: #e36209;
+              }
+
+              .hljs-meta {
+                color: #005cc5;
+              }
+
+              .hljs-deletion {
+                background: #ffeef0;
+                color: #b31d28;
+              }
+
+              .hljs-addition {
+                background: #e6ffed;
+                color: #22863a;
+              }
+            ` : `
+              /* Atom One Dark 深色主题 */
+              .hljs-comment,
+              .hljs-quote {
+                color: #5c6370;
+                font-style: italic;
+              }
+
+              .hljs-keyword,
+              .hljs-selector-tag,
+              .hljs-subst {
+                color: #c678dd;
+              }
+
+              .hljs-number,
+              .hljs-literal,
+              .hljs-variable,
+              .hljs-template-variable,
+              .hljs-tag .hljs-attr {
+                color: #d19a66;
+              }
+
+              .hljs-string,
+              .hljs-doctag {
+                color: #98c379;
+              }
+
+              .hljs-title,
+              .hljs-section,
+              .hljs-selector-id {
+                color: #61afef;
+              }
+
+              .hljs-type,
+              .hljs-class .hljs-title {
+                color: #e5c07b;
+              }
+
+              .hljs-tag,
+              .hljs-name,
+              .hljs-attribute {
+                color: #e06c75;
+                font-weight: normal;
+              }
+
+              .hljs-regexp,
+              .hljs-link {
+                color: #56b6c2;
+              }
+
+              .hljs-symbol,
+              .hljs-bullet {
+                color: #61afef;
+              }
+
+              .hljs-built_in,
+              .hljs-builtin-name {
+                color: #e6c07b;
+              }
+
+              .hljs-meta {
+                color: #abb2bf;
+              }
+
+              .hljs-deletion {
+                background: #722c2e;
+                color: #ffffff;
+              }
+
+              .hljs-addition {
+                background: #2e5f35;
+                color: #ffffff;
+              }
+            `}
+
+            .hljs-emphasis {
+              font-style: italic;
+            }
+
+            .hljs-strong {
+              font-weight: bold;
+            }
+
+            /* 行内代码样式 */
             code {
               font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
               font-size: 85%;
-              color: #d4d4d4;
+              background-color: rgba(175, 184, 193, 0.2);
+              padding: 0.2em 0.4em;
+              border-radius: 3px;
+              color: #e06c75;
             }
+
+            /* 表格样式 */
             table {
               border-collapse: collapse;
               width: 100%;
-              margin: 10px 0;
+              margin: 1em 0;
+              page-break-inside: avoid;
             }
+
             th, td {
               border: 1px solid #ddd;
-              padding: 8px;
+              padding: 8px 12px;
               text-align: left;
             }
+
             th {
-              background-color: #f2f2f2;
+              background-color: #f6f8fa;
+              font-weight: 600;
             }
+
+            /* KaTeX 样式 */
             .katex {
               font-size: 1.1em;
             }
+
             .katex-display {
               margin: 1em 0;
               text-align: center;
             }
+
+            /* Mermaid 图表样式 */
+            .mermaid-container {
+              margin: 1em 0;
+              text-align: center;
+              page-break-inside: avoid;
+            }
+
+            .mermaid-diagram svg {
+              max-width: 100%;
+              height: auto;
+            }
+
+            /* 标题样式 */
+            h1, h2, h3, h4, h5, h6 {
+              color: #24292e;
+              font-weight: 600;
+              line-height: 1.25;
+              margin-top: 1.5em;
+              margin-bottom: 0.5em;
+              page-break-after: avoid;
+            }
+
+            h1 { font-size: 2em; border-bottom: 1px solid #e1e4e8; padding-bottom: 0.3em; }
+            h2 { font-size: 1.5em; border-bottom: 1px solid #e1e4e8; padding-bottom: 0.3em; }
+            h3 { font-size: 1.25em; }
+            h4 { font-size: 1em; }
+            h5 { font-size: 0.875em; }
+            h6 { font-size: 0.85em; color: #6a737d; }
+
+            /* 链接样式 */
+            a {
+              color: #0366d6;
+              text-decoration: none;
+            }
+
+            a:hover {
+              text-decoration: underline;
+            }
+
+            /* 引用样式 */
+            blockquote {
+              margin: 0 0 1em 0;
+              padding: 0 1em;
+              color: #6a737d;
+              border-left: 0.25em solid #dfe2e5;
+            }
+
+            /* 列表样式 */
+            ul, ol {
+              margin-bottom: 1em;
+              padding-left: 2em;
+            }
+
+            li {
+              margin-bottom: 0.25em;
+            }
+
+            /* 水平分割线 */
+            hr {
+              height: 0.25em;
+              padding: 0;
+              margin: 24px 0;
+              background-color: #e1e4e8;
+              border: 0;
+            }
+
+            /* 避免分页断行 */
+            pre, code, table, img, .katex, .mermaid-container {
+              page-break-inside: avoid;
+            }
           </style>
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
         </head>
         <body>
           ${htmlContent}
@@ -62,11 +362,18 @@ export async function POST(request: Request) {
       </html>
     `)
     
-    // 生成PDF
+    // 生成PDF - 支持不同的纸张尺寸
+    const pdfFormat = paperSize.toUpperCase();
     const pdf = await page.pdf({
-      format: 'A4',
-      margin: { top: '20mm', right: '20mm', bottom: '20mm', left: '20mm' },
-      printBackground: true
+      format: pdfFormat as any, // A4, LETTER, LEGAL
+      margin: {
+        top: '20mm',
+        right: '20mm',
+        bottom: '20mm',
+        left: '20mm'
+      },
+      printBackground: true,
+      preferCSSPageSize: true
     })
     
     await browser.close()
