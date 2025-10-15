@@ -15,7 +15,7 @@ export function LanguageSwitcher() {
         <SelectTrigger className="w-auto">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="bg-white border border-gray-200 shadow-lg">
           {availableLanguages.map((lang) => (
             <SelectItem key={lang.code} value={lang.code}>
               <span className="flex items-center gap-2">
