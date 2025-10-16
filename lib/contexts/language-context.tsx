@@ -7,14 +7,14 @@ interface LanguageContextType {
   language: Language
   setLanguage: (lang: Language) => void
   t: TranslationKeys
-  availableLanguages: { code: Language; name: string; nativeName: string }[]
+  availableLanguages: { code: Language; name: string; nativeName: string; flag: string }[]
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 const languageNames = {
-  en: { name: 'English', nativeName: 'English' },
-  zh: { name: 'Chinese', nativeName: '中文' }
+  en: { name: 'English', nativeName: 'English', flag: '🇺🇸' },
+  zh: { name: 'Chinese', nativeName: '中文', flag: '🇨🇳' }
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
