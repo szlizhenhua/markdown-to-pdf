@@ -197,12 +197,13 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
             try {
               // console.log('match$$: ', match);
               // console.log('渲染块级公式math$$:', math);
-              const katexHtml = katex.renderToString(math, { 
+              const katexHtml = katex.renderToString(math, {
                 displayMode: true, // 改为 true 以正确渲染块级公式
                 output: "html", // 输出HTML而不是MathML以获得更好的兼容性
                 fleqn: false,
                 leqno: false,
-                throwOnError: false
+                throwOnError: false,
+                strict: false // 允许unicode字符在数学模式中
               });
               // console.log('katexHtml: ', katexHtml);
               // 添加特殊类名和属性以便在PDF导出时识别
@@ -220,12 +221,13 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
               // console.log('replaced: ', replaced);
               // console.log('match$: ', match);
               // console.log('math$: ', math);
-              const katexHtml = katex.renderToString(math, { 
-                displayMode: false, 
+              const katexHtml = katex.renderToString(math, {
+                displayMode: false,
                 output: "html", // 输出HTML而不是MathML以获得更好的兼容性
                 fleqn: false,
                 leqno: false,
-                throwOnError: false
+                throwOnError: false,
+                strict: false // 允许unicode字符在数学模式中
               });
               // console.log('渲染结果katexHtml: ', katexHtml);
               // 添加特殊类名和属性以便在PDF导出时识别

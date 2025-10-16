@@ -39,9 +39,15 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxx"
           crossOrigin="anonymous"
           strategy="afterInteractive"
+          onError={() => {
+            console.info('AdSense script blocked by content blocker or network error');
+          }}
         />
       </head>
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+      <body
+        className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}
+        suppressHydrationWarning={true}
+      >
         <LanguageProvider>
           {children}
         </LanguageProvider>
