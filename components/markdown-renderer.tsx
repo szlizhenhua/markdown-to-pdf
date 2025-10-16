@@ -39,6 +39,33 @@ interface MarkdownRendererProps {
   onHeadingsChange?: (headings: Array<{ id: string; text: string; level: number }>) => void
 }
 
+// 工具函数：清理 HTML 标签和实体
+const cleanHtmlText = (text: string): string => {
+  return text
+    .replace(/<[^>]*>/g, '') // 移除所有 HTML 标签
+    .replace(/&nbsp;/g, ' ') // 替换空格实体
+    .replace(/&amp;/g, '&') // 替换 & 实体
+    .replace(/&lt;/g, '<') // 替换 < 实体
+    .replace(/&gt;/g, '>') // 替换 > 实体
+    .replace(/&quot;/g, '"') // 替换 " 实体
+    .replace(/&#39;/g, "'") // 替换 ' 实体
+    .replace(/&#\d+;/g, '') // 移除数字实体
+    .replace(/&[a-zA-Z]+;/g, '') // 移除其他命名实体
+    .trim()
+}
+
+// 工具函数：生成安全的 ID
+const generateSafeId = (text: string, depth: number, index: number): string => {
+  const cleanText = cleanHtmlText(text)
+
+  return cleanText
+    .toLowerCase()
+    .replace(/[^\w\u4e00-\u9fa5\u3400-\u4dbf\u20000-\u2a6df\u2a700-\u2b73f\u2b740-\u2b81f\u2b820-\u2ceaf\u2ceb0-\u2ebef\u30000-\u3134f]+/g, '-') // 支持更多中文字符范围
+    .replace(/^-+|-+$/g, '') // 移除开头和结尾的连字符
+    .replace(/--+/g, '-') // 多个连字符合并为一个
+    || `heading-${depth}-${index + 1}` // 如果清理后为空，使用默认 ID
+}
+
 export function MarkdownRenderer({ content, language, theme, paperSizes, fontSizes, t, onHeadingsChange }: MarkdownRendererProps) {
   const [renderedHtml, setRenderedHtml] = useState("")
   const containerRef = useRef<HTMLDivElement>(null)
@@ -104,8 +131,11 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
 
     renderer.heading = ({ text, depth }: { text: string; depth: number }) => {
       const textString = text
-      const id = textString.toLowerCase().replace(/[^\w]+/g, "-")
-      headings.push({ id, text: textString, level: depth })
+      // 使用工具函数清理文本并生成 ID
+      const cleanText = cleanHtmlText(textString)
+      const id = generateSafeId(textString, depth, headings.length)
+
+      headings.push({ id, text: cleanText, level: depth })
       return `<h${depth} id="${id}" class="heading-${depth}" style="margin: 1em 0;">${textString}</h${depth}>`
     }
 
