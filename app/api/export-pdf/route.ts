@@ -33,7 +33,11 @@ export async function POST(request: Request) {
         ...chromium.args,
         '--font-render-hinting=medium',
         '--disable-lcd-text-aa',
-        '--enable-pixel-hit-testing'
+        '--enable-pixel-hit-testing',
+        '--enable-font-antialiasing',
+        '--enable-subpixel-font-rendering',
+        '--force-color-profile=srgb',
+        '--disable-gpu-driver-bug-workarounds'
       ]
     } else {
       // 本地开发环境，查找系统安装的 Chrome
@@ -67,9 +71,10 @@ export async function POST(request: Request) {
           '--no-sandbox',
           '--disable-setuid-sandbox',
           '--disable-dev-shm-usage',
-          '--disable-gpu',
-          '--font-render-hinting=none',
-          '--disable-font-subpixel-positioning'
+          '--font-render-hinting=medium',
+          '--enable-font-antialiasing',
+          '--enable-subpixel-font-rendering',
+          '--force-color-profile=srgb'
         ]
       } catch (error) {
         throw new Error('本地开发需要安装 Chrome/Chromium。请安装后重试。')
@@ -101,17 +106,17 @@ export async function POST(request: Request) {
           <link rel="preconnect" href="https://fonts.googleapis.com">
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
           ${language === 'zh' ? `
-            <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
           ` : `
-            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
           `}
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/${highlightTheme}">
           <style>
             body {
               font-family: ${language === 'zh'
-                ? '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Heiti SC", "SimSun", "STHeiti", "Arial Unicode MS", sans-serif'
-                : '"Inter", "Helvetica Neue", "Arial", sans-serif'};
+                ? '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Heiti SC", "SimSun", "STHeiti", "Arial Unicode MS", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif'
+                : '"Inter", "Helvetica Neue", "Arial", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif'};
               padding: 20px;
               line-height: 1.6;
               color: #24292e;
@@ -130,6 +135,22 @@ export async function POST(request: Request) {
               font-synthesis: none;
               -webkit-font-variant-ligatures: no-common-ligatures;
               font-variant-ligatures: no-common-ligatures;
+            }
+
+            /* 优化 emoji 显示 */
+            .emoji {
+              font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "EmojiSymbols", sans-serif;
+              font-style: normal;
+              font-weight: normal;
+              line-height: 1;
+              text-rendering: optimizeLegibility;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+            }
+
+            /* 全局 emoji 支持 */
+            body, .hljs, code, pre {
+              font-variant-emoji: emoji;
             }
 
             /* 中文标点符号优化 */
@@ -152,8 +173,8 @@ export async function POST(request: Request) {
               color: #abb2bf;
               border-radius: 6px;
               font-family: ${language === 'zh'
-                ? '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace'
-                : '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace'};
+                ? '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace'
+                : '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace'};
               font-size: ${Math.max(0.8, parseInt(fontSize) * 0.08)}em;
               line-height: 1.5;
               margin: 1em 0;
@@ -180,7 +201,7 @@ export async function POST(request: Request) {
             .hljs-string,
             .hljs-title {
               ${language === 'zh' ? `
-                font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace !important;
+                font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace !important;
                 letter-spacing: 0.02em;
               ` : ''}
             }
@@ -381,8 +402,8 @@ export async function POST(request: Request) {
             /* 行内代码样式 */
             code {
               font-family: ${language === 'zh'
-                ? '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace'
-                : '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace'};
+                ? '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace'
+                : '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace'};
               font-size: 85%;
               background-color: rgba(175, 184, 193, 0.2);
               padding: 0.2em 0.4em;
@@ -580,9 +601,30 @@ export async function POST(request: Request) {
     // 等待页面加载完成，特别是确保字体加载完成
     await page.waitForNetworkIdle({ idleTime: 1000 })
 
-    // 等待字体加载完成（对中文特别重要）
+    // 等待字体加载完成（对中文和emoji特别重要）
     await page.evaluate(() => {
       return document.fonts.ready
+    })
+
+    // 额外等待时间确保 emoji 字体完全加载
+    await new Promise(resolve => setTimeout(resolve, 500))
+
+    // 验证字体是否已正确加载
+    await page.evaluate(() => {
+      const testElement = document.createElement('div');
+      testElement.style.fontFamily = '"Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji"';
+      testElement.style.position = 'absolute';
+      testElement.style.visibility = 'hidden';
+      testElement.textContent = '😀';
+      document.body.appendChild(testElement);
+
+      const computedStyle = window.getComputedStyle(testElement);
+      const fontFamily = computedStyle.fontFamily;
+
+      document.body.removeChild(testElement);
+
+      console.log('Font families loaded:', fontFamily);
+      return fontFamily;
     })
 
     // 生成PDF - 支持不同的纸张尺寸
