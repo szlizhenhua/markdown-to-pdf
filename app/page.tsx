@@ -273,54 +273,95 @@ export default function MarkdownToPDF() {
       <div className="min-h-screen bg-background">
         {/* Top header with controls */}
         <header className="border-b bg-card no-print relative">
-          <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Image src="/placeholder-logo.png" alt="logo" width={40} height={40} className="rounded" />
-              <div className="font-medium">{t.title}</div>
-            </div>
-            <div className="flex items-center gap-4">
-              <LanguageSwitcher />
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setShowToc(!showToc)}
-                className="text-muted-foreground hover:text-foreground"
-                aria-label={t.buttons.tableOfContents}
-              >
-                <FileText className="h-5 w-5" />
-              </Button>
-              <Button
-                onClick={handleDownloadPDF}
-                className="cta-button"
-                disabled={isGeneratingPDF}
-              >
-                {isGeneratingPDF ? (
-                  <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    {t.buttons.generatingPDF}
-                  </>
-                ) : (
-                  <>
-                    <Download className="h-4 w-4 mr-2" />
-                    {t.buttons.getPDF}
-                  </>
-                )}
-              </Button>
-              {/*<Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setShowSettings(!showSettings)}
-                className="text-muted-foreground hover:text-foreground"
-                aria-label={t.buttons.settings}
-              >
-                <Settings className="h-5 w-5" />
-              </Button>*/}
+          <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                <Image
+                  src="/placeholder-logo.png"
+                  alt="logo"
+                  width={32}
+                  height={32}
+                  className="rounded flex-shrink-0 sm:w-10 sm:h-10"
+                />
+                <div className="font-medium text-sm sm:text-base truncate hidden sm:block">
+                  {t.title}
+                </div>
+                {/* Mobile logo-only fallback */}
+                <div className="font-medium text-sm sm:hidden">
+                  MD→PDF
+                </div>
+              </div>
+
+              {/* Desktop controls */}
+              <div className="hidden sm:flex items-center gap-2 sm:gap-4">
+                <LanguageSwitcher />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setShowToc(!showToc)}
+                  className="text-muted-foreground hover:text-foreground"
+                  aria-label={t.buttons.tableOfContents}
+                >
+                  <FileText className="h-5 w-5" />
+                </Button>
+                <Button
+                  onClick={handleDownloadPDF}
+                  className="cta-button text-sm sm:text-base"
+                  disabled={isGeneratingPDF}
+                >
+                  {isGeneratingPDF ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      <span className="hidden sm:inline">{t.buttons.generatingPDF}</span>
+                      <span className="sm:hidden">生成中...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Download className="h-4 w-4 mr-2" />
+                      <span className="hidden sm:inline">{t.buttons.getPDF}</span>
+                      <span className="sm:hidden">PDF</span>
+                    </>
+                  )}
+                </Button>
+              </div>
+
+              {/* Mobile controls */}
+              <div className="flex sm:hidden items-center gap-1">
+                <LanguageSwitcher />
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowToc(!showToc)}
+                  className="text-muted-foreground hover:text-foreground p-2"
+                  aria-label={t.buttons.tableOfContents}
+                >
+                  <FileText className="h-4 w-4" />
+                </Button>
+                <Button
+                  onClick={handleDownloadPDF}
+                  className="cta-button text-xs px-2 py-1 min-w-[60px]"
+                  size="sm"
+                  disabled={isGeneratingPDF}
+                >
+                  {isGeneratingPDF ? (
+                    <>
+                      <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+                      PDF
+                    </>
+                  ) : (
+                    <>
+                      <Download className="h-3 w-3 mr-1" />
+                      PDF
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
           </div>
 
           {/* Settings Popover */}
           {showSettings && (
-            <div ref={settingsRef} className="absolute right-4 top-16 z-50 w-64 bg-white shadow-2xl rounded-lg border-2 border-gray-200">
+            <div ref={settingsRef} className="absolute right-2 sm:right-4 top-14 sm:top-16 z-50 w-72 sm:w-64 bg-white shadow-2xl rounded-lg border-2 border-gray-200 max-h-[80vh] overflow-auto">
               <div className="p-4 bg-white">
                 <h3 className="font-medium mb-3">{t.settings.title}</h3>
                 <div className="space-y-4">
@@ -396,7 +437,7 @@ export default function MarkdownToPDF() {
 
           {/* Table of Contents Popover */}
           {showToc && (
-            <div ref={tocRef} className="absolute right-24 top-16 z-50 w-64 bg-white shadow-2xl rounded-lg border-2 border-gray-200 max-h-[70vh] overflow-auto">
+            <div ref={tocRef} className="absolute right-16 sm:right-24 top-14 sm:top-16 z-50 w-72 sm:w-64 bg-white shadow-2xl rounded-lg border-2 border-gray-200 max-h-[70vh] overflow-auto">
               <div className="p-4 bg-white">
                 <h3 className="font-medium mb-3">{t.toc.title}</h3>
                 <div className="space-y-1">
