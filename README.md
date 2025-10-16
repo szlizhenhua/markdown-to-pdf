@@ -8,9 +8,6 @@ A professional Markdown to PDF converter with support for mathematical expressio
 - **Mathematical Expressions**: Full support for LaTeX-style math with KaTeX
 - **Diagrams**: Create flowcharts, sequence diagrams, and more with Mermaid
 - **Code Highlighting**: Syntax highlighting for multiple programming languages
-- **Custom Themes**: Choose from multiple themes (Default, Academic, Modern, Minimal)
-- **Multiple Paper Sizes**: Support for A4, Letter, and Legal formats
-- **Font Size Options**: Adjustable font size from 10pt to 16pt
 - **Drag & Drop**: Easily upload Markdown files by dragging and dropping
 - **Table of Contents**: Automatically generated table of contents
 - **Responsive Design**: Works on desktop and mobile devices
@@ -32,9 +29,8 @@ A professional Markdown to PDF converter with support for mathematical expressio
 ## How to Use
 
 1. Type or paste your Markdown content in the editor
-2. Customize the appearance with themes, paper size, and font settings
-3. Preview your document in real-time
-4. Click "Download PDF" to export your document
+2. Preview your document in real-time
+3. Click "Download PDF" to export your document
 
 You can also upload existing Markdown files by clicking the "Upload" button or dragging and dropping files into the editor area.
 
@@ -82,25 +78,6 @@ Your documents are processed entirely in your browser. No data is sent to any se
 - No storage of your documents
 - No tracking or analytics on your content
 - Secure processing
-
-## Customization
-
-### Themes
-
-- **Default**: Clean and professional look
-- **Academic**: Formal style with justified text and serif fonts
-- **Modern**: Contemporary design with sans-serif fonts
-- **Minimal**: Simple and clean presentation
-
-### Paper Sizes
-
-- A4 (210 × 297 mm)
-- Letter (8.5 × 11 in)
-- Legal (8.5 × 14 in)
-
-### Font Sizes
-
-Adjust the font size from 10pt to 16pt to match your preferences or requirements.
 
 ## Getting Started
 

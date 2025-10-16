@@ -302,7 +302,7 @@ def quicksort(arr):
 - **Highlight.js** - 代码高亮
 
 ### 📧 **联系我们**
-如有问题或建议，欢迎通过以下方式联系：
+[开源项目](https://github.com/szlizhenhua/markdown-to-pdf)，如有问题或建议，欢迎通过以下方式联系：
 - GitHub Issues：报告问题或请求功能
 - 邮箱反馈：support@markdown-to-pdf.org
 
@@ -319,10 +319,10 @@ def quicksort(arr):
   <p><strong>Markdown 转 PDF 转换器</strong></p>
   <p>专业级 Markdown 到 PDF 转换工具</p>
   <p style="font-size: 0.9em; margin-top: 1em;">
-    Made with ❤️ | 开源项目 | 隐私优先
+    Made with ❤️ | 隐私优先
   </p>
   <p style="font-size: 0.8em; margin-top: 0.5em;">
-    © 2024 Markdown to PDF. 保留所有权利。
+    © 2025 Markdown to PDF. 保留所有权利。
   </p>
 </div>`,
 

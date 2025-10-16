@@ -302,7 +302,7 @@ If still not displaying, please check if the formula syntax is correct.
 - **Highlight.js** - Code highlighting
 
 ### 📧 **Contact Us**
-For questions or suggestions, please contact us through:
+[Open Source](https://github.com/szlizhenhua/markdown-to-pdf). For questions or suggestions, please contact us through:
 - GitHub Issues: Report issues or request features
 - Email feedback: support@markdown-to-pdf.org
 
@@ -319,10 +319,10 @@ For questions or suggestions, please contact us through:
   <p><strong>Markdown to PDF Converter</strong></p>
   <p>Professional Markdown to PDF Conversion Tool</p>
   <p style="font-size: 0.9em; margin-top: 1em;">
-    Made with ❤️ | Open Source | Privacy First
+    Made with ❤️ | Privacy First
   </p>
   <p style="font-size: 0.8em; margin-top: 0.5em;">
-    © 2024 Markdown to PDF. All rights reserved.
+    © 2025 Markdown to PDF. All rights reserved.
   </p>
 </div>`,
 
