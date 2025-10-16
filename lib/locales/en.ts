@@ -9,6 +9,7 @@ export const en = {
     showPreview: "Show Preview",
     hidePreview: "Hide Preview",
     getPDF: "Get PDF",
+    generatingPDF: "Generating PDF...",
     settings: "Settings",
     tableOfContents: "Table of Contents"
   },

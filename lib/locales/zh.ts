@@ -9,6 +9,7 @@ export const zh = {
     showPreview: "显示预览",
     hidePreview: "隐藏预览",
     getPDF: "获取 PDF",
+    generatingPDF: "生成 PDF 中...",
     settings: "设置",
     tableOfContents: "目录"
   },

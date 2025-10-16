@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
-import { FileText, Download, Upload, Eye, Settings, FileUp } from "lucide-react"
+import { FileText, Download, Upload, Eye, Settings, FileUp, Loader2 } from "lucide-react"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
 import { TableOfContents } from "@/components/table-of-contents"
 import { LanguageSwitcher } from "@/components/language-switcher"
@@ -68,6 +68,7 @@ export default function MarkdownToPDF() {
   const [isDragging, setIsDragging] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [showToc, setShowToc] = useState(false)
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const dropRef = useRef<HTMLDivElement>(null)
   const settingsRef = useRef<HTMLDivElement>(null)
@@ -150,6 +151,7 @@ export default function MarkdownToPDF() {
   }
 
   const handleDownloadPDF = async () => {
+    setIsGeneratingPDF(true)
     try {
       const previewCard = document.querySelector('.markdown-preview-pdf') as HTMLElement;
       if (!previewCard) {
@@ -238,6 +240,8 @@ export default function MarkdownToPDF() {
       console.error('PDF导出错误:', error);
       const errorMessage = error instanceof Error ? error.message : '未知错误';
       alert(`PDF导出失败: ${errorMessage}`);
+    } finally {
+      setIsGeneratingPDF(false)
     }
   }
 
@@ -285,9 +289,22 @@ export default function MarkdownToPDF() {
               >
                 <FileText className="h-5 w-5" />
               </Button>
-              <Button onClick={handleDownloadPDF} className="cta-button">
-                <Download className="h-4 w-4 mr-2" />
-                {t.buttons.getPDF}
+              <Button
+                onClick={handleDownloadPDF}
+                className="cta-button"
+                disabled={isGeneratingPDF}
+              >
+                {isGeneratingPDF ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    {t.buttons.generatingPDF}
+                  </>
+                ) : (
+                  <>
+                    <Download className="h-4 w-4 mr-2" />
+                    {t.buttons.getPDF}
+                  </>
+                )}
               </Button>
               {/*<Button
                 variant="ghost"
