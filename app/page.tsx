@@ -195,8 +195,35 @@ export default function MarkdownToPDF() {
         throw new Error(`PDF生成失败: ${errorText}`);
       }
 
-      // 创建下载链接
+      // 检查响应类型
+      const contentType = response.headers.get('content-type');
+
+      if (contentType && contentType.includes('application/json')) {
+        // 如果返回的是JSON，说明需要使用浏览器打印
+        const result = await response.json();
+        console.log('API返回JSON响应:', result);
+
+        if (result.useBrowserPrint) {
+          console.log('使用浏览器打印功能');
+          handlePrint();
+          return;
+        }
+
+        // 如果不是useBrowserPrint，则抛出错误
+        throw new Error(result.error || 'PDF生成失败');
+      }
+
+      // 如果返回的是PDF文件
       const blob = await response.blob();
+
+      // 检查blob类型
+      if (blob.type !== 'application/pdf') {
+        // 如果不是PDF类型，尝试读取为文本查看错误信息
+        const text = await blob.text();
+        console.error('收到非PDF响应:', text);
+        throw new Error('服务器返回了无效的PDF文件');
+      }
+
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -206,7 +233,7 @@ export default function MarkdownToPDF() {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
 
-      //console.log('PDF导出成功');
+      console.log('PDF导出成功');
     } catch (error) {
       console.error('PDF导出错误:', error);
       const errorMessage = error instanceof Error ? error.message : '未知错误';
