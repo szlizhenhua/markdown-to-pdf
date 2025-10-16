@@ -39,9 +39,6 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxx"
           crossOrigin="anonymous"
           strategy="afterInteractive"
-          onError={() => {
-            console.info('AdSense script blocked by content blocker or network error');
-          }}
         />
       </head>
       <body
@@ -52,6 +49,19 @@ export default function RootLayout({
           {children}
         </LanguageProvider>
         <Analytics />
+        <Script
+          id="adsense-error-handler"
+          strategy="afterInteractive"
+        >
+          {`
+            // Handle AdSense loading errors
+            window.addEventListener('error', function(event) {
+              if (event.filename && event.filename.includes('adsbygoogle.js')) {
+                console.info('AdSense script blocked by content blocker or network error');
+              }
+            });
+          `}
+        </Script>
       </body>
     </html>
   )

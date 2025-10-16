@@ -1,5 +1,9 @@
 import { NextResponse } from 'next/server'
-import { chromium } from 'playwright'
+import chromium from '@sparticuz/chromium'
+import puppeteer from 'puppeteer-core'
+
+export const runtime = 'nodejs'
+export const maxDuration = 60
 
 export async function POST(request: Request) {
   let browser = null
@@ -18,8 +22,66 @@ export async function POST(request: Request) {
     //console.log('- 安全文件名:', safeFileName);
     //console.log('- 主题:', theme);
 
-    // 启动浏览器
-    browser = await chromium.launch()
+    // 启动浏览器 - 使用 puppeteer-core + @sparticuz/chromium
+    let executablePath = undefined
+    let args = []
+
+    // 在 Vercel 环境中使用 Spartacuz 的 Chromium
+    if (process.env.VERCEL) {
+      executablePath = await chromium.executablePath()
+      args = [
+        ...chromium.args,
+        '--font-render-hinting=medium',
+        '--disable-lcd-text-aa',
+        '--enable-pixel-hit-testing'
+      ]
+    } else {
+      // 本地开发环境，查找系统安装的 Chrome
+      const { execSync } = require('child_process')
+      try {
+        // 尝试查找 Chrome/Chromium 的路径
+        const possiblePaths = [
+          '/usr/bin/google-chrome-stable',
+          '/usr/bin/google-chrome',
+          '/usr/bin/chromium-browser',
+          '/usr/bin/chromium',
+          '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+          '/Applications/Chromium.app/Contents/MacOS/Chromium',
+        ]
+
+        for (const path of possiblePaths) {
+          try {
+            execSync(`test -x "${path}"`)
+            executablePath = path
+            break
+          } catch {
+            // 继续尝试下一个路径
+          }
+        }
+
+        if (!executablePath) {
+          throw new Error('找不到 Chrome/Chromium 可执行文件')
+        }
+
+        args = [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+          '--font-render-hinting=none',
+          '--disable-font-subpixel-positioning'
+        ]
+      } catch (error) {
+        throw new Error('本地开发需要安装 Chrome/Chromium。请安装后重试。')
+      }
+    }
+
+    browser = await puppeteer.launch({
+      args,
+      executablePath,
+      headless: true,
+      defaultViewport: { width: 1280, height: 800 }
+    })
 
     const page = await browser.newPage()
     
@@ -35,12 +97,20 @@ export async function POST(request: Request) {
         <head>
           <meta charset="UTF-8">
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          ${language === 'zh' ? `
+            <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+          ` : `
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+          `}
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/${highlightTheme}">
           <style>
             body {
               font-family: ${language === 'zh'
-                ? '"PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Heiti SC", "SimSun", sans-serif'
+                ? '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Heiti SC", "SimSun", "STHeiti", "Arial Unicode MS", sans-serif'
                 : '"Inter", "Helvetica Neue", "Arial", sans-serif'};
               padding: 20px;
               line-height: 1.6;
@@ -49,6 +119,28 @@ export async function POST(request: Request) {
               font-size: ${fontSize}pt;
               word-wrap: break-word;
               overflow-wrap: break-word;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+              text-rendering: optimizeLegibility;
+              font-weight: 400;
+            }
+
+            /* 确保中文字符正确显示 */
+            * {
+              font-synthesis: none;
+              -webkit-font-variant-ligatures: no-common-ligatures;
+              font-variant-ligatures: no-common-ligatures;
+            }
+
+            /* 中文标点符号优化 */
+            .chinese {
+              text-align: justify;
+              letter-spacing: 0.05em;
+            }
+
+            /* 中英文混排优化 */
+            .mixed-text {
+              letter-spacing: 0.02em;
             }
 
             /* 代码块样式 */
@@ -59,7 +151,9 @@ export async function POST(request: Request) {
               background: #282c34;
               color: #abb2bf;
               border-radius: 6px;
-              font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+              font-family: ${language === 'zh'
+                ? '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace'
+                : '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace'};
               font-size: ${Math.max(0.8, parseInt(fontSize) * 0.08)}em;
               line-height: 1.5;
               margin: 1em 0;
@@ -69,6 +163,26 @@ export async function POST(request: Request) {
             .code-block-container {
               margin: 1.5em 0;
               page-break-inside: avoid;
+            }
+
+            /* 确保代码块中的中文正确显示 */
+            .code-block-container pre,
+            .code-block-container code,
+            .hljs {
+              font-synthesis: none !important;
+              -webkit-font-variant-ligatures: no-common-ligatures !important;
+              font-variant-ligatures: no-common-ligatures !important;
+              text-rendering: optimizeLegibility !important;
+            }
+
+            /* 针对代码块中的中文注释特殊处理 */
+            .hljs-comment,
+            .hljs-string,
+            .hljs-title {
+              ${language === 'zh' ? `
+                font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace !important;
+                letter-spacing: 0.02em;
+              ` : ''}
             }
 
             .code-block-header {
@@ -266,12 +380,16 @@ export async function POST(request: Request) {
 
             /* 行内代码样式 */
             code {
-              font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+              font-family: ${language === 'zh'
+                ? '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace'
+                : '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace'};
               font-size: 85%;
               background-color: rgba(175, 184, 193, 0.2);
               padding: 0.2em 0.4em;
               border-radius: 3px;
               color: #e06c75;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
             }
 
             /* 表格样式 */
@@ -460,7 +578,12 @@ export async function POST(request: Request) {
     `)
 
     // 等待页面加载完成，特别是确保字体加载完成
-    await page.waitForLoadState('networkidle')
+    await page.waitForNetworkIdle({ idleTime: 1000 })
+
+    // 等待字体加载完成（对中文特别重要）
+    await page.evaluate(() => {
+      return document.fonts.ready
+    })
 
     // 生成PDF - 支持不同的纸张尺寸
     const pdfFormat = paperSize.toUpperCase();
@@ -475,7 +598,12 @@ export async function POST(request: Request) {
         left: '20mm'
       },
       printBackground: true,
-      preferCSSPageSize: true
+      preferCSSPageSize: true,
+      // 添加字体相关选项
+      scale: 1.0,
+      displayHeaderFooter: false,
+      headerTemplate: '',
+      footerTemplate: ''
     })
 
     //console.log('PDF生成成功，大小:', pdf.length, 'bytes');
