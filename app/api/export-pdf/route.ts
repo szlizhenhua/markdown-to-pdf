@@ -18,27 +18,8 @@ export async function POST(request: Request) {
     //console.log('- 安全文件名:', safeFileName);
     //console.log('- 主题:', theme);
 
-    // 尝试启动浏览器
-    try {
-      browser = await chromium.launch({
-        headless: true,
-        args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-gpu'
-        ]
-      });
-    } catch (browserError) {
-      console.error('浏览器启动失败:', browserError);
-
-      // 如果浏览器启动失败，返回建议使用浏览器打印
-      return NextResponse.json({
-        message: 'Playwright browser not available in this environment',
-        useBrowserPrint: true,
-        reason: 'BROWSER_UNAVAILABLE'
-      });
-    }
+    // 启动浏览器
+    browser = await chromium.launch()
 
     const page = await browser.newPage()
     
@@ -518,18 +499,6 @@ export async function POST(request: Request) {
       }
     } catch (closeError) {
       console.error('关闭浏览器时出错:', closeError)
-    }
-
-    // 如果是Playwright相关的错误，返回建议使用浏览器打印
-    if (error instanceof Error &&
-        (error.message.includes('Executable doesn\'t exist') ||
-         error.message.includes('playwright') ||
-         error.message.includes('browser'))) {
-      return NextResponse.json({
-        message: 'Playwright browser not available in this environment',
-        useBrowserPrint: true,
-        reason: 'PLAYWRIGHT_ERROR'
-      });
     }
 
     // 返回详细的错误信息
