@@ -4,5 +4,5 @@
       "maxDuration": 30
     }
   },
-  "installCommand": "npm install --legacy-peer-deps --no-optional && npx playwright install chromium --with-deps"
+  "installCommand": "npm install && npx playwright install chromium"
 }
