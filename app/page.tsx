@@ -548,6 +548,7 @@ export default function MarkdownToPDF() {
                         theme={selectedTheme}
                         paperSizes={selectedPaperSize}
                         fontSizes = {selectedFontSize}
+                        isGeneratingPDF={isGeneratingPDF}
                         t={t}
                         onHeadingsChange={setHeadings}
                       />

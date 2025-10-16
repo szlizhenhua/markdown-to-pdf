@@ -35,6 +35,7 @@ interface MarkdownRendererProps {
   theme: string
   paperSizes: string
   fontSizes: string
+  isGeneratingPDF: boolean
   t: any  // Translation object
   onHeadingsChange?: (headings: Array<{ id: string; text: string; level: number }>) => void
 }
@@ -66,7 +67,7 @@ const generateSafeId = (text: string, depth: number, index: number): string => {
     || `heading-${depth}-${index + 1}` // 如果清理后为空，使用默认 ID
 }
 
-export function MarkdownRenderer({ content, language, theme, paperSizes, fontSizes, t, onHeadingsChange }: MarkdownRendererProps) {
+export function MarkdownRenderer({ content, language, theme, paperSizes, fontSizes, isGeneratingPDF, t, onHeadingsChange }: MarkdownRendererProps) {
   const [renderedHtml, setRenderedHtml] = useState("")
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -358,7 +359,7 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
     if (onHeadingsChange) {
       onHeadingsChange(headings)
     }
-  }, [content, language, theme, paperSizes, fontSizes, onHeadingsChange, hljs, katex, mermaid])
+  }, [content, language, theme, paperSizes, fontSizes, isGeneratingPDF, onHeadingsChange, hljs, katex, mermaid])
 
   useEffect(() => {
     if (containerRef.current && renderedHtml && mermaid) {
