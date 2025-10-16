@@ -105,18 +105,14 @@ export async function POST(request: Request) {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <link rel="preconnect" href="https://fonts.googleapis.com">
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-          ${language === 'zh' ? `
-            <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
-          ` : `
-            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
-          `}
+          <!-- 始终加载中文字体支持，确保任何语言下都能正确显示中文 -->
+          <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&family=Inter:wght@400;500;700&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/${highlightTheme}">
           <style>
             body {
-              font-family: ${language === 'zh'
-                ? '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Heiti SC", "SimSun", "STHeiti", "Arial Unicode MS", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif'
-                : '"Inter", "Helvetica Neue", "Arial", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif'};
+              /* 使用包含中英文支持的字体栈，确保任何语言下都能正确显示中文 */
+              font-family: "Noto Sans SC", "Noto Serif SC", "Inter", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Heiti SC", "SimSun", "STHeiti", "Arial Unicode MS", "Helvetica Neue", "Arial", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
               padding: 20px;
               line-height: 1.6;
               color: #24292e;
@@ -172,9 +168,8 @@ export async function POST(request: Request) {
               background: #282c34;
               color: #abb2bf;
               border-radius: 6px;
-              font-family: ${language === 'zh'
-                ? '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace'
-                : '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace'};
+              /* 使用包含中英文支持的等宽字体栈 */
+              font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace;
               font-size: ${Math.max(0.8, parseInt(fontSize) * 0.08)}em;
               line-height: 1.5;
               margin: 1em 0;
@@ -196,14 +191,12 @@ export async function POST(request: Request) {
               text-rendering: optimizeLegibility !important;
             }
 
-            /* 针对代码块中的中文注释特殊处理 */
+            /* 针对代码块中的中文注释特殊处理 - 始终应用中文字体支持 */
             .hljs-comment,
             .hljs-string,
             .hljs-title {
-              ${language === 'zh' ? `
-                font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace !important;
-                letter-spacing: 0.02em;
-              ` : ''}
+              font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace !important;
+              letter-spacing: 0.02em;
             }
 
             .code-block-header {
@@ -401,9 +394,8 @@ export async function POST(request: Request) {
 
             /* 行内代码样式 */
             code {
-              font-family: ${language === 'zh'
-                ? '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace'
-                : '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace'};
+              /* 使用包含中英文支持的等宽字体栈 */
+              font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace;
               font-size: 85%;
               background-color: rgba(175, 184, 193, 0.2);
               padding: 0.2em 0.4em;

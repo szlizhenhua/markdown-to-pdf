@@ -74,6 +74,21 @@ export default function MarkdownToPDF() {
   const settingsRef = useRef<HTMLDivElement>(null)
   const tocRef = useRef<HTMLDivElement>(null)
 
+  // 初次加载时自动刷新
+  useEffect(() => {
+    // 检查是否是首次访问
+    const hasVisited = localStorage.getItem('has-visited-markdown-pdf')
+    if (!hasVisited) {
+      // 标记已访问
+      localStorage.setItem('has-visited-markdown-pdf', 'true')
+      // 延迟刷新以确保用户体验流畅
+      const timer = setTimeout(() => {
+        window.location.reload()
+      }, 500)
+      return () => clearTimeout(timer)
+    }
+  }, [])
+
   // 点击外部关闭菜单
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
