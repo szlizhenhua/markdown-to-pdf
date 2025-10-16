@@ -161,7 +161,7 @@ def quicksort(arr):
 ### 📋 **Table Features**
 
 | Feature | Status | Description | Shortcut |
-|---------|--------|-------------|----------|
+|---------|:------:|-------------|----------|
 | Math Formulas | ✅ | Full KaTeX support | \`$...\$ |
 | Flowcharts | ✅ | Mermaid diagrams | \`mermaid |
 | Code Highlighting | ✅ | Multi-language support | \`lang |

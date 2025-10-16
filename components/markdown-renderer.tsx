@@ -185,19 +185,49 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
       </div>`;
     };
 
-    // 添加对表格的正确渲染
+    // 获取对齐方式的 CSS 样式
+    const getAlignmentStyle = (align: string): string => {
+      switch (align) {
+        case 'left':
+          return 'text-align: left; padding: 8px 12px;';
+        case 'right':
+          return 'text-align: right; padding: 8px 12px;';
+        case 'center':
+          return 'text-align: center; padding: 8px 12px;';
+        default:
+          return 'text-align: left; padding: 8px 12px;';
+      }
+    };
+
+    // 添加对表格的正确渲染，支持对齐方式
     renderer.table = (token: any) => {
-      const headerContent = token.header.map((cell: any) => renderer.tablecell(cell)).join('');
-      const headerRow = renderer.tablerow({ text: headerContent });
-      
-      const bodyRows = token.rows
-        .map((row: any) => {
-          const rowContent = row.map((cell: any) => renderer.tablecell(cell)).join('');
-          return renderer.tablerow({ text: rowContent });
-        })
-        .join('');
-      
-      return `<table class="table-bordered" style="margin: 1em 0; border-collapse: collapse; width: 100%;">${headerRow}${bodyRows}</table>`;
+      // Marked.js 将表格 token 分为 header 和 rows
+      const header = token.header;
+      const rows = token.rows;
+
+      // 渲染表头
+      const headerCells = header.map((cell: any) => {
+        const align = cell.align || 'left';
+        const alignStyle = getAlignmentStyle(align);
+        const cellContent = cell.text || '';
+        return `<th style="${alignStyle}; background-color: #f6f8fa; font-weight: 600; border-bottom: 2px solid #ddd; border: 1px solid #ddd;">${cellContent}</th>`;
+      }).join('');
+
+      // 渲染表格内容
+      const bodyRows = rows.map((row: any) => {
+        const cells = row.map((cell: any) => {
+          const align = cell.align || 'left';
+          const alignStyle = getAlignmentStyle(align);
+          const cellContent = cell.text || '';
+          return `<td style="${alignStyle}; border: 1px solid #ddd;">${cellContent}</td>`;
+        }).join('');
+        return `<tr>${cells}</tr>`;
+      }).join('');
+
+      return `<table class="table-bordered" style="margin: 1em 0; border-collapse: collapse; width: 100%; border: 1px solid #ddd;">
+        <thead><tr>${headerCells}</tr></thead>
+        <tbody>${bodyRows}</tbody>
+      </table>`;
     };
 
     // 添加对表格头的正确渲染
@@ -205,11 +235,18 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
       return `<tr>${token.text}</tr>`;
     };
 
-    // 添加对表格单元格的正确渲染
+    // 添加对表格单元格的正确渲染，支持对齐
     renderer.tablecell = (token: any) => {
       const tag = token.header ? 'th' : 'td';
-      const align = token.align ? `align="${token.align}"` : '';
-      return `<${tag} ${align}>${token.text}</${tag}>`;
+      const align = token.align || 'left';
+      const alignStyle = getAlignmentStyle(align);
+      const cellContent = token.text || '';
+
+      if (token.header) {
+        return `<th style="${getAlignmentStyle(align)}; background-color: #f6f8fa; font-weight: 600; border-bottom: 2px solid #ddd;">${cellContent}</th>`;
+      } else {
+        return `<td style="${getAlignmentStyle(align)}; border-bottom: 1px solid #ddd;">${cellContent}</td>`;
+      }
     };
 
     // 只对非代码块做格式替换
