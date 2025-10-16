@@ -168,10 +168,10 @@ export default function MarkdownToPDF() {
       let htmlContent = previewCard.innerHTML;
 
       // 调试信息：输出HTML内容长度和语言
-      console.log('PDF导出调试信息:');
-      console.log('- 当前语言:', language);
-      console.log('- HTML内容长度:', htmlContent.length);
-      console.log('- 文件名:', fileName);
+      //console.log('PDF导出调试信息:');
+      //console.log('- 当前语言:', language);
+      //console.log('- HTML内容长度:', htmlContent.length);
+      //console.log('- 文件名:', fileName);
 
       // 调用API生成PDF
       const response = await fetch('/api/export-pdf', {
@@ -206,7 +206,7 @@ export default function MarkdownToPDF() {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
 
-      console.log('PDF导出成功');
+      //console.log('PDF导出成功');
     } catch (error) {
       console.error('PDF导出错误:', error);
       const errorMessage = error instanceof Error ? error.message : '未知错误';

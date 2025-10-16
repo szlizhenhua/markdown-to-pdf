@@ -11,15 +11,35 @@ export async function POST(request: Request) {
     const safeFileName = fileName.replace(/[^a-zA-Z0-9\-._]/g, '_');
 
     // 调试信息
-    console.log('PDF API 调试信息:');
-    console.log('- 语言:', language);
-    console.log('- HTML内容长度:', htmlContent?.length || 0);
-    console.log('- 原始文件名:', fileName);
-    console.log('- 安全文件名:', safeFileName);
-    console.log('- 主题:', theme);
+    //console.log('PDF API 调试信息:');
+    //console.log('- 语言:', language);
+    //console.log('- HTML内容长度:', htmlContent?.length || 0);
+    //console.log('- 原始文件名:', fileName);
+    //console.log('- 安全文件名:', safeFileName);
+    //console.log('- 主题:', theme);
 
-    // 启动浏览器
-    browser = await chromium.launch()
+    // 尝试启动浏览器
+    try {
+      browser = await chromium.launch({
+        headless: true,
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-gpu'
+        ]
+      });
+    } catch (browserError) {
+      console.error('浏览器启动失败:', browserError);
+
+      // 如果浏览器启动失败，返回建议使用浏览器打印
+      return NextResponse.json({
+        message: 'Playwright browser not available in this environment',
+        useBrowserPrint: true,
+        reason: 'BROWSER_UNAVAILABLE'
+      });
+    }
+
     const page = await browser.newPage()
     
     // 根据主题选择代码高亮样式
@@ -463,7 +483,7 @@ export async function POST(request: Request) {
 
     // 生成PDF - 支持不同的纸张尺寸
     const pdfFormat = paperSize.toUpperCase();
-    console.log('开始生成PDF，格式:', pdfFormat);
+    //console.log('开始生成PDF，格式:', pdfFormat);
 
     const pdf = await page.pdf({
       format: pdfFormat as any, // A4, LETTER, LEGAL
@@ -477,7 +497,7 @@ export async function POST(request: Request) {
       preferCSSPageSize: true
     })
 
-    console.log('PDF生成成功，大小:', pdf.length, 'bytes');
+    //console.log('PDF生成成功，大小:', pdf.length, 'bytes');
 
     await browser.close()
     
@@ -498,6 +518,18 @@ export async function POST(request: Request) {
       }
     } catch (closeError) {
       console.error('关闭浏览器时出错:', closeError)
+    }
+
+    // 如果是Playwright相关的错误，返回建议使用浏览器打印
+    if (error instanceof Error &&
+        (error.message.includes('Executable doesn\'t exist') ||
+         error.message.includes('playwright') ||
+         error.message.includes('browser'))) {
+      return NextResponse.json({
+        message: 'Playwright browser not available in this environment',
+        useBrowserPrint: true,
+        reason: 'PLAYWRIGHT_ERROR'
+      });
     }
 
     // 返回详细的错误信息
