@@ -167,17 +167,6 @@ def quicksort(arr):
 | Tables | ✅ | Complete table functionality | \| \| \| |
 | Links | ✅ | Automatic link recognition | [text](url) |
 
-### 🎨 **Theme Styles**
-- **Default**: Clean and professional default theme
-- **Academic**: Formal style suitable for academic papers
-- **Modern**: Contemporary design style
-- **Minimal**: Minimalist design
-
-### 📄 **Page Settings**
-- **Paper Sizes**: A4, Letter, Legal
-- **Font Sizes**: Adjustable from 10pt to 16pt
-- **Auto Pagination**: Smart content split to avoid truncation
-
 ---
 
 ## 📖 User Guide
