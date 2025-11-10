@@ -439,11 +439,23 @@ export async function POST(request: Request) {
               margin: 1em 0;
               text-align: center;
               page-break-inside: avoid;
+              font-family: "Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif;
             }
 
             .mermaid-diagram svg {
               max-width: 100%;
               height: auto;
+            }
+
+            .mermaid-diagram .nodeLabel,
+            .mermaid-diagram .nodeLabel span,
+            .mermaid-diagram p {
+              margin: 0;
+              text-align: center !important;
+              text-indent: 0 !important;
+              letter-spacing: normal;
+              white-space: normal;
+              line-height: 1.4;
             }
 
             /* 段落样式优化 */

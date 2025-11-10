@@ -17,6 +17,8 @@ import markdown from 'highlight.js/lib/languages/markdown'
 import katex from 'katex'
 import mermaid from 'mermaid'
 
+const MERMAID_FONT_FAMILY = '"Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif'
+
 // 注册highlight.js语言
 hljs.registerLanguage('javascript', javascript)
 hljs.registerLanguage('typescript', typescript)
@@ -67,6 +69,44 @@ const generateSafeId = (text: string, depth: number, index: number): string => {
     || `heading-${depth}-${index + 1}` // 如果清理后为空，使用默认 ID
 }
 
+// Inject inline + embedded styles into rendered Mermaid SVG so labels keep consistent spacing everywhere
+const injectMermaidLabelStyles = (svg: string): string => {
+  if (typeof document === 'undefined') return svg;
+
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = svg;
+
+  const labelStyleValue = [
+    'margin:0',
+    'text-align:center !important',
+    'text-indent:0 !important',
+    'letter-spacing:normal !important',
+    'white-space:normal !important',
+    'line-height:1.4'
+  ].join(';');
+
+  const targets = wrapper.querySelectorAll('.nodeLabel, .nodeLabel span, .nodeLabel p');
+  targets.forEach(target => {
+    const existing = target.getAttribute('style');
+    target.setAttribute('style', existing ? `${existing};${labelStyleValue}` : labelStyleValue);
+  });
+
+  const svgElement = wrapper.querySelector('svg');
+  if (svgElement) {
+    const labelStyles = `.nodeLabel, .nodeLabel span, .nodeLabel p { ${labelStyleValue} }`;
+    const existingStyle = svgElement.querySelector('style');
+    if (existingStyle) {
+      existingStyle.textContent = `${existingStyle.textContent || ''}\n${labelStyles}`;
+    } else {
+      const styleEl = document.createElement('style');
+      styleEl.textContent = labelStyles;
+      svgElement.insertBefore(styleEl, svgElement.firstChild);
+    }
+  }
+
+  return wrapper.innerHTML;
+};
+
 export function MarkdownRenderer({ content, language, theme, paperSizes, fontSizes, isGeneratingPDF, t, onHeadingsChange }: MarkdownRendererProps) {
   const [renderedHtml, setRenderedHtml] = useState("")
   const containerRef = useRef<HTMLDivElement>(null)
@@ -102,7 +142,7 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
       theme: 'default',
       securityLevel: 'loose',
       maxTextSize: 90000,
-      fontFamily: 'inherit',
+      fontFamily: MERMAID_FONT_FAMILY,
       // 添加更好的错误处理配置
       logLevel: 1, // 减少日志输出
       flowchart: {
@@ -370,7 +410,7 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
           theme: 'default',
           securityLevel: 'loose',
           maxTextSize: 90000,
-          fontFamily: 'inherit'
+          fontFamily: MERMAID_FONT_FAMILY
         });
         // 强制重新渲染所有Mermaid图表
         mermaid.contentLoaded();
@@ -409,7 +449,8 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
             
             element.innerHTML = '';
             const svgElement = document.createElement('div');
-            svgElement.innerHTML = svg;
+            const svgWithLabelStyles = injectMermaidLabelStyles(svg);
+            svgElement.innerHTML = svgWithLabelStyles;
             element.appendChild(svgElement);
             
             if (bindFunctions) {
