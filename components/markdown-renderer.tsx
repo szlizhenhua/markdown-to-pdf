@@ -82,7 +82,9 @@ const injectMermaidLabelStyles = (svg: string): string => {
     'text-indent:0 !important',
     'letter-spacing:normal !important',
     'white-space:normal !important',
-    'line-height:1.4'
+    'line-height:1.4',
+    'word-wrap:break-word !important',
+    'font-family:"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif !important'
   ].join(';');
 
   const targets = wrapper.querySelectorAll('.nodeLabel, .nodeLabel span, .nodeLabel p');
@@ -144,10 +146,13 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
       maxTextSize: 90000,
       fontFamily: MERMAID_FONT_FAMILY,
       // 添加更好的错误处理配置
-      logLevel: 1, // 减少日志输出
+      logLevel: 4, // 静默日志
       flowchart: {
         useMaxWidth: true,
         htmlLabels: true,
+        // 添加以下配置以改善中文显示
+        nodeSpacing: 20, // 替代 nodePadding 的合理选项
+        rankSpacing: 20  // 可选：控制层级间距
       },
       sequence: {
         useMaxWidth: true,
@@ -410,7 +415,19 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
           theme: 'default',
           securityLevel: 'loose',
           maxTextSize: 90000,
-          fontFamily: MERMAID_FONT_FAMILY
+          fontFamily: MERMAID_FONT_FAMILY,
+          // 添加更好的错误处理配置
+          logLevel: 4, // 静默日志
+          flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+            // 添加以下配置以改善中文显示
+            nodeSpacing: 20, // 替代 nodePadding 的合理选项
+            rankSpacing: 20  // 可选：控制层级间距
+          },
+          sequence: {
+            useMaxWidth: true,
+          }
         });
         // 强制重新渲染所有Mermaid图表
         mermaid.contentLoaded();
