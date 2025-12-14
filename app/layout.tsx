@@ -46,7 +46,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        {/* 广告脚本 */}
+        {/* monetag 广告脚本 */}
         <Script 
           src="https://quge5.com/88/tag.min.js" 
           data-zone="193056" 
