@@ -55,7 +55,7 @@
     "marked": "latest",
     "marked-highlight": "latest",
     "mermaid": "^11.12.0",
-    "next": "15.0.5",
+    "next": "15.0.7",
     "next-themes": "latest",
     "pdf-lib": "^1.17.1",
     "puppeteer-core": "^24.25.0",
