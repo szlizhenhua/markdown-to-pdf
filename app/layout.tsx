@@ -47,13 +47,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
         {/* 广告脚本 */}
-        <Script
-          src="https://quge5.com/88/tag.min.js"
-          data-zone="193056"
-          data-cfasync="false"
-          async
-          strategy="afterInteractive"
-        />
+        <script src="https://quge5.com/88/tag.min.js" data-zone="193056" async data-cfasync="false"></script>
       </head>
       <body
         className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}
