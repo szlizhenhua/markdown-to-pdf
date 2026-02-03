@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, memo } from "react"
 import { marked } from "marked"
-import { markedHighlight } from "marked-highlight"
 import hljs from 'highlight.js'
 import javascript from 'highlight.js/lib/languages/javascript'
 import typescript from 'highlight.js/lib/languages/typescript'
@@ -118,16 +117,6 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
   // 只在库加载完成后初始化 marked 配置
   useEffect(() => {
     if (!hljs || !katex || markedConfigured) return
-
-    marked.use(
-      markedHighlight({
-        langPrefix: "hljs language-",
-        highlight(code, lang) {
-          const language = hljs.getLanguage(lang) ? lang : "plaintext"
-          return hljs.highlight(code, { language }).value
-        },
-      })
-    )
 
     marked.use({
       extensions: [
