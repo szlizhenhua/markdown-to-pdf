@@ -21,6 +21,8 @@ import { FullscreenToggle } from "@/components/fullscreen-toggle"
 import { MarkdownToolbar } from "@/components/markdown-toolbar"
 import { FindReplace } from "@/components/find-replace"
 import { ScrollToTop } from "@/components/scroll-to-top"
+import { SeoContent } from "@/components/seo-content"
+import { SiteFooter } from "@/components/site-footer"
 import { PrintPreview } from "@/components/print-preview"
 import { SplitViewToggle } from "@/components/split-view-toggle"
 import { ZoomControl } from "@/components/zoom-control"
@@ -1320,6 +1322,9 @@ ${previewCard.innerHTML}
         </div>
         )}
       </div>
+
+      <SeoContent />
+      <SiteFooter />
 
       {/* Hidden file input */}
       <input ref={fileInputRef} type="file" accept=".md,.txt,text/markdown,text/plain" onChange={handleFileUpload} className="hidden" />

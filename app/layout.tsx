@@ -76,6 +76,13 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap"
           rel="stylesheet"
         />
+        {/* Google AdSense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1924467382262970"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         {/* Structured Data for SEO */}
         <Script
           id="structured-data"

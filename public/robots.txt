@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://markdown-to-pdf.org/sitemap.xml
