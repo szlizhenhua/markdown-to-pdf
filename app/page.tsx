@@ -128,9 +128,14 @@ export default function MarkdownToPDF() {
   useEffect(() => {
     // 检查当前markdown内容是否是对应语言的默认内容
     const currentEnDefaultContent = locales.en.defaultContent
-    const currentZhDefaultContent = locales.zh.defaultContent
+    const currentZhCnDefaultContent = locales['zh-cn'].defaultContent
+    const currentZhTwDefaultContent = locales['zh-tw'].defaultContent
 
-    if (markdown === currentEnDefaultContent || markdown === currentZhDefaultContent) {
+    if (
+      markdown === currentEnDefaultContent ||
+      markdown === currentZhCnDefaultContent ||
+      markdown === currentZhTwDefaultContent
+    ) {
       // 如果当前是默认内容，则切换到新语言的默认内容
       setMarkdown(t.defaultContent)
     }
@@ -159,6 +164,7 @@ export default function MarkdownToPDF() {
   const [wordWrap, setWordWrap] = useState(true)
   const [showFindReplace, setShowFindReplace] = useState(false)
   const [prevMarkdownLength, setPrevMarkdownLength] = useState(0)
+  const isChinese = language === 'zh-cn' || language === 'zh-tw'
   const fileInputRef = useRef<HTMLInputElement>(null)
   const dropRef = useRef<HTMLDivElement>(null)
   const settingsRef = useRef<HTMLDivElement>(null)
@@ -551,7 +557,7 @@ export default function MarkdownToPDF() {
 
       // Generate filename
       const firstLine = markdown.split('\n')[0]?.replace(/^#+\s*/, '') || 'document'
-      const fileName = language === 'zh'
+      const fileName = isChinese
         ? 'document.html'
         : `${firstLine.trim().replace(/\s+/g, '-').toLowerCase()}.html`
 
@@ -638,7 +644,7 @@ ${previewCard.innerHTML}
     try {
       // Generate filename from first heading
       const firstLine = markdown.split('\n')[0]?.replace(/^#+\s*/, '') || 'document'
-      const fileName = language === 'zh'
+      const fileName = isChinese
         ? 'document.md'
         : `${firstLine.trim().replace(/\s+/g, '-').toLowerCase()}.md`
 
@@ -699,7 +705,7 @@ ${previewCard.innerHTML}
 
       // Generate filename
       const firstLine = markdown.split('\n')[0]?.replace(/^#+\s*/, '') || 'document'
-      const fileName = language === 'zh'
+      const fileName = isChinese
         ? 'document.txt'
         : `${firstLine.trim().replace(/\s+/g, '-').toLowerCase()}.txt`
 

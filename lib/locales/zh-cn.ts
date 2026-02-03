@@ -1,4 +1,4 @@
-export const zh = {
+export const zhCN = {
   // Header
   title: "Markdown 转 PDF 转换器",
   subtitle: "将 Markdown 转换为专业 PDF 文档",

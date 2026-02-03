@@ -5,12 +5,23 @@ import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Globe, Languages } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import type { Language } from '@/lib/locales'
 
 export function LanguageSwitcher() {
   const { language, setLanguage, availableLanguages } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [isCompact, setIsCompact] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const getPathForLanguage = (lang: Language, currentPath: string) => {
+    const withoutLocale = currentPath.replace(/^\/(en|zh-cn|zh-tw)(?=\/|$)/, '')
+    const normalized = withoutLocale.startsWith('/') ? withoutLocale : `/${withoutLocale}`
+    const suffix = normalized === '/' ? '' : normalized
+    return `/${lang}${suffix}`
+  }
 
   // 检测屏幕宽度
   useEffect(() => {
@@ -57,7 +68,12 @@ export function LanguageSwitcher() {
                 <button
                   key={lang.code}
                   onClick={() => {
-                    setLanguage(lang.code as 'en' | 'zh')
+                    const nextLang = lang.code as Language
+                    setLanguage(nextLang)
+                    const nextPath = getPathForLanguage(nextLang, pathname)
+                    if (nextPath !== pathname) {
+                      router.push(nextPath)
+                    }
                     setIsOpen(false)
                   }}
                   className={`w-full text-left px-3 py-2 text-sm rounded hover:bg-gray-100 transition-colors ${
@@ -81,7 +97,17 @@ export function LanguageSwitcher() {
   return (
     <div className="flex items-center gap-2">
       <Globe className="h-4 w-4 text-muted-foreground" />
-      <Select value={language} onValueChange={(value) => setLanguage(value as 'en' | 'zh')}>
+      <Select
+        value={language}
+        onValueChange={(value) => {
+          const nextLang = value as Language
+          setLanguage(nextLang)
+          const nextPath = getPathForLanguage(nextLang, pathname)
+          if (nextPath !== pathname) {
+            router.push(nextPath)
+          }
+        }}
+      >
         <SelectTrigger className="w-auto">
           <SelectValue />
         </SelectTrigger>

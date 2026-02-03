@@ -1,12 +1,14 @@
 import { en } from './en'
-import { zh } from './zh'
+import { zhCN } from './zh-cn'
+import { zhTW } from './zh-tw'
 import type { LocaleTranslations } from './types'
 
-export type Language = 'en' | 'zh'
+export type Language = 'en' | 'zh-cn' | 'zh-tw'
 
 export const locales = {
   en,
-  zh
+  'zh-cn': zhCN,
+  'zh-tw': zhTW
 } as const satisfies Record<Language, LocaleTranslations>
 
 export const defaultLocale: Language = 'en'
