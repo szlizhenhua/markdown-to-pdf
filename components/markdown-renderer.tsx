@@ -37,7 +37,6 @@ interface MarkdownRendererProps {
   theme: string
   paperSizes: string
   fontSizes: string
-  isGeneratingPDF: boolean
   t: LocaleTranslations
   onHeadingsChange?: (headings: Array<{ id: string; text: string; level: number }>) => void
 }
@@ -110,7 +109,7 @@ const renderKatex = (math: string, displayMode: boolean): string => {
 
  
 
-function MarkdownRendererComponent({ content, language, theme, paperSizes, fontSizes, isGeneratingPDF, t, onHeadingsChange }: MarkdownRendererProps) {
+function MarkdownRendererComponent({ content, language, theme, paperSizes, fontSizes, t, onHeadingsChange }: MarkdownRendererProps) {
   const [renderedHtml, setRenderedHtml] = useState("")
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -338,7 +337,6 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
     theme,
     paperSizes,
     fontSizes,
-    isGeneratingPDF,
     onHeadingsChange,
     t.messages.highlightJsError,
   ])
@@ -372,8 +370,7 @@ export const MarkdownRenderer = memo(MarkdownRendererComponent, (prevProps, next
     prevProps.theme === nextProps.theme &&
     prevProps.paperSizes === nextProps.paperSizes &&
     prevProps.fontSizes === nextProps.fontSizes &&
-    prevProps.language === nextProps.language &&
-    prevProps.isGeneratingPDF === nextProps.isGeneratingPDF
+    prevProps.language === nextProps.language
   )
 })
 

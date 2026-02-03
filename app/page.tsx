@@ -406,13 +406,15 @@ export default function MarkdownToPDF() {
         throw new Error('找不到预览内容容器');
       }
 
-      // 生成文件名，基于第一行标题或默认（处理中文字符）
+      // 生成文件名，基于第一行标题或默认
       const firstLine = markdown.split('\n')[0]?.replace(/^#+\s*/, '') || 'document';
-      // 对文件名进行URL编码处理，避免中文字符问题
-      const safeFileName = `${firstLine.trim().replace(/\s+/g, '-').toLowerCase()}`;
-      const fileName = language === 'zh'
-        ? `document.pdf` // 中文环境下使用默认文件名，避免编码问题
-        : `${safeFileName}.pdf`;
+      const safeBaseName = firstLine
+        .trim()
+        .replace(/[\\/:*?"<>|]/g, '-')
+        .replace(/\s+/g, '-')
+        .replace(/-{2,}/g, '-')
+        .replace(/^-+|-+$/g, '') || 'document'
+      const fileName = `${safeBaseName}.pdf`;
 
       // 获取HTML内容并确保正确编码
       const htmlContent = previewCard.innerHTML;
@@ -1300,7 +1302,6 @@ ${previewCard.innerHTML}
                         theme={selectedTheme}
                         paperSizes={selectedPaperSize}
                         fontSizes = {selectedFontSize}
-                        isGeneratingPDF={isGeneratingPDF}
                         t={t}
                         onHeadingsChange={setHeadings}
                       />

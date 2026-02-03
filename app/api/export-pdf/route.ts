@@ -12,8 +12,11 @@ export async function POST(request: Request) {
   try {
     const { htmlContent, fileName = 'document.pdf', theme = 'default', paperSize = 'a4', fontSize = '12' } = await request.json()
 
-    // 确保文件名只包含ASCII字符，避免编码问题
-    const safeFileName = fileName.replace(/[^a-zA-Z0-9\-._]/g, '_');
+    const normalizedFileName = fileName && fileName.trim().length > 0 ? fileName.trim() : 'document.pdf'
+    const fallbackFileName = normalizedFileName
+      .replace(/[^\x20-\x7E]/g, '')
+      .replace(/[^a-zA-Z0-9\-._]/g, '_') || 'document.pdf'
+    const encodedFileName = encodeURIComponent(normalizedFileName)
 
     // 调试信息
     //console.log('PDF API 调试信息:');
@@ -153,7 +156,7 @@ export async function POST(request: Request) {
     return new NextResponse(new Uint8Array(pdf), {
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="${safeFileName}"`,
+        'Content-Disposition': `attachment; filename="${fallbackFileName}"; filename*=UTF-8''${encodedFileName}`,
       },
     })
   } catch (error) {
