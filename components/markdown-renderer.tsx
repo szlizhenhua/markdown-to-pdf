@@ -14,77 +14,11 @@ import xml from 'highlight.js/lib/languages/xml'
 import sql from 'highlight.js/lib/languages/sql'
 import markdown from 'highlight.js/lib/languages/markdown'
 import katex from 'katex'
-// Lazy load mermaid to reduce initial bundle size
 import type { LocaleTranslations } from '@/lib/locales/types'
+import { preprocessMarkdown, renderMermaidInContainer } from '@/lib/markdownRender'
+import { stripMarkdown } from '@/lib/markdownUtils'
 
-const MERMAID_FONT_FAMILY = '"Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif'
 let markedConfigured = false
-
-// Mermaid diagram cache manager to avoid memory leaks
-class MermaidCacheManager {
-  private cache = new Map<string, string>()
-  private cleanupInterval: ReturnType<typeof setInterval> | null = null
-  private readonly MAX_CACHE_SIZE = 50
-  private readonly CLEANUP_INTERVAL = 10 * 60 * 1000 // 10 minutes
-
-  constructor() {
-    // Only start cleanup interval in browser
-    if (typeof window !== 'undefined') {
-      this.startCleanup()
-    }
-  }
-
-  private startCleanup() {
-    this.cleanupInterval = setInterval(() => {
-      if (this.cache.size > this.MAX_CACHE_SIZE) {
-        const keysToDelete = Array.from(this.cache.keys()).slice(0, Math.floor(this.MAX_CACHE_SIZE / 2))
-        keysToDelete.forEach(key => this.cache.delete(key))
-      }
-    }, this.CLEANUP_INTERVAL)
-  }
-
-  get(key: string): string | undefined {
-    return this.cache.get(key)
-  }
-
-  set(key: string, value: string): void {
-    this.cache.set(key, value)
-  }
-
-  has(key: string): boolean {
-    return this.cache.has(key)
-  }
-
-  delete(key: string): boolean {
-    return this.cache.delete(key)
-  }
-
-  clear(): void {
-    this.cache.clear()
-  }
-
-  get size(): number {
-    return this.cache.size
-  }
-
-  destroy(): void {
-    if (this.cleanupInterval) {
-      clearInterval(this.cleanupInterval)
-      this.cleanupInterval = null
-    }
-    this.cache.clear()
-  }
-}
-
-// Singleton instance
-const mermaidCache = new MermaidCacheManager()
-
-// Cleanup on page unload
-if (typeof window !== 'undefined') {
-  window.addEventListener('beforeunload', () => {
-    mermaidCache.destroy()
-  })
-}
 
 // 注册highlight.js语言
 hljs.registerLanguage('javascript', javascript)
@@ -111,7 +45,8 @@ interface MarkdownRendererProps {
 
 // 工具函数：清理 HTML 标签和实体
 const cleanHtmlText = (text: string): string => {
-  return text
+  const stripped = stripMarkdown(text)
+  return stripped
     .replace(/<[^>]*>/g, '') // 移除所有 HTML 标签
     .replace(/&nbsp;/g, ' ') // 替换空格实体
     .replace(/&amp;/g, '&') // 替换 & 实体
@@ -174,165 +109,11 @@ const renderKatex = (math: string, displayMode: boolean): string => {
   }
 }
 
-const normalizeMermaidSource = (source: string): string => {
-  if (!source.trim()) return source
-
-  const normalizedSource = source
-    .replace(/[“”]/g, '"')
-    .replace(/[‘’]/g, "'")
-
-  const lines = normalizedSource.split(/\r?\n/)
-  const prefix: string[] = []
-  let index = 0
-
-  while (index < lines.length) {
-    const trimmed = lines[index].trim()
-    if (!trimmed || trimmed.startsWith('%%')) {
-      prefix.push(lines[index])
-      index += 1
-      continue
-    }
-    break
-  }
-
-  const remaining = lines.slice(index)
-  if (remaining.length === 0) return source
-
-  const firstLine = remaining[0]
-    .replace(/^[\uFEFF\u200B\u200C\u200D]+/, '')
-    .replace(/[—–]/g, '-')
-    .replace(/\s+/g, ' ')
-    .trim()
-  const isRadarChart = /^radar\s*-?\s*chart\b/i.test(firstLine)
-  if (!isRadarChart) {
-    return normalizedSource
-  }
-
-  const titleLines: string[] = []
-  const optionLines: string[] = []
-  const axisLabels: string[] = []
-  const seriesLines: Array<{ label: string; values: string }> = []
-
-  for (const rawLine of remaining) {
-    const trimmed = rawLine.trim()
-    if (!trimmed) continue
-    if (/^radar\s*-?\s*chart\b/i.test(trimmed)) continue
-
-    if (trimmed.startsWith('title ')) {
-      titleLines.push(trimmed)
-      continue
-    }
-
-    if (trimmed.startsWith('axis ')) {
-      const axisPart = trimmed.slice(5).trim()
-      if (axisPart) {
-        const items = axisPart
-          .split(/[，,、]/)
-          .map(item => item.trim())
-          .filter(Boolean)
-        axisLabels.push(...items)
-      }
-      continue
-    }
-
-    if (trimmed.startsWith('series ')) {
-      const match = trimmed.match(/^series\s+(?:"([^"]+)"|([^{\[]+))\s*[\[{]([^}\]]+)[}\]]/)
-      if (match) {
-        const label = (match[1] ?? match[2] ?? '').trim()
-        const values = match[3]
-          .split(/[，,、]/)
-          .map(value => value.trim())
-          .filter(Boolean)
-          .join(', ')
-        if (label && values) {
-          seriesLines.push({ label, values })
-          continue
-        }
-      }
-    }
-
-    optionLines.push(trimmed)
-  }
-
-  if (axisLabels.length === 0 || seriesLines.length === 0) {
-    return normalizedSource
-  }
-
-  const axisLines = axisLabels.map((label, idx) => {
-    const safeLabel = label.replace(/"/g, '\\"')
-    return `axis a${idx + 1}["${safeLabel}"]`
-  })
-
-  const curveLines = seriesLines.map((series, idx) => {
-    const safeLabel = series.label.replace(/"/g, '\\"')
-    return `curve s${idx + 1}["${safeLabel}"]{${series.values}}`
-  })
-
-  return [
-    ...prefix,
-    'radar-beta',
-    ...titleLines,
-    ...axisLines,
-    ...curveLines,
-    ...optionLines
-  ].join('\n')
-}
-
-// Inject inline + embedded styles into rendered Mermaid SVG so labels keep consistent spacing everywhere
-const injectMermaidLabelStyles = (svg: string): string => {
-  if (typeof document === 'undefined') return svg;
-
-  const wrapper = document.createElement('div');
-  wrapper.innerHTML = svg;
-
-  const labelStyleValue = [
-    'margin:0',
-    'text-align:center !important',
-    'text-indent:0 !important',
-    'letter-spacing:normal !important',
-    'white-space:normal !important',
-    'line-height:1.4',
-    'word-wrap:break-word !important',
-    'font-family:"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif !important'
-  ].join(';');
-
-  const targets = wrapper.querySelectorAll('.nodeLabel, .nodeLabel span, .nodeLabel p');
-  targets.forEach(target => {
-    const existing = target.getAttribute('style');
-    target.setAttribute('style', existing ? `${existing};${labelStyleValue}` : labelStyleValue);
-  });
-
-  const svgElement = wrapper.querySelector('svg');
-  if (svgElement) {
-    const labelStyles = `.nodeLabel, .nodeLabel span, .nodeLabel p { ${labelStyleValue} }`;
-    const existingStyle = svgElement.querySelector('style');
-    if (existingStyle) {
-      existingStyle.textContent = `${existingStyle.textContent || ''}\n${labelStyles}`;
-    } else {
-      const styleEl = document.createElement('style');
-      styleEl.textContent = labelStyles;
-      svgElement.insertBefore(styleEl, svgElement.firstChild);
-    }
-  }
-
-  return wrapper.innerHTML;
-};
+ 
 
 function MarkdownRendererComponent({ content, language, theme, paperSizes, fontSizes, isGeneratingPDF, t, onHeadingsChange }: MarkdownRendererProps) {
   const [renderedHtml, setRenderedHtml] = useState("")
-  const [mermaidModule, setMermaidModule] = useState<any>(null) // eslint-disable-line @typescript-eslint/no-explicit-any
   const containerRef = useRef<HTMLDivElement>(null)
-
-  // Lazy load mermaid only when needed (on mount)
-  useEffect(() => {
-    let mounted = true
-    import('mermaid').then(module => {
-      if (mounted) {
-        setMermaidModule(module.default || module)
-      }
-    })
-    return () => { mounted = false }
-  }, [])
 
   // 只在库加载完成后初始化 marked 配置
   useEffect(() => {
@@ -396,8 +177,6 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
       gfm: true,
       breaks: true,
       pedantic: false,
-      mangle: false,
-      headerIds: false
     })
 
     markedConfigured = true
@@ -408,31 +187,6 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
     if (!hljs || !katex) return
 
     const highlightJsErrorMessage = t.messages.highlightJsError
-    const mermaidLoadingMessage = t.messages.mermaidLoading
-
-    const mermaid = mermaidModule
-    if (!mermaid) return
-
-    // Initialize mermaid with theme-specific config
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: 'default',
-      securityLevel: 'loose',
-      maxTextSize: 90000,
-      fontFamily: MERMAID_FONT_FAMILY,
-      // 添加更好的错误处理配置
-      logLevel: 4, // 静默日志
-      flowchart: {
-        useMaxWidth: true,
-        htmlLabels: true,
-        // 添加以下配置以改善中文显示
-        nodeSpacing: 20, // 替代 nodePadding 的合理选项
-        rankSpacing: 20  // 可选：控制层级间距
-      },
-      sequence: {
-        useMaxWidth: true,
-      }
-    })
 
     // Custom renderer for headings with IDs
     const renderer = new marked.Renderer()
@@ -467,15 +221,8 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
       const normalizedLang = langString.split(/\s+/)[0].toLowerCase()
 
       if (normalizedLang === "mermaid") {
-        const normalizedText = normalizeMermaidSource(text || "")
-        const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
-        return `
-          <div class="mermaid-container">
-            <div class="mermaid-diagram" id="${id}">
-              <textarea style="display:none;">${normalizedText}</textarea>
-              <div class="mermaid-loading">${mermaidLoadingMessage}</div>
-            </div>
-          </div>`;
+        const escapedText = escapeHtml(text || "")
+        return `<pre><code class="language-mermaid">${escapedText}</code></pre>`
       }
 
       const codeContent = text || ""
@@ -559,7 +306,7 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
     }
 
     // Process markdown
-    const processedContent = content
+    const processedContent = preprocessMarkdown(content)
 
     /*
     // Handle KaTeX math expressions with bold formatting
@@ -604,123 +351,13 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
     fontSizes,
     isGeneratingPDF,
     onHeadingsChange,
-    mermaidModule,
     t.messages.highlightJsError,
-    t.messages.mermaidLoading,
   ])
 
   useEffect(() => {
-    if (containerRef.current && renderedHtml && mermaidModule) {
-      const mermaid = mermaidModule
-      // 确保使用当前主题重新初始化
-      try {
-        mermaid.initialize({
-          startOnLoad: true,
-          theme: 'default',
-          securityLevel: 'loose',
-          maxTextSize: 90000,
-          fontFamily: MERMAID_FONT_FAMILY,
-          // 添加更好的错误处理配置
-          logLevel: 4, // 静默日志
-          flowchart: {
-            useMaxWidth: true,
-            htmlLabels: true,
-            // 添加以下配置以改善中文显示
-            nodeSpacing: 20, // 替代 nodePadding 的合理选项
-            rankSpacing: 20  // 可选：控制层级间距
-          },
-          sequence: {
-            useMaxWidth: true,
-          }
-        });
-        // 强制重新渲染所有Mermaid图表
-        mermaid.contentLoaded();
-      } catch (error) {
-        console.error(t.messages.mermaidInitError, error);
-      }
-
-      // Manual rendering as fallback
-      const mermaidElements = containerRef.current.querySelectorAll(".mermaid-diagram");
-      mermaidElements.forEach(element => {
-        if (element.querySelector('svg')) return; // Skip already rendered
-        
-        const textarea = element.querySelector('textarea');
-        if (!textarea) return;
-        
-        // 保留原始mermaid代码，并确保箭头符号正确
-        const diagramDefinition = normalizeMermaidSource(
-          textarea.value
-            .replace(/--&gt;/g, "-->") // 确保箭头符号不被转义
-            .replace(/--&(amp;)+gt;/g, "-->")
-        )
-        
-        // console.log('diagramDefinition: ', diagramDefinition);
-
-        if (!diagramDefinition.trim()) return;
-        
-        // Add loading indicator
-        element.innerHTML = `<div class="mermaid-loading">${t.messages.mermaidRendering}</div>`;
-        
-        // Render with retry mechanism and caching
-        const renderWithRetry = async (retryCount = 0) => {
-          try {
-            // Check cache first
-            const cacheKey = diagramDefinition.trim()
-            if (mermaidCache.has(cacheKey)) {
-              const cachedSvg = mermaidCache.get(cacheKey)!
-              element.innerHTML = ''
-              const svgElement = document.createElement('div')
-              svgElement.innerHTML = injectMermaidLabelStyles(cachedSvg)
-              element.appendChild(svgElement)
-              return
-            }
-
-            // console.log('mermaid: ', mermaid);
-            const { svg, bindFunctions } = await mermaid.render(
-              element.id + "-svg",
-              diagramDefinition
-            )
-
-            // Cache the rendered SVG
-            mermaidCache.set(cacheKey, svg)
-
-            element.innerHTML = ''
-            const svgElement = document.createElement('div')
-            const svgWithLabelStyles = injectMermaidLabelStyles(svg)
-            svgElement.innerHTML = svgWithLabelStyles
-            element.appendChild(svgElement)
-
-            if (bindFunctions) {
-              bindFunctions(element)
-            }
-          } catch (error) {
-            if (retryCount < 2) {
-              console.warn(t.messages.mermaidRenderRetry.replace('{count}', (retryCount + 1).toString()))
-              await new Promise(resolve => setTimeout(resolve, 100))
-              return renderWithRetry(retryCount + 1)
-            }
-
-            console.error(t.messages.mermaidFinalError, error)
-            element.innerHTML = `
-              <div style="color: red; padding: 10px; border: 1px solid red; border-radius: 4px; background: #ffe6e6;">
-                <strong>${t.messages.mermaidRenderError}:</strong>
-                <div style="margin-top: 5px;">${t.messages.mermaidSyntaxError}</div>
-                <pre style="margin-top: 10px; white-space: pre-wrap;">${error instanceof Error ? error.message : t.messages.unknownError}</pre>
-                <div style="margin-top: 10px;">${t.messages.mermaidExampleSyntax}</div>
-                <pre style="margin: 5px 0; padding: 5px; background: #f5f5f5; border-radius: 3px;">
-graph TD
-    A[Start] --&gt; B{Decision}
-    B -->|Yes| C[OK]
-    B -->|No| D[Retry]</pre>
-              </div>
-            `
-          }
-        }
-        
-        renderWithRetry();
-      });
-    }
-  }, [renderedHtml, mermaidModule]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (!containerRef.current || !renderedHtml) return
+    void renderMermaidInContainer(containerRef.current)
+  }, [renderedHtml])
 
   // 移除主题样式函数
 

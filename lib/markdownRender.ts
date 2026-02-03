@@ -324,10 +324,23 @@ const parseRadarChart = (raw: string): RadarChartData => {
   return { title, axes, series }
 }
 
+const decodeHtmlEntities = (value: string): string => {
+  return value
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+}
+
 const buildRadarChartElement = (raw: string): HTMLElement => {
   const { title, axes, series } = parseRadarChart(raw)
   const container = document.createElement('div')
   container.className = 'mermaid-radar'
+  container.style.display = 'flex'
+  container.style.flexDirection = 'column'
+  container.style.alignItems = 'center'
+  container.style.gap = '12px'
 
   if (!axes.length || !series.length) {
     container.textContent = raw
@@ -354,7 +367,15 @@ const buildRadarChartElement = (raw: string): HTMLElement => {
   })
 
   const svgParts: string[] = []
-  svgParts.push(`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Radar chart">`)
+  svgParts.push(
+    `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Radar chart" class="radar-svg">`
+  )
+  svgParts.push(`<style>
+    .radar-grid polygon { fill: none; stroke: #CBD5E1; stroke-width: 1; }
+    .radar-axes line { stroke: #CBD5E1; stroke-width: 1; }
+    .radar-axes text { fill: #1F2937; font-size: 12px; font-weight: 600; }
+    .radar-shape { fill-opacity: 0.25; stroke-width: 2; }
+  </style>`)
   svgParts.push('<g class="radar-grid">')
   for (let i = 1; i <= levels; i += 1) {
     const r = (radius / levels) * i
@@ -389,16 +410,25 @@ const buildRadarChartElement = (raw: string): HTMLElement => {
 
   svgParts.push('</svg>')
   if (title) {
-    svgParts.unshift(`<div class="radar-title">${title}</div>`)
+    svgParts.unshift(
+      `<div class="radar-title" style="font-weight:600; margin-bottom:4px;">${title}</div>`
+    )
   }
 
   const legend = document.createElement('div')
   legend.className = 'mermaid-radar-legend'
+  legend.style.display = 'flex'
+  legend.style.flexWrap = 'wrap'
+  legend.style.gap = '12px'
+  legend.style.justifyContent = 'center'
   series.forEach((item, index) => {
     const color = palette[index % palette.length]
     const entry = document.createElement('div')
     entry.className = 'mermaid-radar-legend-item'
-    entry.innerHTML = `<span class="swatch" style="background:${color}"></span><span>${item.name}</span>`
+    entry.style.display = 'flex'
+    entry.style.alignItems = 'center'
+    entry.style.gap = '6px'
+    entry.innerHTML = `<span class="swatch" style="background:${color};width:10px;height:10px;border-radius:999px;display:inline-block;"></span><span>${item.name}</span>`
     legend.appendChild(entry)
   })
 
@@ -497,7 +527,7 @@ const renderMermaidInContainer = async (root?: HTMLElement | null): Promise<void
     const classList = Array.from(codeBlock.classList || [])
     const langClass = classList.find((entry) => entry.startsWith('language-') || entry.startsWith('lang-'))
     const lang = langClass ? langClass.replace(/^language-/, '').replace(/^lang-/, '') : ''
-    const raw = codeBlock.textContent || ''
+    const raw = decodeHtmlEntities(codeBlock.textContent || '')
     return lang === 'mermaid' || isMermaidLike(raw)
   })
 
@@ -513,7 +543,7 @@ const renderMermaidInContainer = async (root?: HTMLElement | null): Promise<void
     const lang = langClass ? langClass.replace(/^language-/, '').replace(/^lang-/, '') : ''
     const pre = codeBlock.closest('pre')
     if (!pre) return
-    const raw = codeBlock.textContent || ''
+    const raw = decodeHtmlEntities(codeBlock.textContent || '')
     if (!(lang === 'mermaid' || isMermaidLike(raw))) {
       return
     }
