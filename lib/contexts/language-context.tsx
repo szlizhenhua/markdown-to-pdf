@@ -16,20 +16,38 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 const languageNames = {
   en: { name: 'English', nativeName: 'English', flag: '🇺🇸' },
+  es: { name: 'Spanish', nativeName: 'Español', flag: '🇪🇸' },
+  fr: { name: 'French', nativeName: 'Français', flag: '🇫🇷' },
+  de: { name: 'German', nativeName: 'Deutsch', flag: '🇩🇪' },
+  it: { name: 'Italian', nativeName: 'Italiano', flag: '🇮🇹' },
+  pt: { name: 'Portuguese', nativeName: 'Português', flag: '🇵🇹' },
+  ru: { name: 'Russian', nativeName: 'Русский', flag: '🇷🇺' },
   'zh-cn': { name: 'Chinese (Simplified)', nativeName: '简体中文', flag: '🇨🇳' },
-  'zh-tw': { name: 'Chinese (Traditional)', nativeName: '繁體中文', flag: '🇹🇼' }
+  'zh-tw': { name: 'Chinese (Traditional)', nativeName: '繁體中文', flag: '🇹🇼' },
+  ja: { name: 'Japanese', nativeName: '日本語', flag: '🇯🇵' },
+  ko: { name: 'Korean', nativeName: '한국어', flag: '🇰🇷' },
+  ar: { name: 'Arabic', nativeName: 'بالعربية', flag: '🇸🇦' },
+  hi: { name: 'Hindi', nativeName: 'हिन्दी', flag: '🇮🇳' },
+  tr: { name: 'Turkish', nativeName: 'Türkçe', flag: '🇹🇷' },
+  nl: { name: 'Dutch', nativeName: 'Nederlands', flag: '🇳🇱' },
+  sv: { name: 'Swedish', nativeName: 'Svenska', flag: '🇸🇪' },
+  pl: { name: 'Polish', nativeName: 'Polski', flag: '🇵🇱' },
+  vi: { name: 'Vietnamese', nativeName: 'Tiếng Việt', flag: '🇻🇳' }
 }
 
 const getLanguageFromPath = (pathname: string): Language | null => {
   const segment = pathname.split('/')[1]?.toLowerCase()
-  if (segment === 'zh-cn' || segment === 'zh-tw' || segment === 'en') {
+  if (segment && locales[segment as Language]) {
     return segment as Language
   }
   return null
 }
 
 const getPathForLanguage = (lang: Language, currentPath: string) => {
-  const withoutLocale = currentPath.replace(/^\/(en|zh-cn|zh-tw)(?=\/|$)/, '')
+  const localePattern = Object.keys(locales)
+    .map((code) => code.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'))
+    .join('|')
+  const withoutLocale = currentPath.replace(new RegExp(`^/(${localePattern})(?=/|$)`), '')
   const normalized = withoutLocale.startsWith('/') ? withoutLocale : `/${withoutLocale}`
   const suffix = normalized === '/' ? '' : normalized
   return `/${lang}${suffix}`

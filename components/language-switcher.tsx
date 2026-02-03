@@ -17,7 +17,11 @@ export function LanguageSwitcher() {
   const pathname = usePathname()
 
   const getPathForLanguage = (lang: Language, currentPath: string) => {
-    const withoutLocale = currentPath.replace(/^\/(en|zh-cn|zh-tw)(?=\/|$)/, '')
+    const localePattern = availableLanguages
+      .map((entry) => entry.code)
+      .map((code) => code.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'))
+      .join('|')
+    const withoutLocale = currentPath.replace(new RegExp(`^/(${localePattern})(?=/|$)`), '')
     const normalized = withoutLocale.startsWith('/') ? withoutLocale : `/${withoutLocale}`
     const suffix = normalized === '/' ? '' : normalized
     return `/${lang}${suffix}`
