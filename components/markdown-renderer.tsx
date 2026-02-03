@@ -18,6 +18,7 @@ import katex from 'katex'
 import type { LocaleTranslations } from '@/lib/locales/types'
 
 const MERMAID_FONT_FAMILY = '"Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif'
+let markedConfigured = false
 
 // Mermaid diagram cache manager to avoid memory leaks
 class MermaidCacheManager {
@@ -135,6 +136,148 @@ const generateSafeId = (text: string, depth: number, index: number): string => {
     || `heading-${depth}-${index + 1}` // 如果清理后为空，使用默认 ID
 }
 
+const escapeHtmlAttribute = (value: string): string => {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+}
+
+const escapeHtml = (value: string): string => {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
+const renderKatex = (math: string, displayMode: boolean): string => {
+  try {
+    const katexHtml = katex.renderToString(math, {
+      displayMode,
+      output: "html", // 输出HTML而不是MathML以获得更好的兼容性
+      fleqn: false,
+      leqno: false,
+      throwOnError: false,
+      strict: false // 允许unicode字符在数学模式中
+    })
+    const safeMath = escapeHtmlAttribute(math)
+    if (displayMode) {
+      return `<div class="katex-display" data-tex="${safeMath}">${katexHtml}</div>`
+    }
+    return `<span class="katex" data-tex="${safeMath}">${katexHtml}</span>`
+  } catch {
+    return displayMode ? `$$${math}$$` : `$${math}$`
+  }
+}
+
+const normalizeMermaidSource = (source: string): string => {
+  if (!source.trim()) return source
+
+  const normalizedSource = source
+    .replace(/[“”]/g, '"')
+    .replace(/[‘’]/g, "'")
+
+  const lines = normalizedSource.split(/\r?\n/)
+  const prefix: string[] = []
+  let index = 0
+
+  while (index < lines.length) {
+    const trimmed = lines[index].trim()
+    if (!trimmed || trimmed.startsWith('%%')) {
+      prefix.push(lines[index])
+      index += 1
+      continue
+    }
+    break
+  }
+
+  const remaining = lines.slice(index)
+  if (remaining.length === 0) return source
+
+  const firstLine = remaining[0]
+    .replace(/^[\uFEFF\u200B\u200C\u200D]+/, '')
+    .replace(/[—–]/g, '-')
+    .replace(/\s+/g, ' ')
+    .trim()
+  const isRadarChart = /^radar\s*-?\s*chart\b/i.test(firstLine)
+  if (!isRadarChart) {
+    return normalizedSource
+  }
+
+  const titleLines: string[] = []
+  const optionLines: string[] = []
+  const axisLabels: string[] = []
+  const seriesLines: Array<{ label: string; values: string }> = []
+
+  for (const rawLine of remaining) {
+    const trimmed = rawLine.trim()
+    if (!trimmed) continue
+    if (/^radar\s*-?\s*chart\b/i.test(trimmed)) continue
+
+    if (trimmed.startsWith('title ')) {
+      titleLines.push(trimmed)
+      continue
+    }
+
+    if (trimmed.startsWith('axis ')) {
+      const axisPart = trimmed.slice(5).trim()
+      if (axisPart) {
+        const items = axisPart
+          .split(/[，,、]/)
+          .map(item => item.trim())
+          .filter(Boolean)
+        axisLabels.push(...items)
+      }
+      continue
+    }
+
+    if (trimmed.startsWith('series ')) {
+      const match = trimmed.match(/^series\s+(?:"([^"]+)"|([^{\[]+))\s*[\[{]([^}\]]+)[}\]]/)
+      if (match) {
+        const label = (match[1] ?? match[2] ?? '').trim()
+        const values = match[3]
+          .split(/[，,、]/)
+          .map(value => value.trim())
+          .filter(Boolean)
+          .join(', ')
+        if (label && values) {
+          seriesLines.push({ label, values })
+          continue
+        }
+      }
+    }
+
+    optionLines.push(trimmed)
+  }
+
+  if (axisLabels.length === 0 || seriesLines.length === 0) {
+    return normalizedSource
+  }
+
+  const axisLines = axisLabels.map((label, idx) => {
+    const safeLabel = label.replace(/"/g, '\\"')
+    return `axis a${idx + 1}["${safeLabel}"]`
+  })
+
+  const curveLines = seriesLines.map((series, idx) => {
+    const safeLabel = series.label.replace(/"/g, '\\"')
+    return `curve s${idx + 1}["${safeLabel}"]{${series.values}}`
+  })
+
+  return [
+    ...prefix,
+    'radar-beta',
+    ...titleLines,
+    ...axisLines,
+    ...curveLines,
+    ...optionLines
+  ].join('\n')
+}
+
 // Inject inline + embedded styles into rendered Mermaid SVG so labels keep consistent spacing everywhere
 const injectMermaidLabelStyles = (svg: string): string => {
   if (typeof document === 'undefined') return svg;
@@ -193,28 +336,79 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
 
   // 只在库加载完成后初始化 marked 配置
   useEffect(() => {
-    if (!hljs || !katex) return;
+    if (!hljs || !katex || markedConfigured) return
 
     marked.use(
       markedHighlight({
         langPrefix: "hljs language-",
         highlight(code, lang) {
-          const language = hljs.getLanguage(lang) ? lang : "plaintext";
-          return hljs.highlight(code, { language }).value;
+          const language = hljs.getLanguage(lang) ? lang : "plaintext"
+          return hljs.highlight(code, { language }).value
         },
       })
-    );
+    )
+
+    marked.use({
+      extensions: [
+        {
+          name: "mathBlock",
+          level: "block",
+          start(src) {
+            return src.indexOf("$$")
+          },
+          tokenizer(src) {
+            const match = src.match(/^\$\$([\s\S]+?)\$\$(?:\n|$)/)
+            if (!match) return
+            return {
+              type: "mathBlock",
+              raw: match[0],
+              text: match[1].trim()
+            }
+          },
+          renderer(token) {
+            return renderKatex(token.text, true)
+          }
+        },
+        {
+          name: "mathInline",
+          level: "inline",
+          start(src) {
+            return src.indexOf("$")
+          },
+          tokenizer(src) {
+            if (src.startsWith("$$")) return
+            const match = src.match(/^\$([^\n$]+?)\$/)
+            if (!match) return
+            return {
+              type: "mathInline",
+              raw: match[0],
+              text: match[1]
+            }
+          },
+          renderer(token) {
+            return renderKatex(token.text, false)
+          }
+        }
+      ]
+    })
 
     marked.setOptions({
       gfm: true,
       breaks: true,
       pedantic: false,
-    });
-  }, []);
+      mangle: false,
+      headerIds: false
+    })
+
+    markedConfigured = true
+  }, [])
 
   // 内容或主题变化时重新渲染
   useEffect(() => {
     if (!hljs || !katex) return
+
+    const highlightJsErrorMessage = t.messages.highlightJsError
+    const mermaidLoadingMessage = t.messages.mermaidLoading
 
     const mermaid = mermaidModule
     if (!mermaid) return
@@ -268,25 +462,26 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
 
     // 自定义渲染器，处理数学公式和代码高亮
     renderer.code = (token: { raw?: string; text?: string; lang?: string; type?: string }) => {
-      const { raw, text, lang } = token;
-      const langString = lang || "";
+      const { text, lang } = token
+      const langString = (lang || "").trim()
+      const normalizedLang = langString.split(/\s+/)[0].toLowerCase()
 
-      if (langString === "mermaid") {
+      if (normalizedLang === "mermaid") {
+        const normalizedText = normalizeMermaidSource(text || "")
         const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
         return `
           <div class="mermaid-container">
             <div class="mermaid-diagram" id="${id}">
-              <textarea style="display:none;">${text}</textarea>
-              <div class="mermaid-loading">${t.messages.mermaidLoading}</div>
+              <textarea style="display:none;">${normalizedText}</textarea>
+              <div class="mermaid-loading">${mermaidLoadingMessage}</div>
             </div>
           </div>`;
       }
 
-      // 提取代码内容（移除 markdown 代码块标记）
-      const codeContent = (raw || '').replace(/^```[^\n]*\n?/, '').replace(/```$/, '');
+      const codeContent = text || ""
 
       // 用 highlight.js 高亮代码
-      const language = langString || "plaintext";
+      const language = normalizedLang || "plaintext";
       let highlighted;
 
       try {
@@ -298,7 +493,7 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
           highlighted = hljs.highlight(codeContent, { language: 'plaintext' }).value;
         }
       } catch (error) {
-        console.warn(t.messages.highlightJsError.replace('{lang}', language), error);
+        console.warn(highlightJsErrorMessage.replace('{lang}', language), error);
         // 降级到纯文本
         highlighted = hljs.highlight(codeContent, { language: 'plaintext' }).value;
       }
@@ -326,136 +521,42 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
       </div>`;
     };
 
-    // 获取对齐方式的 CSS 样式
-    const getAlignmentStyle = (align: string): string => {
-      switch (align) {
-        case 'left':
-          return 'text-align: left; padding: 8px 12px;';
-        case 'right':
-          return 'text-align: right; padding: 8px 12px;';
-        case 'center':
-          return 'text-align: center; padding: 8px 12px;';
-        default:
-          return 'text-align: left; padding: 8px 12px;';
+    renderer.codespan = ({ text }: { text: string }) => {
+      return `<code class="inline-code">${escapeHtml(text)}</code>`
+    }
+
+    // 添加对表格的正确渲染，支持对齐方式与单元格内的嵌套 Markdown
+    renderer.table = function (this: any, token: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
+      const header = token.header || []
+      const rows = token.rows || []
+
+      const parseInline = (cell: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
+        if (cell.tokens) {
+          return this.parser.parseInline(cell.tokens)
+        }
+        return escapeHtml(cell.text || "")
       }
-    };
 
-    // 添加对表格的正确渲染，支持对齐方式
-    renderer.table = (token: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
-      // Marked.js 将表格 token 分为 header 和 rows
-      const header = token.header;
-      const rows = token.rows;
-
-      // 渲染表头
       const headerCells = header.map((cell: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
-        const align = cell.align || 'left';
-        const cellContent = cell.text || '';
-        return `<th style="text-align: ${align}; background-color: #f6f8fa; font-weight: 600; border-bottom: 2px solid #ddd; border: 1px solid #ddd;">${cellContent}</th>`;
-      }).join('');
+        const align = cell.align || 'left'
+        const cellContent = parseInline(cell)
+        return `<th style="text-align: ${align};">${cellContent}</th>`
+      }).join('')
 
-      // 渲染表格内容
       const bodyRows = rows.map((row: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
         const cells = row.map((cell: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
-          const align = cell.align || 'left';
-          const cellContent = cell.text || '';
-          return `<td style="text-align: ${align}; border: 1px solid #ddd;">${cellContent}</td>`;
-        }).join('');
-        return `<tr>${cells}</tr>`;
-      }).join('');
+          const align = cell.align || 'left'
+          const cellContent = parseInline(cell)
+          return `<td style="text-align: ${align};">${cellContent}</td>`
+        }).join('')
+        return `<tr>${cells}</tr>`
+      }).join('')
 
-      return `<table class="table-bordered" style="margin: 1em 0; border-collapse: collapse; width: 100%; border: 1px solid #ddd;">
+      return `<table class="table-bordered">
         <thead><tr>${headerCells}</tr></thead>
         <tbody>${bodyRows}</tbody>
-      </table>`;
-    };
-
-    // 添加对表格头的正确渲染
-    renderer.tablerow = (token: { text?: string }) => {
-      return `<tr>${token.text || ''}</tr>`;
-    };
-
-    // 添加对表格单元格的正确渲染，支持对齐
-    renderer.tablecell = (token: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
-      const align = token.align || 'left';
-      const cellContent = token.text || '';
-
-      if (token.header) {
-        return `<th style="${getAlignmentStyle(align)}; background-color: #f6f8fa; font-weight: 600; border-bottom: 2px solid #ddd;">${cellContent}</th>`;
-      } else {
-        return `<td style="${getAlignmentStyle(align)}; border-bottom: 1px solid #ddd;">${cellContent}</td>`;
-      }
-    };
-
-    // 只对非代码块做格式替换
-    const splitMarkdown = (content: string) => {
-      // 按代码块分割
-      const parts = content.split(/(```[\s\S]*?```)/g);
-      return parts.map(part => {
-        if (part.startsWith("```")) {
-          // 代码块，原样返回
-          return part;
-        } else {
-          // 先处理 KaTeX 公式，彻底移除原始 $...$、$$...$$
-          // Block math: $$...$$
-          part = part.replace(/\$\$([^$]+)\$\$/g, (match, math) => {
-            try {
-              // console.log('match$$: ', match);
-              // console.log('渲染块级公式math$$:', math);
-              const katexHtml = katex.renderToString(math, {
-                displayMode: true, // 改为 true 以正确渲染块级公式
-                output: "html", // 输出HTML而不是MathML以获得更好的兼容性
-                fleqn: false,
-                leqno: false,
-                throwOnError: false,
-                strict: false // 允许unicode字符在数学模式中
-              });
-              // console.log('katexHtml: ', katexHtml);
-              // 添加特殊类名和属性以便在PDF导出时识别
-              const katexRendered =  `<div class="katex-display" data-tex="${math}">${katexHtml}</div>`;
-              // console.log('渲染结果rendered: ', rendered);
-              return katexRendered;
-            } catch {
-              console.error(t.messages.katexRenderError);
-              return match;
-            }
-          });
-          // Inline math: $...$
-          part = part.replace(/\*?\*?\$([^$\n]+)\$\*?\*?/g, (match, math) => {
-            try {
-              // console.log('replaced: ', replaced);
-              // console.log('match$: ', match);
-              // console.log('math$: ', math);
-              const katexHtml = katex.renderToString(math, {
-                displayMode: false,
-                output: "html", // 输出HTML而不是MathML以获得更好的兼容性
-                fleqn: false,
-                leqno: false,
-                throwOnError: false,
-                strict: false // 允许unicode字符在数学模式中
-              });
-              // console.log('渲染结果katexHtml: ', katexHtml);
-              // 添加特殊类名和属性以便在PDF导出时识别
-              return `<span class="katex" data-tex="${math}">${katexHtml}</span>`;
-            } catch {
-              return match
-            }
-          });
-
-          // 再做粗体/斜体/删除线等格式替换，避免包裹公式
-          const replaced = part
-            .replace(/(\*\*\*)([^*]+?)(\*\*\*)/g, '<strong><em>$2</em></strong>')
-            .replace(/(\*\*)([^*]+?)(\*\*)/g, '<strong>$2</strong>')
-            .replace(/(\`)([^`]+?)(\`)/g, '<code class="inline-code">$2</code>')
-            .replace(/(\*)([^*]+?)(\*)/g, '<em>$2</em>')
-            .replace(/(~~)([^~]+?)(~~)/g, '<del>$2</del>');
-          // console.log('replaced00: ', replaced);
-          return replaced;
-        }
-      }).join('');
-    };
-
-    content = splitMarkdown(content); // eslint-disable-line react-hooks/exhaustive-deps
-    // console.log('content: ', content);
+      </table>`
+    }
 
     // Process markdown
     const processedContent = content
@@ -495,7 +596,18 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
     if (onHeadingsChange) {
       onHeadingsChange(headings)
     }
-  }, [content, language, theme, paperSizes, fontSizes, isGeneratingPDF, onHeadingsChange, hljs, katex, mermaidModule])
+  }, [
+    content,
+    language,
+    theme,
+    paperSizes,
+    fontSizes,
+    isGeneratingPDF,
+    onHeadingsChange,
+    mermaidModule,
+    t.messages.highlightJsError,
+    t.messages.mermaidLoading,
+  ])
 
   useEffect(() => {
     if (containerRef.current && renderedHtml && mermaidModule) {
@@ -536,9 +648,11 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
         if (!textarea) return;
         
         // 保留原始mermaid代码，并确保箭头符号正确
-        const diagramDefinition = textarea.value
-          .replace(/--&gt;/g, "-->") // 确保箭头符号不被转义
-          .replace(/--&(amp;)+gt;/g, "-->");
+        const diagramDefinition = normalizeMermaidSource(
+          textarea.value
+            .replace(/--&gt;/g, "-->") // 确保箭头符号不被转义
+            .replace(/--&(amp;)+gt;/g, "-->")
+        )
         
         // console.log('diagramDefinition: ', diagramDefinition);
 
