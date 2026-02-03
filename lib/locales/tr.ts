@@ -366,5 +366,97 @@ Hala görünmüyorsa, formül sözdiziminin doğru olup olmadığını kontrol e
     title: "Markdown'dan PDF'e Dönüştürücü | Profesyonel Belge Dışa Aktarma",
     description: "Matematik, kod, diyagramlar, içindekiler, temalar ile Markdown'ı profesyonel PDF belgelerine dönüştürün. Akademik ve ticari kullanım için yayınlama kalitesi çıktı.",
     keywords: "Markdown, PDF, dönüştürücü, KaTeX, Mermaid, kod vurgulama, içindekiler, temalar, dışa aktar, akademik, profesyonel"
+  },
+
+  // SEO Content
+  seoContent: {
+    whyChooseUs: {
+      label: "Neden biz",
+      title: "Neden Markdown'tan PDF'e dönüştürümüzü kullanmalısınız?",
+      subtitle: "Yayınlama için Apple benzeri bir deneyim: taslaktan PDF'e temiz, hızlı ve güzel tutarlı.",
+      features: {
+        privacy: {
+          title: "Gizlilik odaklı",
+          description: "Verileriniz bizimle güvende. Tüm dönüşümler tarayıcınızda yerel olarak gerçekleşir. Markdown dosyalarınızı asla bir sunucuya yüklemeyiz."
+        },
+        instant: {
+          title: "Anında dönüşüm",
+          description: "Bekleme kuyruğu yok. Optimize edilmiş motorumuz belgelerinizi anında dönüştürür ve büyük dosyaları kolayca destekler."
+        },
+        richSupport: {
+          title: "Zengin destek",
+          description: "GFM (GitHub Flavored Markdown), KaTeX matematik formülleri, Mermaid diyagramları ve kod sözdizimi vurgulama için tam destek."
+        }
+      }
+    },
+    howToConvert: {
+      label: "Basit iş akışı",
+      title: "Markdown'ı PDF'e nasıl dönüştürülür",
+      subtitle: "Odaklanmış kalmanızı ve saniyeler içinde cilalı bir PDF almanızı sağlamak için tasarlanmış sakin bir üç adımlı akış.",
+      steps: {
+        step1: {
+          title: "Markdown yazın veya yapıştırın",
+          description: "Doğrudan gerçek zamanlı editörümüze yazın veya mevcut Markdown kodunuzu yapıştırın. .md dosyalarını da sürükleyip bırakabilirsiniz."
+        },
+        step2: {
+          title: "Stili özelleştirin",
+          description: "Profesyonel temalarımızdan (Akademik, Modern, vb.) seçim yapın ve yazı tipi boyutlarını, kenar boşluklarını ve kağıt boyutunu (A4, Letter) ayarlayın."
+        },
+        step3: {
+          title: "PDF'i indirin",
+          description: "Paylaşım veya baskı için hazır biçimlendirilmiş bir PDF belgesini anında almak için Dışa Aktar düğmesine tıklayın."
+        }
+      }
+    },
+    faq: {
+      label: "SSS",
+      title: "Sıkça Sorulan Sorular",
+      items: {
+        isFree: {
+          question: "Bu araç ücretsiz mi?",
+          answer: "Evet, Markdown'tan PDF'e dönüştürümüz kişisel ve ticari kullanım için %100 ücretsizdir."
+        },
+        dataStorage: {
+          question: "Verilerimi saklıyor musunuz?",
+          answer: "Hayır. Her şeyi tarayıcınızda işliyoruz. Belgeleriniz asla cihazınızdan ayrılmaz."
+        },
+        mathSupport: {
+          question: "Matematiksel denklemleri destekliyor mu?",
+          answer: "Evet! Karmaşık matematiksel formülleri ve denklemleri güzel bir şekilde oluşturmak için KaTeX kullanıyoruz."
+        },
+        diagrams: {
+          question: "Diyagram oluşturabilir miyim?",
+          answer: "Kesinlikle. Metinden akış şemaları, sıra diyagramları ve Gantt şemaları oluşturmak için Mermaid.js'i destekliyoruz."
+        }
+      }
+    },
+    comprehensive: {
+      title: "Kapsamlı Markdown çözümü",
+      description1: "İster tez yazan bir öğrenci, ister kod dokümante eden bir geliştirici veya roman yazan bir yazar olun, Markdown editörümüz ihtiyacınız olan araçları sağlar. Gerçek zamanlı önizleme, kelime sayısı takibi ve odak modu gibi özelliklerle dikkat dağınıtmadan yazabilirsiniz.",
+      description2: "Dönüştürücümüz başlıkları, listeleri, bağlantıları, resimleri ve alıntı bloklarını içeren tüm standart Markdown sözdizimini işler. Gelişmiş kullanıcılar, dile özgü sözdizimi vurgulama, dipnotlar ve görev listeleriyle kod blokları desteğini takdir edecektir."
+    }
+  },
+
+  // Footer
+  footer: {
+    tagline: "Markdown'tan PDF'e",
+    subtitle: "Her zaman zarif dönüşümler.",
+    description: "Herkes için profesyonel belge dönüştürme aracı. Ücretsiz, güvenli ve hızlı.",
+    legal: {
+      title: "Yasal",
+      privacyPolicy: "Gizlilik politikası",
+      termsOfService: "Hizmet şartları"
+    },
+    links: {
+      title: "Bağlantılar",
+      aboutUs: "Hakkımızda",
+      contact: "İletişim"
+    },
+    connect: {
+      title: "Bağlan",
+      description: "Sorularınız veya geri bildiriminiz mi var?"
+    },
+    copyright: "© {year} Markdown to PDF. Tüm hakları saklıdır.",
+    designed: "Netlik için tasarlandı"
   }
 }

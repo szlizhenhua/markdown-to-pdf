@@ -366,5 +366,97 @@ Nếu vẫn không hiển thị, hãy kiểm tra xem cú pháp công thức có 
     title: "Chuyển đổi Markdown sang PDF | Xuất Tài liệu Chuyên nghiệp",
     description: "Chuyển đổi Markdown sang tài liệu PDF chuyên nghiệp với toán học, mã, sơ đồ, mục lục, chủ đề. Đầu ra chất lượng xuất bản cho mục đích học thuật và thương mại.",
     keywords: "Markdown, PDF, chuyển đổi, KaTeX, Mermaid, làm nổi bật mã, mục lục, chủ đề, xuất, học thuật, chuyên nghiệp"
+  },
+
+  // SEO Content
+  seoContent: {
+    whyChooseUs: {
+      label: "Tại sao chọn chúng tôi",
+      title: "Tại sao nên sử dụng bộ chuyển đổi Markdown sang PDF của chúng tôi?",
+      subtitle: "Trải nghiệm giống Apple để xuất bản: sạch, nhanh và đẹp的一致 từ bản nháp đến PDF.",
+      features: {
+        privacy: {
+          title: "Tập trung vào quyền riêng tư",
+          description: "Dữ liệu của bạn an toàn với chúng tôi. Tất cả chuyển đổi diễn ra cục bộ trong trình duyệt của bạn. Chúng tôi không bao giờ tải lên các tệp Markdown của bạn lên bất kỳ máy chủ nào."
+        },
+        instant: {
+          title: "Chuyển đổi tức thì",
+          description: "Không có hàng chờ đợi. Công cụ tối ưu hóa của chúng tôi chuyển đổi tài liệu của bạn ngay lập tức, hỗ trợ các tệp lớn một cách dễ dàng."
+        },
+        richSupport: {
+          title: "Hỗ trợ phong phú",
+          description: "Hỗ trợ đầy đủ cho GFM (GitHub Flavored Markdown), công thức toán học KaTeX, sơ đồ Mermaid và làm nổi bật cú pháp mã."
+        }
+      }
+    },
+    howToConvert: {
+      label: "Quy trình làm việc đơn giản",
+      title: "Cách chuyển đổi Markdown sang PDF",
+      subtitle: "Quy trình ba bước êm dịm được thiết kế để giữ bạn tập trung và có được PDF được chỉnh chu trong vài giây.",
+      steps: {
+        step1: {
+          title: "Viết hoặc dán Markdown",
+          description: "Nhập trực tiếp vào trình chỉnh sửa thời gian thực của chúng tôi hoặc dán mã Markdown hiện có của bạn. Bạn cũng có thể kéo và thả các tệp .md."
+        },
+        step2: {
+          title: "Tùy chỉnh kiểu",
+          description: "Chọn từ các chủ đề chuyên nghiệp của chúng tôi (Học thuật, Hiện đại, v.v.) và điều chỉnh kích thước phông, lề và kích thước giấy (A4, Letter)."
+        },
+        step3: {
+          title: "Tải xuống PDF",
+          description: "Nhấp vào nút Xuất để ngay lập tức nhận được tài liệu PDF được định dạng sẵn sàng để chia sẻ hoặc in."
+        }
+      }
+    },
+    faq: {
+      label: "Câu hỏi thường gặp",
+      title: "Câu hỏi thường gặp",
+      items: {
+        isFree: {
+          question: "Công cụ này có miễn phí không?",
+          answer: "Có, bộ chuyển đổi Markdown sang PDF của chúng tôi hoàn toàn miễn phí 100% cho sử dụng cá nhân và thương mại."
+        },
+        dataStorage: {
+          question: "Bạn có lưu trữ dữ liệu của tôi không?",
+          answer: "Không. Chúng tôi xử lý mọi thứ trong trình duyệt của bạn. Tài liệu của bạn không bao giờ rời khỏi thiết bị của bạn."
+        },
+        mathSupport: {
+          question: "Có hỗ trợ phương trình toán học không?",
+          answer: "Có! Chúng tôi sử dụng KaTeX để hiển thị đẹp các công thức toán học và phương trình phức tạp."
+        },
+        diagrams: {
+          question: "Tôi có thể tạo sơ đồ không?",
+          answer: "Chắc chắn. Chúng tôi hỗ trợ Mermaid.js để tạo sơ đồ dòng chảy, sơ đồ trình tự và sơ đồ Gantt từ văn bản."
+        }
+      }
+    },
+    comprehensive: {
+      title: "Giải pháp Markdown toàn diện",
+      description1: "Dù bạn là sinh viên viết luận văn, nhà phát triển tài liệu mã hóa hay nhà văn viết tiểu thuyết, trình chỉnh sửa Markdown của chúng tôi cung cấp các công cụ bạn cần. Với các tính năng như xem trước thời gian thực, theo dõi số từ và chế độ tập trung, bạn có thể viết mà không bị phân tâm.",
+      description2: "Bộ chuyển đổi của chúng tôi xử lý tất cả cú pháp Markdown tiêu chuẩn bao gồm tiêu đề, danh sách, liên kết, hình ảnh và khối trích dẫn. Người dùng nâng cao sẽ đánh giá cao việc hỗ trợ các khối mã với làm nổi bật cú pháp cụ thể theo ngôn ngữ, chú thích chân trang và danh sách công việc."
+    }
+  },
+
+  // Footer
+  footer: {
+    tagline: "Markdown sang PDF",
+    subtitle: "Chuyển đổi sang trọng mỗi lần.",
+    description: "Công cụ chuyển đổi tài liệu chuyên nghiệp cho mọi người. Miễn phí, an toàn và nhanh chóng.",
+    legal: {
+      title: "Pháp lý",
+      privacyPolicy: "Chính sách quyền riêng tư",
+      termsOfService: "Điều khoản dịch vụ"
+    },
+    links: {
+      title: "Liên kết",
+      aboutUs: "Về chúng tôi",
+      contact: "Liên hệ"
+    },
+    connect: {
+      title: "Kết nối",
+      description: "Câu hỏi hoặc phản hồi?"
+    },
+    copyright: "© {year} Markdown to PDF. Đã đăng ký bản quyền.",
+    designed: "Được thiết kế để rõ ràng"
   }
 }

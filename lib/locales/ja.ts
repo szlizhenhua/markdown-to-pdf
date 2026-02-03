@@ -366,5 +366,97 @@ def quicksort(arr):
     title: "Markdown から PDF コンバーター | プロフェッショナルドキュメントエクスポート",
     description: "数式、コード、ダイアグラム、目次、テーマで Markdown をプロフェッショナルな PDF ドキュメントに変換。学術および商用利用の出版品質出力。",
     keywords: "Markdown, PDF, コンバーター, KaTeX, Mermaid, コードハイライト, 目次, テーマ, エクスポート, 学術, プロフェッショナル"
+  },
+
+  // SEO Content
+  seoContent: {
+    whyChooseUs: {
+      label: "私たちを選ぶ理由",
+      title: "私たちの Markdown から PDF コンバーターを選ぶ理由？",
+      subtitle: "公開のための Apple のようなエクスペリエンス：ドラフトから PDF までクリーンで高速、そして美しく一貫性があります。",
+      features: {
+        privacy: {
+          title: "プライバシー重視",
+          description: "あなたのデータは私たちと一緒に安全です。すべての変換はブラウザ内でローカルに行われます。Markdown ファイルをサーバーにアップロードすることはありません。"
+        },
+        instant: {
+          title: "即座の変換",
+          description: "待機行列はありません。最適化されたエンジンがドキュメントを瞬時に変換し、大きなファイルも簡単にサポートします。"
+        },
+        richSupport: {
+          title: "豊富なサポート",
+          description: "GFM（GitHub Flavored Markdown）、KaTeX 数式、Mermaid ダイアグラム、コードシンタックスハイライトの完全サポート。"
+        }
+      }
+    },
+    howToConvert: {
+      label: "シンプルなワークフロー",
+      title: "Markdown を PDF に変換する方法",
+      subtitle: "集中して数秒で洗練された PDF を取得するために設計された、穏やかな 3 ステップのフロー。",
+      steps: {
+        step1: {
+          title: "Markdown を書くまたは貼り付ける",
+          description: "リアルタイムエディタに直接入力するか、既存の Markdown コードを貼り付けます。.md ファイルをドラッグ＆ドロップすることもできます。"
+        },
+        step2: {
+          title: "スタイルをカスタマイズ",
+          description: "プロフェッショナルなテーマ（アカデミック、モダンなど）から選択し、フォントサイズ、余白、用紙サイズ（A4、レター）を調整します。"
+        },
+        step3: {
+          title: "PDF をダウンロード",
+          description: "エクスポートボタンをクリックして、即座にフォーマットされた PDF ドキュメントを取得し、共有または印刷の準備をします。"
+        }
+      }
+    },
+    faq: {
+      label: "よくある質問",
+      title: "よくある質問",
+      items: {
+        isFree: {
+          question: "このツールは無料ですか？",
+          answer: "はい、私たちの Markdown から PDF コンバーターは個人および商用利用で 100% 無料です。"
+        },
+        dataStorage: {
+          question: "私のデータを保存しますか？",
+          answer: "いいえ。すべてはブラウザ内で処理されます。ドキュメントはデバイスから離れることはありません。"
+        },
+        mathSupport: {
+          question: "数式はサポートされていますか？",
+          answer: "はい！KaTeX を使用して、複雑な数式や方程式を美しくレンダリングします。"
+        },
+        diagrams: {
+          question: "図を作成できますか？",
+          answer: "もちろんです。Mermaid.js をサポートしており、テキストからフローチャート、シーケンス図、ガントチャートを作成できます。"
+        }
+      }
+    },
+    comprehensive: {
+      title: "包括的な Markdown ソリューション",
+      description1: "論文を書いている学生、コードを文書化している開発者、小説を執筆している作家など、私たちの Markdown エディターは必要なツールを提供します。リアルタイムプレビュー、ワードカウント追跡、フォーカスモードなどの機能により、気を散らすことなく執筆できます。",
+      description2: "コンバーターは、見出し、リスト、リンク、画像、引用ブロックなど、すべての標準 Markdown 構文を処理します。上級ユーザーは、言語固有の構文ハイライト、脚注、タスクリストをサポートするコードブロックを高く評価するでしょう。"
+    }
+  },
+
+  // Footer
+  footer: {
+    tagline: "Markdown から PDF",
+    subtitle: "毎回エレガントな変換。",
+    description: "すべての人のためのプロフェッショナルなドキュメント変換ツール。無料、安全、高速。",
+    legal: {
+      title: "法的情報",
+      privacyPolicy: "プライバシーポリシー",
+      termsOfService: "利用規約"
+    },
+    links: {
+      title: "リンク",
+      aboutUs: "私たちについて",
+      contact: "お問い合わせ"
+    },
+    connect: {
+      title: "接続",
+      description: "ご質問やフィードバックはありますか？"
+    },
+    copyright: "© {year} Markdown to PDF. All rights reserved.",
+    designed: "明確さのために設計"
   }
 }

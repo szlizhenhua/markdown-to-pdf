@@ -366,5 +366,97 @@ Se ainda não forem exibidas, verifique se a sintaxe da fórmula está correta.
     title: "Conversor de Markdown para PDF | Exportação de Documentos Profissional",
     description: "Converta Markdown em documentos PDF profissionais com matemática, código, diagramas, índice, temas. Saída de qualidade de publicação para uso acadêmico e comercial.",
     keywords: "Markdown, PDF, conversor, KaTeX, Mermaid, destacamento de código, índice, temas, exportar, acadêmico, profissional"
+  },
+
+  // SEO Content
+  seoContent: {
+    whyChooseUs: {
+      label: "Por que nos escolher",
+      title: "Por que usar nosso conversor de Markdown para PDF?",
+      subtitle: "Uma experiência semelhante à Apple para publicar: limpa, rápida e lindamente consistente do rascunho ao PDF.",
+      features: {
+        privacy: {
+          title: "Foco na privacidade",
+          description: "Seus dados estão seguros conosco. Todas as conversões acontecem localmente no seu navegador. Nunca fazemos upload dos seus arquivos Markdown para qualquer servidor."
+        },
+        instant: {
+          title: "Conversão instantânea",
+          description: "Sem filas de espera. Nosso mecanismo otimizado converte seus documentos instantaneamente, suportando arquivos grandes com facilidade."
+        },
+        richSupport: {
+          title: "Suporte rico",
+          description: "Suporte completo para GFM (GitHub Flavored Markdown), fórmulas matemáticas KaTeX, diagramas Mermaid e destaque de sintaxe de código."
+        }
+      }
+    },
+    howToConvert: {
+      label: "Fluxo de trabalho simples",
+      title: "Como converter Markdown para PDF",
+      subtitle: "Um fluxo tranquilo de três passos projetado para mantê-lo focado e obter um PDF polido em segundos.",
+      steps: {
+        step1: {
+          title: "Escreva ou cole Markdown",
+          description: "Digite diretamente em nosso editor em tempo real ou cole seu código Markdown existente. Você também pode arrastar e soltar arquivos .md."
+        },
+        step2: {
+          title: "Personalize o estilo",
+          description: "Escolha entre nossos temas profissionais (Acadêmico, Moderno, etc.) e ajuste tamanhos de fonte, margens e tamanho de papel (A4, Carta)."
+        },
+        step3: {
+          title: "Baixar PDF",
+          description: "Clique no botão Exportar para obter instantaneamente seu documento PDF formatado, pronto para compartilhar ou imprimir."
+        }
+      }
+    },
+    faq: {
+      label: "Perguntas frequentes",
+      title: "Perguntas frequentes",
+      items: {
+        isFree: {
+          question: "Esta ferramenta é gratuita?",
+          answer: "Sim, nosso conversor de Markdown para PDF é 100% gratuito para uso pessoal e comercial."
+        },
+        dataStorage: {
+          question: "Vocês armazenam meus dados?",
+          answer: "Não. Processamos tudo no seu navegador. Seus documentos nunca saem do seu dispositivo."
+        },
+        mathSupport: {
+          question: "Suporta equações matemáticas?",
+          answer: "Sim! Usamos KaTeX para renderizar lindamente fórmulas e equações matemáticas complexas."
+        },
+        diagrams: {
+          question: "Posso criar diagramas?",
+          answer: "Absolutamente. Suportamos Mermaid.js para criar fluxogramas, diagramas de sequência e gráficos de Gantt a partir do texto."
+        }
+      }
+    },
+    comprehensive: {
+      title: "Solução abrangente de Markdown",
+      description1: "Seja você um estudante escrevendo uma tese, um desenvolvedor documentando código ou um escritor redigindo um romance, nosso editor Markdown fornece as ferramentas de que você precisa. Com recursos como visualização em tempo real, rastreamento de contagem de palavras e modo de foco, você pode escrever sem distrações.",
+      description2: "Nosso conversor lida com toda a sintaxe Markdown padrão, incluindo cabeçalhos, listas, links, imagens e blocos de citação. Usuários avançados apreciarão o suporte para blocos de código com destaque de sintaxe específico da linguagem, notas de rodapé e listas de tarefas."
+    }
+  },
+
+  // Footer
+  footer: {
+    tagline: "Markdown para PDF",
+    subtitle: "Conversões elegantes, sempre.",
+    description: "Ferramenta de conversão de documentos profissional para todos. Gratuito, seguro e rápido.",
+    legal: {
+      title: "Legal",
+      privacyPolicy: "Política de privacidade",
+      termsOfService: "Termos de serviço"
+    },
+    links: {
+      title: "Links",
+      aboutUs: "Sobre nós",
+      contact: "Contato"
+    },
+    connect: {
+      title: "Conectar",
+      description: "Perguntas ou feedback?"
+    },
+    copyright: "© {year} Markdown to PDF. Todos os direitos reservados.",
+    designed: "Projetado para clareza"
   }
 }

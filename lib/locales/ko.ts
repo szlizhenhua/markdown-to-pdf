@@ -366,5 +366,97 @@ def quicksort(arr):
     title: "Markdown에서 PDF로 변환기 | 전문 문서 내보내기",
     description: "수학, 코드, 다이어그램, 목차, 테마가 있는 Markdown을 전문 PDF 문서로 변환. 학술 및 상업용 출판 품질 출력.",
     keywords: "Markdown, PDF, 변환기, KaTeX, Mermaid, 코드 강조 표시, 목차, 테마, 내보내기, 학술, 전문"
+  },
+
+  // SEO Content
+  seoContent: {
+    whyChooseUs: {
+      label: "우리를 선택하는 이유",
+      title: "우리의 Markdown에서 PDF 변환기를 사용하는 이유는?",
+      subtitle: "출판을 위한 Apple 같은 경험: 깔끔하고 빠르며 초안에서 PDF까지 아름답게 일관성이 있습니다.",
+      features: {
+        privacy: {
+          title: "프라이버시 중심",
+          description: "데이터는 우리와 함께 안전합니다. 모든 변환은 브라우저에서 로컬로 수행됩니다. Markdown 파일을 서버에 업로드하지 않습니다."
+        },
+        instant: {
+          title: "즉시 변환",
+          description: "대기열이 없습니다. 최적화된 엔진이 문서를 즉시 변환하며 큰 파일도 쉽게 지원합니다."
+        },
+        richSupport: {
+          title: "풍부한 지원",
+          description: "GFM(GitHub Flavored Markdown), KaTeX 수학 공식, Mermaid 다이어그램 및 코드 구문 강조 표시에 대한 완전한 지원."
+        }
+      }
+    },
+    howToConvert: {
+      label: "간단한 워크플로우",
+      title: "Markdown을 PDF로 변환하는 방법",
+      subtitle: "집중하고 몇 초 만에 세련된 PDF를 얻도록 설계된 차분한 3단계 프로세스.",
+      steps: {
+        step1: {
+          title: "Markdown 작성 또는 붙여넣기",
+          description: "실시간 편집기에 직접 입력하거나 기존 Markdown 코드를 붙여넣습니다. .md 파일을 끌어다 놓을 수도 있습니다."
+        },
+        step2: {
+          title: "스타일 사용자 정의",
+          description: "전문 테마(학술, 현대 등) 중에서 선택하고 글꼴 크기, 여백 및 용지 크기(A4, Letter)를 조정합니다."
+        },
+        step3: {
+          title: "PDF 다운로드",
+          description: "내보내기 버튼을 클릭하여 즉시 형식이 지정된 PDF 문서를 가져와 공유 또는 인쇄할 준비를 합니다."
+        }
+      }
+    },
+    faq: {
+      label: "자주 묻는 질문",
+      title: "자주 묻는 질문",
+      items: {
+        isFree: {
+          question: "이 도구는 무료인가요?",
+          answer: "네, 우리의 Markdown에서 PDF 변환기는 개인 및 상업용으로 100% 무료입니다."
+        },
+        dataStorage: {
+          question: "내 데이터를 저장하나요?",
+          answer: "아니요. 모든 것은 브라우저에서 처리됩니다. 문서는 장치를 떠나지 않습니다."
+        },
+        mathSupport: {
+          question: "수학 방정식을 지원하나요?",
+          answer: "네! KaTeX를 사용하여 복잡한 수학 공식과 방정식을 아름답게 렌더링합니다."
+        },
+        diagrams: {
+          question: "다이어그램을 만들 수 있나요?",
+          answer: "물론입니다. Mermaid.js를 지원하여 텍스트에서 플로우차트, 시퀀스 다이어그램 및 간트 차트를 만들 수 있습니다."
+        }
+      }
+    },
+    comprehensive: {
+      title: "포괄적인 Markdown 솔루션",
+      description1: "논문을 쓰는 학생, 코드를 문서화하는 개발자, 소설을 쓰는 작가 등 우리의 Markdown 편집기는 필요한 도구를 제공합니다. 실시간 미리보기, 단어 수 추적 및 집중 모드와 같은 기능을 통해 방해 없이 작성할 수 있습니다.",
+      description2: "변환기는 제목, 목록, 링크, 이미지 및 인용 블록을 포함하여 모든 표준 Markdown 구문을 처리합니다. 고급 사용자는 언어별 구문 강조, 각주 및 작업 목록을 지원하는 코드 블록을 높이 평가할 것입니다."
+    }
+  },
+
+  // Footer
+  footer: {
+    tagline: "Markdown에서 PDF로",
+    subtitle: "매번 우아한 변환.",
+    description: "모든 사람을 위한 전문 문서 변환 도구. 무료, 안전, 빠름.",
+    legal: {
+      title: "법적",
+      privacyPolicy: "개인정보 보호정책",
+      termsOfService: "서비스 약관"
+    },
+    links: {
+      title: "링크",
+      aboutUs: "회사 소개",
+      contact: "연락처"
+    },
+    connect: {
+      title: "연결",
+      description: "질문이나 피드백이 있으신가요?"
+    },
+    copyright: "© {year} Markdown to PDF. All rights reserved.",
+    designed: "명확성을 위해 설계됨"
   }
 }

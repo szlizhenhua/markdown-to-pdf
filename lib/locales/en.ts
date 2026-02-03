@@ -366,5 +366,97 @@ If still not displaying, please check if the formula syntax is correct.
     title: "Markdown to PDF Converter | Professional Document Export",
     description: "Convert Markdown to professional PDF documents with math, code, diagrams, TOC, themes. Publication-quality output for academic and business use.",
     keywords: "Markdown, PDF, converter, KaTeX, Mermaid, code highlighting, table of contents, themes, export, academic, professional"
+  },
+
+  // SEO Content
+  seoContent: {
+    whyChooseUs: {
+      label: "Why choose us",
+      title: "Why Use Our Markdown to PDF Converter?",
+      subtitle: "An Apple-like experience for publishing: clean, fast, and beautifully consistent from draft to PDF.",
+      features: {
+        privacy: {
+          title: "Privacy Focused",
+          description: "Your data is safe with us. All conversions happen locally in your browser. We never upload your Markdown files to any server."
+        },
+        instant: {
+          title: "Instant Conversion",
+          description: "No waiting queues. Our optimized engine converts your documents instantly, supporting large files with ease."
+        },
+        richSupport: {
+          title: "Rich Support",
+          description: "Full support for GFM (GitHub Flavored Markdown), KaTeX math formulas, Mermaid diagrams, and code syntax highlighting."
+        }
+      }
+    },
+    howToConvert: {
+      label: "Simple workflow",
+      title: "How to Convert Markdown to PDF",
+      subtitle: "A calm, three-step flow designed to keep you focused and get a polished PDF in seconds.",
+      steps: {
+        step1: {
+          title: "Write or Paste Markdown",
+          description: "Type directly into our real-time editor or paste your existing Markdown code. You can also drag and drop .md files."
+        },
+        step2: {
+          title: "Customize Styling",
+          description: "Choose from our professional themes (Academic, Modern, etc.) and adjust font sizes, margins, and paper size (A4, Letter)."
+        },
+        step3: {
+          title: "Download PDF",
+          description: "Click the Export button to instantly get your formatted PDF document, ready for sharing or printing."
+        }
+      }
+    },
+    faq: {
+      label: "FAQ",
+      title: "Frequently Asked Questions",
+      items: {
+        isFree: {
+          question: "Is this tool free?",
+          answer: "Yes, our Markdown to PDF converter is 100% free for both personal and commercial use."
+        },
+        dataStorage: {
+          question: "Do you store my data?",
+          answer: "No. We process everything in your browser. Your documents never leave your device."
+        },
+        mathSupport: {
+          question: "Does it support mathematical equations?",
+          answer: "Yes! We use KaTeX to render complex mathematical formulas and equations beautifully."
+        },
+        diagrams: {
+          question: "Can I create diagrams?",
+          answer: "Absolutely. We support Mermaid.js for creating flowcharts, sequence diagrams, and gantt charts from text."
+        }
+      }
+    },
+    comprehensive: {
+      title: "Comprehensive Markdown Solution",
+      description1: "Whether you are a student writing a thesis, a developer documenting code, or a writer drafting a novel, our Markdown editor provides the tools you need. With features like real-time preview, word count tracking, and focus mode, you can write without distractions.",
+      description2: "Our converter handles all standard Markdown syntax including headers, lists, links, images, and blockquotes. Advanced users will appreciate the support for code blocks with language-specific syntax highlighting, footnotes, and task lists."
+    }
+  },
+
+  // Footer
+  footer: {
+    tagline: "Markdown to PDF",
+    subtitle: "Elegant conversions, every time.",
+    description: "Professional document conversion tool for everyone. Free, secure, and fast.",
+    legal: {
+      title: "Legal",
+      privacyPolicy: "Privacy Policy",
+      termsOfService: "Terms of Service"
+    },
+    links: {
+      title: "Links",
+      aboutUs: "About Us",
+      contact: "Contact"
+    },
+    connect: {
+      title: "Connect",
+      description: "Questions or feedback?"
+    },
+    copyright: "© {year} Markdown to PDF. All rights reserved.",
+    designed: "Designed for clarity"
   }
 }

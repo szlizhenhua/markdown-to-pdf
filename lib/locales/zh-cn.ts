@@ -366,5 +366,97 @@ def quicksort(arr):
     title: "Markdown 转 PDF 转换器 | 专业文档导出",
     description: "将 Markdown 转换为专业 PDF 文档，支持数学公式、代码、图表、目录、主题。适合学术和商业用途的出版级输出。",
     keywords: "Markdown, PDF, 转换器, KaTeX, Mermaid, 代码高亮, 目录, 主题, 导出, 学术, 专业"
+  },
+
+  // SEO Content
+  seoContent: {
+    whyChooseUs: {
+      label: "为什么选择我们",
+      title: "为什么选择我们的 Markdown 转 PDF 转换器？",
+      subtitle: "苹果般的发布体验：简洁、快速，从草稿到 PDF 始终如一的美观。",
+      features: {
+        privacy: {
+          title: "隐私优先",
+          description: "您的数据与我们在一起是安全的。所有转换都在您的浏览器本地进行。我们永远不会将您的 Markdown 文件上传到任何服务器。"
+        },
+        instant: {
+          title: "即时转换",
+          description: "无需等待队列。我们的优化引擎可即时转换您的文档，轻松支持大文件。"
+        },
+        richSupport: {
+          title: "丰富支持",
+          description: "完全支持 GFM（GitHub 风格 Markdown）、KaTeX 数学公式、Mermaid 图表和代码语法高亮。"
+        }
+      }
+    },
+    howToConvert: {
+      label: "简单工作流程",
+      title: "如何将 Markdown 转换为 PDF",
+      subtitle: "一个平静的三步流程，旨在让您保持专注并在几秒钟内获得精美的 PDF。",
+      steps: {
+        step1: {
+          title: "编写或粘贴 Markdown",
+          description: "直接在我们的实时编辑器中输入或粘贴您现有的 Markdown 代码。您也可以拖放 .md 文件。"
+        },
+        step2: {
+          title: "自定义样式",
+          description: "从我们的专业主题（学术、现代等）中选择，并调整字体大小、边距和纸张尺寸（A4、Letter）。"
+        },
+        step3: {
+          title: "下载 PDF",
+          description: "单击导出按钮即可立即获得格式化的 PDF 文档，随时可以共享或打印。"
+        }
+      }
+    },
+    faq: {
+      label: "常见问题",
+      title: "常见问题解答",
+      items: {
+        isFree: {
+          question: "这个工具是免费的吗？",
+          answer: "是的，我们的 Markdown 转 PDF 转换器对个人和商业使用 100% 免费。"
+        },
+        dataStorage: {
+          question: "你们存储我的数据吗？",
+          answer: "不。我们在您的浏览器中处理所有内容。您的文档永远不会离开您的设备。"
+        },
+        mathSupport: {
+          question: "它支持数学方程吗？",
+          answer: "是的！我们使用 KaTeX 美观地渲染复杂的数学公式和方程。"
+        },
+        diagrams: {
+          question: "我可以创建图表吗？",
+          answer: "当然可以。我们支持 Mermaid.js 用于从文本创建流程图、序列图和甘特图。"
+        }
+      }
+    },
+    comprehensive: {
+      title: "全面的 Markdown 解决方案",
+      description1: "无论您是撰写论文的学生、记录代码的开发人员，还是起草小说的作家，我们的 Markdown 编辑器都能提供您所需的工具。凭借实时预览、字数统计和专注模式等功能，您可以无干扰地写作。",
+      description2: "我们的转换器处理所有标准 Markdown 语法，包括标题、列表、链接、图像和引用块。高级用户将会欣赏对具有特定语言语法高亮的代码块、脚注和任务列表的支持。"
+    }
+  },
+
+  // Footer
+  footer: {
+    tagline: "Markdown 转 PDF",
+    subtitle: "每次转换都是优雅的。",
+    description: "适合所有人的专业文档转换工具。免费、安全、快速。",
+    legal: {
+      title: "法律",
+      privacyPolicy: "隐私政策",
+      termsOfService: "服务条款"
+    },
+    links: {
+      title: "链接",
+      aboutUs: "关于我们",
+      contact: "联系我们"
+    },
+    connect: {
+      title: "联系我们",
+      description: "有问题或反馈？"
+    },
+    copyright: "© {year} Markdown to PDF. 保留所有权利。",
+    designed: "为清晰而设计"
   }
 }

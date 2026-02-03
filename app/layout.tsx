@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import type React from 'react'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
@@ -13,6 +13,7 @@ import './globals.css'
 import Script from "next/script";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://markdown-to-pdf.org'),
   title: 'Markdown to PDF Converter | Professional Document Export',
   description: 'Convert Markdown to publication-quality PDF documents with math formulas (KaTeX), code highlighting, diagrams (Mermaid), table of contents, and custom themes. Free online tool for academic and business use.',
   keywords: ['markdown', 'pdf', 'converter', 'katex', 'mermaid', 'code highlighting', 'table of contents', 'themes', 'export', 'academic', 'professional', 'free', 'online'],
@@ -57,7 +58,12 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/manifest.json',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
   themeColor: '#54c18a',
 }
 

@@ -366,5 +366,97 @@ Om de fortfarande inte visas, kontrollera om formelsyntaxen är korrekt.
     title: "Markdown till PDF Converter | Professionell Dokumentexport",
     description: "Konvertera Markdown till professionella PDF-dokument med matematik, kod, diagram, innehållsförteckning, teman. Publiceringskvalitetsutdata för akademisk och kommersiell användning.",
     keywords: "Markdown, PDF, converter, KaTeX, Mermaid, kodmarkering, innehållsförteckning, teman, export, akademisk, professionell"
+  },
+
+  // SEO Content
+  seoContent: {
+    whyChooseUs: {
+      label: "Varför välja oss",
+      title: "Varför använda vår Markdown till PDF-konverterare?",
+      subtitle: "En Apple-liknande upplevelse för publicering: ren, snabb och vackert konsekvent från utkast till PDF.",
+      features: {
+        privacy: {
+          title: "Fokus på integritet",
+          description: "Dina data är säkra hos oss. Alla konverteringar sker lokalt i din webbläsare. Vi laddar aldrig upp dina Markdown-filer till någon server."
+        },
+        instant: {
+          title: "Omedelbar konvertering",
+          description: "Inga köer. Vår optimerade motor konverterar dina dokument omedelbart och stöder stora filer med lätthet."
+        },
+        richSupport: {
+          title: "Riktigt stöd",
+          description: "Fullt stöd för GFM (GitHub Flavored Markdown), KaTeX matematiska formler, Mermaid-diagram och kod-syntaxmarkering."
+        }
+      }
+    },
+    howToConvert: {
+      label: "Enkelt arbetsflöde",
+      title: "Hur man konverterar Markdown till PDF",
+      subtitle: "Ett lugnt trestegsprocess designat för att hålla dig fokuserad och få en polerad PDF på sekunder.",
+      steps: {
+        step1: {
+          title: "Skriv eller klistra in Markdown",
+          description: "Skriv direkt i vår realtidsredigerare eller klistra in din befintliga Markdown-kod. Du kan också dra och släppa .md-filer."
+        },
+        step2: {
+          title: "Anpassa stilen",
+          description: "Välj från våra professionella teman (Akademisk, Modern, etc.) och justera teckenstorlekar, marginaler och pappersstorlek (A4, Letter)."
+        },
+        step3: {
+          title: "Ladda ner PDF",
+          description: "Klicka på knappen Exportera för att omedelbart få ett formaterat PDF-dokument redo att delas eller skrivas ut."
+        }
+      }
+    },
+    faq: {
+      label: "Vanliga frågor",
+      title: "Vanliga frågor",
+      items: {
+        isFree: {
+          question: "Är detta verktyg gratis?",
+          answer: "Ja, vår Markdown till PDF-konverterare är 100% gratis för personligt och kommersiellt bruk."
+        },
+        dataStorage: {
+          question: "Lagrar ni mina data?",
+          answer: "Nej. Vi bearbetar allt i din webbläsare. Dina dokument lämnar aldrig din enhet."
+        },
+        mathSupport: {
+          question: "Stöder den matematiska ekvationer?",
+          answer: "Ja! Vi använder KaTeX för att vackert återge komplexa matematiska formler och ekvationer."
+        },
+        diagrams: {
+          question: "Kan jag skapa diagram?",
+          answer: "Absolut. Vi stöder Mermaid.js för att skapa flödesdiagram, sekvensdiagram och Gantt-diagram från text."
+        }
+      }
+    },
+    comprehensive: {
+      title: "Omfattande Markdown-lösning",
+      description1: "Oavsett om du är en student som skriver en avhandling, en utvecklare som dokumenterar kod eller en författare som skriver en roman, ger vår Markdown-redigerare de verktyg du behöver. Med funktioner som realtidsförhandsgranskning, ordräknings-spårning och fokusläge kan du skriva utan distraktioner.",
+      description2: "Vår konverterare hanterar all standard Markdown-syntax inklusive rubriker, listor, länkar, bilder och citatblock. Avancerade användare kommer att uppskatta stödet för kodblock med språkspecifik syntaxmarkering, fotnoter och uppgiftslistor."
+    }
+  },
+
+  // Footer
+  footer: {
+    tagline: "Markdown till PDF",
+    subtitle: "Eleganta konverteringar varje gång.",
+    description: "Professionellt dokumentkonverteringsverktyg för alla. Gratis, säkert och snabbt.",
+    legal: {
+      title: "Juridisk",
+      privacyPolicy: "Integritetspolicy",
+      termsOfService: "Användarvillkor"
+    },
+    links: {
+      title: "Länkar",
+      aboutUs: "Om oss",
+      contact: "Kontakt"
+    },
+    connect: {
+      title: "Anslut",
+      description: "Frågor eller feedback?"
+    },
+    copyright: "© {year} Markdown to PDF. Alla rättigheter förbehållna.",
+    designed: "Designad för tydlighet"
   }
 }

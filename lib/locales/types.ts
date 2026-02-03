@@ -103,4 +103,92 @@ export interface LocaleTranslations {
     description: string
     keywords: string
   }
+  seoContent: {
+    whyChooseUs: {
+      label: string
+      title: string
+      subtitle: string
+      features: {
+        privacy: {
+          title: string
+          description: string
+        }
+        instant: {
+          title: string
+          description: string
+        }
+        richSupport: {
+          title: string
+          description: string
+        }
+      }
+    }
+    howToConvert: {
+      label: string
+      title: string
+      subtitle: string
+      steps: {
+        step1: {
+          title: string
+          description: string
+        }
+        step2: {
+          title: string
+          description: string
+        }
+        step3: {
+          title: string
+          description: string
+        }
+      }
+    }
+    faq: {
+      label: string
+      title: string
+      items: {
+        isFree: {
+          question: string
+          answer: string
+        }
+        dataStorage: {
+          question: string
+          answer: string
+        }
+        mathSupport: {
+          question: string
+          answer: string
+        }
+        diagrams: {
+          question: string
+          answer: string
+        }
+      }
+    }
+    comprehensive: {
+      title: string
+      description1: string
+      description2: string
+    }
+  }
+  footer: {
+    tagline: string
+    subtitle: string
+    description: string
+    legal: {
+      title: string
+      privacyPolicy: string
+      termsOfService: string
+    }
+    links: {
+      title: string
+      aboutUs: string
+      contact: string
+    }
+    connect: {
+      title: string
+      description: string
+    }
+    copyright: string
+    designed: string
+  }
 }

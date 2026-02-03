@@ -366,5 +366,97 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
     title: "Markdown naar PDF Converter | Professionele Document Export",
     description: "Converteer Markdown naar professionele PDF-documenten met wiskunde, code, diagrammen, inhoudsopgave, thema's. Publicatiekwaliteit output voor academisch en commercieel gebruik.",
     keywords: "Markdown, PDF, converter, KaTeX, Mermaid, code highlighting, inhoudsopgave, thema's, export, academisch, professioneel"
+  },
+
+  // SEO Content
+  seoContent: {
+    whyChooseUs: {
+      label: "Waarom ons",
+      title: "Waarom onze Markdown naar PDF converter gebruiken?",
+      subtitle: "Een Apple-achtige ervaring voor publiceren: schoon, snel en mooi consistent van concept tot PDF.",
+      features: {
+        privacy: {
+          title: "Privacy-gericht",
+          description: "Uw gegevens zijn veilig bij ons. Alle conversies vinden lokaal in uw browser plaats. We uploaden nooit uw Markdown-bestanden naar een server."
+        },
+        instant: {
+          title: "Directe conversie",
+          description: "Geen wachtrijen. Onze geoptimaliseerde engine converteert uw documenten direct en ondersteunt grote bestanden met gemak."
+        },
+        richSupport: {
+          title: "Rijke ondersteuning",
+          description: "Volledige ondersteuning voor GFM (GitHub Flavored Markdown), KaTeX wiskundige formules, Mermaid diagrammen en code syntax highlighting."
+        }
+      }
+    },
+    howToConvert: {
+      label: "Eenvoudige workflow",
+      title: "Markdown naar PDF converteren",
+      subtitle: "Een rustig driestappenproces ontworpen om u gefocust te houden en binnen enkele seconden een gepolijste PDF te krijgen.",
+      steps: {
+        step1: {
+          title: "Markdown schrijven of plakken",
+          description: "Typ direct in onze real-time editor of plak uw bestaande Markdown-code. U kunt ook .md-bestanden slepen en neerzetten."
+        },
+        step2: {
+          title: "Stijl aanpassen",
+          description: "Kies uit onze professionele thema's (Academisch, Modern, enz.) en pas lettergroottes, marges en papierformaat (A4, Letter) aan."
+        },
+        step3: {
+          title: "PDF downloaden",
+          description: "Klik op de knop Exporteren om direct een opgemaakt PDF-document te krijgen dat klaar is om te delen of af te drukken."
+        }
+      }
+    },
+    faq: {
+      label: "FAQ",
+      title: "Veelgestelde vragen",
+      items: {
+        isFree: {
+          question: "Is deze tool gratis?",
+          answer: "Ja, onze Markdown naar PDF converter is 100% gratis voor persoonlijk en commercieel gebruik."
+        },
+        dataStorage: {
+          question: "Slaan jullie mijn gegevens op?",
+          answer: "Nee. We verwerken alles in uw browser. Uw documenten verlaten nooit uw apparaat."
+        },
+        mathSupport: {
+          question: "Ondersteunt het wiskundige vergelijkingen?",
+          answer: "Ja! We gebruiken KaTeX om complexe wiskundige formules en vergelijkingen mooi weer te geven."
+        },
+        diagrams: {
+          question: "Kan ik diagrammen maken?",
+          answer: "Absoluut. We ondersteunen Mermaid.js om stroomdiagrammen, sequentiediagrammen en Gantt-diagrammen van tekst te maken."
+        }
+      }
+    },
+    comprehensive: {
+      title: "Compleet Markdown-oplossing",
+      description1: "Of u nu een student bent die een scriptie schrijft, een ontwikkelaar die code documenteert of een schrijver die aan een roman werkt, onze Markdown-editor biedt de tools die u nodig heeft. Met functies zoals real-time voorbeeld, woordentaltracking en focusmodus kunt u zonder afleiding schrijven.",
+      description2: "Onze converter verwerkt alle standaard Markdown-syntaxis inclusief koppen, lijsten, links, afbeeldingen en citaatblokken. Geavanceerde gebruikers zullen de ondersteuning voor codeblokken met taalspecifieke syntax-highlighting, voetnoten en takenlijsten op prijs stellen."
+    }
+  },
+
+  // Footer
+  footer: {
+    tagline: "Markdown naar PDF",
+    subtitle: "Elke keer elegante conversies.",
+    description: "Professionele documentconversietool voor iedereen. Gratis, veilig en snel.",
+    legal: {
+      title: "Juridisch",
+      privacyPolicy: "Privacybeleid",
+      termsOfService: "Servicevoorwaarden"
+    },
+    links: {
+      title: "Links",
+      aboutUs: "Over ons",
+      contact: "Contact"
+    },
+    connect: {
+      title: "Verbinden",
+      description: "Vragen of feedback?"
+    },
+    copyright: "© {year} Markdown to PDF. Alle rechten voorbehouden.",
+    designed: "Ontworpen voor helderheid"
   }
 }
