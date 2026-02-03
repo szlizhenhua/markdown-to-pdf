@@ -991,46 +991,336 @@
   }
 }
 
+/* Utility classes for accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus:not(.sr-only) {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Touch optimization */
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* Smooth scroll for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better focus visible styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
 /* 打印样式 */
 @page {
   margin: 0.5in;
 }
 
+/* Toast animations */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out-right {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out forwards;
+}
+
+.animate-slide-out-right {
+  animation: slide-out-right 0.3s ease-in forwards;
+}
+
 @media print {
+  /* Hide non-printable elements */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Reset body for print */
   body {
     font-size: 12pt;
     line-height: 1.4;
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
-  
+
+  /* Preview container - the main content area */
   .markdown-preview-pdf {
-    padding: 0;
-    margin: 0;
-    background: white;
-    color: black;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
   }
-  
-  /* 避免在元素内部断页 */
+
+  /* Cards should be invisible containers */
+  .card-editor {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Dark mode overrides for print */
+  .dark * {
+    color: black !important;
+    background: white !important;
+    border-color: #000 !important;
+  }
+
+  /* Headings - avoid orphan headings */
   h1, h2, h3, h4, h5, h6 {
     page-break-after: avoid;
     page-break-inside: avoid;
+    color: black !important;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
   }
-  
-  pre, code {
+
+  h1 {
+    font-size: 18pt;
+    border-bottom: 1px solid #000 !important;
+  }
+
+  h2 {
+    font-size: 16pt;
+    border-bottom: 1px solid #ccc !important;
+  }
+
+  h3 {
+    font-size: 14pt;
+  }
+
+  /* Code blocks with syntax highlighting */
+  pre {
     page-break-inside: avoid;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: #f5f5f5 !important;
+    border: 1px solid #ddd !important;
+    padding: 0.5em !important;
+    border-radius: 4px;
   }
-  
-  /* 表格相关 */
+
+  code {
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 0.9em;
+  }
+
+  /* Inline code */
+  :not(pre) > code {
+    background: #f0f0f0 !important;
+    padding: 0.2em 0.4em !important;
+    border-radius: 3px;
+  }
+
+  /* Syntax highlighting colors for print */
+  .hljs {
+    color: #333 !important;
+  }
+
+  .hljs-comment,
+  .hljs-quote {
+    color: #666 !important;
+    font-style: italic;
+  }
+
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-type {
+    color: #000080 !important;
+    font-weight: bold;
+  }
+
+  .hljs-string,
+  .hljs-title {
+    color: #008000 !important;
+  }
+
+  .hljs-number,
+  .hljs-literal {
+    color: #099 !important;
+  }
+
+  .hljs-built_in,
+  .hljs-class {
+    color: #0066cc !important;
+  }
+
+  /* Tables */
   table, tr, td, th {
     page-break-inside: avoid;
   }
-  
-  /* 图表相关 */
-  .mermaid-diagram {
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+  }
+
+  th, td {
+    border: 1px solid #000 !important;
+    padding: 4px 8px;
+  }
+
+  th {
+    background: #f0f0f0 !important;
+  }
+
+  /* Lists */
+  ul, ol {
     page-break-inside: avoid;
   }
-  
-  /* 公式相关 */
-  .katex, .katex-display {
+
+  li {
     page-break-inside: avoid;
   }
+
+  /* Images and diagrams */
+  img, .mermaid-diagram, .katex, .katex-display {
+    page-break-inside: avoid;
+    max-width: 100%;
+  }
+
+  /* Links - show URLs in print */
+  a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+
+  /* Paragraphs - avoid orphans and widows */
+  p {
+    orphans: 3;
+    widows: 3;
+    page-break-inside: avoid;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    page-break-inside: avoid;
+    border-left: 3px solid #000 !important;
+    padding-left: 1em;
+    margin-left: 0;
+  }
+
+  /* HR */
+  hr {
+    page-break-after: avoid;
+    border-color: #000 !important;
+  }
+
+  /* Hide any popovers or overlays */
+  [role="dialog"], [role="menu"], [role="listbox"] {
+    display: none !important;
+  }
+}
+
+/* Keyboard shortcut styling */
+kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.75em;
+  font-weight: 500;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  border: 1px solid currentColor;
+  opacity: 0.8;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Print preview mode */
+body.print-preview-mode {
+  background: white !important;
+}
+
+body.print-preview-mode .no-print {
+  display: none !important;
+}
+
+body.print-preview-mode .markdown-preview-pdf {
+  background: white !important;
+  box-shadow: none !important;
+  padding: 2rem !important;
+}
+
+body.print-preview-mode .card-editor {
+  background: white !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body.print-preview-mode .container {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+/* Focus mode styles */
+body.focus-mode header {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+body.focus-mode .no-print {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+body.focus-mode .editor-footer,
+body.focus-mode .toolbar-extras {
+  opacity: 0.3 !important;
+  transition: opacity 0.3s;
+}
+
+body.focus-mode .editor-footer:hover,
+body.focus-mode .toolbar-extras:hover {
+  opacity: 1 !important;
+}
+
+body.focus-mode .container {
+  max-width: 900px !important;
+  margin: 0 auto !important;
+}
+
+body.focus-mode .card-editor {
+  box-shadow: none !important;
+  border: 1px solid var(--border) !important;
 }

@@ -11,17 +11,25 @@ export const zh = {
     getPDF: "获取 PDF",
     generatingPDF: "生成 PDF 中...",
     settings: "设置",
-    tableOfContents: "目录"
+    tableOfContents: "目录",
+    exportHTML: "HTML",
+    exportMarkdown: "MD"
   },
 
   // Editor
   editor: {
     title: "Markdown 编辑器",
-    placeholder: "在此输入您的 Markdown 内容...",
+    placeholder: "在此输入您的 Markdown 内容...\n\n# 一级标题\n## 二级标题\n\n**粗体** 和 *斜体* 文本\n\n- 列表项 1\n- 列表项 2\n\n```javascript\nconsole.log('你好，世界！');\n```\n\n| 列 1 | 列 2 |\n|---------|----------|\n| 数据 1  | 数据 2   |",
     dragDropText: "将 Markdown 文件拖放到此处",
     dragDropSubtext: "支持 .md 和 .txt 文件",
     loading: "加载图表中...",
-    rendering: "渲染图表中..."
+    rendering: "渲染图表中...",
+    stats: {
+      characters: "字符",
+      words: "词数",
+      lines: "行数",
+      readingTime: "阅读时间"
+    }
   },
 
   // Preview
@@ -81,7 +89,34 @@ export const zh = {
     katexRenderError: "KaTeX 渲染错误：",
     mermaidInitError: "Mermaid 初始化错误：",
     mermaidLoading: "加载图表中...",
-    mermaidRendering: "渲染图表中..."
+    mermaidRendering: "渲染图表中...",
+    templateLoaded: "模板已加载",
+    templateLoadedMessage: "模板已应用到编辑器。",
+    fileTooLarge: "文件过大。最大支持 5MB。",
+    invalidFileType: "无效的文件类型。请上传 .md 或 .txt 文件。",
+    fileUploadFailed: "文件上传失败。请重试。",
+    fileUploaded: "文件上传成功",
+    resetComplete: "重置完成",
+    resetCompleteMessage: "编辑器和设置已重置为默认值。",
+    copySuccess: "已复制到剪贴板",
+    copyFailed: "复制到剪贴板失败",
+    networkError: "网络错误。请检查您的网络连接。",
+    quotaExceeded: "存储空间已满。请清除一些浏览器数据。",
+    autoSaveFailed: "自动保存失败。您的更改可能无法保存。"
+  },
+
+  // Templates
+  templates: {
+    title: "选择模板",
+    description: "从专业设计的模板中快速开始",
+    selectTemplate: "点击模板将其加载到编辑器中。您当前的内容将被替换。",
+    categories: {
+      all: "所有模板",
+      basic: "基础",
+      academic: "学术",
+      technical: "技术",
+      documentation: "文档"
+    }
   },
 
   // Default Content

@@ -1,9 +1,8 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, memo } from "react"
 import { marked } from "marked"
 import { markedHighlight } from "marked-highlight"
-import type { Tokens } from "marked"
 import hljs from 'highlight.js'
 import javascript from 'highlight.js/lib/languages/javascript'
 import typescript from 'highlight.js/lib/languages/typescript'
@@ -15,9 +14,76 @@ import xml from 'highlight.js/lib/languages/xml'
 import sql from 'highlight.js/lib/languages/sql'
 import markdown from 'highlight.js/lib/languages/markdown'
 import katex from 'katex'
-import mermaid from 'mermaid'
+// Lazy load mermaid to reduce initial bundle size
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 const MERMAID_FONT_FAMILY = '"Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif'
+
+// Mermaid diagram cache manager to avoid memory leaks
+class MermaidCacheManager {
+  private cache = new Map<string, string>()
+  private cleanupInterval: ReturnType<typeof setInterval> | null = null
+  private readonly MAX_CACHE_SIZE = 50
+  private readonly CLEANUP_INTERVAL = 10 * 60 * 1000 // 10 minutes
+
+  constructor() {
+    // Only start cleanup interval in browser
+    if (typeof window !== 'undefined') {
+      this.startCleanup()
+    }
+  }
+
+  private startCleanup() {
+    this.cleanupInterval = setInterval(() => {
+      if (this.cache.size > this.MAX_CACHE_SIZE) {
+        const keysToDelete = Array.from(this.cache.keys()).slice(0, Math.floor(this.MAX_CACHE_SIZE / 2))
+        keysToDelete.forEach(key => this.cache.delete(key))
+      }
+    }, this.CLEANUP_INTERVAL)
+  }
+
+  get(key: string): string | undefined {
+    return this.cache.get(key)
+  }
+
+  set(key: string, value: string): void {
+    this.cache.set(key, value)
+  }
+
+  has(key: string): boolean {
+    return this.cache.has(key)
+  }
+
+  delete(key: string): boolean {
+    return this.cache.delete(key)
+  }
+
+  clear(): void {
+    this.cache.clear()
+  }
+
+  get size(): number {
+    return this.cache.size
+  }
+
+  destroy(): void {
+    if (this.cleanupInterval) {
+      clearInterval(this.cleanupInterval)
+      this.cleanupInterval = null
+    }
+    this.cache.clear()
+  }
+}
+
+// Singleton instance
+const mermaidCache = new MermaidCacheManager()
+
+// Cleanup on page unload
+if (typeof window !== 'undefined') {
+  window.addEventListener('beforeunload', () => {
+    mermaidCache.destroy()
+  })
+}
 
 // 注册highlight.js语言
 hljs.registerLanguage('javascript', javascript)
@@ -38,7 +104,7 @@ interface MarkdownRendererProps {
   paperSizes: string
   fontSizes: string
   isGeneratingPDF: boolean
-  t: any  // Translation object
+  t: LocaleTranslations
   onHeadingsChange?: (headings: Array<{ id: string; text: string; level: number }>) => void
 }
 
@@ -109,13 +175,25 @@ const injectMermaidLabelStyles = (svg: string): string => {
   return wrapper.innerHTML;
 };
 
-export function MarkdownRenderer({ content, language, theme, paperSizes, fontSizes, isGeneratingPDF, t, onHeadingsChange }: MarkdownRendererProps) {
+function MarkdownRendererComponent({ content, language, theme, paperSizes, fontSizes, isGeneratingPDF, t, onHeadingsChange }: MarkdownRendererProps) {
   const [renderedHtml, setRenderedHtml] = useState("")
+  const [mermaidModule, setMermaidModule] = useState<any>(null) // eslint-disable-line @typescript-eslint/no-explicit-any
   const containerRef = useRef<HTMLDivElement>(null)
+
+  // Lazy load mermaid only when needed (on mount)
+  useEffect(() => {
+    let mounted = true
+    import('mermaid').then(module => {
+      if (mounted) {
+        setMermaidModule(module.default || module)
+      }
+    })
+    return () => { mounted = false }
+  }, [])
 
   // 只在库加载完成后初始化 marked 配置
   useEffect(() => {
-    if (!hljs || !katex || !mermaid) return;
+    if (!hljs || !katex) return;
 
     marked.use(
       markedHighlight({
@@ -132,11 +210,14 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
       breaks: true,
       pedantic: false,
     });
-  }, [hljs, katex, mermaid]);
+  }, []);
 
   // 内容或主题变化时重新渲染
   useEffect(() => {
-    if (!hljs || !katex || !mermaid) return
+    if (!hljs || !katex) return
+
+    const mermaid = mermaidModule
+    if (!mermaid) return
 
     // Initialize mermaid with theme-specific config
     mermaid.initialize({
@@ -186,7 +267,7 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
     }
 
     // 自定义渲染器，处理数学公式和代码高亮
-    renderer.code = (token: any) => {
+    renderer.code = (token: { raw?: string; text?: string; lang?: string; type?: string }) => {
       const { raw, text, lang } = token;
       const langString = lang || "";
 
@@ -202,7 +283,7 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
       }
 
       // 提取代码内容（移除 markdown 代码块标记）
-      const codeContent = raw.replace(/^```[^\n]*\n?/, '').replace(/```$/, '');
+      const codeContent = (raw || '').replace(/^```[^\n]*\n?/, '').replace(/```$/, '');
 
       // 用 highlight.js 高亮代码
       const language = langString || "plaintext";
@@ -222,12 +303,26 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
         highlighted = hljs.highlight(codeContent, { language: 'plaintext' }).value;
       }
 
-      // 构建代码块HTML，包含语言标识和正确的高亮样式
-      return `<div class="code-block-container" style="margin: 1em 0;">
-        <div class="code-block-header" style="background: rgba(255,255,255,0.1); padding: 0.5em 1em; border-radius: 0.5em 0.5em 0 0; font-size: 0.85em; color: #888;">
+      // 构建代码块HTML，包含语言标识、复制按钮和正确的高亮样式
+      const codeId = `code-${Math.random().toString(36).substr(2, 9)}`
+      return `<div class="code-block-container" style="margin: 1em 0; position: relative;">
+        <div class="code-block-header" style="background: rgba(255,255,255,0.1); padding: 0.5em 1em; border-radius: 0.5em 0.5em 0 0; font-size: 0.85em; color: #888; display: flex; justify-content: space-between; align-items: center;">
           <span style="text-transform: uppercase; font-weight: 600;">${language}</span>
+          <button
+            onclick="window.copyCode && window.copyCode('${codeId}')"
+            class="copy-code-btn"
+            data-code-id="${codeId}"
+            style="background: transparent; border: 1px solid rgba(136,136,136,0.3); border-radius: 4px; padding: 2px 8px; font-size: 12px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 4px; color: inherit;"
+            aria-label="Copy code"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Copy</span>
+          </button>
         </div>
-        <pre class="hljs language-${language}" style="margin: 0; border-radius: 0 0 0.5em 0.5em;"><code>${highlighted}</code></pre>
+        <pre class="hljs language-${language}" style="margin: 0; border-radius: 0 0 0.5em 0.5em;"><code id="${codeId}" class="code-content">${highlighted}</code></pre>
       </div>`;
     };
 
@@ -246,26 +341,24 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
     };
 
     // 添加对表格的正确渲染，支持对齐方式
-    renderer.table = (token: any) => {
+    renderer.table = (token: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
       // Marked.js 将表格 token 分为 header 和 rows
       const header = token.header;
       const rows = token.rows;
 
       // 渲染表头
-      const headerCells = header.map((cell: any) => {
+      const headerCells = header.map((cell: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
         const align = cell.align || 'left';
-        const alignStyle = getAlignmentStyle(align);
         const cellContent = cell.text || '';
-        return `<th style="${alignStyle}; background-color: #f6f8fa; font-weight: 600; border-bottom: 2px solid #ddd; border: 1px solid #ddd;">${cellContent}</th>`;
+        return `<th style="text-align: ${align}; background-color: #f6f8fa; font-weight: 600; border-bottom: 2px solid #ddd; border: 1px solid #ddd;">${cellContent}</th>`;
       }).join('');
 
       // 渲染表格内容
-      const bodyRows = rows.map((row: any) => {
-        const cells = row.map((cell: any) => {
+      const bodyRows = rows.map((row: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
+        const cells = row.map((cell: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
           const align = cell.align || 'left';
-          const alignStyle = getAlignmentStyle(align);
           const cellContent = cell.text || '';
-          return `<td style="${alignStyle}; border: 1px solid #ddd;">${cellContent}</td>`;
+          return `<td style="text-align: ${align}; border: 1px solid #ddd;">${cellContent}</td>`;
         }).join('');
         return `<tr>${cells}</tr>`;
       }).join('');
@@ -277,15 +370,13 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
     };
 
     // 添加对表格头的正确渲染
-    renderer.tablerow = (token: any) => {
-      return `<tr>${token.text}</tr>`;
+    renderer.tablerow = (token: { text?: string }) => {
+      return `<tr>${token.text || ''}</tr>`;
     };
 
     // 添加对表格单元格的正确渲染，支持对齐
-    renderer.tablecell = (token: any) => {
-      const tag = token.header ? 'th' : 'td';
+    renderer.tablecell = (token: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
       const align = token.align || 'left';
-      const alignStyle = getAlignmentStyle(align);
       const cellContent = token.text || '';
 
       if (token.header) {
@@ -323,8 +414,8 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
               const katexRendered =  `<div class="katex-display" data-tex="${math}">${katexHtml}</div>`;
               // console.log('渲染结果rendered: ', rendered);
               return katexRendered;
-            } catch (e) {
-              console.error(t.messages.katexRenderError, e);
+            } catch {
+              console.error(t.messages.katexRenderError);
               return match;
             }
           });
@@ -345,13 +436,13 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
               // console.log('渲染结果katexHtml: ', katexHtml);
               // 添加特殊类名和属性以便在PDF导出时识别
               return `<span class="katex" data-tex="${math}">${katexHtml}</span>`;
-            } catch (e) {
+            } catch {
               return match
             }
           });
 
           // 再做粗体/斜体/删除线等格式替换，避免包裹公式
-          let replaced = part
+          const replaced = part
             .replace(/(\*\*\*)([^*]+?)(\*\*\*)/g, '<strong><em>$2</em></strong>')
             .replace(/(\*\*)([^*]+?)(\*\*)/g, '<strong>$2</strong>')
             .replace(/(\`)([^`]+?)(\`)/g, '<code class="inline-code">$2</code>')
@@ -363,11 +454,11 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
       }).join('');
     };
 
-    content = splitMarkdown(content);
+    content = splitMarkdown(content); // eslint-disable-line react-hooks/exhaustive-deps
     // console.log('content: ', content);
 
     // Process markdown
-    let processedContent = content
+    const processedContent = content
 
     /*
     // Handle KaTeX math expressions with bold formatting
@@ -404,10 +495,11 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
     if (onHeadingsChange) {
       onHeadingsChange(headings)
     }
-  }, [content, language, theme, paperSizes, fontSizes, isGeneratingPDF, onHeadingsChange, hljs, katex, mermaid])
+  }, [content, language, theme, paperSizes, fontSizes, isGeneratingPDF, onHeadingsChange, hljs, katex, mermaidModule])
 
   useEffect(() => {
-    if (containerRef.current && renderedHtml && mermaid) {
+    if (containerRef.current && renderedHtml && mermaidModule) {
+      const mermaid = mermaidModule
       // 确保使用当前主题重新初始化
       try {
         mermaid.initialize({
@@ -455,32 +547,46 @@ export function MarkdownRenderer({ content, language, theme, paperSizes, fontSiz
         // Add loading indicator
         element.innerHTML = `<div class="mermaid-loading">${t.messages.mermaidRendering}</div>`;
         
-        // Render with retry mechanism
+        // Render with retry mechanism and caching
         const renderWithRetry = async (retryCount = 0) => {
           try {
+            // Check cache first
+            const cacheKey = diagramDefinition.trim()
+            if (mermaidCache.has(cacheKey)) {
+              const cachedSvg = mermaidCache.get(cacheKey)!
+              element.innerHTML = ''
+              const svgElement = document.createElement('div')
+              svgElement.innerHTML = injectMermaidLabelStyles(cachedSvg)
+              element.appendChild(svgElement)
+              return
+            }
+
             // console.log('mermaid: ', mermaid);
             const { svg, bindFunctions } = await mermaid.render(
               element.id + "-svg",
               diagramDefinition
-            );
-            
-            element.innerHTML = '';
-            const svgElement = document.createElement('div');
-            const svgWithLabelStyles = injectMermaidLabelStyles(svg);
-            svgElement.innerHTML = svgWithLabelStyles;
-            element.appendChild(svgElement);
-            
+            )
+
+            // Cache the rendered SVG
+            mermaidCache.set(cacheKey, svg)
+
+            element.innerHTML = ''
+            const svgElement = document.createElement('div')
+            const svgWithLabelStyles = injectMermaidLabelStyles(svg)
+            svgElement.innerHTML = svgWithLabelStyles
+            element.appendChild(svgElement)
+
             if (bindFunctions) {
-              bindFunctions(element);
+              bindFunctions(element)
             }
           } catch (error) {
             if (retryCount < 2) {
-              console.warn(t.messages.mermaidRenderRetry.replace('{count}', (retryCount + 1).toString()));
-              await new Promise(resolve => setTimeout(resolve, 100));
-              return renderWithRetry(retryCount + 1);
+              console.warn(t.messages.mermaidRenderRetry.replace('{count}', (retryCount + 1).toString()))
+              await new Promise(resolve => setTimeout(resolve, 100))
+              return renderWithRetry(retryCount + 1)
             }
-            
-            console.error(t.messages.mermaidFinalError, error);
+
+            console.error(t.messages.mermaidFinalError, error)
             element.innerHTML = `
               <div style="color: red; padding: 10px; border: 1px solid red; border-radius: 4px; background: #ffe6e6;">
                 <strong>${t.messages.mermaidRenderError}:</strong>
@@ -493,14 +599,14 @@ graph TD
     B -->|Yes| C[OK]
     B -->|No| D[Retry]</pre>
               </div>
-            `;
+            `
           }
-        };
+        }
         
         renderWithRetry();
       });
     }
-  }, [renderedHtml, mermaid]);
+  }, [renderedHtml, mermaidModule]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // 移除主题样式函数
 
@@ -517,3 +623,18 @@ graph TD
       />
     )
 }
+
+// Memoize the component to prevent unnecessary re-renders
+export const MarkdownRenderer = memo(MarkdownRendererComponent, (prevProps, nextProps) => {
+  // Only re-render if these specific props change
+  return (
+    prevProps.content === nextProps.content &&
+    prevProps.theme === nextProps.theme &&
+    prevProps.paperSizes === nextProps.paperSizes &&
+    prevProps.fontSizes === nextProps.fontSizes &&
+    prevProps.language === nextProps.language &&
+    prevProps.isGeneratingPDF === nextProps.isGeneratingPDF
+  )
+})
+
+MarkdownRenderer.displayName = 'MarkdownRenderer'

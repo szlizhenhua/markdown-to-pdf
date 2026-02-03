@@ -7,7 +7,7 @@ import { Globe, Languages } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 
 export function LanguageSwitcher() {
-  const { language, setLanguage, availableLanguages, t } = useLanguage()
+  const { language, setLanguage, availableLanguages } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [isCompact, setIsCompact] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -57,7 +57,7 @@ export function LanguageSwitcher() {
                 <button
                   key={lang.code}
                   onClick={() => {
-                    setLanguage(lang.code as any)
+                    setLanguage(lang.code as 'en' | 'zh')
                     setIsOpen(false)
                   }}
                   className={`w-full text-left px-3 py-2 text-sm rounded hover:bg-gray-100 transition-colors ${
@@ -81,7 +81,7 @@ export function LanguageSwitcher() {
   return (
     <div className="flex items-center gap-2">
       <Globe className="h-4 w-4 text-muted-foreground" />
-      <Select value={language} onValueChange={(value) => setLanguage(value as any)}>
+      <Select value={language} onValueChange={(value) => setLanguage(value as 'en' | 'zh')}>
         <SelectTrigger className="w-auto">
           <SelectValue />
         </SelectTrigger>

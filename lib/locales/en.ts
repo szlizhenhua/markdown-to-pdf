@@ -11,17 +11,25 @@ export const en = {
     getPDF: "Get PDF",
     generatingPDF: "Generating PDF...",
     settings: "Settings",
-    tableOfContents: "Table of Contents"
+    tableOfContents: "Table of Contents",
+    exportHTML: "HTML",
+    exportMarkdown: "MD"
   },
 
   // Editor
   editor: {
     title: "Markdown Editor",
-    placeholder: "Enter your Markdown content here...",
+    placeholder: "Start typing your Markdown here...\n\n# Heading 1\n## Heading 2\n\n**Bold** and *italic* text\n\n- List item 1\n- List item 2\n\n```javascript\nconsole.log('Hello World!');\n```\n\n| Column 1 | Column 2 |\n|---------|----------|\n| Data 1  | Data 2   |",
     dragDropText: "Drop your Markdown file here",
     dragDropSubtext: "Supports .md and .txt files",
     loading: "Loading diagram...",
-    rendering: "Rendering diagram..."
+    rendering: "Rendering diagram...",
+    stats: {
+      characters: "Characters",
+      words: "Words",
+      lines: "Lines",
+      readingTime: "Reading time"
+    }
   },
 
   // Preview
@@ -81,7 +89,34 @@ export const en = {
     katexRenderError: "KaTeX render error:",
     mermaidInitError: "Mermaid initialization error:",
     mermaidLoading: "Loading diagram...",
-    mermaidRendering: "Rendering diagram..."
+    mermaidRendering: "Rendering diagram...",
+    templateLoaded: "Template loaded",
+    templateLoadedMessage: "Template has been applied to the editor.",
+    fileTooLarge: "File is too large. Maximum size is 5MB.",
+    invalidFileType: "Invalid file type. Please upload a .md or .txt file.",
+    fileUploadFailed: "Failed to upload file. Please try again.",
+    fileUploaded: "File uploaded successfully",
+    resetComplete: "Reset complete",
+    resetCompleteMessage: "Editor and settings have been reset to default.",
+    copySuccess: "Copied to clipboard",
+    copyFailed: "Failed to copy to clipboard",
+    networkError: "Network error. Please check your connection.",
+    quotaExceeded: "Storage quota exceeded. Please clear some browser data.",
+    autoSaveFailed: "Auto-save failed. Your changes may not be saved."
+  },
+
+  // Templates
+  templates: {
+    title: "Select a Template",
+    description: "Choose from professionally designed templates to get started quickly",
+    selectTemplate: "Click a template to load it into the editor. Your current content will be replaced.",
+    categories: {
+      all: "All Templates",
+      basic: "Basic",
+      academic: "Academic",
+      technical: "Technical",
+      documentation: "Documentation"
+    }
   },
 
   // Default Content
