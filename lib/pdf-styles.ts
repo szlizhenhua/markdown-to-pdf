@@ -9,6 +9,8 @@ export interface PDFStyleOptions {
  */
 export function generatePDFStyles(options: PDFStyleOptions): string {
   const { fontSize, theme } = options
+  const baseFontSize = Number.parseInt(fontSize, 10) || 12
+  const mermaidFontSize = Math.max(10, Math.round(baseFontSize * 0.85))
 
   return `
             body {
@@ -181,20 +183,34 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
               font-family: "Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif;
             }
 
-            .mermaid-diagram svg {
+            .mermaid-diagram svg,
+            .mermaid svg {
               max-width: 100%;
               height: auto;
+              overflow: visible;
             }
 
             .mermaid-diagram .nodeLabel,
             .mermaid-diagram .nodeLabel span,
-            .mermaid-diagram p {
+            .mermaid-diagram p,
+            .mermaid .nodeLabel,
+            .mermaid .nodeLabel span,
+            .mermaid .label,
+            .mermaid .edgeLabel,
+            .mermaid text,
+            .mermaid p {
               margin: 0;
               text-align: center !important;
               text-indent: 0 !important;
-              letter-spacing: normal;
+              letter-spacing: 0 !important;
               white-space: normal;
-              line-height: 1.4;
+              line-height: 1.3;
+              font-size: ${mermaidFontSize}px;
+              font-family: "Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif;
+            }
+
+            .mermaid foreignObject {
+              overflow: visible;
             }
 
             /* 段落样式优化 */
@@ -327,7 +343,7 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
             }
 
             /* 避免分页断行 */
-            pre, code, table, img, .katex, .mermaid-container {
+            pre, code, table, img, .katex, .mermaid-container, .mermaid, .mermaid-radar, .mermaid-quadrant {
               page-break-inside: avoid;
             }
   `
