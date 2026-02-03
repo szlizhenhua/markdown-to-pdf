@@ -229,6 +229,358 @@ export function PrivacyContent() {
           content: "이 개인정보 보호정책에 대해 궁금한 점이 있으시면 privacy@markdown-to-pdf.org로 문의하십시오."
         }
       ]
+    },
+    it: {
+      title: "Politica sulla Privacy",
+      lastUpdated: "Ultimo aggiornamento",
+      sections: [
+        {
+          heading: "1. Introduzione",
+          content: "Benvenuti nel convertitore da Markdown a PDF. Rispettiamo la tua privacy e siamo impegnati a proteggere i tuoi dati personali. Questa Politica sulla Privacy spiega come gestiamo le tue informazioni quando utilizzi il nostro sito web e i nostri servizi."
+        },
+        {
+          heading: "2. Elaborazione dei Dati",
+          content: "Il convertitore da Markdown a PDF è progettato per elaborare i tuoi dati localmente nel tuo browser quando possibile. I tuoi documenti Markdown vengono convertiti in PDF direttamente sul tuo dispositivo utilizzando tecnologie lato client. Non memorizziamo il contenuto dei tuoi documenti sui nostri server."
+        },
+        {
+          heading: "3. Informazioni Raccolte",
+          content: "Potremmo raccogliere statistiche di utilizzo anonime e dati tecnici per migliorare il nostro servizio, inclusi:",
+          items: ["Tipo e versione del browser", "Sistema operativo", "URL di riferimento", "Tempo trascorso sul sito"]
+        },
+        {
+          heading: "4. Cookie e Archiviazione Locale",
+          content: "Utilizziamo l'archiviazione locale per salvare le tue preferenze (come l'utilizzo del tema, le impostazioni dell'editor) per migliorare la tua esperienza utente. Potremmo utilizzare servizi di terze parti come Google AdSense che utilizzano i cookie per pubblicare annunci pubblicitari basati sulle tue visite precedenti al nostro sito web o ad altri siti web."
+        },
+        {
+          heading: "5. Servizi di Terze Parti",
+          content: "Utilizziamo i seguenti servizi di terze parti:",
+          items: ["Google AdSense: Per visualizzare pubblicità. Google utilizza i cookie per pubblicare annunci sul nostro sito.", "Analytics: Per capire come gli utenti interagiscono con il nostro strumento."]
+        },
+        {
+          heading: "6. Contattaci",
+          content: "Se hai domande su questa Politica sulla Privacy, contattaci all'indirizzo privacy@markdown-to-pdf.org."
+        }
+      ]
+    },
+    pt: {
+      title: "Política de Privacidade",
+      lastUpdated: "Última atualização",
+      sections: [
+        {
+          heading: "1. Introdução",
+          content: "Bem-vindo ao conversor de Markdown para PDF. Respeitamos sua privacidade e estamos comprometidos em proteger seus dados pessoais. Esta Política de Privacidade explica como lidamos com suas informações quando você usa nosso site e serviços."
+        },
+        {
+          heading: "2. Processamento de Dados",
+          content: "O conversor de Markdown para PDF é projetado para processar seus dados localmente em seu navegador sempre que possível. Seus documentos Markdown são convertidos em PDF diretamente em seu dispositivo usando tecnologias do lado do cliente. Não armazenamos o conteúdo de seus documentos em nossos servidores."
+        },
+        {
+          heading: "3. Informações Coletadas",
+          content: "Podemos coletar estatísticas de uso anônimas e dados técnicos para melhorar nosso serviço, incluindo:",
+          items: ["Tipo e versão do navegador", "Sistema operacional", "URLs de referência", "Tempo gasto no site"]
+        },
+        {
+          heading: "4. Cookies e Armazenamento Local",
+          content: "Usamos o armazenamento local para salvar suas preferências (como uso de tema, configurações do editor) para melhorar sua experiência do usuário. Podemos usar serviços de terceiros como Google AdSense que utilizam cookies para servir anúncios baseados em suas visitas anteriores ao nosso site ou outros sites."
+        },
+        {
+          heading: "5. Serviços de Terceiros",
+          content: "Usamos os seguintes serviços de terceiros:",
+          items: ["Google AdSense: Para exibir anúncios. O Google usa cookies para servir anúncios em nosso site.", "Analytics: Para entender como os usuários interagem com nossa ferramenta."]
+        },
+        {
+          heading: "6. Entre em Contato",
+          content: "Se você tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco em privacy@markdown-to-pdf.org."
+        }
+      ]
+    },
+    ru: {
+      title: "Политика Конфиденциальности",
+      lastUpdated: "Последнее обновление",
+      sections: [
+        {
+          heading: "1. Введение",
+          content: "Добро пожаловать в конвертер Markdown в PDF. Мы уважаем вашу конфиденциальность и обязуемся защищать ваши личные данные. Эта Политика Конфиденциальности объясняет, как мы обрабатываем вашу информацию, когда вы используете наш веб-сайт и услуги."
+        },
+        {
+          heading: "2. Обработка Данных",
+          content: "Конвертер Markdown в PDF разработан для обработки ваших данных локально в вашем браузере, когда это возможно. Ваши документы Markdown преобразуются в PDF непосредственно на вашем устройстве с использованием клиентских технологий. Мы не храним содержимое ваших документов на наших серверах."
+        },
+        {
+          heading: "3. Собираемая Информация",
+          content: "Мы можем собирать анонимную статистику использования и технические данные для улучшения нашей службы, включая:",
+          items: ["Тип и версия браузера", "Операционная система", "URL-адреса рефереров", "Время, проведенное на сайте"]
+        },
+        {
+          heading: "4. Файлы Cookie и Локальное Хранилище",
+          content: "Мы используем локальное хранилище для сохранения ваших настроек (например, использование темы, настройки редактора) для улучшения вашего пользовательского опыта. Мы можем использовать сторонние сервисы, такие как Google AdSense, которые используют файлы cookie для отображения рекламы на основе ваших предыдущих посещений нашего веб-сайта или других веб-сайтов."
+        },
+        {
+          heading: "5. Сторонние Сервисы",
+          content: "Мы используем следующие сторонние сервисы:",
+          items: ["Google AdSense: Для отображения рекламы. Google использует файлы cookie для показа рекламы на нашем сайте.", "Analytics: Чтобы понять, как пользователи взаимодействуют с нашим инструментом."]
+        },
+        {
+          heading: "6. Свяжитесь с Нами",
+          content: "Если у вас есть какие-либо вопросы об этой Политике Конфиденциальности, пожалуйста, свяжитесь с нами по адресу privacy@markdown-to-pdf.org."
+        }
+      ]
+    },
+    'zh-tw': {
+      title: "隱私政策",
+      lastUpdated: "最後更新",
+      sections: [
+        {
+          heading: "1. 簡介",
+          content: "歡迎使用 Markdown 轉 PDF 轉換器。我們尊重您的隱私並致力於保護您的個人數據。本隱私政策解釋了當您使用我們的網站和服務時我們如何處理您的信息。"
+        },
+        {
+          heading: "2. 數據處理",
+          content: "Markdown 轉 PDF 轉換器設計為盡可能在您的瀏覽器中本地處理您的數據。您的 Markdown 文檔使用客戶端技術直接在您的設備上轉換為 PDF。我們不會在我們的服務器上存儲您文檔的內容。"
+        },
+        {
+          heading: "3. 我們收集的信息",
+          content: "我們可能會收集匿名使用統計數據和技術數據以改進我們的服務，包括：",
+          items: ["瀏覽器類型和版本", "操作系統", "引用 URL", "在網站上花費的時間"]
+        },
+        {
+          heading: "4. Cookie 和本地存儲",
+          content: "我們使用本地存儲來保存您的偏好設置（例如主題使用、編輯器設置）以增強您的用戶體驗。我們可能會使用第三方服務，如 Google AdSense，它們使用 cookie 根據您之前訪問我們的網站或其他網站的情況投放廣告。"
+        },
+        {
+          heading: "5. 第三方服務",
+          content: "我們使用以下第三方服務：",
+          items: ["Google AdSense：用於展示廣告。Google 使用 cookie 在我們的網站上投放廣告。", "Analytics：用於了解用戶如何與我們的工具交互。"]
+        },
+        {
+          heading: "6. 聯繫我們",
+          content: "如果您對本隱私政策有任何疑問，請通過 privacy@markdown-to-pdf.org 聯繫我們。"
+        }
+      ]
+    },
+    ar: {
+      title: "سياسة الخصوصية",
+      lastUpdated: "آخر تحديث",
+      sections: [
+        {
+          heading: "1. مقدمة",
+          content: "مرحباً بك في محول Markdown إلى PDF. نحن نحترم خصوصيتك ونلتزم بحماية بياناتك الشخصية. تشرح سياسة الخصوصية هذه كيف نتعامل مع معلوماتك عند استخدام موقعنا الإلكتروني وخدماتنا."
+        },
+        {
+          heading: "2. معالجة البيانات",
+          content: "تم تصميم محول Markdown إلى PDF لمعالجة بياناتك محلياً في متصفحك كلما كان ذلك ممكناً. يتم تحويل مستندات Markdown إلى PDF مباشرة على جهازك باستخدام تقنيات جانب العميل.我们不 نقوم بتخزين محتوى مستنداتك على خوادمنا."
+        },
+        {
+          heading: "3. المعلومات التي نجمعها",
+          content: "قد نجمع إحصائيات استخدام مجهولة وبيانات تقنية لتحسين خدمتنا، بما في ذلك:",
+          items: ["نوع وإصدار المتصفح", "نظام التشغيل", "عناوين URL المحيلة", "الوقت المقضي على الموقع"]
+        },
+        {
+          heading: "4. ملفات تعريف الارتباط والتخزين المحلي",
+          content: "نحن نستخدم التخزين المحلي لحفظ تفضيلاتك (مثل استخدام السمة، إعدادات المحرر) لتحسين تجربة المستخدم الخاصة بك. قد نستخدم خدمات الطرف الثالث مثل Google AdSense التي تستخدم ملفات تعريف الارتباط لعرض الإعلانات بناءً على زياراتك السابقة لموقعنا الإلكتروني أو مواقع ويب أخرى."
+        },
+        {
+          heading: "5. خدمات الطرف الثالث",
+          content: "نحن نستخدم خدمات الطرف الثالث التالية:",
+          items: ["Google AdSense: لعرض الإعلانات. يستخدم Google ملفات تعريف الارتباط لعرض الإعلانات على موقعنا.", "Analytics: لفهم كيف يتفاعل المستخدمون مع أداة."]
+        },
+        {
+          heading: "6. اتصل بنا",
+          content: "إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال بنا على privacy@markdown-to-pdf.org."
+        }
+      ]
+    },
+    hi: {
+      title: "गोपनीयता नीति",
+      lastUpdated: "अंतिम अद्यतन",
+      sections: [
+        {
+          heading: "1. परिचय",
+          content: "Markdown से PDF कनवर्टर में आपका स्वागत है। हम आपकी गोपनीयता का सम्मान करते हैं और आपकी व्यक्तिगत डेटा की सुरक्षा के लिए प्रतिबद्ध हैं। यह गोपनीयता नीति बताती है कि जब आप हमारी वेबसाइट और सेवाओं का उपयोग करते हैं तो हम आपकी जानकारी कैसे संभालते हैं।"
+        },
+        {
+          heading: "2. डेटा प्रसंस्करण",
+          content: "Markdown से PDF कनवर्टर यथासंभव आपके ब्राउज़र में स्थानीय रूप से आपके डेटा को संसाधित करने के लिए डिज़ाइन किया गया है। आपके Markdown दस्तावेज़ सीधे आपके डिवाइस पर क्लाइंट-साइड तकनीकों का उपयोग करके PDF में परिवर्तित हो जाते हैं। हम अपने सर्वर पर आपके दस्तावेज़ों की सामग्री संग्रहीत नहीं करते।"
+        },
+        {
+          heading: "3. हम जो जानकारी एकत्र करते हैं",
+          content: "हम अपनी सेवा को बेहतर बनाने के लिए अज्ञात उपयोग आँकड़े और तकनीकी डेटा एकत्र कर सकते हैं, जिसमें शामिल है:",
+          items: ["ब्राउज़र का प्रकार और संस्करण", "ऑपरेटिंग सिस्टम", "रेफरर URL", "साइट पर बिताया गया समय"]
+        },
+        {
+          heading: "4. कुकीज़ और स्थानीय भंडारण",
+          content: "हम आपके उपयोगकर्ता अनुभव को बेहतर बनाने के लिए अपनी पसंद (जैसे थीम उपयोग, संपादक सेटिंग्स) को सहेजने के लिए स्थानीय भंडारण का उपयोग करते हैं। हम Google AdSense जैसी तीसरे पक्ष की सेवाओं का उपयोग कर सकते हैं जो कुकीज़ का उपयोग करती हैं ताकि आपकी हमारी वेबसाइट या अन्य वेबसाइटों पर पिछली यात्राओं के आधार पर विज्ञापन परोस सकें।"
+        },
+        {
+          heading: "5. तीसरे पक्ष की सेवाएं",
+          content: "हम निम्नलिखित तीसरे पक्ष की सेवाओं का उपयोग करते हैं:",
+          items: ["Google AdSense: विज्ञापन प्रदर्शित करने के लिए। Google हमारी साइट पर विज्ञापन परोसने के लिए कुकीज़ का उपयोग करता है।", "Analytics: यह समझने के लिए कि उपयोगकर्ता हमारे टूल के साथ कैसे इंटरैक्ट करते हैं।"]
+        },
+        {
+          heading: "6. संपर्क करें",
+          content: "यदि आपके पास इस गोपनीयता नीति के बारे में कोई प्रश्न है, तो कृपया privacy@markdown-to-pdf.org पर संपर्क करें।"
+        }
+      ]
+    },
+    tr: {
+      title: "Gizlilik Politikası",
+      lastUpdated: "Son güncelleme",
+      sections: [
+        {
+          heading: "1. Giriş",
+          content: "Markdown'tan PDF'e Dönüştürücü'ye hoş geldiniz. Gizliliğinize saygı duyuyoruz ve kişisel verilerinizi korumayı taahhüt ediyoruz. Bu Gizlilik Politikası, web sitemizi ve hizmetlerimizi kullandığınızda bilgilerinizi nasıl işlediğimizi açıklar."
+        },
+        {
+          heading: "2. Veri İşleme",
+          content: "Markdown'tan PDF'e Dönüştürücü, verilerinizi mümkün olduğunca tarayıcınızda yerel olarak işlemek üzere tasarlanmıştır. Markdown belgeleriniz istemci tarafı teknolojilerini kullanarak doğrudan cihazınızda PDF'ye dönüştürülür. Belgelerinizin içeriğini sunucularımızda saklamayız."
+        },
+        {
+          heading: "3. Toplanan Bilgiler",
+          content: "Hizmetimizi iyileştirmek için anonim kullanım istatistikleri ve teknik veriler toplayabiliriz, şunlar dahil:",
+          items: ["Tarayıcı türü ve sürümü", "İşletim sistemi", "Yönlendiren URL'ler", "Sitede geçirilen süre"]
+        },
+        {
+          heading: "4. Çerezler ve Yerel Depolama",
+          content: "Kullanıcı deneyiminizi artırmak için tercihlerinizi (tema kullanımı, düzenleyici ayarları gibi) kaydetmek için yerel depolamayı kullanıyoruz. Web sitemize veya diğer web sitelerine önceki ziyaretlerinize dayalı reklam sunmak için çerezleri kullanan Google AdSense gibi üçüncü taraf hizmetleri kullanabiliriz."
+        },
+        {
+          heading: "5. Üçüncü Taraf Hizmetler",
+          content: "Şu üçüncü taraf hizmetleri kullanıyoruz:",
+          items: ["Google AdSense: Reklam görüntülemek için. Google, sitemizde reklam sunmak için çerezleri kullanır.", "Analytics: Kullanıcıların aracımızla nasıl etkileşim kurduğunu anlamak için."]
+        },
+        {
+          heading: "6. Bizimle İletişime Geçin",
+          content: "Bu Gizlilik Politikası hakkında herhangi bir sorunuz varsa, lütfen privacy@markdown-to-pdf.org adresinden bizimle iletişime geçin."
+        }
+      ]
+    },
+    nl: {
+      title: "Privacybeleid",
+      lastUpdated: "Laatst bijgewerkt",
+      sections: [
+        {
+          heading: "1. Inleiding",
+          content: "Welkom bij de Markdown naar PDF Converter. Wij respecteren uw privacy en zijn toegewijd aan het beschermen van uw persoonlijke gegevens. Dit Privacybeleid legt uit hoe wij uw informatie verwerken wanneer u onze website en diensten gebruikt."
+        },
+        {
+          heading: "2. Gegevensverwerking",
+          content: "De Markdown naar PDF Converter is ontworpen om uw gegevens zo veel mogelijk lokaal in uw browser te verwerken. Uw Markdown-documenten worden direct op uw apparaat geconverteerd naar PDF met behulp van client-side technologieën. Wij slaan de inhoud van uw documenten niet op onze servers op."
+        },
+        {
+          heading: "3. Verzamelde Informatie",
+          content: "Wij kunnen anonieme gebruiksstatistieken en technische gegevens verzamelen om onze dienst te verbeteren, inclusief:",
+          items: ["Browsertype en -versie", "Besturingssysteem", "Verwijzende URL's", "Tijd doorgebracht op site"]
+        },
+        {
+          heading: "4. Cookies en Lokale Opslag",
+          content: "Wij gebruiken lokale opslag om uw voorkeuren (zoals themagebruik, editorinstellingen) op te slaan om uw gebruikerservaring te verbeteren. Wij kunnen derde partijdiensten zoals Google AdSense gebruiken die cookies gebruiken om advertenties weer te geven op basis van uw eerdere bezoeken aan onze website of andere websites."
+        },
+        {
+          heading: "5. Derde Partij Diensten",
+          content: "Wij gebruiken de volgende derde partij diensten:",
+          items: ["Google AdSense: Om advertenties weer te geven. Google gebruikt cookies om advertenties op onze site weer te geven.", "Analytics: Om te begrijpen hoe gebruikers interageren met onze tool."]
+        },
+        {
+          heading: "6. Neem Contact Op",
+          content: "Als u vragen heeft over dit Privacybeleid, neem dan contact met ons op via privacy@markdown-to-pdf.org."
+        }
+      ]
+    },
+    sv: {
+      title: "Integritetspolicy",
+      lastUpdated: "Senast uppdaterad",
+      sections: [
+        {
+          heading: "1. Introduktion",
+          content: "Välkommen till Markdown till PDF-konverteraren. Vi respekterar din integritet och är engagerade i att skydda dina personuppgifter. Denna Integritetspolicy förklarar hur vi hanterar din information när du använder vår webbplats och våra tjänster."
+        },
+        {
+          heading: "2. Databearbetning",
+          content: "Markdown till PDF-konverteraren är utformad för att bearbeta dina data lokalt i din webbläsare när det är möjligt. Dina Markdown-dokument konverteras till PDF direkt på din enhet med hjälp av klientsidsteknologier. Vi lagrar inte innehållet i dina dokument på våra servrar."
+        },
+        {
+          heading: "3. Information Vi Samlar In",
+          content: "Vi kan samla in anonym användningsstatistik och teknisk data för att förbättra vår tjänst, inklusive:",
+          items: ["Webbläsartyp och version", "Operativsystem", "Hänvisnings-URL:er", "Tid som spenderas på webbplatsen"]
+        },
+        {
+          heading: "4. Kakor och Lokal Lagring",
+          content: "Vi använder lokal lagring för att spara dina inställningar (som temanvändning, redigerarinställningar) för att förbättra din användarupplevelse. Vi kan använda tredjepartstjänster som Google AdSense som använder kakor för att visa annonser baserat på dina tidigare besök på vår webbplats eller andra webbplatser."
+        },
+        {
+          heading: "5. Tredjepartstjänster",
+          content: "Vi använder följande tredjepartstjänster:",
+          items: ["Google AdSense: För att visa annonser. Google använder kakor för att visa annonser på vår webbplats.", "Analytics: För att förstå hur användare interagerar med vårt verktyg."]
+        },
+        {
+          heading: "6. Kontakta Oss",
+          content: "Om du har några frågor om denna Integritetspolicy, kontakta oss på privacy@markdown-to-pdf.org."
+        }
+      ]
+    },
+    pl: {
+      title: "Polityka Prywatności",
+      lastUpdated: "Ostatnia aktualizacja",
+      sections: [
+        {
+          heading: "1. Wprowadzenie",
+          content: "Witamy w Konwerterze Markdown do PDF. Szanujemy Twoją prywatność i jesteśmy zaangażowani w ochronę Twoich danych osobowych. Niniejsza Polityka Prywatności wyjaśnia, jak przetwarzamy Twoje informacje podczas korzystania z naszej witryny i usług."
+        },
+        {
+          heading: "2. Przetwarzanie Danych",
+          content: "Konwerter Markdown do PDF został zaprojektowany tak, aby przetwarzać Twoje dane lokalnie w przeglądarce, gdy tylko jest to możliwe. Twoje dokumenty Markdown są konwertowane bezpośrednio na Twoim urządzeniu przy użyciu technologii po stronie klienta. Nie przechowujemy treści Twoich dokumentów na naszych serwerach."
+        },
+        {
+          heading: "3. Zbierane Informacje",
+          content: "Możemy zbierać anonimowe statystyki użytkowania i dane techniczne w celu poprawy naszej usługi, w tym:",
+          items: ["Typ i wersja przeglądarki", "System operacyjny", "URL-e odsyłające", "Czas spędzony na stronie"]
+        },
+        {
+          heading: "4. Pliki Cookie i Lokalne Przechowywanie",
+          content: "Używamy lokalnego przechowywania, aby zapisać Twoje preferencje (takie jak użycie motywu, ustawienia edytora) w celu poprawy Twojego doświadczenia użytkownika. Możemy używać usług stron trzecich, takich jak Google AdSense, które wykorzystują pliki cookie do wyświetlania reklam na podstawie Twoich poprzednich wizyt na naszej witrynie lub innych witrynach."
+        },
+        {
+          heading: "5. Usługi Stron Trzecich",
+          content: "Używamy następujących usług stron trzecich:",
+          items: ["Google AdSense: Do wyświetlania reklam. Google używa plików cookie do wyświetlania reklam w naszej witrynie.", "Analytics: Aby zrozumieć, jak użytkownicy wchodzą w interakcję z naszym narzędziem."]
+        },
+        {
+          heading: "6. Skontaktuj Się z Nami",
+          content: "Jeśli masz jakiekolwiek pytania dotyczące niniejszej Polityki Prywatności, skontaktuj się z nami pod adresem privacy@markdown-to-pdf.org."
+        }
+      ]
+    },
+    vi: {
+      title: "Chính Sách Quyền Riêng Tư",
+      lastUpdated: "Cập nhật lần cuối",
+      sections: [
+        {
+          heading: "1. Giới Thiệu",
+          content: "Chào mừng bạn đến với Bộ chuyển đổi Markdown sang PDF. Chúng tôi tôn trọng quyền riêng tư của bạn và cam kết bảo vệ dữ liệu cá nhân của bạn. Chính Sách Quyền Riêng Tư này giải thích cách chúng tôi xử lý thông tin của bạn khi bạn sử dụng trang web và dịch vụ của chúng tôi."
+        },
+        {
+          heading: "2. Xử Lý Dữ Liệu",
+          content: "Bộ chuyển đổi Markdown sang PDF được thiết kế để xử lý dữ liệu của bạn cục bộ trong trình duyệt của bạn bất cứ khi nào có thể. Các tài liệu Markdown của bạn được chuyển đổi thành PDF trực tiếp trên thiết bị của bạn bằng công nghệ phía máy khách. Chúng tôi không lưu trữ nội dung tài liệu của bạn trên máy chủ của mình."
+        },
+        {
+          heading: "3. Thông Tin Chúng Tôi Thu Thập",
+          content: "Chúng tôi có thể thu thập thống kê sử dụng ẩn danh và dữ liệu kỹ thuật để cải thiện dịch vụ của mình, bao gồm:",
+          items: ["Loại và phiên bản trình duyệt", "Hệ điều hành", "URL giới thiệu", "Thời gian dành trên trang"]
+        },
+        {
+          heading: "4. Cookie và Lưu Trữ Cục Bộ",
+          content: "Chúng tôi sử dụng lưu trữ cục bộ để lưu tùy chọn của bạn (như sử dụng chủ đề, cài đặt trình soạn thảo) để cải thiện trải nghiệm người dùng của bạn. Chúng tôi có thể sử dụng các dịch vụ của bên thứ ba như Google AdSense sử dụng cookie để phục vụ quảng cáo dựa trên các lần truy cập trước của bạn vào trang web của chúng tôi hoặc các trang web khác."
+        },
+        {
+          heading: "5. Dịch Vụ Của Bên Thứ Ba",
+          content: "Chúng tôi sử dụng các dịch vụ của bên thứ ba sau:",
+          items: ["Google AdSense: Để hiển thị quảng cáo. Google sử dụng cookie để phục vụ quảng cáo trên trang web của chúng tôi.", "Analytics: Để hiểu cách người dùng tương tác với công cụ của chúng tôi."]
+        },
+        {
+          heading: "6. Liên Hệ Với Chúng Tôi",
+          content: "Nếu bạn có bất kỳ câu hỏi nào về Chính Sách Quyền Riêng Tư này, vui lòng liên hệ với chúng tôi tại privacy@markdown-to-pdf.org."
+        }
+      ]
     }
   }
 

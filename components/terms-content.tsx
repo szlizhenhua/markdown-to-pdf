@@ -194,6 +194,303 @@ export function TermsContent() {
           content: "서비스를 사용하여 만들고 변환하는 콘텐츠에 대한 모든 권리를 보유합니다. 문서에 대한 소유권을 주장하지 않습니다."
         }
       ]
+    },
+    it: {
+      title: "Termini di Servizio",
+      lastUpdated: "Ultimo aggiornamento",
+      sections: [
+        {
+          heading: "1. Accettazione dei Termini",
+          content: "Accedendo e utilizzando il Convertitore da Markdown a PDF, accetti e accetti di essere vincolato dai termini e dalle disposizioni di questo accordo."
+        },
+        {
+          heading: "2. Descrizione del Servizio",
+          content: "Il Convertitore da Markdown a PDF fornisce uno strumento basato sul web per convertire testo Markdown in documenti PDF. Il servizio è fornito così com'è e secondo disponibilità."
+        },
+        {
+          heading: "3. Condotta dell'Utente",
+          content: "Accetti di utilizzare il nostro servizio solo per scopi legali. È vietato utilizzare il servizio per:",
+          items: ["Generare contenuti che sono illegali, dannosi o violano i diritti altrui.", "Tentare di interrompere o interferire con la sicurezza o le prestazioni del servizio."]
+        },
+        {
+          heading: "4. Esclusione di Garanzie",
+          content: "Non garantiamo che il servizio sarà privo di errori o ininterrotto. Non siamo responsabili per qualsiasi perdita di dati durante il processo di conversione. Gli utenti sono incoraggiati a mantenere backup dei loro documenti originali."
+        },
+        {
+          heading: "5. Proprietà Intellettuale",
+          content: "Mantieni tutti i diritti sui contenuti che crei e converti utilizzando il nostro servizio. Non rivendichiamo la proprietà sui tuoi documenti."
+        }
+      ]
+    },
+    pt: {
+      title: "Termos de Serviço",
+      lastUpdated: "Última atualização",
+      sections: [
+        {
+          heading: "1. Aceitação dos Termos",
+          content: "Ao acessar e usar o Conversor de Markdown para PDF, você aceita e concorda em ficar vinculado aos termos e disposições deste acordo."
+        },
+        {
+          heading: "2. Descrição do Serviço",
+          content: "O Conversor de Markdown para PDF fornece uma ferramenta baseada na web para converter texto Markdown em documentos PDF. O serviço é fornecido como está e conforme disponível."
+        },
+        {
+          heading: "3. Conduta do Usuário",
+          content: "Você concorda em usar nosso serviço apenas para fins legais. É proibido usar o serviço para:",
+          items: ["Gerar conteúdo que seja ilegal, prejudicial ou viole os direitos de outros.", "Tentar interromper ou interferir com a segurança ou desempenho do serviço."]
+        },
+        {
+          heading: "4. Isenção de Garantias",
+          content: "Não garantimos que o serviço estará livre de erros ou sem interrupções. Não somos responsáveis por qualquer perda de dados durante o processo de conversão. Os usuários são encorajados a manter backups de seus documentos originais."
+        },
+        {
+          heading: "5. Propriedade Intelectual",
+          content: "Você retém todos os direitos sobre o conteúdo que você cria e converte usando nosso serviço. Não reivindicamos propriedade sobre seus documentos."
+        }
+      ]
+    },
+    ru: {
+      title: "Условия Обслуживания",
+      lastUpdated: "Последнее обновление",
+      sections: [
+        {
+          heading: "1. Принятие Условий",
+          content: "Получая доступ и используя Конвертер Markdown в PDF, вы принимаете и соглашаетесь быть связанным условиями и положениями этого соглашения."
+        },
+        {
+          heading: "2. Описание Сервиса",
+          content: "Конвертер Markdown в PDF предоставляет веб-инструмент для преобразования текста Markdown в PDF-документы. Сервис предоставляется как есть и в доступности."
+        },
+        {
+          heading: "3. Поведение Пользователя",
+          content: "Вы соглашаетесь использовать наш сервис только в законных целях. Вам запрещено использовать сервис для:",
+          items: ["Генерации контента, который является незаконным, вредным или нарушает права других.", "Попытки прервать или вмешаться в безопасность или производительность сервиса."]
+        },
+        {
+          heading: "4. Отказ от Гарантий",
+          content: "Мы не гарантируем, что сервис будет безошибочным или без перерывов. Мы не несем ответственности за любые потери данных во время процесса преобразования. Пользователям рекомендуется сохранять резервные копии своих исходных документов."
+        },
+        {
+          heading: "5. Интеллектуальная Собственность",
+          content: "Вы сохраняете все права на контент, который вы создаете и преобразуете с помощью нашего сервиса. Мы не претендуем на право собственности на ваши документы."
+        }
+      ]
+    },
+    'zh-tw': {
+      title: "服務條款",
+      lastUpdated: "最後更新",
+      sections: [
+        {
+          heading: "1. 接受條款",
+          content: "通過訪問和使用 Markdown 轉 PDF 轉換器，您接受並同意受本協議的條款和規定的約束。"
+        },
+        {
+          heading: "2. 服務描述",
+          content: "Markdown 轉 PDF 轉換器提供基於 Web 的工具，用於將 Markdown 文本轉換為 PDF 文檔。服務按原樣和可用方式提供。"
+        },
+        {
+          heading: "3. 用戶行為",
+          content: "您同意僅將我們的服務用於合法目的。禁止使用服務來：",
+          items: ["生成非法、有害或侵犯他人權利的內容。", "試圖破壞或干擾服務的安全性或性能。"]
+        },
+        {
+          heading: "4. 免責聲明",
+          content: "我們不保證服務將無錯誤或不間斷。我們不對轉換過程中的任何數據丟失負責。建議用戶保留原始文檔的備份。"
+        },
+        {
+          heading: "5. 知識產權",
+          content: "您保留使用我們服務創建和轉換的內容的所有權利。我們不對您的文檔主張所有權。"
+        }
+      ]
+    },
+    ar: {
+      title: "شروط الخدمة",
+      lastUpdated: "آخر تحديث",
+      sections: [
+        {
+          heading: "1. قبول الشروط",
+          content: "من خلال الوصول إلى واستخدام محول Markdown إلى PDF، فإنك تقبل وتوافق على الالتزام بشروط وأحكام هذا الاتفاق."
+        },
+        {
+          heading: "2. وصف الخدمة",
+          content: "محول Markdown إلى PDF يوفر أداة قائمة على الويب لتحويل نص Markdown إلى مستندات PDF. يتم توفير الخدمة كما هي ومتاحة."
+        },
+        {
+          heading: "3. سلوك المستخدم",
+          content: "توافق على استخدام خدمتنا فقط للأغراض المشروعة. يحظر استخدام الخدمة لـ:",
+          items: ["إنشاء محتوى غير قانوني أو ضار أو ينتهك حقوق الآخرين.", "محاولة تعطيل أو التدخل مع أمان الخدمة أو أدائها."]
+        },
+        {
+          heading: "4. إخلاء المسؤولية",
+          content: "لا نضمن أن الخدمة ستكون خالية من الأخطاء أو غير متقطعة. نحن غير مسؤولين عن أي فقدان للبيانات أثناء عملية التحويل. يُنصح المستخدمون بالاحتفاظ بنسخ احتياطية من مستنداتهم الأصلية."
+        },
+        {
+          heading: "5. الملكية الفكرية",
+          content: "أنت تحتفظ بجميع الحقوق في المحتوى الذي تنشئه وتحوله باستخدام خدمتنا.我们不 نطالب بملكية مستنداتك."
+        }
+      ]
+    },
+    hi: {
+      title: "सेवा की शर्तें",
+      lastUpdated: "अंतिम अद्यतन",
+      sections: [
+        {
+          heading: "1. नियमों की स्वीकृति",
+          content: "Markdown से PDF कनवर्टर तक पहुंचकर और उसका उपयोग करके, आप इस समझौते की शर्तों और प्रावधानों से बंधे रहने के लिए सहमत होते हैं।"
+        },
+        {
+          heading: "2. सेवा का विवरण",
+          content: "Markdown से PDF कनवर्टर Markdown टेक्स्ट को PDF दस्तावेजों में बदलने के लिए एक वेब-आधारित टूल प्रदान करता है। सेवा जैसी है और जैसी उपलब्ध है, प्रदान की जाती है।"
+        },
+        {
+          heading: "3. उपयोगकर्ता आचरण",
+          content: "आप केवल कानूनी उद्देश्यों के लिए हमारी सेवा का उपयोग करने के लिए सहमत होते हैं। सेवा का उपयोग करने के लिए निषिद्ध है:",
+          items: ["अवैध, हानिकारक या दूसरों के अधिकारों का उल्लंघन करने वाली सामग्री उत्पन्न करना।", "सेवा की सुरक्षा या प्रदर्शन में बाधा डालने या हस्तक्षेप करने का प्रयास करना।"]
+        },
+        {
+          heading: "4. वारंटी की अस्वीकृति",
+          content: "हम यह गारंटी नहीं देते कि सेवा त्रुटि-मुक्त या बिना रुकावट की होगी। रूपांतरण प्रक्रिया के दौरान किसी भी डेटा हानि के लिए हम जिम्मेदार नहीं हैं। उपयोगकर्ताओं को अपने मूल दस्तावेजों का बैकअप रखने के लिए प्रोत्साहित किया जाता है।"
+        },
+        {
+          heading: "5. बौद्धिक संपदा",
+          content: "आप हमारी सेवा का उपयोग करके बनाई गई और परिवर्तित सामग्री के सभी अधिकार रखते हैं। हम आपके दस्तावेजों पर स्वामित्व का दावा नहीं करते।"
+        }
+      ]
+    },
+    tr: {
+      title: "Hizmet Şartları",
+      lastUpdated: "Son güncelleme",
+      sections: [
+        {
+          heading: "1. Şartların Kabulü",
+          content: "Markdown'tan PDF'e Dönüştürücü'ye erişerek ve kullanarak, bu anlaşmanın hüküm ve koşullarına bağlı kalmayı kabul ve kabul edersiniz."
+        },
+        {
+          heading: "2. Hizmetin Açıklaması",
+          content: "Markdown'tan PDF'e Dönüştürücü, Markdown metnini PDF belgelerine dönüştürmek için web tabanlı bir araç sağlar. Hizmet olduğu gibi ve mevcut olduğu şekilde sunulmaktadır."
+        },
+        {
+          heading: "3. Kullanıcı Davranışı",
+          content: "Hizmetimizi sadece yasal amaçlar için kullanmayı kabul edersiniz. Hizmeti kullanmak aşağıdakiler için yasaktır:",
+          items: ["Yasa dışı, zararlı veya başkalarının haklarını ihlal eden içerik oluşturmak.", "Hizmetin güvenliğini veya performansını bozmaya veya müdahale etmeye çalışmak."]
+        },
+        {
+          heading: "4. Garanti Reddi",
+          content: "Hizmetin hatasız veya kesintisiz olacağını garanti etmiyoruz. Dönüştürme işlemi sırasında herhangi bir veri kaybından sorumlu değiliz. Kullanıcıların orijinal belgelerinin yedeklerini tutmaları önerilir."
+        },
+        {
+          heading: "5. Fikri Mülkiyet",
+          content: "Hizmetimizi kullanarak oluşturduğunuz ve dönüştürdüğünüz içeriğin tüm haklarını saklı tutarsınız. Belgelerinizin mülkiyetini talep etmiyoruz."
+        }
+      ]
+    },
+    nl: {
+      title: "Servicevoorwaarden",
+      lastUpdated: "Laatst bijgewerkt",
+      sections: [
+        {
+          heading: "1. Aanvaarding van Voorwaarden",
+          content: "Door toegang te krijgen tot en gebruik te maken van de Markdown naar PDF Converter, aanvaardt u en gaat u akkoord met de voorwaarden en bepalingen van deze overeenkomst."
+        },
+        {
+          heading: "2. Beschrijving van de Dienst",
+          content: "De Markdown naar PDF Converter biedt een webgebaseerd hulpmiddel voor het converteren van Markdown-tekst naar PDF-documenten. De dienst wordt aangeboden zoals deze is en voor zover beschikbaar."
+        },
+        {
+          heading: "3. Gebruikersgedrag",
+          content: "U gaat akkoord met het uitsluitend gebruik van onze dienst voor wettelijke doeleinden. Het is verboden de dienst te gebruiken voor:",
+          items: ["Het genereren van inhoud die onwettig, schadelijk is of de rechten van anderen schendt.", "Pogingen om de beveiliging of prestaties van de dienst te verstoren of te interfereren."]
+        },
+        {
+          heading: "4. Vrijwaring",
+          content: "Wij garanderen niet dat de dienst foutloos of ononderbroken zal zijn. Wij zijn niet verantwoordelijk voor enig gegevensverlies tijdens het conversieproces. Gebruikers worden aangemoedigd om back-ups van hun originele documenten te behouden."
+        },
+        {
+          heading: "5. Intellectueel Eigendom",
+          content: "U behoudt alle rechten op de inhoud die u maakt en converteert met onze dienst. Wij claimen geen eigendom over uw documenten."
+        }
+      ]
+    },
+    sv: {
+      title: "Användarvillkor",
+      lastUpdated: "Senast uppdaterad",
+      sections: [
+        {
+          heading: "1. Godtagande av Villkor",
+          content: "Genom att få tillgång till och använda Markdown till PDF-konverteraren accepterar och går du med på att vara bunden av villkoren och bestämmelserna i detta avtal."
+        },
+        {
+          heading: "2. Beskrivning av Tjänsten",
+          content: "Markdown till PDF-konverteraren tillhandahåller ett webbaserat verktyg för att konvertera Markdown-text till PDF-dokument. Tjänsten tillhandahålls som den är och som tillgänglig."
+        },
+        {
+          heading: "3. Användarbeteende",
+          content: "Du går med på att endast använda vår tjänst för lagliga ändamål. Det är förbjudet att använda tjänsten för:",
+          items: ["Generera innehåll som är olagligt, skadligt eller kränker andras rättigheter.", "Försöka störa eller ingripa i tjänstens säkerhet eller prestanda."]
+        },
+        {
+          heading: "4. Ansvarsfriskrivning",
+          content: "Vi garanterar inte att tjänsten kommer att vara felfri eller oavbruten. Vi är inte ansvariga för någon dataförlust under konverteringsprocessen. Användare uppmuntras att behålla säkerhetskopior av sina ursprungliga dokument."
+        },
+        {
+          heading: "5. Intellektuellt Ägande",
+          content: "Du behåller alla rättigheter till innehållet du skapar och konverterar med vår tjänst. Vi gör inga anspråk på ägandeskap av dina dokument."
+        }
+      ]
+    },
+    pl: {
+      title: "Warunki Korzystania z Usługi",
+      lastUpdated: "Ostatnia aktualizacja",
+      sections: [
+        {
+          heading: "1. Akceptacja Warunków",
+          content: "Uzyskując dostęp i korzystając z Konwertera Markdown do PDF, akceptujesz i zgadzasz się być związany warunkami i postanowieniami tej umowy."
+        },
+        {
+          heading: "2. Opis Usługi",
+          content: "Konwerter Markdown do PDF zapewnia narzędzie internetowe do konwersji tekstu Markdown na dokumenty PDF. Usługa jest świadczona tak, jak jest i w miarę dostępności."
+        },
+        {
+          heading: "3. Zachowanie Użytkownika",
+          content: "Zgadzasz się używać naszej usługi tylko do legalnych celów. Zabrania się używania usługi do:",
+          items: ["Generowania treści, które są nielegalne, szkodliwe lub naruszają prawa innych.", "Próby zakłócenia lub ingerencji w bezpieczeństwo lub wydajność usługi."]
+        },
+        {
+          heading: "4. Wyłączenie Odpowiedzialności",
+          content: "Nie gwarantujemy, że usługa będzie wolna od błędów lub nieprzerwana. Nie jesteśmy odpowiedzialni za jakiekolwiek utraty danych podczas procesu konwersji. Użytkownicy są zachęcani do utrzymywania kopii zapasowych swoich oryginalnych dokumentów."
+        },
+        {
+          heading: "5. Własność Intelektualna",
+          content: "Zachowujesz wszystkie prawa do treści, które tworzysz i konwertujesz przy użyciu naszej usługi. Nie rościmy sobie prawa własności do Twoich dokumentów."
+        }
+      ]
+    },
+    vi: {
+      title: "Điều Khoản Dịch Vụ",
+      lastUpdated: "Cập nhật lần cuối",
+      sections: [
+        {
+          heading: "1. Chấp Nhận Điều Khoản",
+          content: "Bằng cách truy cập và sử dụng Bộ chuyển đổi Markdown sang PDF, bạn chấp nhận và đồng ý bị ràng buộc bởi các điều khoản và quy định của thỏa thuận này."
+        },
+        {
+          heading: "2. Mô Tả Dịch Vụ",
+          content: "Bộ chuyển đổi Markdown sang PDF cung cấp công cụ dựa trên web để chuyển đổi văn bản Markdown thành tài liệu PDF. Dịch vụ được cung cấp như là và theo mức độ có sẵn."
+        },
+        {
+          heading: "3. Hành Vi Người Dùng",
+          content: "Bạn đồng ý chỉ sử dụng dịch vụ của chúng tôi cho mục đích hợp pháp. Bạn bị cấm sử dụng dịch vụ để:",
+          items: ["Tạo nội dung bất hợp pháp, có hại hoặc vi phạm quyền của người khác.", "Cố gắng làm gián đoạn hoặc can thiệp vào bảo mật hoặc hiệu suất của dịch vụ."]
+        },
+        {
+          heading: "4. Tuyên Bố Miễn Trừ Trách Nhiệm",
+          content: "Chúng tôi không đảm bảo rằng dịch vụ sẽ không có lỗi hoặc không bị gián đoạn. Chúng tôi không chịu trách nhiệm về bất kỳ mất mát dữ liệu nào trong quá trình chuyển đổi. Người dùng được khuyến khích giữ bản sao lưu tài liệu gốc của họ."
+        },
+        {
+          heading: "5. Sở Hữu Trí Tuệ",
+          content: "Bạn giữ lại tất cả quyền đối với nội dung bạn tạo và chuyển đổi bằng dịch vụ của chúng tôi. Chúng tôi không tuyên bố quyền sở hữu đối với tài liệu của bạn."
+        }
+      ]
     }
   }
 
