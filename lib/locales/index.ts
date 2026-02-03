@@ -1,6 +1,21 @@
 import { en } from './en'
 import { zhCN } from './zh-cn'
 import { zhTW } from './zh-tw'
+import { es } from './es'
+import { fr } from './fr'
+import { de } from './de'
+import { it } from './it'
+import { pt } from './pt'
+import { ru } from './ru'
+import { ja } from './ja'
+import { ko } from './ko'
+import { ar } from './ar'
+import { hi } from './hi'
+import { tr } from './tr'
+import { nl } from './nl'
+import { sv } from './sv'
+import { pl } from './pl'
+import { vi } from './vi'
 import type { LocaleTranslations } from './types'
 
 export type Language =
@@ -25,23 +40,23 @@ export type Language =
 
 export const locales = {
   en,
-  es: en,
-  fr: en,
-  de: en,
-  it: en,
-  pt: en,
-  ru: en,
+  es,
+  fr,
+  de,
+  it,
+  pt,
+  ru,
   'zh-cn': zhCN,
   'zh-tw': zhTW,
-  ja: en,
-  ko: en,
-  ar: en,
-  hi: en,
-  tr: en,
-  nl: en,
-  sv: en,
-  pl: en,
-  vi: en,
+  ja,
+  ko,
+  ar,
+  hi,
+  tr,
+  nl,
+  sv,
+  pl,
+  vi,
 } as const satisfies Record<Language, LocaleTranslations>
 
 export const defaultLocale: Language = 'en'

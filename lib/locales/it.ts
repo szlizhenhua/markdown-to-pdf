@@ -1,0 +1,370 @@
+export const it = {
+  // Header
+  title: "Convertitore da Markdown a PDF",
+  subtitle: "Converti Markdown in PDF professionali",
+
+  // Controls
+  buttons: {
+    upload: "Carica",
+    showPreview: "Mostra Anteprima",
+    hidePreview: "Nascondi Anteprima",
+    getPDF: "Ottieni PDF",
+    generatingPDF: "Generazione PDF...",
+    settings: "Impostazioni",
+    tableOfContents: "Indice",
+    exportHTML: "HTML",
+    exportMarkdown: "MD"
+  },
+
+  // Editor
+  editor: {
+    title: "Editor Markdown",
+    placeholder: "Inizia a digitare il tuo Markdown qui...\n\n# Intestazione 1\n## Intestazione 2\n\n**Grassetto** e *corsivo*\n\n- Elemento elenco 1\n- Elemento elenco 2\n\n```javascript\nconsole.log('Ciao Mondo!');\n```\n\n| Colonna 1 | Colonna 2 |\n|---------|----------|\n| Dato 1  | Dato 2   |",
+    dragDropText: "Trascina qui il tuo file Markdown",
+    dragDropSubtext: "Supporta file .md e .txt",
+    loading: "Caricamento diagramma...",
+    rendering: "Rendering diagramma...",
+    stats: {
+      characters: "Caratteri",
+      words: "Parole",
+      lines: "Righe",
+      readingTime: "Tempo di lettura"
+    }
+  },
+
+  // Preview
+  preview: {
+    title: "Anteprima",
+    theme: "tema"
+  },
+
+  // Settings
+  settings: {
+    title: "Impostazioni",
+    theme: "Tema",
+    paperSize: "Formato Carta",
+    fontSize: "Dimensione Carattere"
+  },
+
+  // Table of Contents
+  toc: {
+    title: "Indice"
+  },
+
+  // Themes
+  themes: {
+    default: "Predefinito",
+    academic: "Accademico",
+    modern: "Moderno",
+    minimal: "Minimalista"
+  },
+
+  // Paper Sizes
+  paperSizes: {
+    a4: "A4",
+    letter: "Lettera",
+    legal: "Legale"
+  },
+
+  // Font Sizes
+  fontSizes: {
+    10: "10pt",
+    11: "11pt",
+    12: "12pt",
+    14: "14pt",
+    16: "16pt"
+  },
+
+  // Messages
+  messages: {
+    pdfGenerationError: "Generazione PDF fallita",
+    pdfExportError: "Esportazione PDF fallita, controlla la console per dettagli",
+    mermaidRenderError: "Errore rendering Mermaid",
+    mermaidSyntaxError: "Verifica la sintassi Mermaid",
+    mermaidExampleSyntax: "Sintassi di esempio:",
+    mermaidRenderRetry: "Tentativo rendering Mermaid {count} fallito, riproverò tra 100ms",
+    mermaidFinalError: "Rendering Mermaid最终失败",
+    unknownError: "Errore sconosciuto",
+    highlightJsError: "Errore Highlight.js per lingua \"{lang}\":",
+    katexRenderError: "Errore rendering KaTeX:",
+    mermaidInitError: "Errore inizializzazione Mermaid:",
+    mermaidLoading: "Caricamento diagramma...",
+    mermaidRendering: "Rendering diagramma...",
+    templateLoaded: "Modello caricato",
+    templateLoadedMessage: "Il modello è stato applicato all'editor.",
+    fileTooLarge: "File troppo grande. Dimensione massima 5MB.",
+    invalidFileType: "Tipo file non valido. Carica un file .md o .txt.",
+    fileUploadFailed: "Caricamento file fallito. Riprova.",
+    fileUploaded: "File caricato con successo",
+    resetComplete: "Reset completato",
+    resetCompleteMessage: "Editor e impostazioni ripristinati ai valori predefiniti.",
+    copySuccess: "Copiato negli appunti",
+    copyFailed: "Copia negli appunti fallita",
+    networkError: "Errore di rete. Verifica la connessione.",
+    quotaExceeded: "Quota storage superata. Cancella alcuni dati del browser.",
+    autoSaveFailed: "Salvataggio automatico fallito. Le modifiche potrebbero non essere salvate."
+  },
+
+  // Templates
+  templates: {
+    title: "Seleziona un Modello",
+    description: "Scegli tra modelli professionali per iniziare rapidamente",
+    selectTemplate: "Clicca su un modello per caricarlo nell'editor. Il contenuto attuale sarà sostituito.",
+    categories: {
+      all: "Tutti i Modelli",
+      basic: "Base",
+      academic: "Accademico",
+      technical: "Tecnico",
+      documentation: "Documentazione"
+    }
+  },
+
+  // Default Content
+  defaultContent: `# Convertitore da Markdown a PDF
+
+> 🎯 **Converti i tuoi documenti Markdown in PDF professionali con formule matematiche, diagrammi di flusso, evidenziazione codice e più temi**
+
+## ✨ Caratteristiche
+
+### 📊 **Supporto Completo Markdown**
+- **Formattazione Testo**: **Grassetto**, *Corsivo*, ~~Barrato~~, \`Codice inline\`
+- **Livelli Intestazioni**: Supporto completo struttura intestazioni H1-H6
+- **Elenchi**: Elenchi ordinati, non ordinati, elenchi attività
+- **Link e Immagini**: Riconoscimento automatico link, supporto incorporamento immagini
+- **Tabelle**: Supporto allineamento e strutture tabelle complesse
+- **Citazioni**: Citazioni blocco e citazioni annidate
+
+### 🧮 **Rendering Formule Matematiche (KaTeX)**
+**Formula Inline**: Equazione massa-energia di Einstein $E = mc^2$
+
+**Formula Blocco**:
+$$\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}$$
+
+**Formula Complessa**:
+$$\\sum_{i=1}^{n} x_i = x_1 + x_2 + \\cdots + x_n$$
+
+**Rappresentazione Matriciale**:
+$$\\begin{bmatrix}
+a & b \\\\
+c & d
+\\end{bmatrix}$$
+
+### 📈 **Disegno Diagrammi (Mermaid)**
+
+#### Diagramma di Flusso
+\`\`\`mermaid
+graph TD
+    A[Inizio] --> B{Condizione}
+    B -->|Sì| C[Esegui A]
+    B -->|No| D[Esegui B]
+    C --> E[Fine]
+    D --> E
+\`\`\`
+
+#### Diagramma Grafo
+\`\`\`mermaid
+graph LR
+    A[Utente] --> B[Sistema]
+    B --> A[Risposta]
+\`\`\`
+
+### 💻 **Evidenziazione Codice**
+
+#### Esempio JavaScript
+\`\`\`javascript
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Esempio utilizzo
+console.log(fibonacci(10)); // Output: 55
+\`\`\`
+
+#### Esempio Python
+\`\`\`python
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quicksort(left) + middle + quicksort(right)
+\`\`\`
+
+### 📋 **Caratteristiche Tabella**
+
+| Caratteristica | Stato | Descrizione | Scorciatoia |
+|---------|:------:|-------------|----------|
+| Formule Matematiche | ✅ | Supporto completo KaTeX | \`$...\$ |
+| Diagrammi di Flusso | ✅ | Diagrammi Mermaid | \`mermaid |
+| Evidenziazione Codice | ✅ | Supporto multilingua | \`lang |
+| Tabelle | ✅ | Funzionalità completa tabelle | \| \| \| |
+| Link | ✅ | Riconoscimento automatico link | [testo](url) |
+
+---
+
+## 📖 Guida Utente
+
+### 🚀 **Avvio Rapido**
+
+1. **Modifica Contenuto**
+   - Digita o incolla contenuto Markdown nell'editor a sinistra
+   - Anteprima tempo reale con WYSIWYG
+
+2. **Carica File**
+   - Clicca pulsante "Carica" per selezionare file .md o .txt
+   - Oppure trascina file direttamente nell'area editor
+
+3. **Personalizza Stili**
+   - Scegli stile tema (Predefinito/Accademico/Moderno/Minimalista)
+   - Regola formato carta e dimensione carattere
+   - Anteprima tempo reale effetti
+
+4. **Esporta PDF**
+   - Clicca pulsante "Ottieni PDF"
+   - Download automatico documento PDF generato
+   - Nome file generato automaticamente basato sul titolo documento
+
+### ⌨️ **Cheat Sheet Sintassi Markdown**
+
+#### Sintassi Base
+\`\`\`markdown
+# Intestazione Livello 1
+## Intestazione Livello 2
+### Intestazione Livello 3
+
+**Testo grassetto** o __Testo grassetto__
+*Testo corsivo* o _Testo corsivo_
+~~Barrato~~
+
+- Elemento elenco non ordinato
+  - Elemento elenco annidato
+
+1. Elemento elenco ordinato
+2. Secondo elemento
+   1. Elemento ordinato annidato
+
+> Testo citazione
+>> Citazione annidata
+
+[Testo link](https://example.com)
+![Descrizione immagine](immagine.jpg)
+
+\`Codice inline\`
+
+\`\`\`lingua
+Blocco codice
+\`\`\`
+
+### 💡 **Suggerimenti Utilizzo**
+
+1. **Formule Matematiche**
+   - Usa \`$...\` per formule inline
+   - Usa \`$$...$$\` per formule blocco
+   - Sintassi matematica LaTeX completa supportata
+
+2. **Blocchi Codice**
+   - Specifica linguaggio per evidenziazione sintassi: \`\`\`javascript
+   - Linguaggi supportati: JavaScript, Python, JSON, Bash, ecc.
+
+3. **Disegno Diagrammi**
+   - Usa sintassi Mermaid per creare diagrammi di flusso, grafici, ecc.
+   - Supporto tipi diagrammi multipli: grafo, diagramma flusso, ecc.
+
+4. **Formattazione Tabelle**
+   - Usa \`|\` per separare colonne
+   - Usa \`-\` per separare intestazioni e contenuto
+   - Supporto allineamento: \`:---\` (sinistra), \`---:\` (destra), \`:---:\` (centro)
+
+---
+
+## ❓ Domande Frequenti (FAQ)
+
+### D1: Quali sintassi Markdown sono supportate?
+**R**: Questo strumento supporta sintassi Markdown standard ed estensioni GitHub Flavored Markdown (GFM), incluse tabelle, elenchi attività, barrato, ecc. Supporta anche formule matematiche (KaTeX) e disegno diagrammi (Mermaid).
+
+### D2: Cosa fare se le formule matematiche non vengono visualizzate?
+**R**: Assicurati di usare la sintassi corretta:
+- Formule inline: \`$formula$\`
+- Formule blocco: \`$$formula$$\`
+Se ancora non vengono visualizzate, verifica se la sintassi della formula è corretta.
+
+### D3: Qual è la qualità dei PDF esportati?
+**R**: Utilizziamo motori di generazione PDF professionali per garantire la qualità di output:
+- Grafici vettoriali alta definizione
+- Rendering testo chiaro
+- Impaginazione pagine corretta
+- Mantenere formattazione originale
+
+### D4: I miei dati sono al sicuro?
+**R**: Completamente sicuri! Tutta l'elaborazione avviene localmente nel tuo browser:
+- Nessun dato caricato su alcun server
+- Nessun memorizzazione contenuto documento
+- Dati automaticamente cancellati dopo elaborazione
+
+### D5: Quali browser sono supportati?
+**R**: Supporta tutti i browser moderni:
+- Chrome 65+
+- Firefox 60+
+- Safari 12+
+- Edge 79+
+
+### D6: Come gestire documenti di grandi dimensioni?
+**R**: Per documenti di grandi dimensioni, raccomandiamo:
+- Elaborare per sezioni
+- Regolare opportunamente dimensione carattere
+- Usare interruzioni pagina per segmentazione ragionevole
+- Anteprima per confermare effetti prima di esportare
+
+### D7: Qual è il nome del file PDF esportato?
+**R**: Il nome file viene generato automaticamente basato sul titolo della prima riga del documento, ad esempio:
+- Titolo "Report Progetto" → "Report Progetto.pdf"
+- Usa "documento.pdf" quando non c'è titolo
+
+---
+
+## 📞 Supporto Tecnico
+
+### 🔧 **Stack Tecnologico**
+- **Next.js** - Framework React
+- **Tailwind CSS** - Framework Styling
+- **Marked** - Parser Markdown
+- **KaTeX** - Rendering Formule Matematiche
+- **Mermaid** - Disegno Diagrammi
+- **html2pdf.js** - Generazione PDF
+- **Highlight.js** - Evidenziazione Codice
+
+### 📧 **Contattaci**
+[Open Source](https://github.com/szlizhenhua/markdown-to-pdf). Per domande o suggerimenti, contattaci tramite:
+- GitHub Issues: Segnala problemi o richiedi funzionalità
+- Email feedback: support@markdown-to-pdf.org
+
+### 🔄 **Registro Modifiche**
+- **v1.0.0** - Versione iniziale
+- Supporto formule matematiche KaTeX
+- Supporto diagrammi Mermaid
+- Selezione stili temi multipli
+- Ottimizzazione design responsivo
+
+---
+
+<div style="text-align: center; margin-top: 3em; padding: 2em; border-top: 1px solid #eee; color: #666;">
+  <p><strong>Convertitore da Markdown a PDF</strong></p>
+  <p>Strumento Professionale Conversione Markdown in PDF</p>
+  <p style="font-size: 0.9em; margin-top: 1em;">
+    Creato con ❤️ | Privacy Prima
+  </p>
+  <p style="font-size: 0.8em; margin-top: 0.5em;">
+    © 2025 Markdown to PDF. Tutti i diritti riservati.
+  </p>
+</div>`,
+
+  // SEO
+  seo: {
+    title: "Convertitore da Markdown a PDF | Esportazione Documenti Professionale",
+    description: "Converti Markdown in documenti PDF professionali con matematica, codice, diagrammi, indice, temi. Output qualità pubblicazione per uso accademico e commerciale.",
+    keywords: "Markdown, PDF, convertitore, KaTeX, Mermaid, evidenziazione codice, indice, temi, esporta, accademico, professionale"
+  }
+}
