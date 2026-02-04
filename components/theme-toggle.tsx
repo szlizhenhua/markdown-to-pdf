@@ -70,7 +70,10 @@ export function ThemeToggle() {
           {getThemeIcon()}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent
+        align="end"
+        className="bg-popover text-popover-foreground border border-primary/25 shadow-xl"
+      >
         <DropdownMenuItem onClick={() => setTheme('light')} className="cursor-pointer">
           <Sun className="h-4 w-4 mr-2" />
           <span>Light</span>

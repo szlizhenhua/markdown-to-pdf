@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Type, Bold, Italic, Strikethrough, Code, Link, Image, List, ListOrdered, Quote, Heading1, Hash, ChevronDown, ChevronUp, TextSelection, Search, Undo, Redo } from 'lucide-react'
+import { Type, Bold, Italic, Strikethrough, Code, Link, Image, List, ListOrdered, Quote, Heading1, Hash, ChevronDown, ChevronUp, TextSelection, Search, Undo, Redo, ChevronsUpDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { EmojiPicker } from '@/components/emoji-picker'
 import { TableGenerator } from '@/components/table-generator'
@@ -73,6 +73,7 @@ interface MarkdownToolbarProps {
 
 export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFindReplace, onFindReplaceToggle, canUndo, canRedo, onUndo, onRedo, className, content = '', onClear, onReplace, onAutosaveIntervalChange, autosaveInterval, onFontSizeChange, onLineHeightChange, onFontFamilyChange, previewFontSize, previewLineHeight, previewFontFamily, onExportPDF, onExportMarkdown, onPrint, onTogglePreview, onDebounceChange, debounceValue }: MarkdownToolbarProps) {
   const [expanded, setExpanded] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
 
   const insertMarkdown = (before: string, after: string = '', placeholder: string = '') => {
     onInsert(`${before}${placeholder}${after}`)
@@ -214,6 +215,19 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
         >
           {expanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
         </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setCollapsed(!collapsed)}
+          className="h-8 px-2 touch-manipulation"
+          title={collapsed ? 'Expand toolbar' : 'Collapse toolbar'}
+          aria-label={collapsed ? 'Expand toolbar' : 'Collapse toolbar'}
+        >
+          <ChevronsUpDown className="h-4 w-4" />
+          <span className="hidden sm:inline ml-1 text-xs">
+            {collapsed ? 'Expand' : 'Collapse'}
+          </span>
+        </Button>
         {onWordWrapToggle && (
           <Button
             variant="ghost"
@@ -291,48 +305,52 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
           </>
         )}
       </div>
-      {expanded && (
-        <div className="flex items-center gap-1 p-2 pt-0 flex-wrap border-t">
-          {secondaryTools.map(tool => (
-            <Button
-              key={tool.id}
-              variant="ghost"
-              size="sm"
-              onClick={() => tool.insert()}
-              className="h-8 w-8 p-0 touch-manipulation"
-              title={tool.label}
-              aria-label={tool.label}
-            >
-              {tool.icon}
-            </Button>
-          ))}
-          <div className="w-px h-6 bg-border mx-1" />
-          <HeadingHelper onInsert={onInsert} />
-          <BlockquoteHelper onInsert={onInsert} />
-          <ListHelper onInsert={onInsert} />
-          <TaskListHelper onInsert={onInsert} />
-          <CodeBlockSelector onInsert={onInsert} />
-          <LinkHelper onInsert={onInsert} />
-          <ImageHelper onInsert={onInsert} />
-          <TableGenerator onInsert={onInsert} />
-          <DateTimeHelper onInsert={onInsert} />
-          <EmojiPicker onInsert={onInsert} />
-          <HighlightHelper onInsert={onInsert} />
-          {onClear && <ClearFormatting onClear={onClear} />}
-          {onReplace && <TextTransform content={content} onReplace={onReplace} />}
-        </div>
-      )}
-      {content && (
-        <div className="flex items-center gap-1 p-2 pt-0 flex-wrap border-t">
-          <span className="text-xs text-muted-foreground mr-2 hidden sm:inline">Special:</span>
-          <SpecialFormatting onInsert={onInsert} />
-        </div>
-      )}
-      {content && onReplace && (
-        <div className="flex items-center gap-1 p-2 pt-0 flex-wrap border-t">
-          <span className="text-xs text-muted-foreground mr-2">Line Ops:</span>
-          <LineOperations content={content} onReplace={onReplace} />
-        </div>
+      {!collapsed && (
+        <>
+          {expanded && (
+            <div className="flex items-center gap-1 p-2 pt-0 flex-wrap border-t">
+              {secondaryTools.map(tool => (
+                <Button
+                  key={tool.id}
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => tool.insert()}
+                  className="h-8 w-8 p-0 touch-manipulation"
+                  title={tool.label}
+                  aria-label={tool.label}
+                >
+                  {tool.icon}
+                </Button>
+              ))}
+              <div className="w-px h-6 bg-border mx-1" />
+              <HeadingHelper onInsert={onInsert} />
+              <BlockquoteHelper onInsert={onInsert} />
+              <ListHelper onInsert={onInsert} />
+              <TaskListHelper onInsert={onInsert} />
+              <CodeBlockSelector onInsert={onInsert} />
+              <LinkHelper onInsert={onInsert} />
+              <ImageHelper onInsert={onInsert} />
+              <TableGenerator onInsert={onInsert} />
+              <DateTimeHelper onInsert={onInsert} />
+              <EmojiPicker onInsert={onInsert} />
+              <HighlightHelper onInsert={onInsert} />
+              {onClear && <ClearFormatting onClear={onClear} />}
+              {onReplace && <TextTransform content={content} onReplace={onReplace} />}
+            </div>
+          )}
+          {content && (
+            <div className="flex items-center gap-1 p-2 pt-0 flex-wrap border-t">
+              <span className="text-xs text-muted-foreground mr-2 hidden sm:inline">Special:</span>
+              <SpecialFormatting onInsert={onInsert} />
+            </div>
+          )}
+          {content && onReplace && (
+            <div className="flex items-center gap-1 p-2 pt-0 flex-wrap border-t">
+              <span className="text-xs text-muted-foreground mr-2">Line Ops:</span>
+              <LineOperations content={content} onReplace={onReplace} />
+            </div>
+          )}
+        </>
       )}
     </div>
   )

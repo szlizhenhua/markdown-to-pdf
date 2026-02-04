@@ -1,3 +1,4 @@
+import React from 'react'
 import type { Metadata } from 'next'
 import { LegalHeader } from '@/components/legal-header'
 import { SiteFooter } from '@/components/site-footer'
