@@ -168,6 +168,121 @@ graph LR
     B --> A[响应]
 \`\`\`
 
+#### 时序图 (Sequence Diagram)
+\`\`\`mermaid
+sequenceDiagram
+    participant U as 用户
+    participant W as Web 应用
+    participant S as PDF 服务
+    U->>W: 粘贴/编辑 Markdown
+    W-->>U: 实时预览
+    U->>W: 点击「获取 PDF」
+    W->>S: 渲染并生成 PDF
+    S-->>W: 返回 PDF
+    W-->>U: 下载文件
+\`\`\`
+
+#### 甘特图 (Gantt)
+\`\`\`mermaid
+gantt
+    title 项目计划（示例）
+    dateFormat  YYYY-MM-DD
+    section 规划
+    需求梳理           :a1, 2026-02-01, 3d
+    方案评审           :a2, 2026-02-04, 1d
+    section 实现
+    编辑器开发         :b1, 2026-02-05, 5d
+    PDF 导出联调       :b2, 2026-02-10, 3d
+\`\`\`
+
+#### 类图 (Class Diagram)
+\`\`\`mermaid
+classDiagram
+    class MarkdownRenderer {
+      +render(markdown) HTML
+      +renderMermaid() void
+    }
+    class PdfExporter {
+      +export(html) PDF
+    }
+    MarkdownRenderer --> PdfExporter : provides HTML
+\`\`\`
+
+#### 状态图 (State Diagram)
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> Idle
+    Idle --> Editing : 输入
+    Editing --> Preview : 预览
+    Preview --> Exporting : 导出
+    Exporting --> Idle : 完成
+\`\`\`
+
+#### 饼图 (Pie)
+\`\`\`mermaid
+pie title 风险占比（示例）
+    "高风险" : 15
+    "中风险" : 35
+    "低风险" : 50
+\`\`\`
+
+#### 思维导图 (Mindmap)
+\`\`\`mermaid
+mindmap
+  root((风险管理))
+    识别
+      威胁
+      机会
+    评估
+      影响
+      概率
+    应对
+      减轻
+      转移
+      接受
+\`\`\`
+
+#### 时间线 (Timeline)
+\`\`\`mermaid
+timeline
+    title 发布节奏（示例）
+    2026-02 : v1.0 上线
+    2026-03 : 模板库扩展
+    2026-04 : 协作与历史
+\`\`\`
+
+#### 雷达图（自定义 Radar Chart）
+\`\`\`mermaid
+radar-chart
+    title 团队能力雷达（示例 1）
+    axis 沟通, 设计, 开发, 测试, 文档
+    series 方案A [80, 70, 90, 60, 75]
+    series 方案B [65, 85, 70, 80, 60]
+\`\`\`
+
+\`\`\`mermaid
+radar
+    title 产品指标雷达（示例 2）
+    axis 速度, 稳定, 体验, 可维护
+    v1 [70, 60, 80, 65]
+\`\`\`
+
+#### 象限图（自定义 Quadrant Chart）
+\`\`\`mermaid
+quadrant-chart
+    title 风险-时机矩阵
+    x-axis "风险可控性" --> "风险敏感性"
+    y-axis "时机成熟度" --> "时机紧迫性"
+    quadrant-1 "战略窗口区"
+    quadrant-2 "观察准备区"
+    quadrant-3 "谨慎规避区"
+    quadrant-4 "加速布局区"
+    "本土深耕": [0.75, 0.85]
+    "东南亚试探": [0.45, 0.65]
+    "双轨制": [0.35, 0.55]
+    "竞对先发": [0.60, 0.31]
+\`\`\`
+
 ### 💻 **代码高亮**
 
 #### JavaScript 示例

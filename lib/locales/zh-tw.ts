@@ -168,6 +168,121 @@ graph LR
     B --> A[響應]
 \`\`\`
 
+#### 時序圖 (Sequence Diagram)
+\`\`\`mermaid
+sequenceDiagram
+    participant U as 用戶
+    participant W as Web 應用
+    participant S as PDF 服務
+    U->>W: 貼上/編輯 Markdown
+    W-->>U: 即時預覽
+    U->>W: 點擊「獲取 PDF」
+    W->>S: 渲染並生成 PDF
+    S-->>W: 回傳 PDF
+    W-->>U: 下載檔案
+\`\`\`
+
+#### 甘特圖 (Gantt)
+\`\`\`mermaid
+gantt
+    title 專案計畫（示例）
+    dateFormat  YYYY-MM-DD
+    section 規劃
+    需求梳理           :a1, 2026-02-01, 3d
+    方案評審           :a2, 2026-02-04, 1d
+    section 實作
+    編輯器開發         :b1, 2026-02-05, 5d
+    PDF 匯出聯調       :b2, 2026-02-10, 3d
+\`\`\`
+
+#### 類圖 (Class Diagram)
+\`\`\`mermaid
+classDiagram
+    class MarkdownRenderer {
+      +render(markdown) HTML
+      +renderMermaid() void
+    }
+    class PdfExporter {
+      +export(html) PDF
+    }
+    MarkdownRenderer --> PdfExporter : provides HTML
+\`\`\`
+
+#### 狀態圖 (State Diagram)
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> Idle
+    Idle --> Editing : 輸入
+    Editing --> Preview : 預覽
+    Preview --> Exporting : 匯出
+    Exporting --> Idle : 完成
+\`\`\`
+
+#### 圓餅圖 (Pie)
+\`\`\`mermaid
+pie title 風險占比（示例）
+    "高風險" : 15
+    "中風險" : 35
+    "低風險" : 50
+\`\`\`
+
+#### 心智圖 (Mindmap)
+\`\`\`mermaid
+mindmap
+  root((風險管理))
+    識別
+      威脅
+      機會
+    評估
+      影響
+      機率
+    應對
+      減輕
+      轉移
+      接受
+\`\`\`
+
+#### 時間線 (Timeline)
+\`\`\`mermaid
+timeline
+    title 發佈節奏（示例）
+    2026-02 : v1.0 上線
+    2026-03 : 模板庫擴展
+    2026-04 : 協作與歷史
+\`\`\`
+
+#### 雷達圖（自訂 Radar Chart）
+\`\`\`mermaid
+radar-chart
+    title 團隊能力雷達（示例 1）
+    axis 溝通, 設計, 開發, 測試, 文件
+    series 方案A [80, 70, 90, 60, 75]
+    series 方案B [65, 85, 70, 80, 60]
+\`\`\`
+
+\`\`\`mermaid
+radar
+    title 產品指標雷達（示例 2）
+    axis 速度, 穩定, 體驗, 可維護
+    v1 [70, 60, 80, 65]
+\`\`\`
+
+#### 象限圖（自訂 Quadrant Chart）
+\`\`\`mermaid
+quadrant-chart
+    title 風險-時機矩陣
+    x-axis "風險可控性" --> "風險敏感性"
+    y-axis "時機成熟度" --> "時機緊迫性"
+    quadrant-1 "戰略窗口區"
+    quadrant-2 "觀察準備區"
+    quadrant-3 "謹慎規避區"
+    quadrant-4 "加速佈局區"
+    "本土深耕": [0.75, 0.85]
+    "東南亞試探": [0.45, 0.65]
+    "雙軌制": [0.35, 0.55]
+    "競對先發": [0.60, 0.31]
+\`\`\`
+
 ### 💻 **代碼高亮**
 
 #### JavaScript 示例

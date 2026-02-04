@@ -168,6 +168,121 @@ graph LR
     B --> A[Response]
 \`\`\`
 
+#### Sequence Diagram
+\`\`\`mermaid
+sequenceDiagram
+    participant U as User
+    participant W as Web App
+    participant S as PDF Service
+    U->>W: Paste/Edit Markdown
+    W-->>U: Live preview
+    U->>W: Click "Get PDF"
+    W->>S: Render & generate PDF
+    S-->>W: Return PDF
+    W-->>U: Download file
+\`\`\`
+
+#### Gantt
+\`\`\`mermaid
+gantt
+    title Project Plan (Example)
+    dateFormat  YYYY-MM-DD
+    section Planning
+    Requirements        :a1, 2026-02-01, 3d
+    Review              :a2, 2026-02-04, 1d
+    section Delivery
+    Editor features     :b1, 2026-02-05, 5d
+    PDF export polish   :b2, 2026-02-10, 3d
+\`\`\`
+
+#### Class Diagram
+\`\`\`mermaid
+classDiagram
+    class MarkdownRenderer {
+      +render(markdown) HTML
+      +renderMermaid() void
+    }
+    class PdfExporter {
+      +export(html) PDF
+    }
+    MarkdownRenderer --> PdfExporter : provides HTML
+\`\`\`
+
+#### State Diagram
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> Idle
+    Idle --> Editing : type
+    Editing --> Preview : preview
+    Preview --> Exporting : export
+    Exporting --> Idle : done
+\`\`\`
+
+#### Pie
+\`\`\`mermaid
+pie title Risk Split (Example)
+    "High" : 15
+    "Medium" : 35
+    "Low" : 50
+\`\`\`
+
+#### Mindmap
+\`\`\`mermaid
+mindmap
+  root((Risk))
+    Identify
+      Threats
+      Opportunities
+    Assess
+      Impact
+      Likelihood
+    Respond
+      Mitigate
+      Transfer
+      Accept
+\`\`\`
+
+#### Timeline
+\`\`\`mermaid
+timeline
+    title Release cadence (Example)
+    2026-02 : v1.0 launch
+    2026-03 : template library
+    2026-04 : collaboration & history
+\`\`\`
+
+#### Radar Chart (Custom)
+\`\`\`mermaid
+radar-chart
+    title Team skills radar (Example 1)
+    axis Communication, Design, Development, QA, Docs
+    series Plan A [80, 70, 90, 60, 75]
+    series Plan B [65, 85, 70, 80, 60]
+\`\`\`
+
+\`\`\`mermaid
+radar
+    title Product metrics radar (Example 2)
+    axis Speed, Stability, UX, Maintainability
+    v1 [70, 60, 80, 65]
+\`\`\`
+
+#### Quadrant Chart (Custom)
+\`\`\`mermaid
+quadrant-chart
+    title Risk vs Timing Matrix
+    x-axis "Controllability" --> "Sensitivity"
+    y-axis "Maturity" --> "Urgency"
+    quadrant-1 "Strategic window"
+    quadrant-2 "Observe & prepare"
+    quadrant-3 "Avoid"
+    quadrant-4 "Accelerate"
+    "Local deepening": [0.75, 0.85]
+    "SEA probing": [0.45, 0.65]
+    "Dual-track": [0.35, 0.55]
+    "Competitor lead": [0.60, 0.31]
+\`\`\`
+
 ### 💻 **Code Highlighting**
 
 #### JavaScript Example

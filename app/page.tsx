@@ -222,15 +222,12 @@ export default function MarkdownToPDF() {
     return () => clearTimeout(timer)
   }, [markdown, isLoaded, t, addToast, cursorPosition, prevMarkdownLength, pushState, autosaveInterval])
 
-  // Load saved content on mount
+  // Always start from default content on refresh
   useEffect(() => {
     try {
-      const savedContent = localStorage.getItem('markdown-content')
-      if (savedContent && savedContent !== t.defaultContent) {
-        setMarkdown(savedContent)
-      }
+      localStorage.removeItem('markdown-content')
     } catch (error) {
-      console.error('Failed to load content:', error)
+      console.error('Failed to clear saved content:', error)
     }
     setIsLoaded(true)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
