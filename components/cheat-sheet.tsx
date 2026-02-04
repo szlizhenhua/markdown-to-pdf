@@ -91,8 +91,8 @@ export function CheatSheet({ className }: CheatSheetProps) {
             onClick={() => setIsOpen(false)}
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg border-2 border-gray-200 dark:border-gray-700 max-w-4xl w-full max-h-[85vh] overflow-auto">
-              <div className="sticky top-0 bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+            <div className="bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15 max-w-4xl w-full max-h-[85vh] overflow-auto">
+              <div className="sticky top-0 bg-popover p-4 border-b border-border flex items-center justify-between">
                 <h2 className="text-lg font-semibold">Markdown Cheat Sheet</h2>
                 <Button
                   variant="ghost"
@@ -107,17 +107,17 @@ export function CheatSheet({ className }: CheatSheetProps) {
               <div className="p-6 space-y-8">
                 {cheatSheetCategories.map((category) => (
                   <div key={category.name}>
-                    <h3 className="text-base font-semibold mb-3 text-gray-900 dark:text-gray-100">{category.name}</h3>
+                    <h3 className="text-base font-semibold mb-3 text-foreground">{category.name}</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {category.items.map((item) => (
                         <div
                           key={item.code}
-                          className="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700"
+                          className="flex items-start gap-3 p-3 bg-muted/40 rounded-lg border border-border"
                         >
-                          <code className="text-sm font-mono bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded whitespace-pre-wrap flex-1">
+                          <code className="text-sm font-mono bg-muted/60 px-2 py-1 rounded whitespace-pre-wrap flex-1">
                             {item.code}
                           </code>
-                          <span className="text-sm text-gray-600 dark:text-gray-400 flex-1">{item.description}</span>
+                          <span className="text-sm text-muted-foreground flex-1">{item.description}</span>
                         </div>
                       ))}
                     </div>

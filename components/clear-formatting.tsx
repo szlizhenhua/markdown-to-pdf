@@ -34,7 +34,7 @@ export function ClearFormatting({ onClear, className }: ClearFormattingProps) {
       </Button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full mt-1 z-50 w-72 bg-white dark:bg-gray-800 shadow-lg rounded-lg border-2 border-gray-200 dark:border-gray-700">
+        <div className="absolute left-0 top-full mt-1 z-50 w-72 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15">
           <div className="p-4 space-y-4">
             <div>
               <h3 className="text-sm font-medium mb-2">Clear Options</h3>
@@ -49,7 +49,7 @@ export function ClearFormatting({ onClear, className }: ClearFormattingProps) {
                   onClear()
                   setIsOpen(false)
                 }}
-                className="w-full text-left px-3 py-2 text-sm rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-600"
+                className="w-full text-left px-3 py-2 text-sm rounded hover:bg-accent/60 transition-colors border border-border"
               >
                 <div className="font-medium">Clear All Content</div>
                 <div className="text-xs text-muted-foreground">Remove everything and start fresh</div>
@@ -59,7 +59,7 @@ export function ClearFormatting({ onClear, className }: ClearFormattingProps) {
                 onClick={() => {
                   setShowConfirm(true)
                 }}
-                className="w-full text-left px-3 py-2 text-sm rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-600"
+                className="w-full text-left px-3 py-2 text-sm rounded hover:bg-accent/60 transition-colors border border-border"
               >
                 <div className="font-medium">Reset to Default</div>
                 <div className="text-xs text-muted-foreground">Restore default template content</div>

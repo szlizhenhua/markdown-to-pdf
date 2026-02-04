@@ -65,8 +65,8 @@ export function EmojiPicker({ onInsert, className }: EmojiPickerProps) {
       </Button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full mt-1 z-50 w-80 bg-white dark:bg-gray-800 shadow-lg rounded-lg border-2 border-gray-200 dark:border-gray-700 max-h-96 overflow-auto">
-          <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-2">
+        <div className="absolute left-0 top-full mt-1 z-50 w-80 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15 max-h-96 overflow-auto">
+          <div className="sticky top-0 bg-popover border-b border-border p-2">
             <div className="flex gap-1 overflow-x-auto">
               {emojiCategories.map((category, index) => (
                 <button
@@ -74,8 +74,8 @@ export function EmojiPicker({ onInsert, className }: EmojiPickerProps) {
                   onClick={() => setActiveCategory(index)}
                   className={`px-3 py-1 text-xs rounded whitespace-nowrap transition-colors ${
                     activeCategory === index
-                      ? 'bg-gray-200 dark:bg-gray-700 font-medium'
-                      : 'hover:bg-gray-100 dark:hover:bg-gray-600'
+                      ? 'bg-accent text-accent-foreground font-medium'
+                      : 'hover:bg-accent/60'
                   }`}
                 >
                   {category.name}
@@ -90,7 +90,7 @@ export function EmojiPicker({ onInsert, className }: EmojiPickerProps) {
                 <button
                   key={emoji}
                   onClick={() => handleInsertEmoji(emoji)}
-                  className="h-8 w-8 text-xl flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors touch-manipulation"
+                  className="h-8 w-8 text-xl flex items-center justify-center hover:bg-accent/60 rounded transition-colors touch-manipulation"
                   title={emoji}
                   aria-label={`Insert ${emoji}`}
                 >

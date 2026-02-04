@@ -65,7 +65,7 @@ export function LinkHelper({ onInsert, className }: LinkHelperProps) {
       </Button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full mt-1 z-50 w-80 bg-white dark:bg-gray-800 shadow-lg rounded-lg border-2 border-gray-200 dark:border-gray-700">
+        <div className="absolute left-0 top-full mt-1 z-50 w-80 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15">
           <div className="p-4 space-y-3">
             <div>
               <label className="text-sm font-medium mb-1.5 block">URL *</label>
@@ -138,10 +138,10 @@ export function LinkHelper({ onInsert, className }: LinkHelperProps) {
 
             {/* Preview */}
             {url && (
-              <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-900 rounded border text-xs">
-                <div className="text-gray-500 dark:text-gray-400 mb-1">Preview:</div>
+              <div className="mt-3 p-3 bg-muted/40 rounded border text-xs">
+                <div className="text-muted-foreground mb-1">Preview:</div>
                 <div className="text-blue-600 dark:text-blue-400 break-all">
-                  {text || url} {title && <span className="text-gray-500">({title})</span>}
+                  {text || url} {title && <span className="text-muted-foreground">({title})</span>}
                 </div>
               </div>
             )}

@@ -9,7 +9,6 @@ import {
   Printer,
   Copy,
   Trash2,
-  Sparkles,
   Eye,
   RotateCcw,
   Languages,
@@ -37,7 +36,6 @@ interface QuickActionsMenuProps {
   onFormatDocument?: () => void
   onTogglePreview?: () => void
   onNewDocument?: () => void
-  onAiAssist?: () => void
 }
 
 export function QuickActionsMenu({
@@ -49,8 +47,7 @@ export function QuickActionsMenu({
   onClear,
   onFormatDocument,
   onTogglePreview,
-  onNewDocument,
-  onAiAssist
+  onNewDocument
 }: QuickActionsMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -131,11 +128,6 @@ export function QuickActionsMenu({
             <Wand2 className="h-4 w-4 mr-2" />
             <span>Format Document</span>
             <DropdownMenuShortcut>⌘⇧F</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => handleAction(onAiAssist)}>
-            <Sparkles className="h-4 w-4 mr-2" />
-            <span>AI Assistant</span>
-            <DropdownMenuShortcut>⌘⇧A</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
 

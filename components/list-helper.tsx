@@ -72,7 +72,7 @@ export function ListHelper({ onInsert, className }: ListHelperProps) {
       </Button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full mt-1 z-50 w-80 bg-white dark:bg-gray-800 shadow-lg rounded-lg border-2 border-gray-200 dark:border-gray-700">
+        <div className="absolute left-0 top-full mt-1 z-50 w-80 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15">
           <div className="p-4 space-y-4">
             <div>
               <label className="text-sm font-medium mb-2 block">List Type</label>
@@ -82,8 +82,8 @@ export function ListHelper({ onInsert, className }: ListHelperProps) {
                   onClick={() => setListType('bullet')}
                   className={`flex-1 px-3 py-2 text-sm rounded border transition-colors ${
                     listType === 'bullet'
-                      ? 'bg-gray-200 dark:bg-gray-700 border-gray-400 dark:border-gray-500'
-                      : 'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      ? 'bg-accent text-accent-foreground border-primary/30'
+                      : 'bg-card border-border hover:bg-accent/60'
                   }`}
                 >
                   <List className="h-4 w-4 inline mr-1" />
@@ -94,8 +94,8 @@ export function ListHelper({ onInsert, className }: ListHelperProps) {
                   onClick={() => setListType('numbered')}
                   className={`flex-1 px-3 py-2 text-sm rounded border transition-colors ${
                     listType === 'numbered'
-                      ? 'bg-gray-200 dark:bg-gray-700 border-gray-400 dark:border-gray-500'
-                      : 'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      ? 'bg-accent text-accent-foreground border-primary/30'
+                      : 'bg-card border-border hover:bg-accent/60'
                   }`}
                 >
                   <ListOrdered className="h-4 w-4 inline mr-1" />
@@ -112,7 +112,7 @@ export function ListHelper({ onInsert, className }: ListHelperProps) {
                 max="10"
                 value={itemCount}
                 onChange={(e) => handleItemCountChange(parseInt(e.target.value))}
-                className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-gray-700"
+                className="w-full h-2 bg-muted/60 rounded-lg appearance-none cursor-pointer accent-primary"
               />
             </div>
 
@@ -126,7 +126,7 @@ export function ListHelper({ onInsert, className }: ListHelperProps) {
                     value={item}
                     onChange={(e) => handleItemChange(index, e.target.value)}
                     placeholder={listType === 'bullet' ? `Item ${index + 1}` : `${index + 1}. Item`}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary/40"
                   />
                 ))}
               </div>

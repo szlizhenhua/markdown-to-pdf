@@ -177,7 +177,7 @@ export function CollaborationIndicator({ className }: CollaborationIndicatorProp
                         {collab.isOnline ? (
                           <div className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
                         ) : (
-                          <div className="w-2 h-2 rounded-full bg-gray-300 flex-shrink-0" />
+                          <div className="w-2 h-2 rounded-full bg-muted-foreground/40 flex-shrink-0" />
                         )}
                       </div>
                       {collab.cursor && (

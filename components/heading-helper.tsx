@@ -39,7 +39,7 @@ export function HeadingHelper({ onInsert, className }: HeadingHelperProps) {
       </Button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full mt-1 z-50 w-72 bg-white dark:bg-gray-800 shadow-lg rounded-lg border-2 border-gray-200 dark:border-gray-700">
+        <div className="absolute left-0 top-full mt-1 z-50 w-72 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15">
           <div className="p-4 space-y-4">
             <div>
               <label className="text-sm font-medium mb-2 block">Heading Level: {level}</label>
@@ -49,7 +49,7 @@ export function HeadingHelper({ onInsert, className }: HeadingHelperProps) {
                 max="6"
                 value={level}
                 onChange={(e) => setLevel(parseInt(e.target.value))}
-                className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-gray-700"
+                className="w-full h-2 bg-muted/60 rounded-lg appearance-none cursor-pointer accent-primary"
               />
               <div className="flex justify-between text-xs text-muted-foreground mt-1">
                 <span>H1</span>
@@ -73,7 +73,7 @@ export function HeadingHelper({ onInsert, className }: HeadingHelperProps) {
                   }
                 }}
                 placeholder="Enter heading text"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary/40"
               />
             </div>
 
@@ -86,9 +86,9 @@ export function HeadingHelper({ onInsert, className }: HeadingHelperProps) {
             </Button>
 
             {/* Preview */}
-            <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-900 rounded border text-xs">
-              <div className="text-gray-500 dark:text-gray-400 mb-1">Preview:</div>
-              <div className="text-gray-700 dark:text-gray-300" style={{ fontSize: `${2 - level * 0.15}rem`, fontWeight: level === 1 ? 'bold' : level < 3 ? '600' : '500' }}>
+            <div className="mt-3 p-3 bg-muted/40 rounded border text-xs">
+              <div className="text-muted-foreground mb-1">Preview:</div>
+              <div className="text-foreground" style={{ fontSize: `${2 - level * 0.15}rem`, fontWeight: level === 1 ? 'bold' : level < 3 ? '600' : '500' }}>
                 {'#'.repeat(level)} {text || 'Heading'}
               </div>
             </div>

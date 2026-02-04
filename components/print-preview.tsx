@@ -59,7 +59,7 @@ export function PrintPreview({ className, content = '' }: PrintPreviewProps) {
 
   if (isPrintMode) {
     return (
-      <div className="fixed bottom-4 right-4 z-50 bg-background border rounded-lg shadow-lg p-4 w-80 animate-in slide-in-from-right-4">
+      <div className="fixed bottom-4 right-4 z-50 bg-popover text-popover-foreground border border-primary/15 rounded-lg shadow-lg p-4 w-80 animate-in slide-in-from-right-4">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <FileText className="h-4 w-4 text-primary" />

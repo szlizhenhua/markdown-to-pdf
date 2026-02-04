@@ -960,8 +960,8 @@ ${previewCard.innerHTML}
 
           {/* Settings Popover */}
           {showSettings && (
-            <div ref={settingsRef} className="absolute right-2 sm:right-4 top-14 sm:top-16 z-50 w-[calc(100vw-16px)] sm:w-80 bg-white shadow-2xl rounded-lg border-2 border-gray-200 max-h-[80vh] overflow-auto">
-              <div className="p-4 bg-white">
+            <div ref={settingsRef} className="absolute right-2 sm:right-4 top-14 sm:top-16 z-50 w-[calc(100vw-16px)] sm:w-80 bg-popover text-popover-foreground shadow-2xl rounded-lg border border-primary/15 max-h-[80vh] overflow-auto">
+              <div className="p-4">
                 <h3 className="font-medium mb-3">{t.settings.title}</h3>
                 <div className="space-y-4">
                   <div>
@@ -970,20 +970,20 @@ ${previewCard.innerHTML}
                       <SelectTrigger className="w-full">
                         <SelectValue />
                       </SelectTrigger>
-                    <SelectContent className="bg-white max-w-[calc(100vw-32px)] sm:max-w-none">
-                      {themes.map((theme) => (
-                        <SelectItem
-                          key={theme.id}
-                          value={theme.id}
-                          className="hover:bg-gray-100 active:bg-gray-200 transition-colors"
-                        >
-                          <div>
-                            <div className="font-medium">{t.themes[theme.id as keyof typeof t.themes]}</div>
-                            <div className="text-xs text-muted-foreground">{theme.description}</div>
-                          </div>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
+                      <SelectContent className="max-w-[calc(100vw-32px)] sm:max-w-none">
+                        {themes.map((theme) => (
+                          <SelectItem
+                            key={theme.id}
+                            value={theme.id}
+                            className="hover:bg-accent/60 active:bg-accent transition-colors"
+                          >
+                            <div>
+                              <div className="font-medium">{t.themes[theme.id as keyof typeof t.themes]}</div>
+                              <div className="text-xs text-muted-foreground">{theme.description}</div>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
                     </Select>
                   </div>
 
@@ -993,12 +993,12 @@ ${previewCard.innerHTML}
                       <SelectTrigger className="w-full">
                         <SelectValue />
                       </SelectTrigger>
-                    <SelectContent className="bg-white">
+                    <SelectContent>
                       {paperSizes.map((size) => (
                         <SelectItem
                           key={size.id}
                           value={size.id}
-                          className="hover:bg-gray-100 active:bg-gray-200 transition-colors"
+                          className="hover:bg-accent/60 active:bg-accent transition-colors"
                         >
                           <div>
                             <div className="font-medium">{t.paperSizes[size.id as keyof typeof t.paperSizes]}</div>
@@ -1016,12 +1016,12 @@ ${previewCard.innerHTML}
                       <SelectTrigger className="w-full">
                         <SelectValue />
                       </SelectTrigger>
-                    <SelectContent className="bg-white">
+                    <SelectContent>
                       {fontSizes.map((size) => (
                         <SelectItem
                           key={size.id}
                           value={size.id}
-                          className="hover:bg-gray-100 active:bg-gray-200 transition-colors"
+                          className="hover:bg-accent/60 active:bg-accent transition-colors"
                         >
                           <div className="font-medium">{(t.fontSizes as Record<string, string>)[size.id]}</div>
                         </SelectItem>
@@ -1039,7 +1039,7 @@ ${previewCard.innerHTML}
                         max="24"
                         value={editorFontSize}
                         onChange={(e) => setEditorFontSize(parseInt(e.target.value))}
-                        className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-gray-700"
+                        className="flex-1 h-2 bg-muted/60 rounded-lg appearance-none cursor-pointer accent-primary"
                       />
                       <span className="text-xs text-muted-foreground w-12 text-center">{editorFontSize}px</span>
                     </div>
@@ -1054,7 +1054,7 @@ ${previewCard.innerHTML}
                         max="24"
                         value={previewFontSize}
                         onChange={(e) => setPreviewFontSize(parseInt(e.target.value))}
-                        className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-gray-700"
+                        className="flex-1 h-2 bg-muted/60 rounded-lg appearance-none cursor-pointer accent-primary"
                       />
                       <span className="text-xs text-muted-foreground w-12 text-center">{previewFontSize}px</span>
                     </div>
@@ -1068,15 +1068,15 @@ ${previewCard.innerHTML}
 
           {/* Table of Contents Popover */}
           {showToc && (
-            <div ref={tocRef} className="absolute right-16 sm:right-24 top-14 sm:top-16 z-50 w-[calc(100vw-100px)] sm:w-80 max-w-[300px] bg-white shadow-2xl rounded-lg border-2 border-gray-200 max-h-[70vh] overflow-auto">
-              <div className="p-4 bg-white">
+            <div ref={tocRef} className="absolute right-16 sm:right-24 top-14 sm:top-16 z-50 w-[calc(100vw-100px)] sm:w-80 max-w-[300px] bg-popover text-popover-foreground shadow-2xl rounded-lg border border-primary/15 max-h-[70vh] overflow-auto">
+              <div className="p-4">
                 <h3 className="font-medium mb-3">{t.toc.title}</h3>
                 <div className="space-y-1">
                   {headings.map((heading) => (
                     <a
                       key={heading.id}
                       href={`#${heading.id}`}
-                      className="block px-3 py-1.5 rounded hover:bg-gray-100 active:bg-gray-200 transition-colors"
+                      className="block px-3 py-1.5 rounded hover:bg-accent/60 active:bg-accent transition-colors"
                       onClick={() => setShowToc(false)}
                     >
                       <div
@@ -1172,7 +1172,7 @@ ${previewCard.innerHTML}
                           variant="outline"
                           size="sm"
                           onClick={handleExportMarkdown}
-                          className="w-full sm:w-auto"
+                          className="w-full sm:w-auto transition-colors hover:!bg-primary/10 hover:!text-primary hover:!border-primary/40"
                           aria-label={t.buttons.exportMarkdown}
                           title="Download as Markdown"
                         >
@@ -1184,7 +1184,7 @@ ${previewCard.innerHTML}
                           variant="outline"
                           size="sm"
                           onClick={handleExportTXT}
-                          className="w-full sm:w-auto"
+                          className="w-full sm:w-auto transition-colors hover:!bg-primary/10 hover:!text-primary hover:!border-primary/40"
                           aria-label="Export as TXT"
                           title="Download as TXT"
                         >
@@ -1192,12 +1192,12 @@ ${previewCard.innerHTML}
                           <span className="hidden sm:inline">TXT</span>
                           <span className="sm:hidden">TXT</span>
                         </Button>
-                        <FullscreenToggle className="hidden sm:flex" />
-                        <PrintPreview className="hidden sm:flex" />
+                        <FullscreenToggle className="hidden sm:flex hover:!bg-primary/10 hover:!text-primary transition-colors" />
+                        <PrintPreview className="hidden sm:flex hover:!bg-primary/10 hover:!text-primary transition-colors" />
                         <SplitViewToggle
                           isVertical={isVerticalView}
                           onToggle={() => setIsVerticalView(!isVerticalView)}
-                          className="hidden sm:flex"
+                          className="hidden sm:flex hover:!bg-primary/10 hover:!text-primary transition-colors"
                         />
                       </div>
                     </div>

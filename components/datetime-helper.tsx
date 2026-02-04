@@ -77,7 +77,7 @@ export function DateTimeHelper({ onInsert, className }: DateTimeHelperProps) {
       </Button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full mt-1 z-50 w-64 bg-white dark:bg-gray-800 shadow-lg rounded-lg border-2 border-gray-200 dark:border-gray-700">
+        <div className="absolute left-0 top-full mt-1 z-50 w-64 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15">
           <div className="p-4 space-y-3">
             <h3 className="text-sm font-medium">Insert Date/Time</h3>
 
@@ -86,7 +86,7 @@ export function DateTimeHelper({ onInsert, className }: DateTimeHelperProps) {
                 <button
                   key={format.id}
                   onClick={() => handleInsert(format.id)}
-                  className="w-full text-left px-3 py-2 text-sm rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  className="w-full text-left px-3 py-2 text-sm rounded hover:bg-accent/60 transition-colors"
                 >
                   <div className="font-medium">{format.label}</div>
                   <div className="text-xs text-muted-foreground">{format.example}</div>

@@ -114,7 +114,6 @@ const shortcutCategories: ShortcutCategory[] = [
     icon: '⚡',
     shortcuts: [
       { keys: ['⌘⇧H', 'Ctrl+Shift+H'], description: 'Open history panel', isNew: true },
-      { keys: ['⌘⇧A', 'Ctrl+Shift+A'], description: 'Open AI assistant', isNew: true },
       { keys: ['⌘⇧S', 'Ctrl+Shift+S'], description: 'Open snippet library', isNew: true },
       { keys: ['⌘⇧P'], description: 'Print preview', isNew: true },
       { keys: ['⌘⇧D'], description: 'Typography controls', isNew: true },
@@ -207,7 +206,7 @@ export function KeyboardShortcutsDialog({ className }: KeyboardShortcutsDialogPr
                   {category.shortcuts.map((shortcut) => (
                     <div
                       key={shortcut.description}
-                      className="flex items-center justify-between py-2 px-3 rounded-md bg-muted/30 hover:bg-muted/50 transition-colors group"
+                      className="flex items-center justify-between py-2 px-3 rounded-md bg-muted/40 hover:bg-muted/60 transition-colors group"
                     >
                       <span className="text-sm flex items-center gap-2">
                         {shortcut.description}
@@ -221,7 +220,7 @@ export function KeyboardShortcutsDialog({ className }: KeyboardShortcutsDialogPr
                         {shortcut.keys.map((key) => (
                           <kbd
                             key={key}
-                            className="px-2 py-1 text-xs bg-background border rounded font-mono shadow-sm group-hover:shadow-md transition-shadow"
+                            className="px-2 py-1 text-xs bg-muted/50 border border-border rounded font-mono shadow-sm group-hover:shadow-md transition-shadow"
                           >
                             {key}
                           </kbd>
@@ -237,7 +236,7 @@ export function KeyboardShortcutsDialog({ className }: KeyboardShortcutsDialogPr
 
         <div className="pt-4 border-t">
           <p className="text-xs text-muted-foreground">
-            💡 Pro tip: Press <kbd className="px-1 py-0.5 bg-background border rounded text-xs">Ctrl/Cmd + ?</kbd> anytime to open this help
+            💡 Pro tip: Press <kbd className="px-1 py-0.5 bg-muted/50 border border-border rounded text-xs">Ctrl/Cmd + ?</kbd> anytime to open this help
           </p>
         </div>
       </DialogContent>

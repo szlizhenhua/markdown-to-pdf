@@ -33,7 +33,6 @@ import { PrintPreview } from '@/components/print-preview'
 import { MarkdownExport } from '@/components/markdown-export'
 import { TypographyControls } from '@/components/typography-controls'
 import { DocumentHistory } from '@/components/document-history'
-import { AIWritingAssistant } from '@/components/ai-writing-assistant'
 import { SnippetLibrary } from '@/components/snippet-library'
 import { CollaborationIndicator } from '@/components/collaboration-indicator'
 import { QuickActionsMenu } from '@/components/quick-actions-menu'
@@ -252,7 +251,6 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
           currentFontFamily={previewFontFamily}
         />
         <DocumentHistory currentContent={content} onRestore={(newContent) => onReplace?.(content, newContent)} />
-        <AIWritingAssistant content={content} onApplySuggestion={(newContent) => onReplace?.(content, newContent)} />
         <SnippetLibrary onInsertSnippet={onInsert} />
         <CollaborationIndicator />
         <QuickActionsMenu
@@ -273,7 +271,6 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
           }}
           onTogglePreview={onTogglePreview}
           onNewDocument={onClear}
-          onAiAssist={() => {}}
         />
         <PerformanceSettings content={content} onDebounceChange={onDebounceChange} currentDebounce={debounceValue} />
         <WordGoalTracker content={content} />

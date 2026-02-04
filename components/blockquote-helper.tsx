@@ -49,7 +49,7 @@ export function BlockquoteHelper({ onInsert, className }: BlockquoteHelperProps)
       </Button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full mt-1 z-50 w-80 bg-white dark:bg-gray-800 shadow-lg rounded-lg border-2 border-gray-200 dark:border-gray-700">
+        <div className="absolute left-0 top-full mt-1 z-50 w-80 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15">
           <div className="p-4 space-y-4">
             <div>
               <label className="text-sm font-medium mb-1.5 block">Quote Text</label>
@@ -58,7 +58,7 @@ export function BlockquoteHelper({ onInsert, className }: BlockquoteHelperProps)
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Enter quote text"
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                className="w-full px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary/40 resize-none"
               />
             </div>
 
@@ -68,7 +68,7 @@ export function BlockquoteHelper({ onInsert, className }: BlockquoteHelperProps)
                 id="includeCitation"
                 checked={includeCitation}
                 onChange={(e) => setIncludeCitation(e.target.checked)}
-                className="w-4 h-4 rounded border-gray-300"
+                className="w-4 h-4 rounded border border-border"
               />
               <label htmlFor="includeCitation" className="text-sm">
                 Include citation
@@ -83,7 +83,7 @@ export function BlockquoteHelper({ onInsert, className }: BlockquoteHelperProps)
                   value={citation}
                   onChange={(e) => setCitation(e.target.value)}
                   placeholder="Author or source"
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary/40"
                 />
               </div>
             )}
@@ -106,12 +106,12 @@ export function BlockquoteHelper({ onInsert, className }: BlockquoteHelperProps)
             </div>
 
             {/* Preview */}
-            <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-900 rounded border text-xs">
-              <div className="text-gray-500 dark:text-gray-400 mb-1">Preview:</div>
-              <div className="text-gray-700 dark:text-gray-300 italic border-l-4 border-gray-400 pl-3">
+            <div className="mt-3 p-3 bg-muted/40 rounded border text-xs">
+              <div className="text-muted-foreground mb-1">Preview:</div>
+              <div className="text-foreground italic border-l-4 border-primary/40 pl-3">
                 {text || 'Quote text here'}
                 {includeCitation && citation && (
-                  <div className="mt-1 not-italic text-gray-500">
+                  <div className="mt-1 not-italic text-muted-foreground">
                     — {citation}
                   </div>
                 )}

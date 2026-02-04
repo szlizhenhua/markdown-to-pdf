@@ -61,14 +61,14 @@ export function CodeBlockSelector({ onInsert, className }: CodeBlockSelectorProp
       </Button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full mt-1 z-50 w-72 bg-white dark:bg-gray-800 shadow-lg rounded-lg border-2 border-gray-200 dark:border-gray-700 max-h-96 overflow-auto">
+        <div className="absolute left-0 top-full mt-1 z-50 w-72 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15 max-h-96 overflow-auto">
           <div className="p-4 space-y-3">
             <div>
               <label className="text-sm font-medium mb-2 block">Language</label>
               <select
                 value={selectedLanguage}
                 onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-input rounded-md bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
               >
                 {codeLanguages.map((lang) => (
                   <option key={lang.id} value={lang.id}>
@@ -87,9 +87,9 @@ export function CodeBlockSelector({ onInsert, className }: CodeBlockSelectorProp
             </Button>
 
             {/* Preview */}
-            <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-900 rounded border text-xs font-mono">
-              <div className="text-gray-500 dark:text-gray-400 mb-2">Preview:</div>
-              <pre className="whitespace-pre-wrap break-all text-gray-700 dark:text-gray-300">
+            <div className="mt-3 p-3 bg-muted/40 rounded border text-xs font-mono">
+              <div className="text-muted-foreground mb-2">Preview:</div>
+              <pre className="whitespace-pre-wrap break-all text-foreground">
                 {`\\\`\\\`\\\`${selectedLanguage}`}
                 {'\n'}
                 {/* Your code here */}

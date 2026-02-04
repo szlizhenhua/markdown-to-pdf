@@ -66,7 +66,7 @@ export function LanguageSwitcher() {
         </Button>
 
         {isOpen && (
-          <div className="absolute right-0 top-10 z-50 bg-white border border-gray-200 shadow-lg rounded-lg min-w-[140px]">
+          <div className="absolute right-0 top-10 z-50 bg-popover text-popover-foreground border border-primary/15 shadow-lg rounded-lg min-w-[140px]">
             <div className="p-1">
               {availableLanguages.map((lang) => (
                 <button
@@ -80,8 +80,8 @@ export function LanguageSwitcher() {
                     }
                     setIsOpen(false)
                   }}
-                  className={`w-full text-left px-3 py-2 text-sm rounded hover:bg-gray-100 transition-colors ${
-                    language === lang.code ? 'bg-blue-50 text-blue-600 font-medium' : 'text-gray-700'
+                  className={`w-full text-left px-3 py-2 text-sm rounded hover:bg-accent/60 transition-colors ${
+                    language === lang.code ? 'bg-primary/15 text-primary font-medium' : 'text-foreground'
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -115,7 +115,7 @@ export function LanguageSwitcher() {
         <SelectTrigger className="w-auto">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent className="bg-white border border-gray-200 shadow-lg">
+        <SelectContent className="bg-popover border border-primary/15 text-popover-foreground shadow-lg">
           {availableLanguages.map((lang) => (
             <SelectItem key={lang.code} value={lang.code}>
               <span className="flex items-center gap-2">

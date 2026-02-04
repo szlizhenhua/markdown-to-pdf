@@ -54,15 +54,15 @@ export function TemplateSelector({ onSelectTemplate }: TemplateSelectorProps) {
 
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-0 sm:p-4">
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg w-full h-full sm:h-auto sm:max-w-3xl sm:max-h-[80vh] overflow-hidden flex flex-col sm:m-0">
+          <div className="bg-popover text-popover-foreground rounded-lg shadow-lg w-full h-full sm:h-auto sm:max-w-3xl sm:max-h-[80vh] overflow-hidden flex flex-col sm:m-0">
             <div className="p-3 sm:p-4 border-b flex justify-between items-center">
               <div className="min-w-0">
                 <h2 className="text-base sm:text-lg font-semibold truncate">{t.templates.title}</h2>
-                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 hidden sm:block">{t.templates.description}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground hidden sm:block">{t.templates.description}</p>
               </div>
               <button
                 onClick={() => setOpen(false)}
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 p-1 -mr-1 sm:p-0 sm:mr-0 touch-manipulation"
+                className="text-muted-foreground hover:text-foreground p-1 -mr-1 sm:p-0 sm:mr-0 touch-manipulation"
                 aria-label="Close"
               >
                 <X className="h-5 w-5" />
@@ -77,8 +77,8 @@ export function TemplateSelector({ onSelectTemplate }: TemplateSelectorProps) {
                   onClick={() => setSelectedCategory(cat.value)}
                   className={`px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-colors touch-manipulation whitespace-nowrap flex-shrink-0 ${
                     selectedCategory === cat.value
-                      ? 'bg-green-500 text-white'
-                      : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted/40 hover:bg-muted/60'
                   }`}
                 >
                   {cat.label}
@@ -93,21 +93,21 @@ export function TemplateSelector({ onSelectTemplate }: TemplateSelectorProps) {
                   <button
                     key={template.id}
                     onClick={() => handleSelectTemplate(template)}
-                    className="text-left p-3 sm:p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-500 dark:hover:border-green-500 hover:bg-green-50 dark:hover:bg-green-950/20 transition-all group touch-manipulation min-h-[80px] sm:min-h-[100px]"
+                    className="text-left p-3 sm:p-4 rounded-lg border border-border hover:border-primary/40 hover:bg-accent/60 transition-all group touch-manipulation min-h-[80px] sm:min-h-[100px]"
                   >
                     <div className="flex items-start gap-2 sm:gap-3">
-                      <div className="text-green-500 dark:text-green-400 mt-0.5 flex-shrink-0">
+                      <div className="text-primary mt-0.5 flex-shrink-0">
                         {categoryIcons[template.category]}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-gray-100 group-hover:text-green-600 dark:group-hover:text-green-400 truncate">
+                        <h3 className="font-semibold text-sm sm:text-base text-foreground group-hover:text-primary truncate">
                           {template.name}
                         </h3>
-                        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">
+                        <p className="text-xs sm:text-sm text-muted-foreground mt-1 line-clamp-2">
                           {template.description}
                         </p>
                         <div className="mt-2">
-                          <span className="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 capitalize">
+                          <span className="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-muted/40 text-muted-foreground capitalize">
                             {t.templates.categories[template.category]}
                           </span>
                         </div>
@@ -118,7 +118,7 @@ export function TemplateSelector({ onSelectTemplate }: TemplateSelectorProps) {
               </div>
             </div>
 
-            <div className="p-3 sm:p-4 border-t text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+            <div className="p-3 sm:p-4 border-t text-xs sm:text-sm text-muted-foreground">
               {t.templates.selectTemplate}
             </div>
           </div>

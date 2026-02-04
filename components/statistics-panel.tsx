@@ -86,8 +86,8 @@ export function StatisticsPanel({ content, className }: StatisticsPanelProps) {
             onClick={() => setIsOpen(false)}
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg border-2 border-gray-200 dark:border-gray-700 max-w-md w-full max-h-[80vh] overflow-auto">
-              <div className="sticky top-0 bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+            <div className="bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15 max-w-md w-full max-h-[80vh] overflow-auto">
+              <div className="sticky top-0 bg-popover p-4 border-b border-border flex items-center justify-between">
                 <h2 className="text-lg font-semibold">Document Statistics</h2>
                 <Button
                   variant="ghost"
@@ -102,19 +102,19 @@ export function StatisticsPanel({ content, className }: StatisticsPanelProps) {
               <div className="p-6 space-y-4">
                 {/* Basic Stats */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-3 bg-gray-50 dark:bg-gray-900 rounded-lg">
+                  <div className="p-3 bg-muted/40 rounded-lg">
                     <div className="text-2xl font-bold">{stats.words.toLocaleString()}</div>
                     <div className="text-xs text-muted-foreground">Words</div>
                   </div>
-                  <div className="p-3 bg-gray-50 dark:bg-gray-900 rounded-lg">
+                  <div className="p-3 bg-muted/40 rounded-lg">
                     <div className="text-2xl font-bold">{stats.characters.toLocaleString()}</div>
                     <div className="text-xs text-muted-foreground">Characters</div>
                   </div>
-                  <div className="p-3 bg-gray-50 dark:bg-gray-900 rounded-lg">
+                  <div className="p-3 bg-muted/40 rounded-lg">
                     <div className="text-2xl font-bold">{stats.lines.toLocaleString()}</div>
                     <div className="text-xs text-muted-foreground">Lines</div>
                   </div>
-                  <div className="p-3 bg-gray-50 dark:bg-gray-900 rounded-lg">
+                  <div className="p-3 bg-muted/40 rounded-lg">
                     <div className="text-2xl font-bold">{stats.paragraphs.toLocaleString()}</div>
                     <div className="text-xs text-muted-foreground">Paragraphs</div>
                   </div>
@@ -124,11 +124,11 @@ export function StatisticsPanel({ content, className }: StatisticsPanelProps) {
                 <div>
                   <h3 className="text-sm font-medium mb-2">Time Estimates</h3>
                   <div className="space-y-2">
-                    <div className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-900 rounded">
+                    <div className="flex justify-between items-center p-2 bg-muted/40 rounded">
                       <span className="text-sm">Reading time (200 wpm)</span>
                       <span className="text-sm font-medium">{stats.readingTime} min</span>
                     </div>
-                    <div className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-900 rounded">
+                    <div className="flex justify-between items-center p-2 bg-muted/40 rounded">
                       <span className="text-sm">Speaking time (150 wpm)</span>
                       <span className="text-sm font-medium">{stats.speakingTime} min</span>
                     </div>
@@ -139,27 +139,27 @@ export function StatisticsPanel({ content, className }: StatisticsPanelProps) {
                 <div>
                   <h3 className="text-sm font-medium mb-2">Elements</h3>
                   <div className="grid grid-cols-2 gap-2 text-sm">
-                    <div className="flex justify-between p-2 bg-gray-50 dark:bg-gray-900 rounded">
+                    <div className="flex justify-between p-2 bg-muted/40 rounded">
                       <span>Headings</span>
                       <span className="font-medium">{stats.headings}</span>
                     </div>
-                    <div className="flex justify-between p-2 bg-gray-50 dark:bg-gray-900 rounded">
+                    <div className="flex justify-between p-2 bg-muted/40 rounded">
                       <span>Code blocks</span>
                       <span className="font-medium">{stats.codeBlocks}</span>
                     </div>
-                    <div className="flex justify-between p-2 bg-gray-50 dark:bg-gray-900 rounded">
+                    <div className="flex justify-between p-2 bg-muted/40 rounded">
                       <span>Inline code</span>
                       <span className="font-medium">{stats.inlineCode}</span>
                     </div>
-                    <div className="flex justify-between p-2 bg-gray-50 dark:bg-gray-900 rounded">
+                    <div className="flex justify-between p-2 bg-muted/40 rounded">
                       <span>Links</span>
                       <span className="font-medium">{stats.links}</span>
                     </div>
-                    <div className="flex justify-between p-2 bg-gray-50 dark:bg-gray-900 rounded">
+                    <div className="flex justify-between p-2 bg-muted/40 rounded">
                       <span>Images</span>
                       <span className="font-medium">{stats.images}</span>
                     </div>
-                    <div className="flex justify-between p-2 bg-gray-50 dark:bg-gray-900 rounded">
+                    <div className="flex justify-between p-2 bg-muted/40 rounded">
                       <span>List items</span>
                       <span className="font-medium">{stats.listItems}</span>
                     </div>
@@ -170,13 +170,13 @@ export function StatisticsPanel({ content, className }: StatisticsPanelProps) {
                 <div>
                   <h3 className="text-sm font-medium mb-2">Word Stats</h3>
                   <div className="space-y-2">
-                    <div className="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-900 rounded text-sm">
+                    <div className="flex justify-between items-center p-2 bg-muted/40 rounded text-sm">
                       <span>Average word length</span>
                       <span className="font-medium">{stats.avgWordLength} chars</span>
                     </div>
-                    <div className="p-2 bg-gray-50 dark:bg-gray-900 rounded text-sm">
+                    <div className="p-2 bg-muted/40 rounded text-sm">
                       <span className="block mb-1">Longest word</span>
-                      <span className="font-mono bg-white dark:bg-gray-700 px-2 py-1 rounded block">
+                      <span className="font-mono bg-background px-2 py-1 rounded block">
                         {stats.longestWord || 'N/A'}
                       </span>
                     </div>

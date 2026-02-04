@@ -46,7 +46,7 @@ export function HighlightHelper({ onInsert, className }: HighlightHelperProps) {
       </Button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full mt-1 z-50 w-64 bg-white dark:bg-gray-800 shadow-lg rounded-lg border-2 border-gray-200 dark:border-gray-700">
+        <div className="absolute left-0 top-full mt-1 z-50 w-64 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15">
           <div className="p-4 space-y-3">
             <div>
               <label className="text-sm font-medium mb-1.5 block">Highlight Text</label>
@@ -55,7 +55,7 @@ export function HighlightHelper({ onInsert, className }: HighlightHelperProps) {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder="Text to highlight"
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary/40"
               />
             </div>
 

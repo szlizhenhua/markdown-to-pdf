@@ -21,7 +21,7 @@ export function HelpDialog() {
 
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="bg-background border rounded-lg shadow-lg p-6 max-w-3xl max-h-[80vh] overflow-y-auto">
+          <div className="bg-popover text-popover-foreground border border-primary/15 rounded-lg shadow-lg p-6 max-w-3xl max-h-[80vh] overflow-y-auto">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Markdown Quick Reference</h2>
               <button
