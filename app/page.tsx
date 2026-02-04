@@ -36,7 +36,7 @@ import { locales } from "@/lib/locales"
 
 import Head from 'next/head'
 import Image from 'next/image'
-import { Settings, Download, Loader2, Upload, Eye, FileText, FileUp, Code, File, FileEdit } from 'lucide-react'
+import { Settings, Download, Loader2, Upload, Eye, FileText, FileUp, Code, File, FileEdit, SlidersHorizontal } from 'lucide-react'
 
 // Constants
 const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
@@ -165,6 +165,7 @@ export default function MarkdownToPDF() {
   const [cursorPosition, setCursorPosition] = useState<number>()
   const [wordWrap, setWordWrap] = useState(true)
   const [showFindReplace, setShowFindReplace] = useState(false)
+  const [showEditorTools, setShowEditorTools] = useState(false)
   const [prevMarkdownLength, setPrevMarkdownLength] = useState(0)
   const isChinese = language === 'zh-cn' || language === 'zh-tw'
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -1199,47 +1200,68 @@ ${previewCard.innerHTML}
                           onToggle={() => setIsVerticalView(!isVerticalView)}
                           className="hidden sm:flex hover:!bg-primary/10 hover:!text-primary transition-colors"
                         />
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            setShowEditorTools((prev) => {
+                              const next = !prev
+                              if (!next) setShowFindReplace(false)
+                              return next
+                            })
+                          }}
+                          className="hidden sm:flex w-full sm:w-auto transition-colors hover:!bg-primary/10 hover:!text-primary hover:!border-primary/40"
+                          aria-label={showEditorTools ? (isChinese ? '隐藏功能按钮' : 'Hide tools') : (isChinese ? '显示功能按钮' : 'Show tools')}
+                          title={showEditorTools ? (isChinese ? '隐藏功能按钮' : 'Hide tools') : (isChinese ? '显示功能按钮' : 'Show tools')}
+                        >
+                          <SlidersHorizontal className="h-4 w-4 mr-2" />
+                          {showEditorTools ? (isChinese ? '隐藏功能按钮' : 'Hide tools') : (isChinese ? '显示功能按钮' : 'Show tools')}
+                        </Button>
                       </div>
                     </div>
                   </CardTitle>
                 </CardHeader>
-                <MarkdownToolbar
-                  onInsert={insertAtCursor}
-                  wordWrap={wordWrap}
-                  onWordWrapToggle={() => setWordWrap(!wordWrap)}
-                  showFindReplace={showFindReplace}
-                  onFindReplaceToggle={() => setShowFindReplace(!showFindReplace)}
-                  canUndo={canUndo}
-                  canRedo={canRedo}
-                  onUndo={handleUndo}
-                  onRedo={handleRedo}
-                  content={markdown}
-                  onClear={resetToDefault}
-                  onReplace={(oldContent, newContent) => setMarkdown(newContent)}
-                  onAutosaveIntervalChange={setAutosaveInterval}
-                  autosaveInterval={autosaveInterval}
-                  onFontSizeChange={setPreviewFontSize}
-                  onLineHeightChange={setPreviewLineHeight}
-                  onFontFamilyChange={setPreviewFontFamily}
-                  previewFontSize={previewFontSize}
-                  previewLineHeight={previewLineHeight}
-                  previewFontFamily={previewFontFamily}
-                  onExportPDF={handleDownloadPDF}
-                  onExportMarkdown={() => {/* Handled by MarkdownExport component */}}
-                  onPrint={() => window.print()}
-                  onTogglePreview={() => setShowPreview(!showPreview)}
-                  onDebounceChange={(ms) => {
-                    // Update debounce value (currently hardcoded at 300ms)
-                    console.log('Debounce changed to:', ms)
-                  }}
-                  debounceValue={300}
-                />
-                {showFindReplace && (
-                  <FindReplace
-                    content={markdown}
-                    onReplace={(_, newContent) => setMarkdown(newContent)}
-                    onClose={() => setShowFindReplace(false)}
-                  />
+                {showEditorTools && (
+                  <>
+                    <MarkdownToolbar
+                      onInsert={insertAtCursor}
+                      wordWrap={wordWrap}
+                      onWordWrapToggle={() => setWordWrap(!wordWrap)}
+                      showFindReplace={showFindReplace}
+                      onFindReplaceToggle={() => setShowFindReplace(!showFindReplace)}
+                      canUndo={canUndo}
+                      canRedo={canRedo}
+                      onUndo={handleUndo}
+                      onRedo={handleRedo}
+                      content={markdown}
+                      onClear={resetToDefault}
+                      onReplace={(oldContent, newContent) => setMarkdown(newContent)}
+                      onAutosaveIntervalChange={setAutosaveInterval}
+                      autosaveInterval={autosaveInterval}
+                      onFontSizeChange={setPreviewFontSize}
+                      onLineHeightChange={setPreviewLineHeight}
+                      onFontFamilyChange={setPreviewFontFamily}
+                      previewFontSize={previewFontSize}
+                      previewLineHeight={previewLineHeight}
+                      previewFontFamily={previewFontFamily}
+                      onExportPDF={handleDownloadPDF}
+                      onExportMarkdown={() => {/* Handled by MarkdownExport component */}}
+                      onPrint={() => window.print()}
+                      onTogglePreview={() => setShowPreview(!showPreview)}
+                      onDebounceChange={(ms) => {
+                        // Update debounce value (currently hardcoded at 300ms)
+                        console.log('Debounce changed to:', ms)
+                      }}
+                      debounceValue={300}
+                    />
+                    {showFindReplace && (
+                      <FindReplace
+                        content={markdown}
+                        onReplace={(_, newContent) => setMarkdown(newContent)}
+                        onClose={() => setShowFindReplace(false)}
+                      />
+                    )}
+                  </>
                 )}
                 <CardContent className="h-full relative">
                   {isDragging && (
