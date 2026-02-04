@@ -458,12 +458,22 @@ const buildQuadrantChartElement = (raw: string): HTMLElement => {
 
   const svgParts: string[] = []
   svgParts.push(`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Quadrant chart">`)
-  svgParts.push(`<rect x="${originX}" y="${originY}" width="${size}" height="${size}" rx="12" />`)
+  svgParts.push(`<style>
+    svg { font-family: "Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif; }
+    .quad-bg { fill: var(--card, #ffffff); stroke: var(--border, #CBD5E1); stroke-width: 1.5; }
+    .quad-divider { stroke: var(--border, #CBD5E1); stroke-width: 1; }
+    .quad-label { fill: var(--foreground, #334155); font-size: 16px; font-weight: 700; }
+    .axis-label { fill: var(--muted-foreground, #64748B); font-size: 12px; font-weight: 500; }
+    .point-label { fill: var(--foreground, #0f172a); font-size: 12px; font-weight: 600; }
+  </style>`)
   svgParts.push(
-    `<line x1="${originX + size / 2}" y1="${originY}" x2="${originX + size / 2}" y2="${originY + size}" />`
+    `<rect class="quad-bg" x="${originX}" y="${originY}" width="${size}" height="${size}" rx="12" />`
   )
   svgParts.push(
-    `<line x1="${originX}" y1="${originY + size / 2}" x2="${originX + size}" y2="${originY + size / 2}" />`
+    `<line class="quad-divider" x1="${originX + size / 2}" y1="${originY}" x2="${originX + size / 2}" y2="${originY + size}" />`
+  )
+  svgParts.push(
+    `<line class="quad-divider" x1="${originX}" y1="${originY + size / 2}" x2="${originX + size}" y2="${originY + size / 2}" />`
   )
 
   const labels = [
