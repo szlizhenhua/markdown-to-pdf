@@ -146,6 +146,30 @@ export const en = {
       name: "Tutorial/Guide",
       description: "Step-by-step tutorial template"
     },
+    simpleNotes: {
+      name: "Simple Notes",
+      description: "Basic note-taking template"
+    },
+    meetingNotes: {
+      name: "Meeting Notes",
+      description: "Structured meeting documentation"
+    },
+    researchPaper: {
+      name: "Research Paper",
+      description: "Academic paper template with citations"
+    },
+    apiDocumentation: {
+      name: "API Documentation",
+      description: "Technical API reference template"
+    },
+    blogPost: {
+      name: "Blog Post Template",
+      description: "SEO-optimized blog article template"
+    },
+    productRequirements: {
+      name: "Product Requirements",
+      description: "PRD template for product managers"
+    },
     templates: "Templates"
   },
 

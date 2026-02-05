@@ -143,10 +143,34 @@ export const pl = {
       description: "Gestructureerd notulen sjabloon"
     },
     tutorial: {
-      name: "Tutorial/Gids",
-      description: "Stap-voor-stap tutorial sjabloon"
+      name: "Samouczek/Przewodnik",
+      description: "Szablon samouczka krok po kroku"
     },
-    templates: "Sjablonen"
+    simpleNotes: {
+      name: "Proste Notatki",
+      description: "Podstawowy szablon notatek"
+    },
+    meetingNotes: {
+      name: "Notatki ze Spotkania",
+      description: "Strukturalna dokumentacja spotkania"
+    },
+    researchPaper: {
+      name: "Artykuł Naukowy",
+      description: "Szablon artykułu akademickiego z cytowaniami"
+    },
+    apiDocumentation: {
+      name: "Dokumentacja API",
+      description: "Techniczny szablon odniesienia API"
+    },
+    blogPost: {
+      name: "Szablon Wpisu na Blogu",
+      description: "Zoptymalizowany pod SEO szablon wpisu na blogu"
+    },
+    productRequirements: {
+      name: "Wymagania Produktu",
+      description: "Szablon PRD dla menedżerów produktu"
+    },
+    templates: "Szablony"
   },
 
   quickTemplates: {

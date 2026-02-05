@@ -146,6 +146,30 @@ export const ja = {
       name: "チュートリアル/ガイド",
       description: "ステップバイステップのチュートリアルテンプレート"
     },
+    simpleNotes: {
+      name: "シンプルなメモ",
+      description: "基本的なメモテンプレート"
+    },
+    meetingNotes: {
+      name: "会議議事録",
+      description: "構造化された会議ドキュメント"
+    },
+    researchPaper: {
+      name: "研究論文",
+      description: "引用付き学術論文テンプレート"
+    },
+    apiDocumentation: {
+      name: "APIドキュメント",
+      description: "技術的APIリファレンステンプレート"
+    },
+    blogPost: {
+      name: "ブログ投稿テンプレート",
+      description: "SEO最適化ブログ記事テンプレート"
+    },
+    productRequirements: {
+      name: "製品要件",
+      description: "プロダクトマネージャー向けPRDテンプレート"
+    },
     templates: "テンプレート"
   },
 

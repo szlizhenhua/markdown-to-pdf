@@ -146,6 +146,30 @@ export const fr = {
       name: "Tutoriel/Guide",
       description: "Modèle de tutoriel pas à pas"
     },
+    simpleNotes: {
+      name: "Notes Simples",
+      description: "Modèle de notes de base"
+    },
+    meetingNotes: {
+      name: "Notes de Réunion",
+      description: "Documentation de réunion structurée"
+    },
+    researchPaper: {
+      name: "Article de Recherche",
+      description: "Modèle d'article académique avec citations"
+    },
+    apiDocumentation: {
+      name: "Documentation API",
+      description: "Modèle de référence technique API"
+    },
+    blogPost: {
+      name: "Modèle d'article de Blog",
+      description: "Modèle d'article de blog optimisé SEO"
+    },
+    productRequirements: {
+      name: "Exigences du Produit",
+      description: "Modèle PRD pour les chefs de produit"
+    },
     templates: "Modèles"
   },
 

@@ -146,6 +146,30 @@ export const hi = {
       name: "ट्यूटोरियल/गाइड",
       description: "चरण-दर-चरण ट्यूटोरियल टेम्पलेट"
     },
+    simpleNotes: {
+      name: "सरल नोट्स",
+      description: "बुनियादी नोट टेम्पलेट"
+    },
+    meetingNotes: {
+      name: "बैठक के नोट्स",
+      description: "संरचित बैठक दस्तावेज़"
+    },
+    researchPaper: {
+      name: "शोध पत्र",
+      description: "उद्धरणों के साथ शैक्षणिक पत्र टेम्पलेट"
+    },
+    apiDocumentation: {
+      name: "API दस्तावेज़ीकरण",
+      description: "तकनीकी API संदर्भ टेम्पलेट"
+    },
+    blogPost: {
+      name: "ब्लॉग पोस्ट टेम्पलेट",
+      description: "SEO-अनुकूलित ब्लॉग पोस्ट टेम्पलेट"
+    },
+    productRequirements: {
+      name: "उत्पाद आवश्यकताएं",
+      description: "उत्पाद प्रबंधकों के लिए PRD टेम्पलेट"
+    },
     templates: "टेम्पलेट"
   },
 

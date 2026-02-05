@@ -146,6 +146,30 @@ export const zhTW = {
       name: "教程/指南",
       description: "分步教程模板"
     },
+    simpleNotes: {
+      name: "簡單筆記",
+      description: "基礎筆記模板"
+    },
+    meetingNotes: {
+      name: "會議記錄",
+      description: "結構化會議文檔"
+    },
+    researchPaper: {
+      name: "研究論文",
+      description: "帶引用的學術論文模板"
+    },
+    apiDocumentation: {
+      name: "API 文檔",
+      description: "技術 API 參考模板"
+    },
+    blogPost: {
+      name: "博客文章模板",
+      description: "SEO 優化的博客文章模板"
+    },
+    productRequirements: {
+      name: "產品需求",
+      description: "產品經理的 PRD 模板"
+    },
     templates: "模板"
   },
 

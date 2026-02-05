@@ -146,6 +146,30 @@ export const zhCN = {
       name: "教程/指南",
       description: "分步教程模板"
     },
+    simpleNotes: {
+      name: "简单笔记",
+      description: "基础笔记模板"
+    },
+    meetingNotes: {
+      name: "会议记录",
+      description: "结构化会议文档"
+    },
+    researchPaper: {
+      name: "研究论文",
+      description: "带引用的学术论文模板"
+    },
+    apiDocumentation: {
+      name: "API 文档",
+      description: "技术 API 参考模板"
+    },
+    blogPost: {
+      name: "博客文章模板",
+      description: "SEO 优化的博客文章模板"
+    },
+    productRequirements: {
+      name: "产品需求",
+      description: "产品经理的 PRD 模板"
+    },
     templates: "模板"
   },
 

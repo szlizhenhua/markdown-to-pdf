@@ -146,6 +146,30 @@ export const es = {
       name: "Tutorial/Guía",
       description: "Plantilla de tutorial paso a paso"
     },
+    simpleNotes: {
+      name: "Notas Simples",
+      description: "Plantilla básica de notas"
+    },
+    meetingNotes: {
+      name: "Notas de Reunión",
+      description: "Documentación de reunión estructurada"
+    },
+    researchPaper: {
+      name: "Artículo de Investigación",
+      description: "Plantilla de artículo académico con citas"
+    },
+    apiDocumentation: {
+      name: "Documentación de API",
+      description: "Plantilla de referencia técnica de API"
+    },
+    blogPost: {
+      name: "Plantilla de Artículo de Blog",
+      description: "Plantilla de artículo de blog optimizada para SEO"
+    },
+    productRequirements: {
+      name: "Requisitos del Producto",
+      description: "Plantilla de PRD para gestores de producto"
+    },
     templates: "Plantillas"
   },
 

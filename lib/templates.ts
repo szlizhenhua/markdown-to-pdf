@@ -19,8 +19,8 @@ export function getTemplates(t: LocaleTranslations): Template[] {
     },
   {
     id: 'simple-notes',
-    name: 'Simple Notes',
-    description: 'Basic note-taking template',
+    name: t.templates.simpleNotes.name,
+    description: t.templates.simpleNotes.description,
     category: 'basic' as const,
     content: `# Notes
 
@@ -42,8 +42,8 @@ export function getTemplates(t: LocaleTranslations): Template[] {
   },
   {
     id: 'meeting-notes',
-    name: 'Meeting Notes',
-    description: 'Structured meeting documentation',
+    name: t.templates.meetingNotes.name,
+    description: t.templates.meetingNotes.description,
     category: 'documentation' as const,
     content: `# Meeting Notes
 
@@ -84,8 +84,8 @@ export function getTemplates(t: LocaleTranslations): Template[] {
   },
   {
     id: 'research-paper',
-    name: 'Research Paper',
-    description: 'Academic paper template with citations',
+    name: t.templates.researchPaper.name,
+    description: t.templates.researchPaper.description,
     category: 'academic' as const,
     content: `# Title: Research Paper on AI
 
@@ -138,8 +138,8 @@ This research demonstrates the potential for AI-driven solutions in real-world a
   },
   {
     id: 'api-documentation',
-    name: 'API Documentation',
-    description: 'Technical API reference template',
+    name: t.templates.apiDocumentation.name,
+    description: t.templates.apiDocumentation.description,
     category: 'technical' as const,
     content: `# API Documentation
 
@@ -251,8 +251,8 @@ fetch(\`\${BASE_URL}/users\`\`, {
   },
   {
     id: 'readme',
-    name: 'README Template',
-    description: 'Standard README template for GitHub projects',
+    name: t.templates.readme.name,
+    description: t.templates.readme.description,
     category: 'documentation' as const,
     content: `# Project Name
 
@@ -318,8 +318,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   },
   {
     id: 'resume',
-    name: 'Professional Resume',
-    description: 'CV/Resume template',
+    name: t.templates.resume.name,
+    description: t.templates.resume.description,
     category: 'documentation' as const,
     content: `# John Doe
 
@@ -382,8 +382,8 @@ Results-driven software engineer with 8+ years of experience building scalable w
   },
   {
     id: 'blog-post',
-    name: 'Blog Post Template',
-    description: 'SEO-optimized blog article template',
+    name: t.templates.blogPost.name,
+    description: t.templates.blogPost.description,
     category: 'documentation' as const,
     content: `# Engaging Blog Post Title
 
@@ -449,8 +449,8 @@ Summarize the key takeaways and provide a call-to-action.
   },
   {
     id: 'product-requirements',
-    name: 'Product Requirements',
-    description: 'PRD template for product managers',
+    name: t.templates.productRequirements.name,
+    description: t.templates.productRequirements.description,
     category: 'documentation' as const,
     content: `# Product Requirements Document
 

@@ -124,6 +124,30 @@ export interface LocaleTranslations {
       name: string
       description: string
     }
+    simpleNotes: {
+      name: string
+      description: string
+    }
+    meetingNotes: {
+      name: string
+      description: string
+    }
+    researchPaper: {
+      name: string
+      description: string
+    }
+    apiDocumentation: {
+      name: string
+      description: string
+    }
+    blogPost: {
+      name: string
+      description: string
+    }
+    productRequirements: {
+      name: string
+      description: string
+    }
     templates: string
   }
   defaultContent: string

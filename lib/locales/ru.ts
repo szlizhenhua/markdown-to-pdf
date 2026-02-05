@@ -146,6 +146,30 @@ export const ru = {
       name: "Учебник/Руководство",
       description: "Пошаговый шаблон учебника"
     },
+    simpleNotes: {
+      name: "Простые Заметки",
+      description: "Базовый шаблон заметок"
+    },
+    meetingNotes: {
+      name: "Заметки Совещания",
+      description: "Структурированная документация совещаний"
+    },
+    researchPaper: {
+      name: "Научная Статья",
+      description: "Шаблон академической статьи с цитированием"
+    },
+    apiDocumentation: {
+      name: "Документация API",
+      description: "Технический шаблон ссылки API"
+    },
+    blogPost: {
+      name: "Шаблон Записи Блога",
+      description: "SEO-оптимизированный шаблон записи блога"
+    },
+    productRequirements: {
+      name: "Требования к Продукту",
+      description: "Шаблон PRD для менеджеров продуктов"
+    },
     templates: "Шаблоны"
   },
 

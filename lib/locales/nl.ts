@@ -146,6 +146,30 @@ export const nl = {
       name: "Tutorial/Gids",
       description: "Stap-voor-stap tutorial sjabloon"
     },
+    simpleNotes: {
+      name: "Eenvoudige Notities",
+      description: "Basis notitie sjabloon"
+    },
+    meetingNotes: {
+      name: "Vergadernotities",
+      description: "Gestructureerde vergaderdocumentatie"
+    },
+    researchPaper: {
+      name: "Onderzoeksartikel",
+      description: "Academisch artikel sjabloon met citaten"
+    },
+    apiDocumentation: {
+      name: "API Documentatie",
+      description: "Technisch API referentie sjabloon"
+    },
+    blogPost: {
+      name: "Blog Post Sjabloon",
+      description: "SEO-geoptimaliseerd blog artikel sjabloon"
+    },
+    productRequirements: {
+      name: "Productvereisten",
+      description: "PRD sjabloon voor productmanagers"
+    },
     templates: "Sjablonen"
   },
 

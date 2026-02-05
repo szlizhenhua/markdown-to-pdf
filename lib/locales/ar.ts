@@ -146,6 +146,30 @@ export const ar = {
       name: "درس تعليمي/دليل",
       description: "قالب درس تعليمي خطوة بخطوة"
     },
+    simpleNotes: {
+      name: "ملاحظات بسيطة",
+      description: "نموذج ملاحظات أساسي"
+    },
+    meetingNotes: {
+      name: "محضر الاجتماع",
+      description: "وثائق اجتماع منظمة"
+    },
+    researchPaper: {
+      name: "ورقة بحثية",
+      description: "نموذج ورقة أكاديمية مع استشهادات"
+    },
+    apiDocumentation: {
+      name: "وثائق API",
+      description: "نموذج مرجع تقني لـ API"
+    },
+    blogPost: {
+      name: "قالب منشور المدونة",
+      description: "نموذج منشور مدونة محسن لمحركات البحث"
+    },
+    productRequirements: {
+      name: "متطلبات المنتج",
+      description: "نموذج PRD لمديري المنتجات"
+    },
     templates: "القوالب"
   },
 

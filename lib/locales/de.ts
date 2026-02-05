@@ -146,6 +146,30 @@ export const de = {
       name: "Tutorial/Leitfaden",
       description: "Schritt-für-Schritt-Tutorial-Vorlage"
     },
+    simpleNotes: {
+      name: "Einfache Notizen",
+      description: "Grundlegende Notizvorlage"
+    },
+    meetingNotes: {
+      name: "Meeting-Notizen",
+      description: "Strukturierte Meeting-Dokumentation"
+    },
+    researchPaper: {
+      name: "Forschungsarbeit",
+      description: "Akademische Vorlage mit Zitaten"
+    },
+    apiDocumentation: {
+      name: "API-Dokumentation",
+      description: "Technische API-Referenzvorlage"
+    },
+    blogPost: {
+      name: "Blog-Artikel-Vorlage",
+      description: "SEO-optimierte Blog-Artikelvorlage"
+    },
+    productRequirements: {
+      name: "Produktanforderungen",
+      description: "PRD-Vorlage für Produktmanager"
+    },
     templates: "Vorlagen"
   },
 

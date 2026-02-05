@@ -146,6 +146,30 @@ export const tr = {
       name: "Eğitim/Kılavuz",
       description: "Adım adım eğitim şablonu"
     },
+    simpleNotes: {
+      name: "Basit Notlar",
+      description: "Temel not şablonu"
+    },
+    meetingNotes: {
+      name: "Toplantı Notları",
+      description: "Yapılandırılmış toplantı belgeleri"
+    },
+    researchPaper: {
+      name: "Araştırma Makalesi",
+      description: "Atıf içeren akademik makale şablonu"
+    },
+    apiDocumentation: {
+      name: "API Dokümantasyonu",
+      description: "Teknik API referans şablonu"
+    },
+    blogPost: {
+      name: "Blog Gönderi Şablonu",
+      description: "SEO optimize edilmiş blog gönderi şablonu"
+    },
+    productRequirements: {
+      name: "Ürün Gereksinimleri",
+      description: "Ürün yöneticileri için PRD şablonu"
+    },
     templates: "Şablonlar"
   },
 

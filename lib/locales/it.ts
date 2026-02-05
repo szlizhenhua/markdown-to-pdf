@@ -146,6 +146,30 @@ export const it = {
       name: "Tutorial/Guida",
       description: "Modello tutorial passo passo"
     },
+    simpleNotes: {
+      name: "Note Semplici",
+      description: "Modello di base per appunti"
+    },
+    meetingNotes: {
+      name: "Note Riunione",
+      description: "Documentazione riunione strutturata"
+    },
+    researchPaper: {
+      name: "Articolo di Ricerca",
+      description: "Modello articolo accademico con citazioni"
+    },
+    apiDocumentation: {
+      name: "Documentazione API",
+      description: "Modello riferimento tecnico API"
+    },
+    blogPost: {
+      name: "Modello Articolo Blog",
+      description: "Modello articolo blog ottimizzato SEO"
+    },
+    productRequirements: {
+      name: "Requisiti Prodotto",
+      description: "Modello PRD per product manager"
+    },
     templates: "Modelli"
   },
 

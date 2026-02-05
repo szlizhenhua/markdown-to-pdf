@@ -143,10 +143,34 @@ export const vi = {
       description: "Gestructureerd notulen sjabloon"
     },
     tutorial: {
-      name: "Tutorial/Gids",
-      description: "Stap-voor-stap tutorial sjabloon"
+      name: "Hướng dẫn/Cẩm nang",
+      description: "Mẫu hướng dẫn từng bước"
     },
-    templates: "Sjablonen"
+    simpleNotes: {
+      name: "Ghi Chú Đơn Giản",
+      description: "Mẫu ghi chú cơ bản"
+    },
+    meetingNotes: {
+      name: "Ghi Chú Cuộc Họp",
+      description: "Tài liệu cuộc họp có cấu trúc"
+    },
+    researchPaper: {
+      name: "Bài Cáo Nghiên Cứu",
+      description: "Mẫu bài báo học thuật với trích dẫn"
+    },
+    apiDocumentation: {
+      name: "Tài Liệu API",
+      description: "Mẫu tham khảo kỹ thuật API"
+    },
+    blogPost: {
+      name: "Mẫu Bài Viết Blog",
+      description: "Mẫu bài viết blog tối ưu SEO"
+    },
+    productRequirements: {
+      name: "Yêu Cầu Sản Phẩm",
+      description: "Mẫu PRD cho quản lý sản phẩm"
+    },
+    templates: "Mẫu"
   },
 
   quickTemplates: {

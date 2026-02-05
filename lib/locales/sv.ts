@@ -143,10 +143,34 @@ export const sv = {
       description: "Gestructureerd notulen sjabloon"
     },
     tutorial: {
-      name: "Tutorial/Gids",
-      description: "Stap-voor-stap tutorial sjabloon"
+      name: "Tutorial/Guide",
+      description: "Steg-för-steg tutorial mall"
     },
-    templates: "Sjablonen"
+    simpleNotes: {
+      name: "Enkla Anteckningar",
+      description: "Grundläggande anteckningsmall"
+    },
+    meetingNotes: {
+      name: "Mötesanteckningar",
+      description: "Strukturerad mötesdokumentation"
+    },
+    researchPaper: {
+      name: "Forskningsartikel",
+      description: "Akademisk artikelmall med citat"
+    },
+    apiDocumentation: {
+      name: "API-dokumentation",
+      description: "Teknisk API-referensmall"
+    },
+    blogPost: {
+      name: "Blogginläggsmall",
+      description: "SEO-optimerad blogginläggsmall"
+    },
+    productRequirements: {
+      name: "Produktkrav",
+      description: "PRD-mall för produktchefer"
+    },
+    templates: "Mallar"
   },
 
   quickTemplates: {

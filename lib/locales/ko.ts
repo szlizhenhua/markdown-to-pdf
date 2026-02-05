@@ -146,6 +146,30 @@ export const ko = {
       name: "튜토리얼/가이드",
       description: "단계별 튜토리얼 템플릿"
     },
+    simpleNotes: {
+      name: "간단한 메모",
+      description: "기본 메모 템플릿"
+    },
+    meetingNotes: {
+      name: "회의록",
+      description: "구조화된 회의 문서"
+    },
+    researchPaper: {
+      name: "연구 논문",
+      description: "인용이 포함된 학술 논문 템플릿"
+    },
+    apiDocumentation: {
+      name: "API 문서",
+      description: "기술적 API 참조 템플릿"
+    },
+    blogPost: {
+      name: "블로그 게시물 템플릿",
+      description: "SEO 최적화 블로그 게시물 템플릿"
+    },
+    productRequirements: {
+      name: "제품 요구사항",
+      description: "제품 관리자를 위한 PRD 템플릿"
+    },
     templates: "템플릿"
   },
 
