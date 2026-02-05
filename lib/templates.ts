@@ -1,3 +1,5 @@
+import type { LocaleTranslations } from '@/lib/locales/types'
+
 export interface Template {
   id: string
   name: string
@@ -6,14 +8,15 @@ export interface Template {
   category: 'basic' | 'academic' | 'technical' | 'documentation'
 }
 
-export const templates: Template[] = [
-  {
-    id: 'blank',
-    name: 'Blank Document',
-    description: 'Start with a clean slate',
-    category: 'basic' as const,
-    content: ''
-  },
+export function getTemplates(t: LocaleTranslations): Template[] {
+  return [
+    {
+      id: 'blank',
+      name: t.templates.blank.name,
+      description: t.templates.blank.description,
+      category: 'basic' as const,
+      content: ''
+    },
   {
     id: 'simple-notes',
     name: 'Simple Notes',
@@ -566,4 +569,5 @@ Current solutions fail to address:
 2. Reference 2
 `
   }
-]
+  ]
+}

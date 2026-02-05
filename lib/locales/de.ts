@@ -116,7 +116,148 @@ export const de = {
       academic: "Akademisch",
       technical: "Technisch",
       documentation: "Dokumentation"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "Leeres Dokument",
+      description: "Mit einem leeren Blatt beginnen"
+    },
+    article: {
+      name: "Blog-Artikel",
+      description: "Standard-Beitragsstruktur"
+    },
+    readme: {
+      name: "README.md",
+      description: "Projektdokumentationsvorlage"
+    },
+    resume: {
+      name: "Lebenslauf",
+      description: "Professionelle Lebenslaufvorlage"
+    },
+    essay: {
+      name: "Wissenschaftliche Arbeit",
+      description: "Strukturierte wissenschaftliche Arbeit"
+    },
+    meeting: {
+      name: "Meeting-Protokoll",
+      description: "Vorlage für strukturierte Meeting-Notizen"
+    },
+    tutorial: {
+      name: "Tutorial/Leitfaden",
+      description: "Schritt-für-Schritt-Tutorial-Vorlage"
+    },
+    templates: "Vorlagen"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "API-Endpunkt",
+    codeSnippet: "Code-Schnipsel",
+    meetingNotes: "Meeting-Notizen",
+    bugReport: "Fehlerbericht",
+    dailyStandup: "Tägliches Standup",
+    featureRequest: "Funktionsanfrage",
+    codeReview: "Code-Review",
+    projectReadme: "Projekt-README"
+  },
+  textTransform: {
+    title: "Text transformieren",
+    close: "Schließen",
+    uppercase: "GROSSBUCHSTABEN",
+    lowercase: "kleinbuchstaben",
+    titleCase: "Titel",
+    sentenceCase: "Satz",
+    camelCase: "camelCase",
+    kebabCase: "kebab-case",
+    snakeCase: "snake_case",
+    toggleCase: "tOGGLE cASE",
+    capitalize: "Großschreiben",
+    uppercaseDesc: "In Großbuchstaben umwandeln",
+    lowercaseDesc: "In Kleinbuchstaben umwandeln",
+    titleCaseDesc: "Jedes Wort großschreiben",
+    sentenceCaseDesc: "Nur erstes Wort großschreiben",
+    camelCaseDesc: "In camelCase umwandeln",
+    kebabCaseDesc: "In kebab-case umwandeln",
+    snakeCaseDesc: "In snake_case umwandeln",
+    toggleCaseDesc: "Groß-/Kleinschreibung umschalten",
+    capitalizeDesc: "Ersten Buchstaben großschreiben"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "Sprache",
+    insertCodeBlock: "Code-Block einfügen",
+    preview: "Vorschau"
+  },
+  dateTime: {
+    insertDateTime: "Datum/Uhrzeit einfügen",
+    date: "Datum",
+    time: "Uhrzeit",
+    dateTime: "Datum & Uhrzeit",
+    iso8601: "ISO 8601",
+    usFormat: "US-Format",
+    euFormat: "EU-Format",
+    readable: "Lesbar",
+    cancel: "Abbrechen"
+  },
+  listHelper: {
+    listType: "Listentyp",
+    bullet: "Aufzählung",
+    numbered: "Nummeriert",
+    numberOfItems: "Anzahl der Elemente",
+    listItems: "Listenelemente",
+    insertList: "Liste einfügen",
+    cancel: "Abbrechen",
+    item: "Element"
+  },
+  highlightHelper: {
+    insertHighlight: "Hervorhebung einfügen",
+    highlightText: "Text hervorheben",
+    textToHighlight: "Zu hervorhebender Text",
+    color: "Farbe",
+    visualOnly: "(nur visuell)",
+    note: "Hinweis: Hervorhebung verwendet die Syntax ==Text==. Wird möglicherweise nicht von allen Markdown-Renderern unterstützt.",
+    cancel: "Abbrechen",
+    yellow: "Gelb",
+    red: "Rot",
+    green: "Grün",
+    blue: "Blau",
+    purple: "Lila",
+    pink: "Rosa"
+  },
+
+  helpDialog: {
+    title: "Markdown-Schnellreferenz",
+    close: "Schließen",
+    headings: "Überschriften",
+    textStyles: "Textstile",
+    codeBlocks: "Code-Blöcke",
+    lists: "Listen",
+    links: "Links",
+    images: "Bilder",
+    quotes: "Zitate",
+    tables: "Tabellen"
   },
 
   // Default Content
@@ -510,14 +651,24 @@ Wenn sie immer noch nicht angezeigt werden, überprüfen Sie, ob die Formelsynta
     },
     timeTracker: {
       title: "Zeit-Tracker",
-      startTime: "Sitzung starten",
-      stopTime: "Sitzung stoppen",
+      startTime: "Starten",
+      stopTime: "Pause",
       reset: "Zurücksetzen",
       totalTime: "Gesamtzeit",
-      sessions: "Heutige Sitzungen"
+      sessions: "Heutige Sitzungen",
+      wordsPerMin: "Wörter/Min",
+      recording: "Aufnahme",
+      stopped: "Gestoppt",
+      today: "Heute",
+      thisWeek: "Diese Woche",
+      avgSession: "Durchschnittssitzung",
+      dailyTimeGoal: "Tägliches Zeitziel",
+      hours: "2 Stunden",
+      recentSessions: "Letzte Sitzungen"
     },
     pomodoro: {
       title: "Pomodoro-Timer",
+      description: "Verwenden Sie die Pomodoro-Technik für fokussierte Schreibsessions",
       start: "Starten",
       pause: "Pause",
       reset: "Zurücksetzen",
@@ -552,21 +703,22 @@ Wenn sie immer noch nicht angezeigt werden, überprüfen Sie, ob die Formelsynta
     },
     typography: {
       title: "Typografie-Steuerelemente",
+      description: "Passen Sie das Erscheinungsbild des Vorschautextes an",
       fontSize: "Schriftgröße",
       lineHeight: "Zeilenhöhe",
       fontFamily: "Schriftfamilie"
     },
     snippets: {
       title: "Snippet-Bibliothek",
+      description: "Schneller Zugriff auf wiederverwendbare Markdown-Muster und Vorlagen",
       add: "Snippet hinzufügen",
       save: "Snippet speichern",
       cancel: "Abbrechen",
       name: "Name",
-      content: "Inhalt"
     },
     keyboardShortcuts: {
-      title: "Tastaturkürzel",
-      description: "Beschleunigen Sie Ihren Workflow mit diesen Kürzeln"
+      title: "Tastenkürzel",
+      description: "Beschleunigen Sie Ihren Arbeitsablauf mit diesen Tastenkürzeln"
     }
-  }
+  },
 }

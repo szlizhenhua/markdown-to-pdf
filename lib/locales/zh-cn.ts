@@ -116,7 +116,37 @@ export const zhCN = {
       academic: "学术",
       technical: "技术",
       documentation: "文档"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "空白文档",
+      description: "从空白开始"
+    },
+    article: {
+      name: "博客文章",
+      description: "标准的博客文章结构"
+    },
+    readme: {
+      name: "README.md",
+      description: "项目文档模板"
+    },
+    resume: {
+      name: "简历/CV",
+      description: "专业简历模板"
+    },
+    essay: {
+      name: "学术论文",
+      description: "结构化论文"
+    },
+    meeting: {
+      name: "会议记录",
+      description: "结构化会议记录模板"
+    },
+    tutorial: {
+      name: "教程/指南",
+      description: "分步教程模板"
+    },
+    templates: "模板"
   },
 
   // Default Content
@@ -625,14 +655,24 @@ def quicksort(arr):
     },
     timeTracker: {
       title: "时间追踪",
-      startTime: "开始计时",
-      stopTime: "停止计时",
+      startTime: "开始",
+      stopTime: "暂停",
       reset: "重置",
       totalTime: "总时间",
-      sessions: "今日会话"
+      sessions: "今日会话",
+      wordsPerMin: "字/分钟",
+      recording: "记录中",
+      stopped: "已停止",
+      today: "今天",
+      thisWeek: "本周",
+      avgSession: "平均会话",
+      dailyTimeGoal: "每日时间目标",
+      hours: "2 小时",
+      recentSessions: "最近会话"
     },
     pomodoro: {
       title: "番茄钟计时器",
+      description: "使用番茄工作法进行专注写作",
       start: "开始",
       pause: "暂停",
       reset: "重置",
@@ -667,12 +707,14 @@ def quicksort(arr):
     },
     typography: {
       title: "排版控制",
+      description: "自定义预览文本的外观",
       fontSize: "字体大小",
       lineHeight: "行高",
       fontFamily: "字体族"
     },
     snippets: {
       title: "代码片段库",
+      description: "快速访问可重用的 Markdown 模式和模板",
       add: "添加片段",
       save: "保存片段",
       cancel: "取消",
@@ -683,5 +725,114 @@ def quicksort(arr):
       title: "键盘快捷键",
       description: "使用这些快捷键提高工作效率"
     }
+  },
+  quickTemplates: {
+    apiEndpoint: "API 接口",
+    codeSnippet: "代码片段",
+    meetingNotes: "会议记录",
+    bugReport: "缺陷报告",
+    dailyStandup: "每日站会",
+    featureRequest: "功能请求",
+    codeReview: "代码评审",
+    projectReadme: "项目说明"
+  },
+  textTransform: {
+    title: "文本转换",
+    close: "关闭",
+    uppercase: "大写",
+    lowercase: "小写",
+    titleCase: "首字母大写",
+    sentenceCase: "句首大写",
+    camelCase: "驼峰命名",
+    kebabCase: "短横线命名",
+    snakeCase: "下划线命名",
+    toggleCase: "切换大小写",
+    capitalize: "首字母大写",
+    uppercaseDesc: "转换为大写",
+    lowercaseDesc: "转换为小写",
+    titleCaseDesc: "每个单词首字母大写",
+    sentenceCaseDesc: "仅首字母大写",
+    camelCaseDesc: "转换为驼峰命名",
+    kebabCaseDesc: "转换为短横线命名",
+    snakeCaseDesc: "转换为下划线命名",
+    toggleCaseDesc: "切换字母大小写",
+    capitalizeDesc: "首字母大写"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "语言",
+    insertCodeBlock: "插入代码块",
+    preview: "预览"
+  },
+  dateTime: {
+    insertDateTime: "插入日期/时间",
+    date: "日期",
+    time: "时间",
+    dateTime: "日期时间",
+    iso8601: "ISO 8601",
+    usFormat: "美国格式",
+    euFormat: "欧洲格式",
+    readable: "可读格式",
+    cancel: "取消"
+  },
+  listHelper: {
+    listType: "列表类型",
+    bullet: "无序",
+    numbered: "有序",
+    numberOfItems: "项目数量",
+    listItems: "列表项",
+    insertList: "插入列表",
+    cancel: "取消",
+    item: "项目"
+  },
+  highlightHelper: {
+    insertHighlight: "插入高亮",
+    highlightText: "高亮文本",
+    textToHighlight: "要高亮的文本",
+    color: "颜色",
+    visualOnly: "（仅视觉效果）",
+    note: "注意：高亮使用 ==文本== 语法。可能不被所有 Markdown 渲染器支持。",
+    cancel: "取消",
+    yellow: "黄色",
+    red: "红色",
+    green: "绿色",
+    blue: "蓝色",
+    purple: "紫色",
+    pink: "粉色"
+  },
+  helpDialog: {
+    title: "Markdown 快速参考",
+    close: "关闭",
+    headings: "标题",
+    textStyles: "文本样式",
+    codeBlocks: "代码块",
+    lists: "列表",
+    links: "链接",
+    images: "图片",
+    quotes: "引用",
+    tables: "表格"
   }
 }

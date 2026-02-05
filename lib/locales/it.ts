@@ -116,7 +116,148 @@ export const it = {
       academic: "Accademico",
       technical: "Tecnico",
       documentation: "Documentazione"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "Documento Vuoto",
+      description: "Inizia da una pagina bianca"
+    },
+    article: {
+      name: "Articolo Blog",
+      description: "Struttura standard articolo blog"
+    },
+    readme: {
+      name: "README.md",
+      description: "Modello documentazione progetto"
+    },
+    resume: {
+      name: "CV",
+      description: "Modello CV professionale"
+    },
+    essay: {
+      name: "Saggio Accademico",
+      description: "Documento accademico strutturato"
+    },
+    meeting: {
+      name: "Note Riunione",
+      description: "Modello note riunione strutturate"
+    },
+    tutorial: {
+      name: "Tutorial/Guida",
+      description: "Modello tutorial passo passo"
+    },
+    templates: "Modelli"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "Endpoint API",
+    codeSnippet: "Snippet di Codice",
+    meetingNotes: "Note Riunione",
+    bugReport: "Report Bug",
+    dailyStandup: "Standup Giornaliero",
+    featureRequest: "Richiesta Funzionalità",
+    codeReview: "Code Review",
+    projectReadme: "README Progetto"
+  },
+  textTransform: {
+    title: "Trasforma Testo",
+    close: "Chiudi",
+    uppercase: "MAIUSCOLO",
+    lowercase: "minuscolo",
+    titleCase: "Titolo",
+    sentenceCase: "Frase",
+    camelCase: "camelCase",
+    kebabCase: "kebab-case",
+    snakeCase: "snake_case",
+    toggleCase: "tOGGLE cASE",
+    capitalize: "Capitalizza",
+    uppercaseDesc: "Converti in maiuscolo",
+    lowercaseDesc: "Converti in minuscolo",
+    titleCaseDesc: "Capitalizza Ogni Parola",
+    sentenceCaseDesc: "Capitalizza solo la prima parola",
+    camelCaseDesc: "Converti in camelCase",
+    kebabCaseDesc: "Converti in kebab-case",
+    snakeCaseDesc: "Converti in snake_case",
+    toggleCaseDesc: "Alterna maiuscolo/minuscolo",
+    capitalizeDesc: "Capitalizza prima lettera"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "Linguaggio",
+    insertCodeBlock: "Inserisci Blocco di Codice",
+    preview: "Anteprima"
+  },
+  dateTime: {
+    insertDateTime: "Inserisci Data/Ora",
+    date: "Data",
+    time: "Ora",
+    dateTime: "Data e Ora",
+    iso8601: "ISO 8601",
+    usFormat: "Formato US",
+    euFormat: "Formato UE",
+    readable: "Leggibile",
+    cancel: "Annulla"
+  },
+  listHelper: {
+    listType: "Tipo di Lista",
+    bullet: "Puntatura",
+    numbered: "Numerata",
+    numberOfItems: "Numero di Elementi",
+    listItems: "Elementi Lista",
+    insertList: "Inserisci Lista",
+    cancel: "Annulla",
+    item: "Elemento"
+  },
+  highlightHelper: {
+    insertHighlight: "Inserisci evidenziazione",
+    highlightText: "Evidenzia Testo",
+    textToHighlight: "Testo da evidenziare",
+    color: "Colore",
+    visualOnly: "(solo visivo)",
+    note: "Nota: L'evidenziazione usa la sintassi ==testo==. Può non essere supportata da tutti i renderer Markdown.",
+    cancel: "Annulla",
+    yellow: "Giallo",
+    red: "Rosso",
+    green: "Verde",
+    blue: "Blu",
+    purple: "Viola",
+    pink: "Rosa"
+  },
+
+  helpDialog: {
+    title: "Riferimento Rapido Markdown",
+    close: "Chiudi",
+    headings: "Intestazioni",
+    textStyles: "Stili di Testo",
+    codeBlocks: "Blocchi di Codice",
+    lists: "Elenchi",
+    links: "Collegamenti",
+    images: "Immagini",
+    quotes: "Citazioni",
+    tables: "Tabelle"
   },
 
   // Default Content
@@ -510,14 +651,24 @@ Se ancora non vengono visualizzate, verifica se la sintassi della formula è cor
     },
     timeTracker: {
       title: "Tracker del tempo",
-      startTime: "Avvia sessione",
-      stopTime: "Ferma sessione",
+      startTime: "Avvia",
+      stopTime: "Pausa",
       reset: "Resetta",
       totalTime: "Tempo totale",
-      sessions: "Sessioni di oggi"
+      sessions: "Sessioni di oggi",
+      wordsPerMin: "parole/min",
+      recording: "Registrazione",
+      stopped: "Fermato",
+      today: "Oggi",
+      thisWeek: "Questa Settimana",
+      avgSession: "Sessione Media",
+      dailyTimeGoal: "Obiettivo di Tempo Giornaliero",
+      hours: "2 ore",
+      recentSessions: "Sessioni Recenti"
     },
     pomodoro: {
       title: "Timer Pomodoro",
+      description: "Usa la tecnica Pomodoro per sessioni di scrittura focalizzate",
       start: "Avvia",
       pause: "Pausa",
       reset: "Resetta",
@@ -552,21 +703,22 @@ Se ancora non vengono visualizzate, verifica se la sintassi della formula è cor
     },
     typography: {
       title: "Controlli tipografici",
+      description: "Personalizza l'aspetto del testo di anteprima",
       fontSize: "Dimensione carattere",
       lineHeight: "Altezza riga",
       fontFamily: "Famiglia carattere"
     },
     snippets: {
       title: "Libreria snippet",
+      description: "Accesso rapido a pattern e template Markdown riutilizzabili",
       add: "Aggiungi snippet",
       save: "Salva snippet",
       cancel: "Annulla",
       name: "Nome",
-      content: "Contenuto"
     },
     keyboardShortcuts: {
       title: "Scorciatoie da tastiera",
-      description: "Accelera il tuo flusso di lavoro con queste scorciatoie"
+      description: "Velocizza il tuo flusso di lavoro con queste scorciatoie"
     }
-  }
+  },
 }

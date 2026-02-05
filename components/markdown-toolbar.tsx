@@ -313,17 +313,17 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
           <div className="w-px h-6 bg-border mx-1" />
           <HeadingHelper onInsert={onInsert} />
           <BlockquoteHelper onInsert={onInsert} />
-          <ListHelper onInsert={onInsert} />
+          <ListHelper onInsert={onInsert} t={t} />
           <TaskListHelper onInsert={onInsert} />
-          <CodeBlockSelector onInsert={onInsert} />
+          <CodeBlockSelector onInsert={onInsert} t={t} />
           <LinkHelper onInsert={onInsert} />
           <ImageHelper onInsert={onInsert} />
           <TableGenerator onInsert={onInsert} />
-          <DateTimeHelper onInsert={onInsert} />
+          <DateTimeHelper onInsert={onInsert} t={t} />
           <EmojiPicker onInsert={onInsert} />
-          <HighlightHelper onInsert={onInsert} />
+          <HighlightHelper onInsert={onInsert} t={t} />
           {onClear && <ClearFormatting onClear={onClear} />}
-          {onReplace && <TextTransform content={content} onReplace={onReplace} />}
+          {onReplace && <TextTransform content={content} onReplace={onReplace} t={t} />}
         </div>
       )}
       {content && (

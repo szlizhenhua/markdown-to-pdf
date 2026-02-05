@@ -3,14 +3,16 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Type } from 'lucide-react'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface TextTransformProps {
   content: string
   onReplace: (oldContent: string, newContent: string) => void
   className?: string
+  t: LocaleTranslations
 }
 
-export function TextTransform({ content, onReplace, className }: TextTransformProps) {
+export function TextTransform({ content, onReplace, className, t }: TextTransformProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const transformSelection = (transform: (text: string) => string) => {
@@ -84,15 +86,15 @@ export function TextTransform({ content, onReplace, className }: TextTransformPr
   }
 
   const transformations = [
-    { id: 'upper', label: 'UPPERCASE', action: toUpperCase, desc: 'Convert to uppercase' },
-    { id: 'lower', label: 'lowercase', action: toLowerCase, desc: 'Convert to lowercase' },
-    { id: 'title', label: 'Title Case', action: toTitleCase, desc: 'Capitalize Each Word' },
-    { id: 'sentence', label: 'Sentence case', action: toSentenceCase, desc: 'Capitalize first word only' },
-    { id: 'camel', label: 'camelCase', action: toCamelCase, desc: 'Convert to camelCase' },
-    { id: 'kebab', label: 'kebab-case', action: toKebabCase, desc: 'Convert to kebab-case' },
-    { id: 'snake', label: 'snake_case', action: toSnakeCase, desc: 'Convert to snake_case' },
-    { id: 'toggle', label: 'tOGGLE cASE', action: toggleCase, desc: 'Toggle letter case' },
-    { id: 'capitalize', label: 'Capitalize', action: capitalize, desc: 'Capitalize first letter' }
+    { id: 'upper', label: t.textTransform.uppercase, action: toUpperCase, desc: t.textTransform.uppercaseDesc },
+    { id: 'lower', label: t.textTransform.lowercase, action: toLowerCase, desc: t.textTransform.lowercaseDesc },
+    { id: 'title', label: t.textTransform.titleCase, action: toTitleCase, desc: t.textTransform.titleCaseDesc },
+    { id: 'sentence', label: t.textTransform.sentenceCase, action: toSentenceCase, desc: t.textTransform.sentenceCaseDesc },
+    { id: 'camel', label: t.textTransform.camelCase, action: toCamelCase, desc: t.textTransform.camelCaseDesc },
+    { id: 'kebab', label: t.textTransform.kebabCase, action: toKebabCase, desc: t.textTransform.kebabCaseDesc },
+    { id: 'snake', label: t.textTransform.snakeCase, action: toSnakeCase, desc: t.textTransform.snakeCaseDesc },
+    { id: 'toggle', label: t.textTransform.toggleCase, action: toggleCase, desc: t.textTransform.toggleCaseDesc },
+    { id: 'capitalize', label: t.textTransform.capitalize, action: capitalize, desc: t.textTransform.capitalizeDesc }
   ]
 
   return (
@@ -102,8 +104,8 @@ export function TextTransform({ content, onReplace, className }: TextTransformPr
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
         className="h-8 w-8 p-0 touch-manipulation"
-        title="Text transformation"
-        aria-label="Text transformation"
+        title={t.textTransform.title}
+        aria-label={t.textTransform.title}
         aria-expanded={isOpen}
       >
         <Type className="h-4 w-4" />
@@ -112,7 +114,7 @@ export function TextTransform({ content, onReplace, className }: TextTransformPr
       {isOpen && (
         <div className="absolute left-0 top-full mt-1 z-50 w-64 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15">
           <div className="p-4">
-            <h3 className="text-sm font-medium mb-3">Transform Text</h3>
+            <h3 className="text-sm font-medium mb-3">{t.textTransform.title}</h3>
             <div className="space-y-1 max-h-80 overflow-y-auto">
               {transformations.map((transform) => (
                 <button
@@ -131,7 +133,7 @@ export function TextTransform({ content, onReplace, className }: TextTransformPr
               size="sm"
               className="w-full mt-3"
             >
-              Close
+              {t.textTransform.close}
             </Button>
           </div>
         </div>

@@ -167,8 +167,8 @@ export function TimeTracker({ className, content = '', t }: TimeTrackerProps) {
           className={`h-8 px-2 touch-manipulation text-xs ${className} ${
             isRunning ? 'text-green-600 dark:text-green-400 animate-pulse' : ''
           }`}
-          title="Time tracker"
-          aria-label="Time tracker"
+          title={t.dialogs.timeTracker.title}
+          aria-label={t.dialogs.timeTracker.title}
         >
           {isRunning ? (
             <>
@@ -178,7 +178,7 @@ export function TimeTracker({ className, content = '', t }: TimeTrackerProps) {
           ) : (
             <>
               <Clock className="h-4 w-4 mr-1" />
-              <span className="hidden sm:inline">Timer</span>
+              <span className="hidden sm:inline">{formatTime(elapsed)}</span>
             </>
           )}
         </Button>
@@ -194,26 +194,26 @@ export function TimeTracker({ className, content = '', t }: TimeTrackerProps) {
               {isRunning ? (
                 <>
                   <Badge variant="default" className="animate-pulse">
-                    Recording
+                    {t.dialogs.timeTracker.recording}
                   </Badge>
                   <span className="text-xs text-muted-foreground">
-                    {wordsPerMinute} words/min
+                    {wordsPerMinute} {t.dialogs.timeTracker.wordsPerMin}
                   </span>
                 </>
               ) : (
-                <Badge variant="secondary">Stopped</Badge>
+                <Badge variant="secondary">{t.dialogs.timeTracker.stopped}</Badge>
               )}
             </div>
             <div className="flex justify-center gap-2">
               {!isRunning ? (
                 <Button onClick={startTimer} size="sm">
                   <Play className="h-4 w-4 mr-2" />
-                  Start
+                  {t.dialogs.timeTracker.startTime}
                 </Button>
               ) : (
                 <Button onClick={pauseTimer} variant="secondary" size="sm">
                   <Pause className="h-4 w-4 mr-2" />
-                  Pause
+                  {t.dialogs.timeTracker.stopTime}
                 </Button>
               )}
               <Button
@@ -223,7 +223,7 @@ export function TimeTracker({ className, content = '', t }: TimeTrackerProps) {
                 disabled={!isRunning && elapsed === 0}
               >
                 <RotateCcw className="h-4 w-4 mr-2" />
-                Reset
+                {t.dialogs.timeTracker.reset}
               </Button>
             </div>
           </div>
@@ -231,19 +231,19 @@ export function TimeTracker({ className, content = '', t }: TimeTrackerProps) {
           {/* Stats */}
           <div className="space-y-3 pt-3 border-t">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">Today</span>
+              <span className="text-sm text-muted-foreground">{t.dialogs.timeTracker.today}</span>
               <span className="text-sm font-medium">
                 {formatTime(Math.floor(todayTime / 1000))}
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">This Week</span>
+              <span className="text-sm text-muted-foreground">{t.dialogs.timeTracker.thisWeek}</span>
               <span className="text-sm font-medium">
                 {formatTime(Math.floor(weekTime / 1000))}
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">Avg Session</span>
+              <span className="text-sm text-muted-foreground">{t.dialogs.timeTracker.avgSession}</span>
               <span className="text-sm font-medium">
                 {formatTime(Math.floor(avgSessionTime / 1000))}
               </span>
@@ -253,8 +253,8 @@ export function TimeTracker({ className, content = '', t }: TimeTrackerProps) {
           {/* Progress Bar (if daily goal is set) */}
           <div className="space-y-2 pt-3 border-t">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">Daily Time Goal</span>
-              <span>2 hours</span>
+              <span className="text-muted-foreground">{t.dialogs.timeTracker.dailyTimeGoal}</span>
+              <span>{t.dialogs.timeTracker.hours}</span>
             </div>
             <Progress
               value={(todayTime / (2 * 60 * 60 * 1000)) * 100}
@@ -267,7 +267,7 @@ export function TimeTracker({ className, content = '', t }: TimeTrackerProps) {
             <div className="space-y-2 pt-3 border-t">
               <div className="flex items-center gap-2 text-sm font-medium">
                 <TrendingUp className="h-4 w-4" />
-                Recent Sessions
+                {t.dialogs.timeTracker.recentSessions}
               </div>
               <div className="space-y-1 max-h-32 overflow-y-auto">
                 {sessions.slice(0, 5).map((session, index) => {
@@ -278,7 +278,7 @@ export function TimeTracker({ className, content = '', t }: TimeTrackerProps) {
                     minute: '2-digit'
                   })
                   const dateStr = session.date === new Date().toISOString().split('T')[0]
-                    ? 'Today'
+                    ? t.dialogs.timeTracker.today
                     : new Date(session.date).toLocaleDateString('en-US', { weekday: 'short' })
 
                   return (

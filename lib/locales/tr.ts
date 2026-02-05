@@ -116,7 +116,148 @@ export const tr = {
       academic: "Akademik",
       technical: "Teknik",
       documentation: "Belgeleme"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "Boş Belge",
+      description: "Temiz bir sayfadan başlayın"
+    },
+    article: {
+      name: "Blog Yazısı",
+      description: "Standart blog gönderi yapısı"
+    },
+    readme: {
+      name: "README.md",
+      description: "Proje belgelendirme şablonu"
+    },
+    resume: {
+      name: "Özgeçmiş/CV",
+      description: "Profesyonel özgeçmiş şablonu"
+    },
+    essay: {
+      name: "Akademik Makale",
+      description: "Yapılandırılmış akademik makale"
+    },
+    meeting: {
+      name: "Toplantı Notları",
+      description: "Yapılandırılmış toplantı notları şablonu"
+    },
+    tutorial: {
+      name: "Eğitim/Kılavuz",
+      description: "Adım adım eğitim şablonu"
+    },
+    templates: "Şablonlar"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "API Uç Noktası",
+    codeSnippet: "Kod Parçası",
+    meetingNotes: "Toplantı Notları",
+    bugReport: "Hata Raporu",
+    dailyStandup: "Günlük Durum Toplantısı",
+    featureRequest: "Özellik Talebi",
+    codeReview: "Kod İncelemesi",
+    projectReadme: "Proje README"
+  },
+  textTransform: {
+    title: "Metni Dönüştür",
+    close: "Kapat",
+    uppercase: "BÜYÜK HARF",
+    lowercase: "küçük harf",
+    titleCase: "Başlık Harfi",
+    sentenceCase: "Cümle Harfi",
+    camelCase: "deveHali",
+    kebabCase: "kebap-hali",
+    snakeCase: "yılan_hali",
+    toggleCase: "hARF dEĞİŞTİR",
+    capitalize: "Baş Harf",
+    uppercaseDesc: "Büyük harfe dönüştür",
+    lowercaseDesc: "Küçük harfe dönüştür",
+    titleCaseDesc: "Her Kelimenin Baş Harfi",
+    sentenceCaseDesc: "Sadece ilk kelimenin baş harfi",
+    camelCaseDesc: "camelCase'e dönüştür",
+    kebabCaseDesc: "kebab-case'e dönüştür",
+    snakeCaseDesc: "snake_case'e dönüştür",
+    toggleCaseDesc: "Büyük/küçük harf değiştir",
+    capitalizeDesc: "İlk harfi büyüt"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "Dil",
+    insertCodeBlock: "Kod Bloğu Ekle",
+    preview: "Önizleme"
+  },
+  dateTime: {
+    insertDateTime: "Tarih/Saat Ekle",
+    date: "Tarih",
+    time: "Saat",
+    dateTime: "Tarih & Saat",
+    iso8601: "ISO 8601",
+    usFormat: "ABD Formatı",
+    euFormat: "AB Formatı",
+    readable: "Okunabilir",
+    cancel: "İptal"
+  },
+  listHelper: {
+    listType: "Liste Türü",
+    bullet: "Madde İşareti",
+    numbered: "Numaralı",
+    numberOfItems: "Öğe Sayısı",
+    listItems: "Liste Öğeleri",
+    insertList: "Liste Ekle",
+    cancel: "İptal",
+    item: "Öğe"
+  },
+  highlightHelper: {
+    insertHighlight: "Vurgu Ekle",
+    highlightText: "Metni Vurgula",
+    textToHighlight: "Vurgulanacak metin",
+    color: "Renk",
+    visualOnly: "(sadece görsel)",
+    note: "Not: Vurgulama ==metin== sözdizimini kullanır. Tüm markdown rendercıları tarafından desteklenmeyebilir.",
+    cancel: "İptal",
+    yellow: "Sarı",
+    red: "Kırmızı",
+    green: "Yeşil",
+    blue: "Mavi",
+    purple: "Mor",
+    pink: "Pembe"
+  },
+
+  helpDialog: {
+    title: "Markdown Hızlı Başvurusu",
+    close: "Kapat",
+    headings: "Başlıklar",
+    textStyles: "Metin Stilleri",
+    codeBlocks: "Kod Blokları",
+    lists: "Listeler",
+    links: "Bağlantılar",
+    images: "Görseller",
+    quotes: "Alıntılar",
+    tables: "Tablolar"
   },
 
   // Default Content
@@ -510,14 +651,24 @@ Hala görünmüyorsa, formül sözdiziminin doğru olup olmadığını kontrol e
     },
     timeTracker: {
       title: "Zaman Takipçisi",
-      startTime: "Oturumu başlat",
-      stopTime: "Oturumu durdur",
+      startTime: "Başlat",
+      stopTime: "Duraklat",
       reset: "Sıfırla",
       totalTime: "Toplam zaman",
-      sessions: "Bugünkü oturumlar"
+      sessions: "Bugünkü oturumlar",
+      wordsPerMin: "kelime/dakika",
+      recording: "Kayıt",
+      stopped: "Durduruldu",
+      today: "Bugün",
+      thisWeek: "Bu Hafta",
+      avgSession: "Ortalama Oturum",
+      dailyTimeGoal: "Günlük Zaman Hedefi",
+      hours: "2 saat",
+      recentSessions: "Son Oturumlar"
     },
     pomodoro: {
       title: "Pomodoro Zamanlayıcı",
+      description: "Odaklı yazı oturumları için Pomodoro tekniğini kullanın",
       start: "Başlat",
       pause: "Duraklat",
       reset: "Sıfırla",
@@ -552,17 +703,18 @@ Hala görünmüyorsa, formül sözdiziminin doğru olup olmadığını kontrol e
     },
     typography: {
       title: "Tipografi Kontrolleri",
+      description: "Önizleme metninin görünümünü özelleştirin",
       fontSize: "Yazı tipi boyutu",
       lineHeight: "Satır yüksekliği",
       fontFamily: "Yazı tipi ailesi"
     },
     snippets: {
       title: "Parçacık Kütüphanesi",
+      description: "Yeniden kullanılabilir Markdown kalıplarına ve şablonlara hızlı erişim",
       add: "Parçacık ekle",
       save: "Parçacığı kaydet",
       cancel: "İptal",
       name: "Ad",
-      content: "İçerik"
     },
     keyboardShortcuts: {
       title: "Klavye Kısayolları",

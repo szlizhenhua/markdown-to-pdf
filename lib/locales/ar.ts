@@ -116,7 +116,148 @@ export const ar = {
       academic: "أكاديمي",
       technical: "تقني",
       documentation: "توثيق"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "مستند فارغ",
+      description: "ابدأ من صفحة فارغة"
+    },
+    article: {
+      name: "مقالة مدونة",
+      description: "هيكل مشاركة مدونة قياسي"
+    },
+    readme: {
+      name: "README.md",
+      description: "قالب توثيق المشروع"
+    },
+    resume: {
+      name: "سيرة ذاتية/CV",
+      description: "قالب سيرة ذاتية احترافي"
+    },
+    essay: {
+      name: "مقال أكاديمي",
+      description: "ورقة أكاديمية منظمة"
+    },
+    meeting: {
+      name: "ملاحظات الاجتماع",
+      description: "قالب ملاحظات اجتماع منظمة"
+    },
+    tutorial: {
+      name: "درس تعليمي/دليل",
+      description: "قالب درس تعليمي خطوة بخطوة"
+    },
+    templates: "القوالب"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "نقطة نهاية API",
+    codeSnippet: "قصاصة برمجية",
+    meetingNotes: "ملاحظات الاجتماع",
+    bugReport: "تقرير خطأ",
+    dailyStandup: "الوقوف اليومي",
+    featureRequest: "طلب ميزة",
+    codeReview: "مراجعة الكود",
+    projectReadme: "README للمشروع"
+  },
+  textTransform: {
+    title: "تحويل النص",
+    close: "إغلاق",
+    uppercase: "أحرف كبيرة",
+    lowercase: "أحرف صغيرة",
+    titleCase: "حالة العنوان",
+    sentenceCase: "حالة الجملة",
+    camelCase: "حالة الجمل",
+    kebabCase: "kebab-case",
+    snakeCase: "snake_case",
+    toggleCase: "تبديل الحالة",
+    capitalize: "تكبير الحرف الأول",
+    uppercaseDesc: "تحويل إلى أحرف كبيرة",
+    lowercaseDesc: "تحويل إلى أحرف صغيرة",
+    titleCaseDesc: "تكبير كل كلمة",
+    sentenceCaseDesc: "تكبير أول كلمة فقط",
+    camelCaseDesc: "التحويل إلى camelCase",
+    kebabCaseDesc: "التحويل إلى kebab-case",
+    snakeCaseDesc: "التحويل إلى snake_case",
+    toggleCaseDesc: "تبديل حالة الأحرف",
+    capitalizeDesc: "تكبير الحرف الأول"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "اللغة",
+    insertCodeBlock: "إدراج كود",
+    preview: "معاينة"
+  },
+  dateTime: {
+    insertDateTime: "إدراج التاريخ/الوقت",
+    date: "التاريخ",
+    time: "الوقت",
+    dateTime: "التاريخ والوقت",
+    iso8601: "ISO 8601",
+    usFormat: "التنسيق الأمريكي",
+    euFormat: "التنسيق الأوروبي",
+    readable: "مقروء",
+    cancel: "إلغاء"
+  },
+  listHelper: {
+    listType: "نوع القائمة",
+    bullet: "نقطي",
+    numbered: "مرقم",
+    numberOfItems: "عدد العناصر",
+    listItems: "عناصر القائمة",
+    insertList: "إدراج قائمة",
+    cancel: "إلغاء",
+    item: "عنصر"
+  },
+  highlightHelper: {
+    insertHighlight: "إدراج تمييز",
+    highlightText: "تمييز النص",
+    textToHighlight: "النص المميز",
+    color: "اللون",
+    visualOnly: "(مرئي فقط)",
+    note: "ملاحظة: التمييز يستخدم بناء الجملة ==نص==. قد لا تكون مدعومة من قبل جميع عارضات Markdown.",
+    cancel: "إلغاء",
+    yellow: "أصفر",
+    red: "أحمر",
+    green: "أخضر",
+    blue: "أزرق",
+    purple: "بنفسجي",
+    pink: "وردي"
+  },
+
+  helpDialog: {
+    title: "مرجع سريع لـ Markdown",
+    close: "إغلاق",
+    headings: "العناوين",
+    textStyles: "أنماط النص",
+    codeBlocks: "كتل الكود",
+    lists: "القوائم",
+    links: "الروابط",
+    images: "الصور",
+    quotes: "الاقتباسات",
+    tables: "الجداول"
   },
 
   // Default Content
@@ -510,14 +651,24 @@ def quicksort(arr):
     },
     timeTracker: {
       title: "متتبع الوقت",
-      startTime: "بدء الجلسة",
-      stopTime: "إيقاف الجلسة",
+      startTime: "بدء",
+      stopTime: "إيقاف",
       reset: "إعادة تعيين",
       totalTime: "الوقت الإجمالي",
-      sessions: "جلسات اليوم"
+      sessions: "جلسات اليوم",
+      wordsPerMin: "كلمة/دقيقة",
+      recording: "تسجيل",
+      stopped: "متوقف",
+      today: "اليوم",
+      thisWeek: "هذا الأسبوع",
+      avgSession: "الجلسة المتوسطة",
+      dailyTimeGoal: "الهدف اليومي للوقت",
+      hours: "2 ساعات",
+      recentSessions: "الجلسات الأخيرة"
     },
     pomodoro: {
       title: "مؤقت بومودورو",
+      description: "استخدم تقنية بومودورو لجلسات كتابة مركزة",
       start: "بدء",
       pause: "إيقاف مؤقت",
       reset: "إعادة تعيين",
@@ -552,21 +703,22 @@ def quicksort(arr):
     },
     typography: {
       title: "تحكمات الطباعة",
+      description: "تخصيص مظهر نص المعاينة",
       fontSize: "حجم الخط",
       lineHeight: "ارتفاع السطر",
       fontFamily: "عائلة الخط"
     },
     snippets: {
       title: "مكتبة القصاصات",
+      description: "الوصول السريع إلى أنماط وقوالب Markdown القابلة لإعادة الاستخدام",
       add: "إضافة قصاصة",
       save: "حفظ القصاصة",
       cancel: "إلغاء",
       name: "الاسم",
-      content: "المحتوى"
     },
     keyboardShortcuts: {
       title: "اختصارات لوحة المفاتيح",
-      description: "تسريع سير العمل مع هذه الاختصارات"
+      description: "عجّل سير العمل الخاص بك بهذه الاختصارات"
     }
   }
 }

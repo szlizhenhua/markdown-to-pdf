@@ -116,7 +116,148 @@ export const fr = {
       academic: "Académique",
       technical: "Technique",
       documentation: "Documentation"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "Document Vide",
+      description: "Commencer avec une page blanche"
+    },
+    article: {
+      name: "Article de Blog",
+      description: "Structure d'article de blog standard"
+    },
+    readme: {
+      name: "README.md",
+      description: "Modèle de documentation de projet"
+    },
+    resume: {
+      name: "CV",
+      description: "Modèle de CV professionnel"
+    },
+    essay: {
+      name: "Dissertation Académique",
+      description: "Travail académique structuré"
+    },
+    meeting: {
+      name: "Notes de Réunion",
+      description: "Modèle de notes de réunion structurées"
+    },
+    tutorial: {
+      name: "Tutoriel/Guide",
+      description: "Modèle de tutoriel pas à pas"
+    },
+    templates: "Modèles"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "Endpoint API",
+    codeSnippet: "Extrait de Code",
+    meetingNotes: "Notes de Réunion",
+    bugReport: "Rapport de Bug",
+    dailyStandup: "Quotidien Standup",
+    featureRequest: "Demande de Fonctionnalité",
+    codeReview: "Revue de Code",
+    projectReadme: "README du Projet"
+  },
+  textTransform: {
+    title: "Transformer le Texte",
+    close: "Fermer",
+    uppercase: "MAJUSCULE",
+    lowercase: "minuscule",
+    titleCase: "Titre",
+    sentenceCase: "Phrase",
+    camelCase: "chameauCase",
+    kebabCase: "kebab-case",
+    snakeCase: "snake_case",
+    toggleCase: "tOGGLE cASE",
+    capitalize: "Capitaliser",
+    uppercaseDesc: "Convertir en majuscules",
+    lowercaseDesc: "Convertir en minuscules",
+    titleCaseDesc: "Capitaliser Chaque Mot",
+    sentenceCaseDesc: "Capitaliser seulement le premier mot",
+    camelCaseDesc: "Convertir en chameauCase",
+    kebabCaseDesc: "Convertir en kebab-case",
+    snakeCaseDesc: "Convertir en snake_case",
+    toggleCaseDesc: "Alterner la casse",
+    capitalizeDesc: "Capitaliser la première lettre"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "Langue",
+    insertCodeBlock: "Insérer un Bloc de Code",
+    preview: "Aperçu"
+  },
+  dateTime: {
+    insertDateTime: "Insérer Date/Heure",
+    date: "Date",
+    time: "Heure",
+    dateTime: "Date et Heure",
+    iso8601: "ISO 8601",
+    usFormat: "Format US",
+    euFormat: "Format UE",
+    readable: "Lisible",
+    cancel: "Annuler"
+  },
+  listHelper: {
+    listType: "Type de Liste",
+    bullet: "Puces",
+    numbered: "Numérotée",
+    numberOfItems: "Nombre d'Éléments",
+    listItems: "Éléments de Liste",
+    insertList: "Insérer une Liste",
+    cancel: "Annuler",
+    item: "Élément"
+  },
+  highlightHelper: {
+    insertHighlight: "Insérer un surlignage",
+    highlightText: "Surligner le Texte",
+    textToHighlight: "Texte à surligner",
+    color: "Couleur",
+    visualOnly: "(visuel uniquement)",
+    note: "Note : Le surlignage utilise la syntaxe ==texte==. Peut ne pas être pris en charge par tous les rendus Markdown.",
+    cancel: "Annuler",
+    yellow: "Jaune",
+    red: "Rouge",
+    green: "Vert",
+    blue: "Bleu",
+    purple: "Violet",
+    pink: "Rose"
+  },
+
+  helpDialog: {
+    title: "Référence Rapide Markdown",
+    close: "Fermer",
+    headings: "Titres",
+    textStyles: "Styles de Texte",
+    codeBlocks: "Blocs de Code",
+    lists: "Listes",
+    links: "Liens",
+    images: "Images",
+    quotes: "Citations",
+    tables: "Tableaux"
   },
 
   // Default Content
@@ -510,14 +651,24 @@ Si elles ne s'affichent toujours pas, vérifiez si la syntaxe de la formule est 
     },
     timeTracker: {
       title: "Suivi du temps",
-      startTime: "Démarrer la session",
-      stopTime: "Arrêter la session",
+      startTime: "Démarrer",
+      stopTime: "Pause",
       reset: "Réinitialiser",
       totalTime: "Temps total",
-      sessions: "Sessions d'aujourd'hui"
+      sessions: "Sessions d'aujourd'hui",
+      wordsPerMin: "mots/min",
+      recording: "Enregistrement",
+      stopped: "Arrêté",
+      today: "Aujourd'hui",
+      thisWeek: "Cette Semaine",
+      avgSession: "Session Moyenne",
+      dailyTimeGoal: "Objectif de Temps Quotidien",
+      hours: "2 heures",
+      recentSessions: "Sessions Récentes"
     },
     pomodoro: {
       title: "Minuterie Pomodoro",
+      description: "Utilisez la technique Pomodoro pour des sessions d'écriture concentrées",
       start: "Démarrer",
       pause: "Pause",
       reset: "Réinitialiser",
@@ -552,21 +703,22 @@ Si elles ne s'affichent toujours pas, vérifiez si la syntaxe de la formule est 
     },
     typography: {
       title: "Contrôles typographiques",
+      description: "Personnalisez l'apparence du texte de prévisualisation",
       fontSize: "Taille de police",
       lineHeight: "Hauteur de ligne",
       fontFamily: "Famille de police"
     },
     snippets: {
       title: "Bibliothèque d'extraits",
+      description: "Accès rapide aux modèles et motifs Markdown réutilisables",
       add: "Ajouter un extrait",
       save: "Enregistrer l'extrait",
       cancel: "Annuler",
       name: "Nom",
-      content: "Contenu"
     },
     keyboardShortcuts: {
       title: "Raccourcis clavier",
       description: "Accélérez votre flux de travail avec ces raccourcis"
     }
-  }
+  },
 }

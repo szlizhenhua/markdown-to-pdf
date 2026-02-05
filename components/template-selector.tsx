@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { templates, type Template } from '@/lib/templates'
+import { getTemplates, type Template } from '@/lib/templates'
 import { Button } from '@/components/ui/button'
 import { FileText, BookOpen, Code, FileEdit, FolderOpen, X } from 'lucide-react'
 import { useLanguage } from '@/lib/contexts/language-context'
@@ -19,6 +19,7 @@ interface TemplateSelectorProps {
 
 export function TemplateSelector({ onSelectTemplate }: TemplateSelectorProps) {
   const { t } = useLanguage()
+  const templates = getTemplates(t)
   const [open, setOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<Template['category'] | 'all'>('all')
 

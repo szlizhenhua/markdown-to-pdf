@@ -116,7 +116,148 @@ export const ja = {
       academic: "アカデミック",
       technical: "テクニカル",
       documentation: "ドキュメンテーション"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "空白のドキュメント",
+      description: "白紙から始める"
+    },
+    article: {
+      name: "ブログ記事",
+      description: "標準的なブログ記事の構造"
+    },
+    readme: {
+      name: "README.md",
+      description: "プロジェクトドキュメントのテンプレート"
+    },
+    resume: {
+      name: "レジュメ/CV",
+      description: "プロフェッショナルなレジュメテンプレート"
+    },
+    essay: {
+      name: "学術論文",
+      description: "構造化された学術論文"
+    },
+    meeting: {
+      name: "会議議事録",
+      description: "構造化された会議議事録テンプレート"
+    },
+    tutorial: {
+      name: "チュートリアル/ガイド",
+      description: "ステップバイステップのチュートリアルテンプレート"
+    },
+    templates: "テンプレート"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "APIエンドポイント",
+    codeSnippet: "コードスニペット",
+    meetingNotes: "会議議事録",
+    bugReport: "バグレポート",
+    dailyStandup: "デイリースタンドアップ",
+    featureRequest: "機能リクエスト",
+    codeReview: "コードレビュー",
+    projectReadme: "プロジェクトREADME"
+  },
+  textTransform: {
+    title: "テキスト変換",
+    close: "閉じる",
+    uppercase: "大文字",
+    lowercase: "小文字",
+    titleCase: "タイトルケース",
+    sentenceCase: "センテンスケース",
+    camelCase: "キャメルケース",
+    kebabCase: "ケバブケース",
+    snakeCase: "スネークケース",
+    toggleCase: "トグルケース",
+    capitalize: "キャピタライズ",
+    uppercaseDesc: "大文字に変換",
+    lowercaseDesc: "小文字に変換",
+    titleCaseDesc: "各単語の先頭を大文字に",
+    sentenceCaseDesc: "最初の単語のみ大文字に",
+    camelCaseDesc: "キャメルケースに変換",
+    kebabCaseDesc: "ケバブケースに変換",
+    snakeCaseDesc: "スネークケースに変換",
+    toggleCaseDesc: "大文字小文字を切り替え",
+    capitalizeDesc: "最初の文字を大文字に"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "言語",
+    insertCodeBlock: "コードブロックを挿入",
+    preview: "プレビュー"
+  },
+  dateTime: {
+    insertDateTime: "日付/時刻を挿入",
+    date: "日付",
+    time: "時刻",
+    dateTime: "日付と時刻",
+    iso8601: "ISO 8601",
+    usFormat: "米国形式",
+    euFormat: "欧州形式",
+    readable: "読みやすく",
+    cancel: "キャンセル"
+  },
+  listHelper: {
+    listType: "リストタイプ",
+    bullet: "箇条書き",
+    numbered: "番号付き",
+    numberOfItems: "項目数",
+    listItems: "リスト項目",
+    insertList: "リストを挿入",
+    cancel: "キャンセル",
+    item: "項目"
+  },
+  highlightHelper: {
+    insertHighlight: "ハイライトを挿入",
+    highlightText: "テキストをハイライト",
+    textToHighlight: "ハイライトするテキスト",
+    color: "色",
+    visualOnly: "(視覚のみ)",
+    note: "注意: ハイライトには==テキスト==構文を使用します。すべてのMarkdownレンダラーでサポートされているわけではありません。",
+    cancel: "キャンセル",
+    yellow: "黄色",
+    red: "赤",
+    green: "緑",
+    blue: "青",
+    purple: "紫",
+    pink: "ピンク"
+  },
+
+  helpDialog: {
+    title: "Markdownクイックリファレンス",
+    close: "閉じる",
+    headings: "見出し",
+    textStyles: "テキストスタイル",
+    codeBlocks: "コードブロック",
+    lists: "リスト",
+    links: "リンク",
+    images: "画像",
+    quotes: "引用",
+    tables: "テーブル"
   },
 
   // Default Content
@@ -510,14 +651,24 @@ def quicksort(arr):
     },
     timeTracker: {
       title: "時間トラッカー",
-      startTime: "セッションを開始",
-      stopTime: "セッションを停止",
+      startTime: "開始",
+      stopTime: "一時停止",
       reset: "リセット",
       totalTime: "総時間",
-      sessions: "今日のセッション"
+      sessions: "今日のセッション",
+      wordsPerMin: "単語/分",
+      recording: "録音中",
+      stopped: "停止中",
+      today: "今日",
+      thisWeek: "今週",
+      avgSession: "平均セッション",
+      dailyTimeGoal: "1日の時間目標",
+      hours: "2時間",
+      recentSessions: "最近のセッション"
     },
     pomodoro: {
       title: "ポモドーロタイマー",
+      description: "ポモドーロテクニックを使って集中執筆セッションを行う",
       start: "開始",
       pause: "一時停止",
       reset: "リセット",
@@ -552,21 +703,22 @@ def quicksort(arr):
     },
     typography: {
       title: "タイポグラフィコントロール",
+      description: "プレビューテキストの外観をカスタマイズ",
       fontSize: "フォントサイズ",
       lineHeight: "行の高さ",
       fontFamily: "フォントファミリ"
     },
     snippets: {
       title: "スニペットライブラリ",
+      description: "再利用可能な Markdown パターンとテンプレートに素早くアクセス",
       add: "スニペットを追加",
       save: "スニペットを保存",
       cancel: "キャンセル",
       name: "名前",
-      content: "内容"
     },
     keyboardShortcuts: {
       title: "キーボードショートカット",
-      description: "これらのショートカットでワークフローを加速"
+      description: "これらのショートカットでワークフローをスピードアップ"
     }
   }
 }

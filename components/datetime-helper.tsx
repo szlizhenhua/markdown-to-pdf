@@ -3,13 +3,15 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Calendar } from 'lucide-react'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface DateTimeHelperProps {
   onInsert: (dateTimeMarkdown: string) => void
   className?: string
+  t: LocaleTranslations
 }
 
-export function DateTimeHelper({ onInsert, className }: DateTimeHelperProps) {
+export function DateTimeHelper({ onInsert, className, t }: DateTimeHelperProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const formatDate = (date: Date, format: string) => {
@@ -53,13 +55,13 @@ export function DateTimeHelper({ onInsert, className }: DateTimeHelperProps) {
   }
 
   const formats = [
-    { id: 'date', label: 'Date', example: new Date().toISOString().split('T')[0] },
-    { id: 'time', label: 'Time', example: new Date().toTimeString().split(' ')[0] },
-    { id: 'datetime', label: 'Date & Time', example: new Date().toISOString().replace('T', ' ').split('.')[0] },
-    { id: 'iso', label: 'ISO 8601', example: new Date().toISOString() },
-    { id: 'us', label: 'US Format', example: '01/15/2025' },
-    { id: 'eu', label: 'EU Format', example: '15.01.2025' },
-    { id: 'readable', label: 'Readable', example: 'Wednesday, January 15, 2025' }
+    { id: 'date', label: t.dateTime.date, example: new Date().toISOString().split('T')[0] },
+    { id: 'time', label: t.dateTime.time, example: new Date().toTimeString().split(' ')[0] },
+    { id: 'datetime', label: t.dateTime.dateTime, example: new Date().toISOString().replace('T', ' ').split('.')[0] },
+    { id: 'iso', label: t.dateTime.iso8601, example: new Date().toISOString() },
+    { id: 'us', label: t.dateTime.usFormat, example: '01/15/2025' },
+    { id: 'eu', label: t.dateTime.euFormat, example: '15.01.2025' },
+    { id: 'readable', label: t.dateTime.readable, example: 'Wednesday, January 15, 2025' }
   ]
 
   return (
@@ -69,8 +71,8 @@ export function DateTimeHelper({ onInsert, className }: DateTimeHelperProps) {
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
         className="h-8 w-8 p-0 touch-manipulation"
-        title="Insert date/time"
-        aria-label="Insert date/time"
+        title={t.dateTime.insertDateTime}
+        aria-label={t.dateTime.insertDateTime}
         aria-expanded={isOpen}
       >
         <Calendar className="h-4 w-4" />
@@ -79,7 +81,7 @@ export function DateTimeHelper({ onInsert, className }: DateTimeHelperProps) {
       {isOpen && (
         <div className="absolute left-0 top-full mt-1 z-50 w-64 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15">
           <div className="p-4 space-y-3">
-            <h3 className="text-sm font-medium">Insert Date/Time</h3>
+            <h3 className="text-sm font-medium">{t.dateTime.insertDateTime}</h3>
 
             <div className="space-y-1">
               {formats.map((format) => (
@@ -100,7 +102,7 @@ export function DateTimeHelper({ onInsert, className }: DateTimeHelperProps) {
               size="sm"
               className="w-full"
             >
-              Cancel
+              {t.dateTime.cancel}
             </Button>
           </div>
         </div>

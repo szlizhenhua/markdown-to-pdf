@@ -116,7 +116,148 @@ export const nl = {
       academic: "Academisch",
       technical: "Technisch",
       documentation: "Documentatie"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "Leeg Document",
+      description: "Begin met een schone lei"
+    },
+    article: {
+      name: "Blogartikel",
+      description: "Standaard blogpost structuur"
+    },
+    readme: {
+      name: "README.md",
+      description: "Projectdocumentatie sjabloon"
+    },
+    resume: {
+      name: "CV",
+      description: "Professioneel cv-sjabloon"
+    },
+    essay: {
+      name: "Academisch Essay",
+      description: "Gestructureerd academisch paper"
+    },
+    meeting: {
+      name: "Notulen",
+      description: "Gestructureerd notulen sjabloon"
+    },
+    tutorial: {
+      name: "Tutorial/Gids",
+      description: "Stap-voor-stap tutorial sjabloon"
+    },
+    templates: "Sjablonen"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "API-eindpunt",
+    codeSnippet: "Codefragment",
+    meetingNotes: "Notulen",
+    bugReport: "Bugrapport",
+    dailyStandup: "Dagelijkse Standup",
+    featureRequest: "Featureverzoek",
+    codeReview: "Code Review",
+    projectReadme: "Project README"
+  },
+  textTransform: {
+    title: "Tekst Transformeren",
+    close: "Sluiten",
+    uppercase: "HOOFDLETTERS",
+    lowercase: "kleine letters",
+    titleCase: "Titelhoofdletters",
+    sentenceCase: "Zinshoofdletters",
+    camelCase: "kameelHuis",
+    kebabCase: "kebab-huis",
+    snakeCase: "slang_huis",
+    toggleCase: "hOOFDlETTERS wISSELEN",
+    capitalize: "Hoofdfletter",
+    uppercaseDesc: "Omzetten naar hoofdletters",
+    lowercaseDesc: "Omzetten naar kleine letters",
+    titleCaseDesc: "Elk woord met hoofdletter",
+    sentenceCaseDesc: "Alleen eerste woord met hoofdletter",
+    camelCaseDesc: "Omzetten naar camelCase",
+    kebabCaseDesc: "Omzetten naar kebab-case",
+    snakeCaseDesc: "Omzetten naar snake_case",
+    toggleCaseDesc: "Hoofdletter/kleine letter wisselen",
+    capitalizeDesc: "Eerste letter hoofdletter"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "Taal",
+    insertCodeBlock: "Codeblok Invoegen",
+    preview: "Voorbeeld"
+  },
+  dateTime: {
+    insertDateTime: "Datum/Tijd Invoegen",
+    date: "Datum",
+    time: "Tijd",
+    dateTime: "Datum & Tijd",
+    iso8601: "ISO 8601",
+    usFormat: "US Formaat",
+    euFormat: "EU Formaat",
+    readable: "Leesbaar",
+    cancel: "Annuleren"
+  },
+  listHelper: {
+    listType: "Lijsttype",
+    bullet: "Opsommingsteken",
+    numbered: "Genummerd",
+    numberOfItems: "Aantal Items",
+    listItems: "Lijstitems",
+    insertList: "Lijst Invoegen",
+    cancel: "Annuleren",
+    item: "Item"
+  },
+  highlightHelper: {
+    insertHighlight: "Markering Invoegen",
+    highlightText: "Tekst Markeren",
+    textToHighlight: "Te markeren tekst",
+    color: "Kleur",
+    visualOnly: "(alleen visueel)",
+    note: "Let op: Markering gebruikt ==tekst== syntaxis. Mogelijk niet ondersteund door alle markdown renderers.",
+    cancel: "Annuleren",
+    yellow: "Geel",
+    red: "Rood",
+    green: "Groen",
+    blue: "Blauw",
+    purple: "Paars",
+    pink: "Roze"
+  },
+
+  helpDialog: {
+    title: "Markdown Snelreferentie",
+    close: "Sluiten",
+    headings: "Koppen",
+    textStyles: "Tekststijlen",
+    codeBlocks: "Codeblokken",
+    lists: "Lijsten",
+    links: "Links",
+    images: "Afbeeldingen",
+    quotes: "Citaten",
+    tables: "Tabellen"
   },
 
   // Default Content
@@ -227,7 +368,7 @@ def quicksort(arr):
    - Automatische download van het gegenereerde PDF-document
    - Bestandsnaam wordt automatisch gegenereerd op basis van de documenttitel
 
-### ⌨️ **Markdown Syntaxis Cheat Sheet**
+### ⌨️ **Markdown Syntaxis Cheat Sheet\`
 
 #### Basis Syntaxis
 \`\`\`markdown
@@ -514,10 +655,20 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       stopTime: "Sessie stoppen",
       reset: "Resetten",
       totalTime: "Totale tijd",
-      sessions: "Sessies vandaag"
+      sessions: "Sessies vandaag",
+      wordsPerMin: "Woorden/min",
+      recording: "Opnemen",
+      stopped: "Gestopt",
+      today: "Vandaag",
+      thisWeek: "Deze week",
+      avgSession: "Gemiddelde sessie",
+      dailyTimeGoal: "Dagelijks tijddoel",
+      hours: "2 uur",
+      recentSessions: "Recente sessies"
     },
     pomodoro: {
       title: "Pomodoro-timer",
+      description: "Gebruik de Pomodoro-techniek voor gefocuste schrijfsessies",
       start: "Starten",
       pause: "Pauzeren",
       reset: "Resetten",
@@ -526,47 +677,21 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       longBreak: "Lange pauze",
       sessions: "Voltooide sessies"
     },
-    quickTemplates: {
-      title: "Snel sjablonen",
-      select: "Selecteer een sjabloon om in te voegen"
-    },
-    documentTemplates: {
-      title: "Documentsjablonen",
-      description: "Kies een sjabloon om te beginnen"
-    },
-    performance: {
-      title: "Prestatie-instellingen",
-      debounceTime: "Debounce-tijd",
-      description: "Renderprestaties aanpassen"
-    },
-    autosave: {
-      title: "Auto-save instellingen",
-      interval: "Save-interval",
-      description: "Hoe vaak uw werk automatisch opslaan",
-      status: {
-        saved: "Opgeslagen",
-        saving: "Opslaan...",
-        unsaved: "Niet opgeslagen wijzigingen",
-        error: "Fout bij opslaan"
-      }
-    },
     typography: {
-      title: "Typografie-besturingselementen",
+      title: "Typografiebesturing",
+      description: "Pas de weergave van de voorbeeldtekst aan",
       fontSize: "Lettergrootte",
       lineHeight: "Regelhoogte",
-      fontFamily: "Lettertypefamilie"
+      fontFamily: "Letterfamilie"
     },
     snippets: {
-      title: "Snippet-bibliotheek",
-      add: "Snippet toevoegen",
-      save: "Snippet opslaan",
+      title: "Fragmentbibliotheek",
+      description: "Snelle toegang tot herbruikbare Markdown-patronen en sjablonen",
+      add: "Fragment toevoegen",
+      save: "Fragment opslaan",
       cancel: "Annuleren",
       name: "Naam",
       content: "Inhoud"
-    },
-    keyboardShortcuts: {
-      title: "Sneltoetsen",
-      description: "Versnel uw workflow met deze sneltoetsen"
     }
   }
 }

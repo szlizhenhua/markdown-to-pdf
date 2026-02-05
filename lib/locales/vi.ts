@@ -1,62 +1,62 @@
 export const vi = {
   // Header
   title: "Chuyển đổi Markdown sang PDF",
-  subtitle: "Chuyển đổi Markdown sang PDF chuyên nghiệp",
+  subtitle: "Chuyển đổi Markdown sang PDF chuyên nghiệp's",
 
   // Controls
   buttons: {
-    upload: "Tải lên",
-    showPreview: "Hiển thị Xem trước",
-    hidePreview: "Ẩn Xem trước",
-    getPDF: "Lấy PDF",
-    generatingPDF: "Đang tạo PDF...",
-    settings: "Cài đặt",
-    tableOfContents: "Mục lục",
+    upload: "Uploaden",
+    showPreview: "Voorbeeld weergeven",
+    hidePreview: "Voorbeeld verbergen",
+    getPDF: "PDF ophalen",
+    generatingPDF: "PDF genereren...",
+    settings: "Instellingen",
+    tableOfContents: "Inhoudsopgave",
     exportHTML: "HTML",
     exportMarkdown: "MD"
   },
 
   // Editor
   editor: {
-    title: "Trình chỉnh sửa Markdown",
-    placeholder: "Bắt đầu nhập Markdown của bạn tại đây...\n\n# Tiêu đề 1\n## Tiêu đề 2\n\n**In đậm** và *in nghiêng*\n\n- Mục danh sách 1\n- Mục danh sách 2\n\n```javascript\nconsole.log('Xin chào Thế giới!');\n```\n\n| Cột 1 | Cột 2 |\n|---------|----------|\n| Dữ liệu 1  | Dữ liệu 2   |",
-    dragDropText: "Kéo tệp Markdown của bạn vào đây",
-    dragDropSubtext: "Hỗ trợ tệp .md và .txt",
-    loading: "Đang tải sơ đồ...",
-    rendering: "Đang hiển thị sơ đồ...",
+    title: "Markdown Editor",
+    placeholder: "Begin hier met het typen van uw Markdown...\n\n# Kop 1\n## Kop 2\n\n**Vet** en *cursief*\n\n- Lijstitem 1\n- Lijstitem 2\n\n```javascript\nconsole.log('Hallo Wereld!');\n```\n\n| Kolom 1 | Kolom 2 |\n|---------|----------|\n| Gegevens 1  | Gegevens 2   |",
+    dragDropText: "Sleep uw Markdown-bestand hier",
+    dragDropSubtext: "Ondersteunt .md en .txt bestanden",
+    loading: "Diagram laden...",
+    rendering: "Diagram renderen...",
     stats: {
-      characters: "Ký tự",
-      words: "Từ",
-      lines: "Dòng",
-      readingTime: "Thời gian đọc"
+      characters: "Tekens",
+      words: "Woorden",
+      lines: "Regels",
+      readingTime: "Leestijd"
     }
   },
 
   // Preview
   preview: {
-    title: "Xem trước",
-    theme: "chủ đề"
+    title: "Voorbeeld",
+    theme: "thema"
   },
 
   // Settings
   settings: {
-    title: "Cài đặt",
-    theme: "Chủ đề",
-    paperSize: "Kích thước giấy",
-    fontSize: "Kích thước phông"
+    title: "Instellingen",
+    theme: "Thema",
+    paperSize: "Papierformaat",
+    fontSize: "Lettergrootte"
   },
 
   // Table of Contents
   toc: {
-    title: "Mục lục"
+    title: "Inhoudsopgave"
   },
 
   // Themes
   themes: {
-    default: "Mặc định",
-    academic: "Học thuật",
-    modern: "Hiện đại",
-    minimal: "Tối giản"
+    default: "Standaard",
+    academic: "Academisch",
+    modern: "Modern",
+    minimal: "Minimaal"
   },
 
   // Paper Sizes
@@ -77,111 +77,252 @@ export const vi = {
 
   // Messages
   messages: {
-    pdfGenerationError: "Tạo PDF không thành công",
-    pdfExportError: "Xuất PDF không thành công, hãy kiểm tra console để biết chi tiết",
-    mermaidRenderError: "Lỗi hiển thị Mermaid",
-    mermaidSyntaxError: "Vui lòng kiểm tra cú pháp Mermaid",
-    mermaidExampleSyntax: "Ví dụ cú pháp:",
-    mermaidRenderRetry: "Thử hiển thị Mermaid {count} không thành công, sẽ thử lại sau 100ms",
-    mermaidFinalError: "Hiển thị Mermaid cuối cùng không thành công",
-    unknownError: "Lỗi không xác định",
-    highlightJsError: "Lỗi Highlight.js cho ngôn ngữ \"{lang}\":",
-    katexRenderError: "Lỗi hiển thị KaTeX:",
-    mermaidInitError: "Lỗi khởi tạo Mermaid:",
-    mermaidLoading: "Đang tải sơ đồ...",
-    mermaidRendering: "Đang hiển thị sơ đồ...",
-    templateLoaded: "Mẫu đã tải",
-    templateLoadedMessage: "Mẫu đã được áp dụng cho trình chỉnh sửa.",
-    fileTooLarge: "Tệp quá lớn. Kích thước tối đa là 5MB.",
-    invalidFileType: "Loại tệp không hợp lệ. Vui lòng tải lên tệp .md hoặc .txt.",
-    fileUploadFailed: "Tải lên tệp không thành công. Vui lòng thử lại.",
-    fileUploaded: "Tệp đã tải lên thành công",
-    resetComplete: "Đặt lại hoàn tất",
-    resetCompleteMessage: "Trình chỉnh sửa và cài đặt đã được đặt lại về giá trị mặc định.",
-    copySuccess: "Đã sao chép vào clipboard",
-    copyFailed: "Sao chép vào clipboard không thành công",
-    networkError: "Lỗi mạng. Vui lòng kiểm tra kết nối của bạn.",
-    quotaExceeded: "Vượt quá hạn ngạch lưu trữ. Vui lòng xóa một số dữ liệu trình duyệt.",
-    autoSaveFailed: "Lưu tự động không thành công. Các thay đổi của bạn có thể không được lưu."
+    pdfGenerationError: "PDF-generatie mislukt",
+    pdfExportError: "PDF-export mislukt, controleer de console voor details",
+    mermaidRenderError: "Mermaid renderfout",
+    mermaidSyntaxError: "Controleer de Mermaid-syntaxis",
+    mermaidExampleSyntax: "Voorbeeld van syntaxis:",
+    mermaidRenderRetry: "Mermaid render poging {count} mislukt, zal opnieuw proberen in 100ms",
+    mermaidFinalError: "Mermaid render uiteindelijk mislukt",
+    unknownError: "Onbekende fout",
+    highlightJsError: "Highlight.js-fout voor taal \"{lang}\":",
+    katexRenderError: "KaTeX-renderfout:",
+    mermaidInitError: "Mermaid-initialisatiefout:",
+    mermaidLoading: "Diagram laden...",
+    mermaidRendering: "Diagram renderen...",
+    templateLoaded: "Sjabloon geladen",
+    templateLoadedMessage: "Het sjabloon is toegepast op de editor.",
+    fileTooLarge: "Bestand is te groot. Maximale grootte is 5MB.",
+    invalidFileType: "Ongeldig bestandstype. Upload een .md of .txt bestand.",
+    fileUploadFailed: "Bestand uploaden mislukt. Probeer opnieuw.",
+    fileUploaded: "Bestand succesvol geüpload",
+    resetComplete: "Reset voltooid",
+    resetCompleteMessage: "Editor en instellingen zijn teruggezet naar de standaardwaarden.",
+    copySuccess: "Gekopieerd naar klembord",
+    copyFailed: "Kopiëren naar klembord mislukt",
+    networkError: "Netwerkfout. Controleer uw verbinding.",
+    quotaExceeded: "Opslagquota overschreden. Wis enkele browsergegevens.",
+    autoSaveFailed: "Automatisch opslaan mislukt. Uw wijzigingen worden mogelijk niet opgeslagen."
   },
 
   // Templates
   templates: {
-    title: "Chọn Mẫu",
-    description: "Chọn từ các mẫu được thiết kế chuyên nghiệp để bắt đầu nhanh chóng",
-    selectTemplate: "Nhấp vào một mẫu để tải nó vào trình chỉnh sửa. Nội dung hiện tại của bạn sẽ được thay thế.",
+    title: "Selecteer een Sjabloon",
+    description: "Kies uit professioneel ontworpen sjablonen om snel te beginnen",
+    selectTemplate: "Klik op een sjabloon om het in de editor te laden. Uw huidige inhoud wordt vervangen.",
     categories: {
-      all: "Tất cả Mẫu",
-      basic: "Cơ bản",
-      academic: "Học thuật",
-      technical: "Kỹ thuật",
-      documentation: "Tài liệu"
-    }
+      all: "Alle Sjablonen",
+      basic: "Basis",
+      academic: "Academisch",
+      technical: "Technisch",
+      documentation: "Documentatie"
+    },
+    // Document templates
+    blank: {
+      name: "Leeg Document",
+      description: "Begin met een schone lei"
+    },
+    article: {
+      name: "Blogartikel",
+      description: "Standaard blogpost structuur"
+    },
+    readme: {
+      name: "README.md",
+      description: "Projectdocumentatie sjabloon"
+    },
+    resume: {
+      name: "CV",
+      description: "Professioneel cv-sjabloon"
+    },
+    essay: {
+      name: "Academisch Essay",
+      description: "Gestructureerd academisch paper"
+    },
+    meeting: {
+      name: "Ghi chú cuộc họp",
+      description: "Gestructureerd notulen sjabloon"
+    },
+    tutorial: {
+      name: "Tutorial/Gids",
+      description: "Stap-voor-stap tutorial sjabloon"
+    },
+    templates: "Sjablonen"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "Điểm cuối API",
+    codeSnippet: "Đoạn mã",
+    meetingNotes: "Ghi chú cuộc họp",
+    bugReport: "Báo cáo lỗi",
+    dailyStandup: "Họp giao ban hàng ngày",
+    featureRequest: "Yêu cầu tính năng",
+    codeReview: "Code Review",
+    projectReadme: "Project README"
+  },
+  textTransform: {
+    title: "Chuyển đổi văn bản",
+    close: "Đóng",
+    uppercase: "CHỮ HOA",
+    lowercase: "kleine letters",
+    titleCase: "Titelhoofdletters",
+    sentenceCase: "Zinshoofdletters",
+    camelCase: "kameelHuis",
+    kebabCase: "kebab-huis",
+    snakeCase: "slang_huis",
+    toggleCase: "hOOFDlETTERS wISSELEN",
+    capitalize: "Hoofdfletter",
+    uppercaseDesc: "Chuyển đổi sang hoofdletters",
+    lowercaseDesc: "Chuyển đổi sang kleine letters",
+    titleCaseDesc: "Elk woord met hoofdletter",
+    sentenceCaseDesc: "Alleen eerste woord met hoofdletter",
+    camelCaseDesc: "Chuyển đổi sang camelCase",
+    kebabCaseDesc: "Chuyển đổi sang kebab-case",
+    snakeCaseDesc: "Chuyển đổi sang snake_case",
+    toggleCaseDesc: "Hoofdletter/kleine letter wisselen",
+    capitalizeDesc: "Eerste letter hoofdletter"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "Ngôn ngữ",
+    insertCodeBlock: "Chèn Khối Mã",
+    preview: "Voorbeeld"
+  },
+  dateTime: {
+    insertDateTime: "Chèn Ngày/Giờ",
+    date: "Ngày",
+    time: "Giờ",
+    dateTime: "Ngày & Giờ",
+    iso8601: "ISO 8601",
+    usFormat: "US Formaat",
+    euFormat: "EU Formaat",
+    readable: "Leesbaar",
+    cancel: "Hủy"
+  },
+  listHelper: {
+    listType: "Loại danh sách",
+    bullet: "Dấu đầu dòng",
+    numbered: "Đánh số",
+    numberOfItems: "Aantal Items",
+    listItems: "Lijstitems",
+    insertList: "Lijst Invoegen",
+    cancel: "Hủy",
+    item: "Item"
+  },
+  highlightHelper: {
+    insertHighlight: "Chèn Đánh dấu",
+    highlightText: "Đánh dấu Văn bản",
+    textToHighlight: "Te markeren tekst",
+    color: "Kleur",
+    visualOnly: "(alleen visueel)",
+    note: "Let op: Markering gebruikt ==tekst== syntaxis. Mogelijk niet ondersteund door alle markdown renderers.",
+    cancel: "Hủy",
+    yellow: "Vàng",
+    red: "Đỏ",
+    green: "Xanh lá cây",
+    blue: "Xanh dương",
+    purple: "Tím",
+    pink: "Hồng"
+  },
+
+  helpDialog: {
+    title: "Tài liệu Tham khảo Markdown Nhanh",
+    close: "Đóng",
+    headings: "Tiêu đề",
+    textStyles: "Kiểu văn bản",
+    codeBlocks: "Khối mã",
+    lists: "Danh sách",
+    links: "Liên kết",
+    images: "Hình ảnh",
+    quotes: "Trích dẫn",
+    tables: "Bảng"
   },
 
   // Default Content
   defaultContent: `# Chuyển đổi Markdown sang PDF
 
-> 🎯 **Chuyển đổi tài liệu Markdown của bạn sang PDF chuyên nghiệp với công thức toán học, sơ đồ lưu đồ, làm nổi bật mã và nhiều chủ đề**
+> 🎯 **Converteer uw Markdown-documenten naar professionele PDF's met wiskundige formules, stroomdiagrammen, code-highlighting en meerdere thema's**
 
-## ✨ Tính năng
+## ✨ Functies
 
-### 📊 **Hỗ trợ Markdown Đầy đủ**
-- **Định dạng văn bản**: **In đậm**, *In nghiêng*, ~~Gạch ngang~~, \`Mã nội dòng\`
-- **Mức tiêu đề**: Hỗ trợ đầy đủ cấu trúc tiêu đề H1-H6
-- **Danh sách**: Danh sách có thứ tự, danh sách không có thứ tự, danh sách công việc
-- **Liên kết và Hình ảnh**: Nhận dạng liên kết tự động, hỗ trợ nhúng hình ảnh
-- **Bảng**: Hỗ trợ căn chỉnh và cấu trúc bảng phức tạp
-- **Trích dẫn**: Khối trích dẫn và trích dẫn lồng nhau
+### 📊 **Volledige Markdown-ondersteuning**
+- **Tekstopmaak**: **Vet**, *Cursief*, ~~Doorhalen~~, \`Inline code\`
+- **Kopniveaus**: Volledige H1-H6 kopstructuurondersteuning
+- **Lijsten**: Geordende lijsten, ongeordende lijsten, takenlijsten
+- **Links en Afbeeldingen**: Automatische linkherkenning, ondersteuning voor het insluiten van afbeeldingen
+- **Tabellen**: Ondersteuning voor uitlijning en complexe tabelstructuren
+- **Citaten**: Blokcitaten en geneste citaten
 
-### 🧮 **Hiển thị Công thức Toán học (KaTeX)**
-**Công thức nội dòng**: Phương trình khối lượng-năng lượng của Einstein $E = mc^2$
+### 🧮 **Wiskundige Formule Rendering (KaTeX)**
+**Inline formule**: Einsteins massa-energievergelijking $E = mc^2$
 
-**Công thức khối**:
+**Blokformule**:
 $$\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}$$
 
-**Công thức phức tạp**:
+**Complexe formule**:
 $$\\sum_{i=1}^{n} x_i = x_1 + x_2 + \\cdots + x_n$$
 
-**Biểu diễn ma trận**:
+**Matrixrepresentatie**:
 $$\\begin{bmatrix}
 a & b \\\\
 c & d
 \\end{bmatrix}$$
 
-### 📈 **Vẽ Sơ đồ (Mermaid)**
+### 📈 **Diagram Tekenen (Mermaid)**
 
-#### Sơ đồ lưu đồ
+#### Stroomdiagram
 \`\`\`mermaid
 graph TD
-    A[Bắt đầu] --> B{Điều kiện}
-    B -->|Có| C[Thực hiện A]
-    B -->|Không| D[Thực hiện B]
-    C --> E[Kết thúc]
+    A[Start] --> B{Voorwaarde}
+    B -->|Ja| C[Voer A uit]
+    B -->|Nee| D[Voer B uit]
+    C --> E[Einde]
     D --> E
 \`\`\`
 
-#### Sơ đồ đồ thị
+#### Grafiekdiagram
 \`\`\`mermaid
 graph LR
-    A[Người dùng] --> B[Hệ thống]
-    B --> A[Phản hồi]
+    A[Gebruiker] --> B[Systeem]
+    B --> A[Antwoord]
 \`\`\`
 
-### 💻 **Làm nổi bật Mã**
+### 💻 **Code Highlighting**
 
-#### Ví dụ JavaScript
+#### JavaScript Voorbeeld
 \`\`\`javascript
 function fibonacci(n) {
   if (n <= 1) return n;
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-// Ví dụ sử dụng
-console.log(fibonacci(10)); // Đầu ra: 55
+// Gebruiksvoorbeeld
+console.log(fibonacci(10)); // Uitvoer: 55
 \`\`\`
 
-#### Ví dụ Python
+#### Python Voorbeeld
 \`\`\`python
 def quicksort(arr):
     if len(arr) <= 1:
@@ -193,380 +334,364 @@ def quicksort(arr):
     return quicksort(left) + middle + quicksort(right)
 \`\`\`
 
-### 📋 **Tính năng Bảng**
+### 📋 **Tabel Functies**
 
-| Tính năng | Trạng thái | Mô tả | Lối tắt |
+| Functie | Status | Beschrijving | Snelkoppeling |
 |---------|:------:|-------------|----------|
-| Công thức toán học | ✅ | Hỗ trợ KaTeX đầy đủ | \`$...\$ |
-| Sơ đồ lưu đồ | ✅ | Sơ đồ Mermaid | \`mermaid |
-| Làm nổi bật mã | ✅ | Hỗ trợ đa ngôn ngữ | \`lang |
-| Bảng | ✅ | Chức năng bảng đầy đủ | \| \| \| |
-| Liên kết | ✅ | Nhận dạng liên kết tự động | [văn bản](url) |
+| Wiskundige Formules | ✅ | Volledige KaTeX-ondersteuning | \`$...\$ |
+| Stroomdiagrammen | ✅ | Mermaid-diagrammen | \`mermaid |
+| Code Highlighting | ✅ | Meertalige ondersteuning | \`lang |
+| Tabellen | ✅ | Volledige tabelfunctionaliteit | \| \| \| |
+| Links | ✅ | Automatische linkherkenning | [tekst](url) |
 
 ---
 
-## 📖 Hướng dẫn Người dùng
+## 📖 Gebruikershandleiding
 
-### 🚀 **Bắt đầu Nhanh**
+### 🚀 **Snelstart**
 
-1. **Chỉnh sửa Nội dung**
-   - Nhập hoặc dán nội dung Markdown vào trình chỉnh sửa bên trái
-   - Xem trước thời gian thực với WYSIWYG
+1. **Inhoud bewerken**
+   - Typ of plak Markdown-inhoud in de linkereditor
+   - Real-time voorbeeld met WYSIWYG
 
-2. **Tải lên Tệp**
-   - Nhấp vào nút "Tải lên" để chọn tệp .md hoặc .txt
-   - Hoặc kéo và thả tệp trực tiếp vào vùng trình chỉnh sửa
+2. **Bestanden uploaden**
+   - Klik op de knop "Uploaden" om .md of .txt bestanden te selecteren
+   - Of sleep bestanden direct naar het editorgebied
 
-3. **Tùy chỉnh Phong cách**
-   - Chọn phong cách chủ đề (Mặc định/Học thuật/Hiện đại/Tối giản)
-   - Điều chỉnh kích thước giấy và kích thước phông
-   - Xem trước thời gian thực các hiệu ứng
+3. **Stijlen aanpassen**
+   - Kies de themastijl (Standaard/Academisch/Modern/Minimaal)
+   - Pas papierformaat en lettergrootte aan
+   - Real-time voorbeeld van effecten
 
-4. **Xuất PDF**
-   - Nhấp vào nút "Lấy PDF"
-   - Tự động tải xuống tài liệu PDF được tạo
-   - Tên tệp được tạo tự động dựa trên tiêu đề tài liệu
+4. **PDF exporteren**
+   - Klik op de knop "PDF ophalen"
+   - Automatische download van het gegenereerde PDF-document
+   - Bestandsnaam wordt automatisch gegenereerd op basis van de documenttitel
 
-### ⌨️ **Cheat Sheet Cú pháp Markdown**
+### ⌨️ **Markdown Syntaxis Cheat Sheet\`
 
-#### Cú pháp Cơ bản
+#### Basis Syntaxis
 \`\`\`markdown
-# Tiêu đề Cấp 1
-## Tiêu đề Cấp 2
-### Tiêu đề Cấp 3
+# Niveau 1 Kop
+## Niveau 2 Kop
+### Niveau 3 Kop
 
-**Văn bản in đậm** hoặc __Văn bản in đậm__
-*Văn bản in nghiêng* hoặc _Văn bản in nghiêng_
-~~Gạch ngang~~
+**Vette tekst** of __Vette tekst__
+*Cursieve tekst* of _Cursieve tekst_
+~~Doorhalen~~
 
-- Mục danh sách không có thứ tự
-  - Mục danh sách lồng nhau
+- Ongeordend lijstitem
+  - Genest lijstitem
 
-1. Mục danh sách có thứ tự
-2. Mục thứ hai
-   1. Mục có thứ tự lồng nhau
+1. Geordend lijstitem
+2. Tweede item
+   1. Genest geordend item
 
->Văn bản trích dẫn
->> Trích dẫn lồng nhau
+>Citeertekst
+>> Genest citaat
 
-[Văn bản liên kết](https://example.com)
-![Mô tả hình ảnh](hình.jpg)
+[Linktekst](https://example.com)
+![Afbeeldingbeschrijving](afbeelding.jpg)
 
-\`Mã nội dòng\`
+\`Inline code\`
 
-\`\`\`ngôn ngữ
-Khối mã
+\`\`\`taal
+Codeblok
 \`\`\`
 
-### 💡 **Mẹo sử dụng**
+### 💡 **Gebruikstips**
 
-1. **Công thức toán học**
-   - Sử dụng \`$...\` cho công thức nội dòng
-   - Sử dụng \`$$...$$\` cho công thức khối
-   - Hỗ trợ đầy đủ cú pháp toán học LaTeX
+1. **Wiskundige Formules**
+   - Gebruik \`$...\` voor inline formules
+   - Gebruik \`$$...$$\` voor blokformules
+   - Volledige LaTeX-wiskundesyntaxis ondersteund
 
-2. **Khối mã**
-   - Chỉ định ngôn ngữ để làm nổi bật cú pháp: \`\`\`javascript
-   - Ngôn ngữ được hỗ trợ: JavaScript, Python, JSON, Bash, v.v.
+2. **Codeblokken**
+   - Geef de taal op voor syntaxis-highlighting: \`\`\`javascript
+   - Ondersteunde talen: JavaScript, Python, JSON, Bash, etc.
 
-3. **Vẽ sơ đồ**
-   - Sử dụng cú pháp Mermaid để tạo sơ đồ lưu đồ, đồ thị, v.v.
-   - Hỗ trợ nhiều loại sơ đồ: đồ thị, sơ đồ lưu đồ, v.v.
+3. **Diagram Tekenen**
+   - Gebruik Mermaid-syntaxis om stroomdiagrammen, grafieken, etc. te maken
+   - Ondersteuning voor meerdere diagramtypen: graaf, stroomdiagram, etc.
 
-4. **Định dạng bảng**
-   - Sử dụng \`|\` để phân tách các cột
-   - Sử dụng \`-\` để phân tách tiêu đề và nội dung
-   - Hỗ trợ căn chỉnh: \`:---\` (trái), \`---:\` (phải), \`:---:\` (giữa)
+4. **Tabelopmaak**
+   - Gebruik \`|\` om kolommen te scheiden
+   - Gebruik \`-\` om kopteksten en inhoud te scheiden
+   - Ondersteuning voor uitlijning: \`:---\` (links), \`---:\` (rechts), \`:---:\` (midden)
 
 ---
 
-## ❓ Câu hỏi Thường gặp (FAQ)
+## ❓ Vaak Gestelde Vragen (FAQ)
 
-### C1: Cú pháp Markdown nào được hỗ trợ?
-**Đ**: Công cụ này hỗ trợ cú pháp Markdown tiêu chuẩn và các phần mở rộng GitHub Flavored Markdown (GFM), bao gồm bảng, danh sách công việc, gạch ngang, v.v. Nó cũng hỗ trợ công thức toán học (KaTeX) và vẽ sơ đồ (Mermaid).
+### V1: Welke Markdown-syntaxis wordt ondersteund?
+**A**: Deze tool ondersteunt de standaard Markdown-syntaxis en GitHub Flavored Markdown (GFM) extensies, inclusief tabellen, takenlijsten, doorhalen, etc. Het ondersteunt ook wiskundige formules (KaTeX) en diagram tekenen (Mermaid).
 
-### C2: Làm gì nếu công thức toán học không hiển thị?
-**Đ**: Hãy đảm bảo bạn sử dụng cú pháp đúng:
-- Công thức nội dòng: \`$công thức$\`
-- Công thức khối: \`$$công thức$$\`
-Nếu vẫn không hiển thị, hãy kiểm tra xem cú pháp công thức có đúng không.
+### V2: Wat te doen als wiskundige formules niet worden weergegeven?
+**A**: Zorg ervoor dat u de juiste syntaxis gebruikt:
+- Inline formules: \`$formule$\`
+- Blokformules: \`$$formule$$\`
+Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis correct is.
 
-### C3: Chất lượng của PDF được xuất như thế nào?
-**Đ**: Chúng tôi sử dụng các động cơ tạo PDF chuyên nghiệp để đảm bảo chất lượng đầu ra:
-- Đồ họa vectơ độ phân giải cao
-- Hiển thị văn bản rõ ràng
-- Phân trang đúng
-- Giữ nguyên định dạng gốc
+### V3: Hoe is de kwaliteit van geëxporteerde PDF's?
+**A**: Wij gebruiken professionele PDF-generatie-engines om de outputkwaliteit te waarborgen:
+- High-definition vectorafbeeldingen
+- Duidelijke tekstweergave
+- Correcte paginering
+- Oorspronkelijke opmaak behouden
 
-### C4: Dữ liệu của tôi có an toàn không?
-**Đ**: Hoàn toàn an toàn! Tất cả xử lý được thực hiện cục bộ trong trình duyệt của bạn:
-- Không có dữ liệu nào được tải lên bất kỳ máy chủ nào
-- Không lưu trữ nội dung tài liệu của bạn
-- Dữ liệu được tự động xóa sau khi xử lý
+### V4: Zijn mijn gegevens veilig?
+**A**: Volledig veilig! Alle verwerking wordt lokaal in uw browser uitgevoerd:
+- Geen gegevens worden naar een server geüpload
+- Geen opslag van uw documentinhoud
+- Gegevens worden automatisch gewist na verwerking
 
-### C5: Những trình duyệt nào được hỗ trợ?
-**Đ**: Hỗ trợ tất cả các trình duyệt hiện đại:
+### V5: Welke browsers worden ondersteund?
+**A**: Ondersteunt alle moderne browsers:
 - Chrome 65+
 - Firefox 60+
 - Safari 12+
 - Edge 79+
 
-### C6: Làm thế nào để xử lý các tài liệu lớn?
-**Đ**: Đối với các tài liệu lớn, chúng tôi khuyên:
-- Xử lý theo từng phần
-- Điều chỉnh kích thước phông phù hợp
-- Sử dụng ngắt trang để phân đoạn hợp lý
-- Xem trước để xác nhận các hiệu ứng trước khi xuất
+### V6: Hoe ga ik om met grote documenten?
+**A**: Voor grote documenten raden wij aan:
+- Verwerken in secties
+- Lettergrootte indien aanpassen
+- Pagina-einden gebruiken voor redelijke segmentering
+- Voorbeeld bekijken om effecten te bevestigen voordat u exporteert
 
-### C7: Tên tệp PDF được xuất là gì?
-**Đ**: Tên tệp được tạo tự động dựa trên tiêu đề của dòng đầu tiên của tài liệu, ví dụ:
-- Tiêu đề "Báo cáo Dự án" → "Báo cáo Dự án.pdf"
-- Sử dụng "document.pdf" khi không có tiêu đề
+### V7: Wat is de bestandsnaam van de geëxporteerde PDF?
+**A**: De bestandsnaam wordt automatisch gegenereerd op basis van de titel van de eerste regel van het document, bijvoorbeeld:
+- Titel "Projectrapport" → "Projectrapport.pdf"
+- Gebruikt "document.pdf" wanneer er geen titel is
 
 ---
 
-## 📞 Hỗ trợ Kỹ thuật
+## 📞 Technische Ondersteuning
 
-### 🔧 **Công nghệ Stack**
-- **Next.js** - Framework React
-- **Tailwind CSS** - Framework Styling
-- **Marked** - Trình phân tích cú pháp Markdown
-- **KaTeX** - Hiển thị công thức toán học
-- **Mermaid** - Vẽ sơ đồ
-- **html2pdf.js** - Tạo PDF
-- **Highlight.js** - Làm nổi bật mã
+### 🔧 **Tech Stack**
+- **Next.js** - React-framework
+- **Tailwind CSS** - Styling-framework
+- **Marked** - Markdown-parser
+- **KaTeX** - Wiskundige formule rendering
+- **Mermaid** - Diagram tekenen
+- **html2pdf.js** - PDF-generatie
+- **Highlight.js** - Code highlighting
 
-### 📧 **Liên hệ với Chúng tôi**
-[Mã nguồn mở](https://github.com/szlizhenhua/markdown-to-pdf). Đối với câu hỏi hoặc đề xuất, vui lòng liên hệ với chúng tôi qua:
-- GitHub Issues: Báo cáo vấn đề hoặc yêu cầu tính năng
-- Phản hồi qua email: support@markdown-to-pdf.org
+### 📧 **Neem Contact Op**
+[Open Source](https://github.com/szlizhenhua/markdown-to-pdf). Voor vragen of suggesties, neem contact met ons op via:
+- GitHub Issues: Problemen melden of functies aanvragen
+- E-mailfeedback: support@markdown-to-pdf.org
 
-### 🔄 **Nhật ký Thay đổi**
-- **v1.0.0** - Phiên bản đầu tiên
-- Hỗ trợ công thức toán học KaTeX
-- Hỗ trợ sơ đồ Mermaid
-- Chọn nhiều phong cách chủ đề
-- Tối ưu hóa thiết kế phản hồi
+### 🔄 **Wijzigingenlog**
+- **v1.0.0** - Eerste release
+- KaTeX wiskundige formule ondersteuning
+- Mermaid diagram ondersteuning
+- Selectie van meerdere themastijlen
+- Responsief ontwerp optimalisatie
 
 ---
 
 <div style="text-align: center; margin-top: 3em; padding: 2em; border-top: 1px solid #eee; color: #666;">
   <p><strong>Chuyển đổi Markdown sang PDF</strong></p>
-  <p>Công cụ Chuyển đổi Markdown sang PDF Chuyên nghiệp</p>
+  <p>Professionele Markdown naar PDF Conversie Tool</p>
   <p style="font-size: 0.9em; margin-top: 1em;">
-    Được tạo với ❤️ | Quyền riêng tư Đầu tiên
+    Gemaakt met ❤️ | Privacy First
   </p>
   <p style="font-size: 0.8em; margin-top: 0.5em;">
-    © 2025 Markdown to PDF. Đã đăng ký bản quyền.
+    © 2025 Markdown to PDF. Alle rechten voorbehouden.
   </p>
 </div>`,
 
   // SEO
   seo: {
-    title: "Chuyển đổi Markdown sang PDF | Xuất Tài liệu Chuyên nghiệp",
-    description: "Chuyển đổi Markdown sang tài liệu PDF chuyên nghiệp với toán học, mã, sơ đồ, mục lục, chủ đề. Đầu ra chất lượng xuất bản cho mục đích học thuật và thương mại.",
-    keywords: "Markdown, PDF, chuyển đổi, KaTeX, Mermaid, làm nổi bật mã, mục lục, chủ đề, xuất, học thuật, chuyên nghiệp"
+    title: "Chuyển đổi Markdown sang PDF | Professionele Document Export",
+    description: "Chuyển đổi Markdown sang PDF chuyên nghiệp-documenten met wiskunde, code, diagrammen, inhoudsopgave, thema's. Publicatiekwaliteit output voor academisch en commercieel gebruik.",
+    keywords: "Markdown, PDF, converter, KaTeX, Mermaid, code highlighting, inhoudsopgave, thema's, export, academisch, professioneel"
   },
 
   // SEO Content
   seoContent: {
     whyChooseUs: {
-      label: "Tại sao chọn chúng tôi",
-      title: "Tại sao nên sử dụng bộ chuyển đổi Markdown sang PDF của chúng tôi?",
-      subtitle: "Trải nghiệm giống Apple để xuất bản: sạch, nhanh và đẹp的一致 từ bản nháp đến PDF.",
+      label: "Waarom ons",
+      title: "Waarom onze Markdown sang PDF bộ chuyển đổi gebruiken?",
+      subtitle: "Een Apple-achtige ervaring voor publiceren: schoon, snel en mooi consistent van concept tot PDF.",
       features: {
         privacy: {
-          title: "Tập trung vào quyền riêng tư",
-          description: "Dữ liệu của bạn an toàn với chúng tôi. Tất cả chuyển đổi diễn ra cục bộ trong trình duyệt của bạn. Chúng tôi không bao giờ tải lên các tệp Markdown của bạn lên bất kỳ máy chủ nào."
+          title: "Privacy-gericht",
+          description: "Uw gegevens zijn veilig bij ons. Alle conversies vinden lokaal in uw browser plaats. We uploaden nooit uw Markdown-bestanden naar een server."
         },
         instant: {
-          title: "Chuyển đổi tức thì",
-          description: "Không có hàng chờ đợi. Công cụ tối ưu hóa của chúng tôi chuyển đổi tài liệu của bạn ngay lập tức, hỗ trợ các tệp lớn một cách dễ dàng."
+          title: "Directe conversie",
+          description: "Geen wachtrijen. Onze geoptimaliseerde engine converteert uw documenten direct en ondersteunt grote bestanden met gemak."
         },
         richSupport: {
-          title: "Hỗ trợ phong phú",
-          description: "Hỗ trợ đầy đủ cho GFM (GitHub Flavored Markdown), công thức toán học KaTeX, sơ đồ Mermaid và làm nổi bật cú pháp mã."
+          title: "Rijke ondersteuning",
+          description: "Volledige ondersteuning voor GFM (GitHub Flavored Markdown), KaTeX wiskundige formules, Mermaid diagrammen en code syntax highlighting."
         }
       }
     },
     howToConvert: {
-      label: "Quy trình làm việc đơn giản",
-      title: "Cách chuyển đổi Markdown sang PDF",
-      subtitle: "Quy trình ba bước êm dịm được thiết kế để giữ bạn tập trung và có được PDF được chỉnh chu trong vài giây.",
+      label: "Eenvoudige workflow",
+      title: "Markdown sang PDF bộ chuyển đổien",
+      subtitle: "Een rustig driestappenproces ontworpen om u gefocust te houden en binnen enkele seconden een gepolijste PDF te krijgen.",
       steps: {
         step1: {
-          title: "Viết hoặc dán Markdown",
-          description: "Nhập trực tiếp vào trình chỉnh sửa thời gian thực của chúng tôi hoặc dán mã Markdown hiện có của bạn. Bạn cũng có thể kéo và thả các tệp .md."
+          title: "Markdown schrijven of plakken",
+          description: "Typ direct in onze real-time editor of plak uw bestaande Markdown-code. U kunt ook .md-bestanden slepen en neerzetten."
         },
         step2: {
-          title: "Tùy chỉnh kiểu",
-          description: "Chọn từ các chủ đề chuyên nghiệp của chúng tôi (Học thuật, Hiện đại, v.v.) và điều chỉnh kích thước phông, lề và kích thước giấy (A4, Letter)."
+          title: "Stijl aanpassen",
+          description: "Kies uit onze professionele thema's (Academisch, Modern, enz.) en pas lettergroottes, marges en papierformaat (A4, Letter) aan."
         },
         step3: {
-          title: "Tải xuống PDF",
-          description: "Nhấp vào nút Xuất để ngay lập tức nhận được tài liệu PDF được định dạng sẵn sàng để chia sẻ hoặc in."
+          title: "PDF downloaden",
+          description: "Klik op de knop Exporteren om direct een opgemaakt PDF-document te krijgen dat klaar is om te delen of af te drukken."
         }
       }
     },
     faq: {
-      label: "Câu hỏi thường gặp",
-      title: "Câu hỏi thường gặp",
+      label: "FAQ",
+      title: "Veelgestelde vragen",
       items: {
         isFree: {
-          question: "Công cụ này có miễn phí không?",
-          answer: "Có, bộ chuyển đổi Markdown sang PDF của chúng tôi hoàn toàn miễn phí 100% cho sử dụng cá nhân và thương mại."
+          question: "Is deze tool gratis?",
+          answer: "Ja, onze Markdown sang PDF bộ chuyển đổi is 100% gratis voor persoonlijk en commercieel gebruik."
         },
         dataStorage: {
-          question: "Bạn có lưu trữ dữ liệu của tôi không?",
-          answer: "Không. Chúng tôi xử lý mọi thứ trong trình duyệt của bạn. Tài liệu của bạn không bao giờ rời khỏi thiết bị của bạn."
+          question: "Slaan jullie mijn gegevens op?",
+          answer: "Nee. We verwerken alles in uw browser. Uw documenten verlaten nooit uw apparaat."
         },
         mathSupport: {
-          question: "Có hỗ trợ phương trình toán học không?",
-          answer: "Có! Chúng tôi sử dụng KaTeX để hiển thị đẹp các công thức toán học và phương trình phức tạp."
+          question: "Ondersteunt het wiskundige vergelijkingen?",
+          answer: "Ja! We gebruiken KaTeX om complexe wiskundige formules en vergelijkingen mooi weer te geven."
         },
         diagrams: {
-          question: "Tôi có thể tạo sơ đồ không?",
-          answer: "Chắc chắn. Chúng tôi hỗ trợ Mermaid.js để tạo sơ đồ dòng chảy, sơ đồ trình tự và sơ đồ Gantt từ văn bản."
+          question: "Kan ik diagrammen maken?",
+          answer: "Absoluut. We ondersteunen Mermaid.js om stroomdiagrammen, sequentiediagrammen en Gantt-diagrammen van tekst te maken."
         }
       }
     },
     comprehensive: {
-      title: "Giải pháp Markdown toàn diện",
-      description1: "Dù bạn là sinh viên viết luận văn, nhà phát triển tài liệu mã hóa hay nhà văn viết tiểu thuyết, trình chỉnh sửa Markdown của chúng tôi cung cấp các công cụ bạn cần. Với các tính năng như xem trước thời gian thực, theo dõi số từ và chế độ tập trung, bạn có thể viết mà không bị phân tâm.",
-      description2: "Bộ chuyển đổi của chúng tôi xử lý tất cả cú pháp Markdown tiêu chuẩn bao gồm tiêu đề, danh sách, liên kết, hình ảnh và khối trích dẫn. Người dùng nâng cao sẽ đánh giá cao việc hỗ trợ các khối mã với làm nổi bật cú pháp cụ thể theo ngôn ngữ, chú thích chân trang và danh sách công việc."
+      title: "Compleet Markdown-oplossing",
+      description1: "Of u nu een student bent die een scriptie schrijft, een ontwikkelaar die code documenteert of een schrijver die aan een roman werkt, onze Markdown-editor biedt de tools die u nodig heeft. Met functies zoals real-time voorbeeld, woordentaltracking en focusmodus kunt u zonder afleiding schrijven.",
+      description2: "Onze converter verwerkt alle standaard Markdown-syntaxis inclusief koppen, lijsten, links, afbeeldingen en citaatblokken. Geavanceerde gebruikers zullen de ondersteuning voor codeblokken met taalspecifieke syntax-highlighting, voetnoten en takenlijsten op prijs stellen."
     }
   },
 
   // Footer
   footer: {
-    tagline: "Markdown sang PDF",
-    subtitle: "Chuyển đổi sang trọng mỗi lần.",
-    description: "Công cụ chuyển đổi tài liệu chuyên nghiệp cho mọi người. Miễn phí, an toàn và nhanh chóng.",
+    tagline: "Markdown naar PDF",
+    subtitle: "Elke keer elegante conversies.",
+    description: "Professionele documentconversietool voor iedereen. Gratis, veilig en snel.",
     legal: {
-      title: "Pháp lý",
-      privacyPolicy: "Chính sách quyền riêng tư",
-      termsOfService: "Điều khoản dịch vụ"
+      title: "Juridisch",
+      privacyPolicy: "Privacybeleid",
+      termsOfService: "Servicevoorwaarden"
     },
     links: {
-      title: "Liên kết",
-      aboutUs: "Về chúng tôi",
-      contact: "Liên hệ"
+      title: "Links",
+      aboutUs: "Over ons",
+      contact: "Contact"
     },
     connect: {
-      title: "Kết nối",
-      description: "Câu hỏi hoặc phản hồi?"
+      title: "Verbinden",
+      description: "Vragen of feedback?"
     },
-    copyright: "© {year} Markdown to PDF. Đã đăng ký bản quyền.",
-    designed: "Được thiết kế để rõ ràng"
+    copyright: "© {year} Markdown to PDF. Alle rechten voorbehouden.",
+    designed: "Ontworpen voor helderheid"
   },
 
   // Toolbar
   toolbar: {
-    heading: "Tiêu đề",
-    bold: "In đậm",
-    italic: "In nghiêng",
-    strikethrough: "Gạch ngang",
-    code: "Mã",
-    link: "Liên kết",
-    image: "Hình ảnh",
-    bulletList: "Danh sách dấu đầu dòng",
-    numberedList: "Danh sách đánh số",
-    quote: "Trích dẫn",
-    codeBlock: "Khối mã",
-    horizontalRule: "Đường kẻ ngang",
-    undo: "Hoàn tác",
-    redo: "Làm lại",
-    showLess: "Hiện ít hơn",
-    showMore: "Hiển thị thêm",
-    disableWordWrap: "Tắt ngắt dòng",
-    enableWordWrap: "Bật ngắt dòng",
-    findAndReplace: "Tìm và thay thế",
-    showTools: "Hiện công cụ",
-    hideTools: "Ẩn công cụ",
+    heading: "Kop",
+    bold: "Vet",
+    italic: "Cursief",
+    strikethrough: "Doorhalen",
+    code: "Code",
+    link: "Link",
+    image: "Afbeelding",
+    bulletList: "Lijst met opsommingstekens",
+    numberedList: "Đánh sốe lijst",
+    quote: "Citaat",
+    codeBlock: "Codeblok",
+    horizontalRule: "Horizontale lijn",
+    undo: "Ongedaan maken",
+    redo: "Opnieuw",
+    showLess: "Minder weergeven",
+    showMore: "Meer weergeven",
+    disableWordWrap: "Woordafbreking uitschakelen",
+    enableWordWrap: "Woordafbreking inschakelen",
+    findAndReplace: "Zoeken en vervangen",
+    showTools: "Tools weergeven",
+    hideTools: "Tools verbergen",
     exportTXT: "TXT",
-    special: "Đặc biệt",
-    lineOps: "Thao tác dòng"
+    special: "Speciaal",
+    lineOps: "Regelbewerkingen"
   },
 
   // Dialogs
   dialogs: {
-    markdownCheatSheet: "Bảng tham khảo Markdown",
-    documentStatistics: "Thống kê tài liệu",
+    markdownCheatSheet: "Markdown-spiekkaart",
+    documentStatistics: "Documentstatistieken",
     close: "Đóng",
     focusMode: {
-      title: "Chế độ tập trung",
-      enter: "Vào chế độ tập trung",
-      exit: "Thoát chế độ tập trung",
-      description: "Môi trường viết không bị xao nhãng"
+      title: "Focusmodus",
+      enter: "Focusmodus betreden",
+      exit: "Focusmodus verlaten",
+      description: "Afleidingsvrij schrijfmilieu"
     },
     wordGoal: {
-      title: "Theo dõi mục tiêu từ",
-      setGoal: "Đặt mục tiêu từ",
-      currentWords: "Từ hiện tại",
-      goalWords: "Mục tiêu",
-      remaining: "Còn lại",
-      progress: "Tiến độ",
-      achieved: "Đạt được mục tiêu! 🎉"
+      title: "Woordendoel-tracker",
+      setGoal: "Woordendoel instellen",
+      currentWords: "Huidige woorden",
+      goalWords: "Doel",
+      remaining: "Resterend",
+      progress: "Voortgang",
+      achieved: "Doel bereikt! 🎉"
     },
     timeTracker: {
-      title: "Theo dõi thời gian",
-      startTime: "Bắt đầu phiên",
-      stopTime: "Dừng phiên",
-      reset: "Đặt lại",
-      totalTime: "Tổng thời gian",
-      sessions: "Phiên hôm nay"
+      title: "Giờstracker",
+      startTime: "Sessie starten",
+      stopTime: "Sessie stoppen",
+      reset: "Resetten",
+      totalTime: "Totale tijd",
+      sessions: "Sessies vandaag",
+      wordsPerMin: "Woorden/min",
+      recording: "Opnemen",
+      stopped: "Gestopt",
+      today: "Vandaag",
+      thisWeek: "Deze week",
+      avgSession: "Gemiddelde sessie",
+      dailyTimeGoal: "Dagelijks tijddoel",
+      hours: "2 uur",
+      recentSessions: "Recente sessies"
     },
     pomodoro: {
-      title: "Bộ hẹn giờ Pomodoro",
-      start: "Bắt đầu",
-      pause: "Tạm dừng",
-      reset: "Đặt lại",
-      work: "Làm việc",
-      shortBreak: "Nghỉ ngắn",
-      longBreak: "Nghỉ dài",
-      sessions: "Phiên đã hoàn thành"
-    },
-    quickTemplates: {
-      title: "Mẫu nhanh",
-      select: "Chọn một mẫu để chèn"
-    },
-    documentTemplates: {
-      title: "Mẫu tài liệu",
-      description: "Chọn một mẫu để bắt đầu"
-    },
-    performance: {
-      title: "Cài đặt hiệu suất",
-      debounceTime: "Thời gian debounce",
-      description: "Điều chỉnh hiệu suất kết xuất"
-    },
-    autosave: {
-      title: "Cài đặt tự động lưu",
-      interval: "Khoảng lưu",
-      description: "Tần suất tự động lưu công việc của bạn",
-      status: {
-        saved: "Đã lưu",
-        saving: "Đang lưu...",
-        unsaved: "Thay đổi chưa được lưu",
-        error: "Lỗi lưu"
-      }
+      title: "Pomodoro-timer",
+      description: "Sử dụng kỹ thuật Pomodoro cho các phiên viết tập trung",
+      start: "Starten",
+      pause: "Pauzeren",
+      reset: "Resetten",
+      work: "Werk",
+      shortBreak: "Korte pauze",
+      longBreak: "Lange pauze",
+      sessions: "Voltooide sessies"
     },
     typography: {
-      title: "Điều khiển kiểu chữ",
+      title: "Kiểm soát typography",
+      description: "Tùy chỉnh giao diện của văn bản xem trước",
       fontSize: "Cỡ chữ",
-      lineHeight: "Chiều cao dòng",
+      lineHeight: "Độ cao dòng",
       fontFamily: "Họ phông chữ"
     },
     snippets: {
       title: "Thư viện đoạn mã",
+      description: "Truy cập nhanh vào các mẫu và mẫu Markdown có thể tái sử dụng",
       add: "Thêm đoạn mã",
       save: "Lưu đoạn mã",
       cancel: "Hủy",
       name: "Tên",
       content: "Nội dung"
-    },
-    keyboardShortcuts: {
-      title: "Phím tắt",
-      description: "Tăng tốc quy trình làm việc của bạn với các phím tắt này"
     }
   }
 }

@@ -96,6 +96,35 @@ export interface LocaleTranslations {
       technical: string
       documentation: string
     }
+    blank: {
+      name: string
+      description: string
+    }
+    article: {
+      name: string
+      description: string
+    }
+    readme: {
+      name: string
+      description: string
+    }
+    resume: {
+      name: string
+      description: string
+    }
+    essay: {
+      name: string
+      description: string
+    }
+    meeting: {
+      name: string
+      description: string
+    }
+    tutorial: {
+      name: string
+      description: string
+    }
+    templates: string
   }
   defaultContent: string
   seo: {
@@ -243,9 +272,19 @@ export interface LocaleTranslations {
       reset: string
       totalTime: string
       sessions: string
+      wordsPerMin: string
+      recording: string
+      stopped: string
+      today: string
+      thisWeek: string
+      avgSession: string
+      dailyTimeGoal: string
+      hours: string
+      recentSessions: string
     }
     pomodoro: {
       title: string
+      description: string
       start: string
       pause: string
       reset: string
@@ -280,12 +319,14 @@ export interface LocaleTranslations {
     }
     typography: {
       title: string
+      description: string
       fontSize: string
       lineHeight: string
       fontFamily: string
     }
     snippets: {
       title: string
+      description: string
       add: string
       save: string
       cancel: string
@@ -296,5 +337,114 @@ export interface LocaleTranslations {
       title: string
       description: string
     }
+  }
+  quickTemplates: {
+    apiEndpoint: string
+    codeSnippet: string
+    meetingNotes: string
+    bugReport: string
+    dailyStandup: string
+    featureRequest: string
+    codeReview: string
+    projectReadme: string
+  }
+  textTransform: {
+    title: string
+    close: string
+    uppercase: string
+    lowercase: string
+    titleCase: string
+    sentenceCase: string
+    camelCase: string
+    kebabCase: string
+    snakeCase: string
+    toggleCase: string
+    capitalize: string
+    uppercaseDesc: string
+    lowercaseDesc: string
+    titleCaseDesc: string
+    sentenceCaseDesc: string
+    camelCaseDesc: string
+    kebabCaseDesc: string
+    snakeCaseDesc: string
+    toggleCaseDesc: string
+    capitalizeDesc: string
+  }
+  codeLanguages: {
+    javascript: string
+    typescript: string
+    python: string
+    java: string
+    cpp: string
+    csharp: string
+    go: string
+    rust: string
+    php: string
+    ruby: string
+    swift: string
+    kotlin: string
+    html: string
+    css: string
+    scss: string
+    sql: string
+    bash: string
+    shell: string
+    json: string
+    yaml: string
+    xml: string
+    markdown: string
+    dockerfile: string
+    diff: string
+    language: string
+    insertCodeBlock: string
+    preview: string
+  }
+  dateTime: {
+    insertDateTime: string
+    date: string
+    time: string
+    dateTime: string
+    iso8601: string
+    usFormat: string
+    euFormat: string
+    readable: string
+    cancel: string
+  }
+  listHelper: {
+    listType: string
+    bullet: string
+    numbered: string
+    numberOfItems: string
+    listItems: string
+    insertList: string
+    cancel: string
+    item: string
+  }
+  highlightHelper: {
+    insertHighlight: string
+    highlightText: string
+    textToHighlight: string
+    color: string
+    visualOnly: string
+    note: string
+    cancel: string
+    yellow: string
+    red: string
+    green: string
+    blue: string
+    purple: string
+    pink: string
+  }
+  helpDialog: {
+    title: string
+    close: string
+    headings: string
+    textStyles: string
+    codeBlocks: string
+    lists: string
+    links: string
+    images: string
+    quotes: string
+    tables: string
   }
 }

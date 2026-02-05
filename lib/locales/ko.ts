@@ -116,7 +116,148 @@ export const ko = {
       academic: "학술",
       technical: "기술",
       documentation: "문서"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "빈 문서",
+      description: "처음부터 시작하기"
+    },
+    article: {
+      name: "블로그 게시물",
+      description: "표준 블로그 게시물 구조"
+    },
+    readme: {
+      name: "README.md",
+      description: "프로젝트 문서 템플릿"
+    },
+    resume: {
+      name: "이력서/CV",
+      description: "전문 이력서 템플릿"
+    },
+    essay: {
+      name: "학술 에세이",
+      description: "구조화된 학술 논문"
+    },
+    meeting: {
+      name: "회의록",
+      description: "구조화된 회의록 템플릿"
+    },
+    tutorial: {
+      name: "튜토리얼/가이드",
+      description: "단계별 튜토리얼 템플릿"
+    },
+    templates: "템플릿"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "API 엔드포인트",
+    codeSnippet: "코드 스니펫",
+    meetingNotes: "회의록",
+    bugReport: "버그 보고서",
+    dailyStandup: "데일리 스탠드업",
+    featureRequest: "기능 요청",
+    codeReview: "코드 리뷰",
+    projectReadme: "프로젝트 README"
+  },
+  textTransform: {
+    title: "텍스트 변환",
+    close: "닫기",
+    uppercase: "대문자",
+    lowercase: "소문자",
+    titleCase: "제목 대문자",
+    sentenceCase: "문장 대소문자",
+    camelCase: "카멜케이스",
+    kebabCase: "케밥케이스",
+    snakeCase: "스네이크케이스",
+    toggleCase: "대소문자 토글",
+    capitalize: "첫 글자 대문자",
+    uppercaseDesc: "대문자로 변환",
+    lowercaseDesc: "소문자로 변환",
+    titleCaseDesc: "각 단어의 첫 글자를 대문자로",
+    sentenceCaseDesc: "첫 번째 단어만 대문자로",
+    camelCaseDesc: "카멜케이스로 변환",
+    kebabCaseDesc: "케밥케이스로 변환",
+    snakeCaseDesc: "스네이크케이스로 변환",
+    toggleCaseDesc: "대소문자 전환",
+    capitalizeDesc: "첫 글자를 대문자로"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "언어",
+    insertCodeBlock: "코드 블록 삽입",
+    preview: "미리보기"
+  },
+  dateTime: {
+    insertDateTime: "날짜/시간 삽입",
+    date: "날짜",
+    time: "시간",
+    dateTime: "날짜 및 시간",
+    iso8601: "ISO 8601",
+    usFormat: "미국 형식",
+    euFormat: "유럽 형식",
+    readable: "읽기 쉬움",
+    cancel: "취소"
+  },
+  listHelper: {
+    listType: "목록 유형",
+    bullet: "글머리 기호",
+    numbered: "번호 매기기",
+    numberOfItems: "항목 수",
+    listItems: "목록 항목",
+    insertList: "목록 삽입",
+    cancel: "취소",
+    item: "항목"
+  },
+  highlightHelper: {
+    insertHighlight: "하이라이트 삽입",
+    highlightText: "텍스트 하이라이트",
+    textToHighlight: "하이라이트할 텍스트",
+    color: "색상",
+    visualOnly: "(시각용만)",
+    note: "참고: 하이라이트는 ==텍스트== 구문을 사용합니다. 모든 마크다운 렌더러에서 지원되지 않을 수 있습니다.",
+    cancel: "취소",
+    yellow: "노란색",
+    red: "빨간색",
+    green: "초록색",
+    blue: "파란색",
+    purple: "보라색",
+    pink: "분홍색"
+  },
+
+  helpDialog: {
+    title: "Markdown 빠른 참조",
+    close: "닫기",
+    headings: "제목",
+    textStyles: "텍스트 스타일",
+    codeBlocks: "코드 블록",
+    lists: "목록",
+    links: "링크",
+    images: "이미지",
+    quotes: "인용문",
+    tables: "표"
   },
 
   // Default Content
@@ -510,14 +651,24 @@ def quicksort(arr):
     },
     timeTracker: {
       title: "시간 추적기",
-      startTime: "세션 시작",
-      stopTime: "세션 중지",
+      startTime: "시작",
+      stopTime: "일시정지",
       reset: "재설정",
       totalTime: "총 시간",
-      sessions: "오늘 세션"
+      sessions: "오늘 세션",
+      wordsPerMin: "단어/분",
+      recording: "녹음 중",
+      stopped: "중지됨",
+      today: "오늘",
+      thisWeek: "이번 주",
+      avgSession: "평균 세션",
+      dailyTimeGoal: "일일 시간 목표",
+      hours: "2 시간",
+      recentSessions: "최근 세션"
     },
     pomodoro: {
       title: "뽀모도로 타이머",
+      description: "집중 글쓰기 세션을 위해 뽀모도로 기법 사용",
       start: "시작",
       pause: "일시정지",
       reset: "재설정",
@@ -552,21 +703,22 @@ def quicksort(arr):
     },
     typography: {
       title: "타이포그래피 컨트롤",
+      description: "미리보기 텍스트의 모양 사용자 정의",
       fontSize: "글꼴 크기",
       lineHeight: "줄 높이",
       fontFamily: "글꼴 계열"
     },
     snippets: {
       title: "스니펫 라이브러리",
+      description: "재사용 가능한 마크다운 패턴 및 템플릿에 빠르게 액세스",
       add: "스니펫 추가",
       save: "스니펫 저장",
       cancel: "취소",
       name: "이름",
-      content: "내용"
     },
     keyboardShortcuts: {
       title: "키보드 단축키",
-      description: "이 단축키로 작업 속도 향상"
+      description: "이러한 단축키로 작업 속도 높이기"
     }
   }
 }

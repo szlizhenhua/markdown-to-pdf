@@ -3,13 +3,15 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { List, ListOrdered } from 'lucide-react'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface ListHelperProps {
   onInsert: (listMarkdown: string) => void
   className?: string
+  t: LocaleTranslations
 }
 
-export function ListHelper({ onInsert, className }: ListHelperProps) {
+export function ListHelper({ onInsert, className, t }: ListHelperProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [listType, setListType] = useState<'bullet' | 'numbered'>('bullet')
   const [itemCount, setItemCount] = useState(3)
@@ -64,8 +66,8 @@ export function ListHelper({ onInsert, className }: ListHelperProps) {
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
         className="h-8 w-8 p-0 touch-manipulation"
-        title="Insert list"
-        aria-label="Insert list"
+        title={t.listHelper.insertList}
+        aria-label={t.listHelper.insertList}
         aria-expanded={isOpen}
       >
         {listType === 'bullet' ? <List className="h-4 w-4" /> : <ListOrdered className="h-4 w-4" />}
@@ -75,7 +77,7 @@ export function ListHelper({ onInsert, className }: ListHelperProps) {
         <div className="absolute left-0 top-full mt-1 z-50 w-80 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15">
           <div className="p-4 space-y-4">
             <div>
-              <label className="text-sm font-medium mb-2 block">List Type</label>
+              <label className="text-sm font-medium mb-2 block">{t.listHelper.listType}</label>
               <div className="flex gap-2">
                 <button
                   type="button"
@@ -87,7 +89,7 @@ export function ListHelper({ onInsert, className }: ListHelperProps) {
                   }`}
                 >
                   <List className="h-4 w-4 inline mr-1" />
-                  Bullet
+                  {t.listHelper.bullet}
                 </button>
                 <button
                   type="button"
@@ -99,13 +101,13 @@ export function ListHelper({ onInsert, className }: ListHelperProps) {
                   }`}
                 >
                   <ListOrdered className="h-4 w-4 inline mr-1" />
-                  Numbered
+                  {t.listHelper.numbered}
                 </button>
               </div>
             </div>
 
             <div>
-              <label className="text-sm font-medium mb-2 block">Number of Items: {itemCount}</label>
+              <label className="text-sm font-medium mb-2 block">{t.listHelper.numberOfItems}: {itemCount}</label>
               <input
                 type="range"
                 min="1"
@@ -117,7 +119,7 @@ export function ListHelper({ onInsert, className }: ListHelperProps) {
             </div>
 
             <div>
-              <label className="text-sm font-medium mb-2 block">List Items</label>
+              <label className="text-sm font-medium mb-2 block">{t.listHelper.listItems}</label>
               <div className="space-y-2 max-h-48 overflow-y-auto">
                 {items.map((item, index) => (
                   <input
@@ -125,7 +127,7 @@ export function ListHelper({ onInsert, className }: ListHelperProps) {
                     type="text"
                     value={item}
                     onChange={(e) => handleItemChange(index, e.target.value)}
-                    placeholder={listType === 'bullet' ? `Item ${index + 1}` : `${index + 1}. Item`}
+                    placeholder={listType === 'bullet' ? `${t.listHelper.item} ${index + 1}` : `${index + 1}. ${t.listHelper.item}`}
                     className="w-full px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary/40"
                   />
                 ))}
@@ -138,14 +140,14 @@ export function ListHelper({ onInsert, className }: ListHelperProps) {
                 size="sm"
                 className="flex-1"
               >
-                Insert List
+                {t.listHelper.insertList}
               </Button>
               <Button
                 onClick={() => setIsOpen(false)}
                 variant="outline"
                 size="sm"
               >
-                Cancel
+                {t.listHelper.cancel}
               </Button>
             </div>
           </div>

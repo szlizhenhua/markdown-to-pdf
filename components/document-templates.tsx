@@ -19,19 +19,19 @@ interface DocumentTemplatesProps {
   t: LocaleTranslations
 }
 
-const templates = [
+const getTemplates = (t: LocaleTranslations) => [
   {
     id: 'blank',
-    name: 'Blank Document',
+    name: t.templates.blank.name,
     icon: <FileText className="h-5 w-5" />,
-    description: 'Start with a clean slate',
+    description: t.templates.blank.description,
     content: ''
   },
   {
     id: 'article',
-    name: 'Blog Article',
+    name: t.templates.article.name,
     icon: <FileEdit className="h-5 w-5" />,
-    description: 'Standard blog post structure',
+    description: t.templates.article.description,
     content: `# Article Title
 
 *Write your article here*
@@ -60,9 +60,9 @@ Summarize your key points and provide a call to action.
   },
   {
     id: 'readme',
-    name: 'README.md',
+    name: t.templates.readme.name,
     icon: <Code className="h-5 w-5" />,
-    description: 'Project documentation template',
+    description: t.templates.readme.description,
     content: `# Project Name
 
 > A brief description of what this project does and who it's for
@@ -97,9 +97,9 @@ This project is licensed under the MIT License.
   },
   {
     id: 'resume',
-    name: 'Resume/CV',
+    name: t.templates.resume.name,
     icon: <Briefcase className="h-5 w-5" />,
-    description: 'Professional resume template',
+    description: t.templates.resume.description,
     content: `# Your Name
 
 [City, State] | [email@example.com] | [linkedin.com/in/yourname]
@@ -134,9 +134,9 @@ Experienced professional with a proven track record of [key achievement]. Skille
   },
   {
     id: 'essay',
-    name: 'Academic Essay',
+    name: t.templates.essay.name,
     icon: <GraduationCap className="h-5 w-5" />,
-    description: 'Structured academic paper',
+    description: t.templates.essay.description,
     content: `# Essay Title
 
 *Your Name*
@@ -170,9 +170,9 @@ Restate your thesis in a new way. Summarize your main points without simply repe
   },
   {
     id: 'meeting',
-    name: 'Meeting Notes',
+    name: t.templates.meeting.name,
     icon: <Calendar className="h-5 w-5" />,
-    description: 'Structured meeting notes template',
+    description: t.templates.meeting.description,
     content: `# Meeting Notes
 
 **Date:** [Insert Date]
@@ -229,9 +229,9 @@ Restate your thesis in a new way. Summarize your main points without simply repe
   },
   {
     id: 'tutorial',
-    name: 'Tutorial/Guide',
+    name: t.templates.tutorial.name,
     icon: <Book className="h-5 w-5" />,
-    description: 'Step-by-step tutorial template',
+    description: t.templates.tutorial.description,
     content: `# Tutorial Title
 
 > A brief description of what readers will learn
@@ -291,6 +291,7 @@ Summarize what was accomplished and suggest next steps for further learning.
 
 export function DocumentTemplates({ onTemplateSelect, className, t }: DocumentTemplatesProps) {
   const [open, setOpen] = useState(false)
+  const templates = getTemplates(t)
 
   const handleSelectTemplate = (template: typeof templates[0]) => {
     onTemplateSelect(template.content)
@@ -304,11 +305,11 @@ export function DocumentTemplates({ onTemplateSelect, className, t }: DocumentTe
           variant="ghost"
           size="sm"
           className={`h-8 px-2 touch-manipulation text-xs ${className}`}
-          title="Document templates"
-          aria-label="Document templates"
+          title={t.templates.templates}
+          aria-label={t.templates.templates}
         >
           <Download className="h-4 w-4" />
-          <span className="hidden sm:inline ml-1">Templates</span>
+          <span className="hidden sm:inline ml-1">{t.templates.templates}</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">

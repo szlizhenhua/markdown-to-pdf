@@ -1,62 +1,62 @@
 export const pl = {
   // Header
   title: "Konwerter Markdown na PDF",
-  subtitle: "Konwertuj Markdown na profesjonalne PDF",
+  subtitle: "Konwertuj Markdown na profesjonalne PDF's",
 
   // Controls
   buttons: {
-    upload: "Prześlij",
-    showPreview: "Pokaż podgląd",
-    hidePreview: "Ukryj podgląd",
-    getPDF: "Pobierz PDF",
-    generatingPDF: "Generowanie PDF...",
-    settings: "Ustawienia",
-    tableOfContents: "Spis treści",
+    upload: "Uploaden",
+    showPreview: "Voorbeeld weergeven",
+    hidePreview: "Voorbeeld verbergen",
+    getPDF: "PDF ophalen",
+    generatingPDF: "PDF genereren...",
+    settings: "Instellingen",
+    tableOfContents: "Inhoudsopgave",
     exportHTML: "HTML",
     exportMarkdown: "MD"
   },
 
   // Editor
   editor: {
-    title: "Edytor Markdown",
-    placeholder: "Zacznij pisać swój Markdown tutaj...\n\n# Nagłówek 1\n## Nagłówek 2\n\n**Pogrubienie** i *kursywa*\n\n- Element listy 1\n- Element listy 2\n\n```javascript\nconsole.log('Witaj Świecie!');\n```\n\n| Kolumna 1 | Kolumna 2 |\n|---------|----------|\n| Dane 1  | Dane 2   |",
-    dragDropText: "Przeciągnij swój plik Markdown tutaj",
-    dragDropSubtext: "Obsługuje pliki .md i .txt",
-    loading: "Ładowanie diagramu...",
-    rendering: "Renderowanie diagramu...",
+    title: "Markdown Editor",
+    placeholder: "Begin hier met het typen van uw Markdown...\n\n# Kop 1\n## Kop 2\n\n**Vet** en *cursief*\n\n- Lijstitem 1\n- Lijstitem 2\n\n```javascript\nconsole.log('Hallo Wereld!');\n```\n\n| Kolom 1 | Kolom 2 |\n|---------|----------|\n| Gegevens 1  | Gegevens 2   |",
+    dragDropText: "Sleep uw Markdown-bestand hier",
+    dragDropSubtext: "Ondersteunt .md en .txt bestanden",
+    loading: "Diagram laden...",
+    rendering: "Diagram renderen...",
     stats: {
-      characters: "Znaki",
-      words: "Słowa",
-      lines: "Linie",
-      readingTime: "Czas czytania"
+      characters: "Tekens",
+      words: "Woorden",
+      lines: "Regels",
+      readingTime: "Leestijd"
     }
   },
 
   // Preview
   preview: {
-    title: "Podgląd",
-    theme: "motyw"
+    title: "Voorbeeld",
+    theme: "thema"
   },
 
   // Settings
   settings: {
-    title: "Ustawienia",
-    theme: "Motyw",
-    paperSize: "Rozmiar papieru",
-    fontSize: "Rozmiar czcionki"
+    title: "Instellingen",
+    theme: "Thema",
+    paperSize: "Papierformaat",
+    fontSize: "Lettergrootte"
   },
 
   // Table of Contents
   toc: {
-    title: "Spis treści"
+    title: "Inhoudsopgave"
   },
 
   // Themes
   themes: {
-    default: "Domyślny",
-    academic: "Akademicki",
-    modern: "Nowoczesny",
-    minimal: "Minimalistyczny"
+    default: "Standaard",
+    academic: "Academisch",
+    modern: "Modern",
+    minimal: "Minimaal"
   },
 
   // Paper Sizes
@@ -77,111 +77,252 @@ export const pl = {
 
   // Messages
   messages: {
-    pdfGenerationError: "Generowanie PDF nieudane",
-    pdfExportError: "Eksport PDF nieudany, sprawdź konsolę dla szczegółów",
-    mermaidRenderError: "Błąd renderowania Mermaid",
-    mermaidSyntaxError: "Sprawdź składnię Mermaid",
-    mermaidExampleSyntax: "Przykład składni:",
-    mermaidRenderRetry: "Próba renderowania Mermaid {count} nieudana, ponowna próba za 100ms",
-    mermaidFinalError: "Ostateczne niepowodzenie renderowania Mermaid",
-    unknownError: "Nieznany błąd",
-    highlightJsError: "Błąd Highlight.js dla języka \"{lang}\":",
-    katexRenderError: "Błąd renderowania KaTeX:",
-    mermaidInitError: "Błąd inicjalizacji Mermaid:",
-    mermaidLoading: "Ładowanie diagramu...",
-    mermaidRendering: "Renderowanie diagramu...",
-    templateLoaded: "Szablon załadowany",
-    templateLoadedMessage: "Szablon został zastosowany do edytora.",
-    fileTooLarge: "Plik jest za duży. Maksymalny rozmiar to 5MB.",
-    invalidFileType: "Nieprawidłowy typ pliku. Prześlij plik .md lub .txt.",
-    fileUploadFailed: "Przesyłanie pliku nieudane. Spróbuj ponownie.",
-    fileUploaded: "Plik pomyślnie przesłany",
-    resetComplete: "Resetowanie zakończone",
-    resetCompleteMessage: "Edytor i ustawienia zostały zresetowane do wartości domyślnych.",
-    copySuccess: "Skopiowano do schowka",
-    copyFailed: "Kopiowanie do schowka nieudane",
-    networkError: "Błąd sieci. Sprawdź swoje połączenie.",
-    quotaExceeded: "Przekroczono przydział pamięci. Wyczyść trochę danych przeglądarki.",
-    autoSaveFailed: "Automatyczne zapisywanie nieudane. Twoje zmiany mogą nie zostać zapisane."
+    pdfGenerationError: "PDF-generatie mislukt",
+    pdfExportError: "PDF-export mislukt, controleer de console voor details",
+    mermaidRenderError: "Mermaid renderfout",
+    mermaidSyntaxError: "Controleer de Mermaid-syntaxis",
+    mermaidExampleSyntax: "Voorbeeld van syntaxis:",
+    mermaidRenderRetry: "Mermaid render poging {count} mislukt, zal opnieuw proberen in 100ms",
+    mermaidFinalError: "Mermaid render uiteindelijk mislukt",
+    unknownError: "Onbekende fout",
+    highlightJsError: "Highlight.js-fout voor taal \"{lang}\":",
+    katexRenderError: "KaTeX-renderfout:",
+    mermaidInitError: "Mermaid-initialisatiefout:",
+    mermaidLoading: "Diagram laden...",
+    mermaidRendering: "Diagram renderen...",
+    templateLoaded: "Sjabloon geladen",
+    templateLoadedMessage: "Het sjabloon is toegepast op de editor.",
+    fileTooLarge: "Bestand is te groot. Maximale grootte is 5MB.",
+    invalidFileType: "Ongeldig bestandstype. Upload een .md of .txt bestand.",
+    fileUploadFailed: "Bestand uploaden mislukt. Probeer opnieuw.",
+    fileUploaded: "Bestand succesvol geüpload",
+    resetComplete: "Reset voltooid",
+    resetCompleteMessage: "Editor en instellingen zijn teruggezet naar de standaardwaarden.",
+    copySuccess: "Gekopieerd naar klembord",
+    copyFailed: "Kopiëren naar klembord mislukt",
+    networkError: "Netwerkfout. Controleer uw verbinding.",
+    quotaExceeded: "Opslagquota overschreden. Wis enkele browsergegevens.",
+    autoSaveFailed: "Automatisch opslaan mislukt. Uw wijzigingen worden mogelijk niet opgeslagen."
   },
 
   // Templates
   templates: {
-    title: "Wybierz Szablon",
-    description: "Wybierz spośród profesjonalnie zaprojektowanych szablonów, aby szybko rozpocząć",
-    selectTemplate: "Kliknij szablon, aby załadować go do edytora. Twoja obecna zawartość zostanie zastąpiona.",
+    title: "Selecteer een Sjabloon",
+    description: "Kies uit professioneel ontworpen sjablonen om snel te beginnen",
+    selectTemplate: "Klik op een sjabloon om het in de editor te laden. Uw huidige inhoud wordt vervangen.",
     categories: {
-      all: "Wszystkie Szablony",
-      basic: "Podstawowy",
-      academic: "Akademicki",
-      technical: "Techniczny",
-      documentation: "Dokumentacja"
-    }
+      all: "Alle Sjablonen",
+      basic: "Basis",
+      academic: "Academisch",
+      technical: "Technisch",
+      documentation: "Documentatie"
+    },
+    // Document templates
+    blank: {
+      name: "Leeg Document",
+      description: "Begin met een schone lei"
+    },
+    article: {
+      name: "Blogartikel",
+      description: "Standaard blogpost structuur"
+    },
+    readme: {
+      name: "README.md",
+      description: "Projectdocumentatie sjabloon"
+    },
+    resume: {
+      name: "CV",
+      description: "Professioneel cv-sjabloon"
+    },
+    essay: {
+      name: "Academisch Essay",
+      description: "Gestructureerd academisch paper"
+    },
+    meeting: {
+      name: "Notatki ze spotkania",
+      description: "Gestructureerd notulen sjabloon"
+    },
+    tutorial: {
+      name: "Tutorial/Gids",
+      description: "Stap-voor-stap tutorial sjabloon"
+    },
+    templates: "Sjablonen"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "Punkt końcowy API",
+    codeSnippet: "Fragment kodu",
+    meetingNotes: "Notatki ze spotkania",
+    bugReport: "Raport błędów",
+    dailyStandup: "Dzienne Standup",
+    featureRequest: "Prośba o funkcję",
+    codeReview: "Code Review",
+    projectReadme: "Project README"
+  },
+  textTransform: {
+    title: "Przekształć Tekst",
+    close: "Zamknij",
+    uppercase: "WIELKIE LITERY",
+    lowercase: "kleine letters",
+    titleCase: "Titelhoofdletters",
+    sentenceCase: "Zinshoofdletters",
+    camelCase: "kameelHuis",
+    kebabCase: "kebab-huis",
+    snakeCase: "slang_huis",
+    toggleCase: "hOOFDlETTERS wISSELEN",
+    capitalize: "Hoofdfletter",
+    uppercaseDesc: "Konwertuj na hoofdletters",
+    lowercaseDesc: "Konwertuj na kleine letters",
+    titleCaseDesc: "Elk woord met hoofdletter",
+    sentenceCaseDesc: "Alleen eerste woord met hoofdletter",
+    camelCaseDesc: "Konwertuj na camelCase",
+    kebabCaseDesc: "Konwertuj na kebab-case",
+    snakeCaseDesc: "Konwertuj na snake_case",
+    toggleCaseDesc: "Hoofdletter/kleine letter wisselen",
+    capitalizeDesc: "Eerste letter hoofdletter"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "Język",
+    insertCodeBlock: "Wstaw Blok Kodu",
+    preview: "Voorbeeld"
+  },
+  dateTime: {
+    insertDateTime: "Wstaw Datę/Czas",
+    date: "Data",
+    time: "Czas",
+    dateTime: "Data & Czas",
+    iso8601: "ISO 8601",
+    usFormat: "US Formaat",
+    euFormat: "EU Formaat",
+    readable: "Leesbaar",
+    cancel: "Anuluj"
+  },
+  listHelper: {
+    listType: "Typ listy",
+    bullet: "Punkt",
+    numbered: "Numerowany",
+    numberOfItems: "Aantal Items",
+    listItems: "Lijstitems",
+    insertList: "Lijst Invoegen",
+    cancel: "Anuluj",
+    item: "Item"
+  },
+  highlightHelper: {
+    insertHighlight: "Wstaw Wyróżnienie",
+    highlightText: "Zaznacz Tekst",
+    textToHighlight: "Te markeren tekst",
+    color: "Kleur",
+    visualOnly: "(alleen visueel)",
+    note: "Let op: Markering gebruikt ==tekst== syntaxis. Mogelijk niet ondersteund door alle markdown renderers.",
+    cancel: "Anuluj",
+    yellow: "Żółty",
+    red: "Czerwony",
+    green: "Zielony",
+    blue: "Niebieski",
+    purple: "Fioletowy",
+    pink: "Różowy"
+  },
+
+  helpDialog: {
+    title: "Szybki Przewodnik po Markdown",
+    close: "Zamknij",
+    headings: "Nagłówki",
+    textStyles: "Style Tekstu",
+    codeBlocks: "Bloki Kodu",
+    lists: "Listy",
+    links: "Linki",
+    images: "Obrazy",
+    quotes: "Cytaty",
+    tables: "Tabele"
   },
 
   // Default Content
   defaultContent: `# Konwerter Markdown na PDF
 
-> 🎯 **Konwertuj swoje dokumenty Markdown na profesjonalne PDF z formułami matematycznymi, schematami blokowymi, podświetlaniem kodu i wieloma motywami**
+> 🎯 **Converteer uw Markdown-documenten naar professionele PDF's met wiskundige formules, stroomdiagrammen, code-highlighting en meerdere thema's**
 
-## ✨ Funkcje
+## ✨ Functies
 
-### 📊 **Pełne wsparcie Markdown**
-- **Formatowanie tekstu**: **Pogrubienie**, *Kursywa*, ~~Przekreślenie~~, \`Kod w tekście\`
-- **Poziomy nagłówków**: Pełna obsługa struktury nagłówków H1-H6
-- **Listy**: Listy uporządkowane, listy nieuporządkowane, listy zadań
-- **Linki i obrazy**: Automatyczne rozpoznawanie linków, obsługa osadzania obrazów
-- **Tabele**: Obsługa wyrównania i złożonych struktur tabel
-- **Cytaty**: Bloki cytatów i zagnieżdżone cytaty
+### 📊 **Volledige Markdown-ondersteuning**
+- **Tekstopmaak**: **Vet**, *Cursief*, ~~Doorhalen~~, \`Inline code\`
+- **Kopniveaus**: Volledige H1-H6 kopstructuurondersteuning
+- **Lijsten**: Geordende lijsten, ongeordende lijsten, takenlijsten
+- **Links en Afbeeldingen**: Automatische linkherkenning, ondersteuning voor het insluiten van afbeeldingen
+- **Tabellen**: Ondersteuning voor uitlijning en complexe tabelstructuren
+- **Citaten**: Blokcitaten en geneste citaten
 
-### 🧮 **Renderowanie formuł matematycznych (KaTeX)**
-**Formuła w tekście**: Równanie Einsteina $E = mc^2$
+### 🧮 **Wiskundige Formule Rendering (KaTeX)**
+**Inline formule**: Einsteins massa-energievergelijking $E = mc^2$
 
-**Formuła blokowa**:
+**Blokformule**:
 $$\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}$$
 
-**Złożona formuła**:
+**Complexe formule**:
 $$\\sum_{i=1}^{n} x_i = x_1 + x_2 + \\cdots + x_n$$
 
-**Reprezentacja macierzowa**:
+**Matrixrepresentatie**:
 $$\\begin{bmatrix}
 a & b \\\\
 c & d
 \\end{bmatrix}$$
 
-### 📈 **Rysowanie diagramów (Mermaid)**
+### 📈 **Diagram Tekenen (Mermaid)**
 
-#### Schemat blokowy
+#### Stroomdiagram
 \`\`\`mermaid
 graph TD
-    A[Start] --> B{Warunek}
-    B -->|Tak| C[Wykonaj A]
-    B -->|Nie| D[Wykonaj B]
-    C --> E[Koniec]
+    A[Start] --> B{Voorwaarde}
+    B -->|Ja| C[Voer A uit]
+    B -->|Nee| D[Voer B uit]
+    C --> E[Einde]
     D --> E
 \`\`\`
 
-#### Diagram grafowy
+#### Grafiekdiagram
 \`\`\`mermaid
 graph LR
-    A[Użytkownik] --> B[System]
-    B --> A[Odpowiedź]
+    A[Gebruiker] --> B[Systeem]
+    B --> A[Antwoord]
 \`\`\`
 
-### 💻 **Podświetlanie kodu**
+### 💻 **Code Highlighting**
 
-#### Przykład JavaScript
+#### JavaScript Voorbeeld
 \`\`\`javascript
 function fibonacci(n) {
   if (n <= 1) return n;
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-// Przykład użycia
-console.log(fibonacci(10)); // Wyjście: 55
+// Gebruiksvoorbeeld
+console.log(fibonacci(10)); // Uitvoer: 55
 \`\`\`
 
-#### Przykład Python
+#### Python Voorbeeld
 \`\`\`python
 def quicksort(arr):
     if len(arr) <= 1:
@@ -193,380 +334,364 @@ def quicksort(arr):
     return quicksort(left) + middle + quicksort(right)
 \`\`\`
 
-### 📋 **Funkcje tabeli**
+### 📋 **Tabel Functies**
 
-| Funkcja | Status | Opis | Skrót |
+| Functie | Status | Beschrijving | Snelkoppeling |
 |---------|:------:|-------------|----------|
-| Formuły matematyczne | ✅ | Pełna obsługa KaTeX | \`$...\$ |
-| Schematy blokowe | ✅ | Diagramy Mermaid | \`mermaid |
-| Podświetlanie kodu | ✅ | Obsługa wielojęzyczna | \`lang |
-| Tabele | ✅ | Pełna funkcjonalność tabel | \| \| \| |
-| Linki | ✅ | Automatyczne rozpoznawanie linków | [tekst](url) |
+| Wiskundige Formules | ✅ | Volledige KaTeX-ondersteuning | \`$...\$ |
+| Stroomdiagrammen | ✅ | Mermaid-diagrammen | \`mermaid |
+| Code Highlighting | ✅ | Meertalige ondersteuning | \`lang |
+| Tabellen | ✅ | Volledige tabelfunctionaliteit | \| \| \| |
+| Links | ✅ | Automatische linkherkenning | [tekst](url) |
 
 ---
 
-## 📖 Przewodnik użytkownika
+## 📖 Gebruikershandleiding
 
-### 🚀 **Szybki start**
+### 🚀 **Snelstart**
 
-1. **Edytuj zawartość**
-   - Wpisz lub wklej zawartość Markdown w lewym edytorze
-   - Podgląd w czasie rzeczywistym z WYSIWYG
+1. **Inhoud bewerken**
+   - Typ of plak Markdown-inhoud in de linkereditor
+   - Real-time voorbeeld met WYSIWYG
 
-2. **Prześlij pliki**
-   - Kliknij przycisk "Prześlij", aby wybrać pliki .md lub .txt
-   - Lub przeciągnij i upuść pliki bezpośrednio w obszarze edytora
+2. **Bestanden uploaden**
+   - Klik op de knop "Uploaden" om .md of .txt bestanden te selecteren
+   - Of sleep bestanden direct naar het editorgebied
 
-3. **Dostosuj style**
-   - Wybierz styl motywu (Domyślny/Akademicki/Nowoczesny/Minimalistyczny)
-   - Dostosuj rozmiar papieru i rozmiar czcionki
-   - Podgląd w czasie rzeczywistym efektów
+3. **Stijlen aanpassen**
+   - Kies de themastijl (Standaard/Academisch/Modern/Minimaal)
+   - Pas papierformaat en lettergrootte aan
+   - Real-time voorbeeld van effecten
 
-4. **Eksportuj PDF**
-   - Kliknij przycisk "Pobierz PDF"
-   - Automatyczne pobieranie wygenerowanego dokumentu PDF
-   - Nazwa pliku jest generowana automatycznie na podstawie tytułu dokumentu
+4. **PDF exporteren**
+   - Klik op de knop "PDF ophalen"
+   - Automatische download van het gegenereerde PDF-document
+   - Bestandsnaam wordt automatisch gegenereerd op basis van de documenttitel
 
-### ⌨️ **Ściąga składni Markdown**
+### ⌨️ **Markdown Syntaxis Cheat Sheet\`
 
-#### Podstawowa składnia
+#### Basis Syntaxis
 \`\`\`markdown
-# Nagłówek poziomu 1
-## Nagłówek poziomu 2
-### Nagłówek poziomu 3
+# Niveau 1 Kop
+## Niveau 2 Kop
+### Niveau 3 Kop
 
-**Tekst pogrubiony** lub __Tekst pogrubiony__
-*Tekst kursywa* lub _Tekst kursywa_
-~~Przekreślenie~~
+**Vette tekst** of __Vette tekst__
+*Cursieve tekst* of _Cursieve tekst_
+~~Doorhalen~~
 
-- Element listy nieuporządkowanej
-  - Zagnieżdżony element listy
+- Ongeordend lijstitem
+  - Genest lijstitem
 
-1. Element listy uporządkowanej
-2. Drugi element
-   1. Zagnieżdżony element uporządkowany
+1. Geordend lijstitem
+2. Tweede item
+   1. Genest geordend item
 
-> Tekst cytatu
->> Zagnieżdżony cytat
+>Citeertekst
+>> Genest citaat
 
-[Tekst linku](https://example.com)
-![Opis obrazu](obraz.jpg)
+[Linktekst](https://example.com)
+![Afbeeldingbeschrijving](afbeelding.jpg)
 
-\`Kod w tekście\`
+\`Inline code\`
 
-\`\`\`język
-Blok kodu
+\`\`\`taal
+Codeblok
 \`\`\`
 
-### 💡 **Wskazówki użytkowania**
+### 💡 **Gebruikstips**
 
-1. **Formuły matematyczne**
-   - Użyj \`$...\` dla formuł w tekście
-   - Użyj \`$$...$$\` dla formuł blokowych
-   - Pełna składnia matematyczna LaTeX obsługiwana
+1. **Wiskundige Formules**
+   - Gebruik \`$...\` voor inline formules
+   - Gebruik \`$$...$$\` voor blokformules
+   - Volledige LaTeX-wiskundesyntaxis ondersteund
 
-2. **Bloki kodu**
-   - Określ język dla podświetlania składni: \`\`\`javascript
-   - Obsługiwane języki: JavaScript, Python, JSON, Bash, itp.
+2. **Codeblokken**
+   - Geef de taal op voor syntaxis-highlighting: \`\`\`javascript
+   - Ondersteunde talen: JavaScript, Python, JSON, Bash, etc.
 
-3. **Rysowanie diagramów**
-   - Użyj składni Mermaid do tworzenia schematów blokowych, grafów, itp.
-   - Obsługa wielu typów diagramów: graf, schemat blokowy, itp.
+3. **Diagram Tekenen**
+   - Gebruik Mermaid-syntaxis om stroomdiagrammen, grafieken, etc. te maken
+   - Ondersteuning voor meerdere diagramtypen: graaf, stroomdiagram, etc.
 
-4. **Formatowanie tabel**
-   - Użyj \`|\` do oddzielania kolumn
-   - Użyj \`-\` do oddzielania nagłówków i treści
-   - Obsługa wyrównania: \`:---\` (lewo), \`---:\` (prawo), \`:---:\` (centrum)
+4. **Tabelopmaak**
+   - Gebruik \`|\` om kolommen te scheiden
+   - Gebruik \`-\` om kopteksten en inhoud te scheiden
+   - Ondersteuning voor uitlijning: \`:---\` (links), \`---:\` (rechts), \`:---:\` (midden)
 
 ---
 
-## ❓ Często zadawane pytania (FAQ)
+## ❓ Vaak Gestelde Vragen (FAQ)
 
-### P1: Która składnia Markdown jest obsługiwana?
-**O**: To narzędzie obsługuje standardową składnię Markdown i rozszerzenia GitHub Flavored Markdown (GFM), w tym tabele, listy zadań, przekreślenie, itp. Obsługuje również formuły matematyczne (KaTeX) i rysowanie diagramów (Mermaid).
+### V1: Welke Markdown-syntaxis wordt ondersteund?
+**A**: Deze tool ondersteunt de standaard Markdown-syntaxis en GitHub Flavored Markdown (GFM) extensies, inclusief tabellen, takenlijsten, doorhalen, etc. Het ondersteunt ook wiskundige formules (KaTeX) en diagram tekenen (Mermaid).
 
-### P2: Co zrobić, jeśli formuły matematyczne nie są wyświetlane?
-**O**: Upewnij się, że używasz prawidłowej składni:
-- Formuły w tekście: \`$formuła$\`
-- Formuły blokowe: \`$$formuła$$\`
-Jeśli nadal nie są wyświetlane, sprawdź, czy składnia formuły jest poprawna.
+### V2: Wat te doen als wiskundige formules niet worden weergegeven?
+**A**: Zorg ervoor dat u de juiste syntaxis gebruikt:
+- Inline formules: \`$formule$\`
+- Blokformules: \`$$formule$$\`
+Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis correct is.
 
-### P3: Jaka jest jakość eksportowanych plików PDF?
-**O**: Używamy profesjonalnych silników generowania PDF, aby zapewnić jakość wyjściową:
-- Grafiki wektorowe wysokiej definicji
-- Wyraźne renderowanie tekstu
-- Prawidłowe paginowanie stron
-- Zachowanie oryginalnego formatowania
+### V3: Hoe is de kwaliteit van geëxporteerde PDF's?
+**A**: Wij gebruiken professionele PDF-generatie-engines om de outputkwaliteit te waarborgen:
+- High-definition vectorafbeeldingen
+- Duidelijke tekstweergave
+- Correcte paginering
+- Oorspronkelijke opmaak behouden
 
-### P4: Czy moje dane są bezpieczne?
-**O**: Całkowicie bezpieczne! Wszystkie przetwarzanie odbywa się lokalnie w Twojej przeglądarce:
-- Żadne dane nie są przesyłane na żaden serwer
-- Brak przechowywania zawartości Twojego dokumentu
-- Dane są automatycznie usuwane po przetworzeniu
+### V4: Zijn mijn gegevens veilig?
+**A**: Volledig veilig! Alle verwerking wordt lokaal in uw browser uitgevoerd:
+- Geen gegevens worden naar een server geüpload
+- Geen opslag van uw documentinhoud
+- Gegevens worden automatisch gewist na verwerking
 
-### P5: Które przeglądarki są obsługiwane?
-**O**: Obsługuje wszystkie nowoczesne przeglądarki:
+### V5: Welke browsers worden ondersteund?
+**A**: Ondersteunt alle moderne browsers:
 - Chrome 65+
 - Firefox 60+
 - Safari 12+
 - Edge 79+
 
-### P6: Jak obsługiwać duże dokumenty?
-**O**: W przypadku dużych dokumentów zalecamy:
-- Przetwarzanie w sekcjach
-- Odpowiednie dostosowanie rozmiaru czcionki
-- Używanie podziałów stron do rozsądnego segmentowania
-- Podgląd w celu potwierdzenia efektów przed eksportem
+### V6: Hoe ga ik om met grote documenten?
+**A**: Voor grote documenten raden wij aan:
+- Verwerken in secties
+- Lettergrootte indien aanpassen
+- Pagina-einden gebruiken voor redelijke segmentering
+- Voorbeeld bekijken om effecten te bevestigen voordat u exporteert
 
-### P7: Jakie jest nazwa eksportowanego pliku PDF?
-**O**: Nazwa pliku jest generowana automatycznie na podstawie tytułu pierwszego wiersza dokumentu, na przykład:
-- Tytuł "Raport projektu" → "Raport projektu.pdf"
-- Używa "document.pdf", gdy nie ma tytułu
+### V7: Wat is de bestandsnaam van de geëxporteerde PDF?
+**A**: De bestandsnaam wordt automatisch gegenereerd op basis van de titel van de eerste regel van het document, bijvoorbeeld:
+- Titel "Projectrapport" → "Projectrapport.pdf"
+- Gebruikt "document.pdf" wanneer er geen titel is
 
 ---
 
-## 📞 Wsparcie techniczne
+## 📞 Technische Ondersteuning
 
-### 🔧 **Stos technologiczny**
-- **Next.js** - Framework React
-- **Tailwind CSS** - Framework stylowania
-- **Marked** - Parser Markdown
-- **KaTeX** - Renderowanie formuł matematycznych
-- **Mermaid** - Rysowanie diagramów
-- **html2pdf.js** - Generowanie PDF
-- **Highlight.js** - Podświetlanie kodu
+### 🔧 **Tech Stack**
+- **Next.js** - React-framework
+- **Tailwind CSS** - Styling-framework
+- **Marked** - Markdown-parser
+- **KaTeX** - Wiskundige formule rendering
+- **Mermaid** - Diagram tekenen
+- **html2pdf.js** - PDF-generatie
+- **Highlight.js** - Code highlighting
 
-### 📧 **Skontaktuj się z nami**
-[Otwarte źródło](https://github.com/szlizhenhua/markdown-to-pdf). W przypadku pytań lub sugestii, skontaktuj się z nami przez:
-- GitHub Issues: Zgłoś problemy lub żądaj funkcji
-- E-mail z opiniami: support@markdown-to-pdf.org
+### 📧 **Neem Contact Op**
+[Open Source](https://github.com/szlizhenhua/markdown-to-pdf). Voor vragen of suggesties, neem contact met ons op via:
+- GitHub Issues: Problemen melden of functies aanvragen
+- E-mailfeedback: support@markdown-to-pdf.org
 
-### 🔄 **Dziennik zmian**
-- **v1.0.0** - Pierwsze wydanie
-- Obsługa formuł matematycznych KaTeX
-- Obsługa diagramów Mermaid
-- Wybór wielu stylów motywów
-- Optymalizacja projektu responsywnego
+### 🔄 **Wijzigingenlog**
+- **v1.0.0** - Eerste release
+- KaTeX wiskundige formule ondersteuning
+- Mermaid diagram ondersteuning
+- Selectie van meerdere themastijlen
+- Responsief ontwerp optimalisatie
 
 ---
 
 <div style="text-align: center; margin-top: 3em; padding: 2em; border-top: 1px solid #eee; color: #666;">
   <p><strong>Konwerter Markdown na PDF</strong></p>
-  <p>Profesjonalne narzędzie do konwersji Markdown na PDF</p>
+  <p>Professionele Markdown naar PDF Conversie Tool</p>
   <p style="font-size: 0.9em; margin-top: 1em;">
-    Zrobione z ❤️ | Prywatność przede wszystkim
+    Gemaakt met ❤️ | Privacy First
   </p>
   <p style="font-size: 0.8em; margin-top: 0.5em;">
-    © 2025 Markdown to PDF. Wszelkie prawa zastrzeżone.
+    © 2025 Markdown to PDF. Alle rechten voorbehouden.
   </p>
 </div>`,
 
   // SEO
   seo: {
-    title: "Konwerter Markdown na PDF | Profesjonalny eksport dokumentów",
-    description: "Konwertuj Markdown na profesjonalne dokumenty PDF z matematyką, kodem, diagramami, spisem treści, motywami. Wyjście jakości publikacji do użytku akademickiego i komercyjnego.",
-    keywords: "Markdown, PDF, konwerter, KaTeX, Mermaid, podświetlanie kodu, spis treści, motywy, eksport, akademicki, profesjonalny"
+    title: "Konwerter Markdown na PDF | Professionele Document Export",
+    description: "Konwertuj Markdown na profesjonalne PDF-documenten met wiskunde, code, diagrammen, inhoudsopgave, thema's. Publicatiekwaliteit output voor academisch en commercieel gebruik.",
+    keywords: "Markdown, PDF, converter, KaTeX, Mermaid, code highlighting, inhoudsopgave, thema's, export, academisch, professioneel"
   },
 
   // SEO Content
   seoContent: {
     whyChooseUs: {
-      label: "Dlaczego my",
-      title: "Dlaczego warto użyć naszego konwertera Markdown na PDF?",
-      subtitle: "Doświadczenie podobne do Apple w publikacji: czyste, szybkie i pięknie spójne od szkicu do PDF.",
+      label: "Waarom ons",
+      title: "Waarom onze Markdown na PDF konwerter gebruiken?",
+      subtitle: "Een Apple-achtige ervaring voor publiceren: schoon, snel en mooi consistent van concept tot PDF.",
       features: {
         privacy: {
-          title: "Skupienie na prywatności",
-          description: "Twoje dane są u nas bezpieczne. Wszystkie konwersje odbywają się lokalnie w Twojej przeglądarce. Nigdy nie przesyłamy Twoich plików Markdown na żaden serwer."
+          title: "Privacy-gericht",
+          description: "Uw gegevens zijn veilig bij ons. Alle conversies vinden lokaal in uw browser plaats. We uploaden nooit uw Markdown-bestanden naar een server."
         },
         instant: {
-          title: "Natychmiastowa konwersja",
-          description: "Brak kolejek. Nasza zoptymalizowana silnik natychmiastowo konwertuje Twoje dokumenty, łatwo obsługując duże pliki."
+          title: "Directe conversie",
+          description: "Geen wachtrijen. Onze geoptimaliseerde engine converteert uw documenten direct en ondersteunt grote bestanden met gemak."
         },
         richSupport: {
-          title: "Bogate wsparcie",
-          description: "Pełne wsparcie dla GFM (GitHub Flavored Markdown), formuł matematycznych KaTeX, diagramów Mermaid i podświetlania składni kodu."
+          title: "Rijke ondersteuning",
+          description: "Volledige ondersteuning voor GFM (GitHub Flavored Markdown), KaTeX wiskundige formules, Mermaid diagrammen en code syntax highlighting."
         }
       }
     },
     howToConvert: {
-      label: "Prosty przepływ pracy",
-      title: "Jak konwertować Markdown na PDF",
-      subtitle: "Spokojny, trzyetapowy proces zaprojektowany, aby utrzymać Cię skupionym i uzyskać wypolerowany PDF w kilka sekund.",
+      label: "Eenvoudige workflow",
+      title: "Markdown na PDF konwerteren",
+      subtitle: "Een rustig driestappenproces ontworpen om u gefocust te houden en binnen enkele seconden een gepolijste PDF te krijgen.",
       steps: {
         step1: {
-          title: "Pisz lub wklej Markdown",
-          description: "Wpisz bezpośrednio w naszym edytorze w czasie rzeczywistym lub wklej istniejący kod Markdown. Możesz także przeciągnąć i upuścić pliki .md."
+          title: "Markdown schrijven of plakken",
+          description: "Typ direct in onze real-time editor of plak uw bestaande Markdown-code. U kunt ook .md-bestanden slepen en neerzetten."
         },
         step2: {
-          title: "Dostosuj styl",
-          description: "Wybierz spośród naszych profesjonalnych motywów (Akademicki, Nowoczesny itp.) i dostosuj rozmiary czcionek, marginesy i rozmiar papieru (A4, Letter)."
+          title: "Stijl aanpassen",
+          description: "Kies uit onze professionele thema's (Academisch, Modern, enz.) en pas lettergroottes, marges en papierformaat (A4, Letter) aan."
         },
         step3: {
-          title: "Pobierz PDF",
-          description: "Kliknij przycisk Eksportuj, aby natychmiast uzyskać sformatowany dokument PDF gotowy do udostępnienia lub druku."
+          title: "PDF downloaden",
+          description: "Klik op de knop Exporteren om direct een opgemaakt PDF-document te krijgen dat klaar is om te delen of af te drukken."
         }
       }
     },
     faq: {
       label: "FAQ",
-      title: "Często zadawane pytania",
+      title: "Veelgestelde vragen",
       items: {
         isFree: {
-          question: "Czy to narzędzie jest bezpłatne?",
-          answer: "Tak, nasz konwerter Markdown na PDF jest w 100% bezpłatny do użytku osobistego i komercyjnego."
+          question: "Is deze tool gratis?",
+          answer: "Ja, onze Markdown na PDF konwerter is 100% gratis voor persoonlijk en commercieel gebruik."
         },
         dataStorage: {
-          question: "Czy przechowujecie moje dane?",
-          answer: "Nie. Przetwarzamy wszystko w Twojej przeglądarce. Twoje dokumenty nigdy nie opuszczają Twojego urządzenia."
+          question: "Slaan jullie mijn gegevens op?",
+          answer: "Nee. We verwerken alles in uw browser. Uw documenten verlaten nooit uw apparaat."
         },
         mathSupport: {
-          question: "Czy obsługuje równania matematyczne?",
-          answer: "Tak! Używamy KaTeX do pięknego renderowania złożonych wzorów matematycznych i równań."
+          question: "Ondersteunt het wiskundige vergelijkingen?",
+          answer: "Ja! We gebruiken KaTeX om complexe wiskundige formules en vergelijkingen mooi weer te geven."
         },
         diagrams: {
-          question: "Czy mogę tworzyć diagramy?",
-          answer: "Absolutnie. Obsługujemy Mermaid.js do tworzenia schematów blokowych, diagramów sekwencji i diagramów Gantta z tekstu."
+          question: "Kan ik diagrammen maken?",
+          answer: "Absoluut. We ondersteunen Mermaid.js om stroomdiagrammen, sequentiediagrammen en Gantt-diagrammen van tekst te maken."
         }
       }
     },
     comprehensive: {
-      title: "Kompleksowe rozwiązanie Markdown",
-      description1: "Niezależnie od tego, czy jesteś studentem piszącym pracę dyplomową, deweloperem dokumentującym kod czy pisarzem piszącym powieść, nasz edytor Markdown zapewnia narzędzia, których potrzebujesz. Dzięki funkcjom takim jak podgląd w czasie rzeczywistym, śledzenie liczby słów i tryb skupienia możesz pisać bez rozproszeń.",
-      description2: "Nasz konwerter obsługuje całą standardową składnię Markdown, w tym nagłówki, listy, linki, obrazy i bloki cytatów. Zaawansowani użytkownicy docenią obsługę bloków kodu ze specyficznym dla języka podświetlaniem składni, przypisów i list zadań."
+      title: "Compleet Markdown-oplossing",
+      description1: "Of u nu een student bent die een scriptie schrijft, een ontwikkelaar die code documenteert of een schrijver die aan een roman werkt, onze Markdown-editor biedt de tools die u nodig heeft. Met functies zoals real-time voorbeeld, woordentaltracking en focusmodus kunt u zonder afleiding schrijven.",
+      description2: "Onze converter verwerkt alle standaard Markdown-syntaxis inclusief koppen, lijsten, links, afbeeldingen en citaatblokken. Geavanceerde gebruikers zullen de ondersteuning voor codeblokken met taalspecifieke syntax-highlighting, voetnoten en takenlijsten op prijs stellen."
     }
   },
 
   // Footer
   footer: {
-    tagline: "Markdown na PDF",
-    subtitle: "Eleganckie konwersje za każdym razem.",
-    description: "Profesjonalne narzędzie do konwersji dokumentów dla wszystkich. Bezpłatne, bezpieczne i szybkie.",
+    tagline: "Markdown naar PDF",
+    subtitle: "Elke keer elegante conversies.",
+    description: "Professionele documentconversietool voor iedereen. Gratis, veilig en snel.",
     legal: {
-      title: "Prawny",
-      privacyPolicy: "Polityka prywatności",
-      termsOfService: "Warunki korzystania z usługi"
+      title: "Juridisch",
+      privacyPolicy: "Privacybeleid",
+      termsOfService: "Servicevoorwaarden"
     },
     links: {
-      title: "Linki",
-      aboutUs: "O nas",
-      contact: "Kontakt"
+      title: "Links",
+      aboutUs: "Over ons",
+      contact: "Contact"
     },
     connect: {
-      title: "Połącz",
-      description: "Pytania lub opinie?"
+      title: "Verbinden",
+      description: "Vragen of feedback?"
     },
-    copyright: "© {year} Markdown to PDF. Wszelkie prawa zastrzeżone.",
-    designed: "Zaprojektowany dla jasności"
+    copyright: "© {year} Markdown to PDF. Alle rechten voorbehouden.",
+    designed: "Ontworpen voor helderheid"
   },
 
   // Toolbar
   toolbar: {
-    heading: "Nagłówek",
-    bold: "Pogrubienie",
-    italic: "Kursywa",
-    strikethrough: "Przekreślenie",
-    code: "Kod",
+    heading: "Kop",
+    bold: "Vet",
+    italic: "Cursief",
+    strikethrough: "Doorhalen",
+    code: "Code",
     link: "Link",
-    image: "Obraz",
-    bulletList: "Lista wypunktowana",
-    numberedList: "Lista numerowana",
-    quote: "Cytat",
-    codeBlock: "Blok kodu",
-    horizontalRule: "Linia pozioma",
-    undo: "Cofnij",
-    redo: "Ponów",
-    showLess: "Pokaż mniej",
-    showMore: "Pokaż więcej",
-    disableWordWrap: "Wyłącz zawijanie słów",
-    enableWordWrap: "Włącz zawijanie słów",
-    findAndReplace: "Znajdź i zamień",
-    showTools: "Pokaż narzędzia",
-    hideTools: "Ukryj narzędzia",
+    image: "Afbeelding",
+    bulletList: "Lijst met opsommingstekens",
+    numberedList: "Numerowanye lijst",
+    quote: "Citaat",
+    codeBlock: "Codeblok",
+    horizontalRule: "Horizontale lijn",
+    undo: "Ongedaan maken",
+    redo: "Opnieuw",
+    showLess: "Minder weergeven",
+    showMore: "Meer weergeven",
+    disableWordWrap: "Woordafbreking uitschakelen",
+    enableWordWrap: "Woordafbreking inschakelen",
+    findAndReplace: "Zoeken en vervangen",
+    showTools: "Tools weergeven",
+    hideTools: "Tools verbergen",
     exportTXT: "TXT",
-    special: "Specjalny",
-    lineOps: "Operacje linii"
+    special: "Speciaal",
+    lineOps: "Regelbewerkingen"
   },
 
   // Dialogs
   dialogs: {
-    markdownCheatSheet: "Ściąga Markdown",
-    documentStatistics: "Statystyki dokumentu",
+    markdownCheatSheet: "Markdown-spiekkaart",
+    documentStatistics: "Documentstatistieken",
     close: "Zamknij",
     focusMode: {
-      title: "Tryb skupienia",
-      enter: "Wejdź w tryb skupienia",
-      exit: "Wyjdź z trybu skupienia",
-      description: "Środowisko pisania bez rozpraszaczy"
+      title: "Focusmodus",
+      enter: "Focusmodus betreden",
+      exit: "Focusmodus verlaten",
+      description: "Afleidingsvrij schrijfmilieu"
     },
     wordGoal: {
-      title: "Śledzenie celu słów",
-      setGoal: "Ustaw cel słów",
-      currentWords: "Bieżące słowa",
-      goalWords: "Cel",
-      remaining: "Pozostało",
-      progress: "Postęp",
-      achieved: "Cel osiągnięty! 🎉"
+      title: "Woordendoel-tracker",
+      setGoal: "Woordendoel instellen",
+      currentWords: "Huidige woorden",
+      goalWords: "Doel",
+      remaining: "Resterend",
+      progress: "Voortgang",
+      achieved: "Doel bereikt! 🎉"
     },
     timeTracker: {
-      title: "Tracker czasu",
-      startTime: "Rozpocznij sesję",
-      stopTime: "Zatrzymaj sesję",
-      reset: "Zresetuj",
-      totalTime: "Całkowity czas",
-      sessions: "Dzisiejsze sesje"
+      title: "Czasstracker",
+      startTime: "Sessie starten",
+      stopTime: "Sessie stoppen",
+      reset: "Resetten",
+      totalTime: "Totale tijd",
+      sessions: "Sessies vandaag",
+      wordsPerMin: "Woorden/min",
+      recording: "Opnemen",
+      stopped: "Gestopt",
+      today: "Vandaag",
+      thisWeek: "Deze week",
+      avgSession: "Gemiddelde sessie",
+      dailyTimeGoal: "Dagelijks tijddoel",
+      hours: "2 uur",
+      recentSessions: "Recente sessies"
     },
     pomodoro: {
-      title: "Timer Pomodoro",
-      start: "Rozpocznij",
-      pause: "Wstrzymaj",
-      reset: "Zresetuj",
-      work: "Praca",
-      shortBreak: "Krótka przerwa",
-      longBreak: "Długa przerwa",
-      sessions: "Ukończone sesje"
-    },
-    quickTemplates: {
-      title: "Szybkie szablony",
-      select: "Wybierz szablon do wstawienia"
-    },
-    documentTemplates: {
-      title: "Szablony dokumentów",
-      description: "Wybierz szablon, aby rozpocząć"
-    },
-    performance: {
-      title: "Ustawienia wydajności",
-      debounceTime: "Czas debounce",
-      description: "Dostosuj wydajność renderowania"
-    },
-    autosave: {
-      title: "Ustawienia auto-zapisu",
-      interval: "Interwał zapisu",
-      description: "Jak często automatycznie zapisywać pracę",
-      status: {
-        saved: "Zapisano",
-        saving: "Zapisywanie...",
-        unsaved: "Niezapisane zmiany",
-        error: "Błąd zapisu"
-      }
+      title: "Pomodoro-timer",
+      description: "Użyj techniki Pomodoro do skoncentrowanych sesji pisania",
+      start: "Starten",
+      pause: "Pauzeren",
+      reset: "Resetten",
+      work: "Werk",
+      shortBreak: "Korte pauze",
+      longBreak: "Lange pauze",
+      sessions: "Voltooide sessies"
     },
     typography: {
-      title: "Kontroly typografii",
+      title: "Kontrolki typografii",
+      description: "Dostosuj wygląd tekstu podglądu",
       fontSize: "Rozmiar czcionki",
       lineHeight: "Wysokość linii",
       fontFamily: "Rodzina czcionek"
     },
     snippets: {
       title: "Biblioteka fragmentów",
+      description: "Szybki dostęp do wielokrotnego użytku wzorców i szablonów Markdown",
       add: "Dodaj fragment",
       save: "Zapisz fragment",
       cancel: "Anuluj",
       name: "Nazwa",
-      content: "Treść"
-    },
-    keyboardShortcuts: {
-      title: "Skróty klawiaturowe",
-      description: "Przyspiesz swój przepływ pracy tymi skrótami"
+      content: "Zawartość"
     }
   }
 }

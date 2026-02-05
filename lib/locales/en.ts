@@ -116,7 +116,37 @@ export const en = {
       academic: "Academic",
       technical: "Technical",
       documentation: "Documentation"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "Blank Document",
+      description: "Start with a clean slate"
+    },
+    article: {
+      name: "Blog Article",
+      description: "Standard blog post structure"
+    },
+    readme: {
+      name: "README.md",
+      description: "Project documentation template"
+    },
+    resume: {
+      name: "Resume/CV",
+      description: "Professional resume template"
+    },
+    essay: {
+      name: "Academic Essay",
+      description: "Structured academic paper"
+    },
+    meeting: {
+      name: "Meeting Notes",
+      description: "Structured meeting notes template"
+    },
+    tutorial: {
+      name: "Tutorial/Guide",
+      description: "Step-by-step tutorial template"
+    },
+    templates: "Templates"
   },
 
   // Default Content
@@ -625,11 +655,20 @@ If still not displaying, please check if the formula syntax is correct.
     },
     timeTracker: {
       title: "Time Tracker",
-      startTime: "Start Session",
-      stopTime: "Stop Session",
+      startTime: "Start",
+      stopTime: "Pause",
       reset: "Reset",
       totalTime: "Total time",
-      sessions: "Sessions today"
+      sessions: "Sessions today",
+      wordsPerMin: "words/min",
+      recording: "Recording",
+      stopped: "Stopped",
+      today: "Today",
+      thisWeek: "This Week",
+      avgSession: "Avg Session",
+      dailyTimeGoal: "Daily Time Goal",
+      hours: "2 hours",
+      recentSessions: "Recent Sessions"
     },
     pomodoro: {
       title: "Pomodoro Timer",
@@ -686,5 +725,114 @@ If still not displaying, please check if the formula syntax is correct.
       title: "Keyboard Shortcuts",
       description: "Speed up your workflow with these shortcuts"
     }
+  },
+  quickTemplates: {
+    apiEndpoint: "API Endpoint",
+    codeSnippet: "Code Snippet",
+    meetingNotes: "Meeting Notes",
+    bugReport: "Bug Report",
+    dailyStandup: "Daily Standup",
+    featureRequest: "Feature Request",
+    codeReview: "Code Review",
+    projectReadme: "Project README"
+  },
+  textTransform: {
+    title: "Transform Text",
+    close: "Close",
+    uppercase: "UPPERCASE",
+    lowercase: "lowercase",
+    titleCase: "Title Case",
+    sentenceCase: "Sentence case",
+    camelCase: "camelCase",
+    kebabCase: "kebab-case",
+    snakeCase: "snake_case",
+    toggleCase: "tOGGLE cASE",
+    capitalize: "Capitalize",
+    uppercaseDesc: "Convert to uppercase",
+    lowercaseDesc: "Convert to lowercase",
+    titleCaseDesc: "Capitalize Each Word",
+    sentenceCaseDesc: "Capitalize first word only",
+    camelCaseDesc: "Convert to camelCase",
+    kebabCaseDesc: "Convert to kebab-case",
+    snakeCaseDesc: "Convert to snake_case",
+    toggleCaseDesc: "Toggle letter case",
+    capitalizeDesc: "Capitalize first letter"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "Language",
+    insertCodeBlock: "Insert Code Block",
+    preview: "Preview"
+  },
+  dateTime: {
+    insertDateTime: "Insert Date/Time",
+    date: "Date",
+    time: "Time",
+    dateTime: "Date & Time",
+    iso8601: "ISO 8601",
+    usFormat: "US Format",
+    euFormat: "EU Format",
+    readable: "Readable",
+    cancel: "Cancel"
+  },
+  listHelper: {
+    listType: "List Type",
+    bullet: "Bullet",
+    numbered: "Numbered",
+    numberOfItems: "Number of Items",
+    listItems: "List Items",
+    insertList: "Insert List",
+    cancel: "Cancel",
+    item: "Item"
+  },
+  highlightHelper: {
+    insertHighlight: "Insert highlight",
+    highlightText: "Highlight Text",
+    textToHighlight: "Text to highlight",
+    color: "Color",
+    visualOnly: "(visual only)",
+    note: "Note: Highlighting uses ==text== syntax. May not be supported by all markdown renderers.",
+    cancel: "Cancel",
+    yellow: "Yellow",
+    red: "Red",
+    green: "Green",
+    blue: "Blue",
+    purple: "Purple",
+    pink: "Pink"
+  },
+  helpDialog: {
+    title: "Markdown Quick Reference",
+    close: "Close",
+    headings: "Headings",
+    textStyles: "Text Styles",
+    codeBlocks: "Code Blocks",
+    lists: "Lists",
+    links: "Links",
+    images: "Images",
+    quotes: "Quotes",
+    tables: "Tables"
   }
 }

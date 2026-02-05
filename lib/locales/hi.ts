@@ -116,7 +116,148 @@ export const hi = {
       academic: "शैक्षिक",
       technical: "तकनीकी",
       documentation: "प्रलेखन"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "रिक्त दस्तावेज़",
+      description: "खाली पृष्ठ से शुरू करें"
+    },
+    article: {
+      name: "ब्लॉग लेख",
+      description: "मानक ब्लॉग पोस्ट संरचना"
+    },
+    readme: {
+      name: "README.md",
+      description: "प्रोजेक्ट प्रलेखन टेम्पलेट"
+    },
+    resume: {
+      name: "बायोडाटा/CV",
+      description: "पेशेवर बायोडाटा टेम्पलेट"
+    },
+    essay: {
+      name: "शैक्षिक निबंध",
+      description: "संरचित शैक्षिक पत्र"
+    },
+    meeting: {
+      name: "बैठक नोट्स",
+      description: "संरचित बैठक नोट्स टेम्पलेट"
+    },
+    tutorial: {
+      name: "ट्यूटोरियल/गाइड",
+      description: "चरण-दर-चरण ट्यूटोरियल टेम्पलेट"
+    },
+    templates: "टेम्पलेट"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "API एंडपॉइंट",
+    codeSnippet: "कोड स्निपेट",
+    meetingNotes: "बैठक नोट्स",
+    bugReport: "बग रिपोर्ट",
+    dailyStandup: "दैनिक स्टैंडअप",
+    featureRequest: "सुविधा अनुरोध",
+    codeReview: "कोड समीक्षा",
+    projectReadme: "प्रोजेक्ट README"
+  },
+  textTransform: {
+    title: "पाठ रूपांतरित करें",
+    close: "बंद करें",
+    uppercase: "बड़े अक्षर",
+    lowercase: "छोटे अक्षर",
+    titleCase: "टाइटल केस",
+    sentenceCase: "सेंटेंस केस",
+    camelCase: "कैमल केस",
+    kebabCase: "केबेब-केस",
+    snakeCase: "स्नेक केस",
+    toggleCase: "टॉगल केस",
+    capitalize: "कैपिटलाइज़",
+    uppercaseDesc: "बड़े अक्षरों में बदलें",
+    lowercaseDesc: "छोटे अक्षरों में बदलें",
+    titleCaseDesc: "प्रत्येक शब्द का पहला अक्षर बड़ा करें",
+    sentenceCaseDesc: "केवल पहला शब्द बड़ा करें",
+    camelCaseDesc: "कैमल केस में बदलें",
+    kebabCaseDesc: "केबेब-केस में बदलें",
+    snakeCaseDesc: "स्नेक केस में बदलें",
+    toggleCaseDesc: "अक्षरों का आकार बदलें",
+    capitalizeDesc: "पहला अक्षर बड़ा करें"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "भाषा",
+    insertCodeBlock: "कोड ब्लॉक डालें",
+    preview: "पूर्वावलोकन"
+  },
+  dateTime: {
+    insertDateTime: "दिनांक/समय डालें",
+    date: "दिनांक",
+    time: "समय",
+    dateTime: "दिनांक और समय",
+    iso8601: "ISO 8601",
+    usFormat: "US प्रारूप",
+    euFormat: "EU प्रारूप",
+    readable: "पठनीय",
+    cancel: "रद्द करें"
+  },
+  listHelper: {
+    listType: "सूची प्रकार",
+    bullet: "बुलेट",
+    numbered: "क्रमांकित",
+    numberOfItems: "आइटम की संख्या",
+    listItems: "सूची आइटम",
+    insertList: "सूची डालें",
+    cancel: "रद्द करें",
+    item: "आइटम"
+  },
+  highlightHelper: {
+    insertHighlight: "हाइलाइट डालें",
+    highlightText: "पाठ हाइलाइट करें",
+    textToHighlight: "हाइलाइट करने के लिए पाठ",
+    color: "रंग",
+    visualOnly: "(केवल दृश्य)",
+    note: "नोट: हाइलाइट करने के लिए ==पाठ== वाक्यविन्यास का उपयोग किया जाता है। यह सभी मार्कडाउन रेंडरर द्वारा समर्थित नहीं हो सकता है।",
+    cancel: "रद्द करें",
+    yellow: "पीला",
+    red: "लाल",
+    green: "हरा",
+    blue: "नीला",
+    purple: "बैंगनी",
+    pink: "गुलाबी"
+  },
+
+  helpDialog: {
+    title: "मार्कडाउन त्वरित संदर्भ",
+    close: "बंद करें",
+    headings: "शीर्षक",
+    textStyles: "टेक्स्ट शैलियाँ",
+    codeBlocks: "कोड ब्लॉक",
+    lists: "सूचियाँ",
+    links: "लिंक",
+    images: "चित्र",
+    quotes: "उद्धरण",
+    tables: "तालिकाएं"
   },
 
   // Default Content
@@ -510,14 +651,24 @@ def quicksort(arr):
     },
     timeTracker: {
       title: "समय ट्रैकर",
-      startTime: "सत्र प्रारंभ करें",
-      stopTime: "सत्र रोकें",
+      startTime: "शुरू करें",
+      stopTime: "रोकें",
       reset: "रीसेट करें",
       totalTime: "कुल समय",
-      sessions: "आज के सत्र"
+      sessions: "आज के सत्र",
+      wordsPerMin: "शब्द/मिनट",
+      recording: "रिकॉर्ड",
+      stopped: "रुका हुआ",
+      today: "आज",
+      thisWeek: "इस सप्ताह",
+      avgSession: "औसत सत्र",
+      dailyTimeGoal: "दैनिक समय लक्ष्य",
+      hours: "2 घंटे",
+      recentSessions: "हाल के सत्र"
     },
     pomodoro: {
       title: "पोमोडोरो टाइमर",
+      description: "केंद्रित लेखन सत्रों के लिए पोमोडोरो तकनीक का उपयोग करें",
       start: "प्रारंभ करें",
       pause: "रोकें",
       reset: "रीसेट करें",
@@ -552,21 +703,22 @@ def quicksort(arr):
     },
     typography: {
       title: "टाइपोग्राफी नियंत्रण",
+      description: "पूर्वावलोकन पाठ की उपस्थिति अनुकूलित करें",
       fontSize: "फ़ॉन्ट आकार",
       lineHeight: "पंक्ति ऊंचाई",
       fontFamily: "फ़ॉन्ट परिवार"
     },
     snippets: {
       title: "स्निपेट लाइब्रेरी",
+      description: "पुन: उपयोग योग्य मार्कडाउन पैटर्न और टेम्पलेट तक त्वरित पहुंच",
       add: "स्निपेट जोड़ें",
       save: "स्निपेट सहेजें",
       cancel: "रद्द करें",
       name: "नाम",
-      content: "सामग्री"
     },
     keyboardShortcuts: {
       title: "कीबोर्ड शॉर्टकट",
-      description: "इन शॉर्टकट के साथ अपने वर्कफ़्लो को तेज़ करें"
+      description: "इन शॉर्टकट के साथ अपने वर्कफ़्लो को गति दें"
     }
   }
 }

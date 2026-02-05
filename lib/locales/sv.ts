@@ -1,7 +1,7 @@
 export const sv = {
   // Header
   title: "Markdown till PDF Converter",
-  subtitle: "Konvertera Markdown till professionella PDF:er",
+  subtitle: "Konvertera Markdown till professionella PDF's",
 
   // Controls
   buttons: {
@@ -16,26 +16,26 @@ export const sv = {
     exportMarkdown: "MD"
   },
 
-  // Editor
+  // Redigerare
   editor: {
     title: "Markdown-redigerare",
-    placeholder: "Börja skriva din Markdown här...\n\n# Rubrik 1\n## Rubrik 2\n\n**Fet** och *kursiv*\n\n- Listobjekt 1\n- Listobjekt 2\n\n```javascript\nconsole.log('Hej Världen!');\n```\n\n| Kolumn 1 | Kolumn 2 |\n|---------|----------|\n| Data 1  | Data 2   |",
-    dragDropText: "Släpp din Markdown-fil här",
-    dragDropSubtext: "Stöder .md och .txt filer",
-    loading: "Laddar diagram...",
-    rendering: "Renderar diagram...",
+    placeholder: "Begin hier met het typen van uw Markdown...\n\n# Kop 1\n## Kop 2\n\n**Vet** en *cursief*\n\n- Lijstitem 1\n- Lijstitem 2\n\n```javascript\nconsole.log('Hallo Wereld!');\n```\n\n| Kolom 1 | Kolom 2 |\n|---------|----------|\n| Gegevens 1  | Gegevens 2   |",
+    dragDropText: "Sleep uw Markdown-bestand hier",
+    dragDropSubtext: "Ondersteunt .md en .txt bestanden",
+    loading: "Diagram laden...",
+    rendering: "Diagram renderen...",
     stats: {
-      characters: "Tecken",
-      words: "Ord",
-      lines: "Rader",
-      readingTime: "Lästid"
+      characters: "Tekens",
+      words: "Woorden",
+      lines: "Regels",
+      readingTime: "Leestijd"
     }
   },
 
   // Preview
   preview: {
     title: "Förhandsgranskning",
-    theme: "tema"
+    theme: "thema"
   },
 
   // Settings
@@ -77,111 +77,252 @@ export const sv = {
 
   // Messages
   messages: {
-    pdfGenerationError: "PDF-generering misslyckades",
-    pdfExportError: "PDF-export misslyckades, kontrollera konsolen för detaljer",
-    mermaidRenderError: "Mermaid-renderingsfel",
-    mermaidSyntaxError: "Kontrollera Mermaid-syntaxen",
-    mermaidExampleSyntax: "Syntaxexempel:",
-    mermaidRenderRetry: "Mermaid-renderingsförsök {count} misslyckades, kommer att försöka igen om 100ms",
-    mermaidFinalError: "Mermaid-rendering slutgiltigt misslyckad",
-    unknownError: "Okänt fel",
-    highlightJsError: "Highlight.js-fel för språk \"{lang}\":",
-    katexRenderError: "KaTeX-renderingsfel:",
-    mermaidInitError: "Mermaid-initieringsfel:",
-    mermaidLoading: "Laddar diagram...",
-    mermaidRendering: "Renderar diagram...",
-    templateLoaded: "Mall laddad",
-    templateLoadedMessage: "Mallen har applicerats på redigeraren.",
-    fileTooLarge: "Filen är för stor. Maximal storlek är 5MB.",
-    invalidFileType: "Ogiltig filtyp. Ladda upp en .md eller .txt fil.",
-    fileUploadFailed: "Filuppladdning misslyckades. Försök igen.",
-    fileUploaded: "Filen uppladdad framgångsrikt",
-    resetComplete: "Återställning komplett",
-    resetCompleteMessage: "Redigerare och inställningar har återställts till standardvärden.",
-    copySuccess: "Kopierat till urklipp",
-    copyFailed: "Kopiering till urklipp misslyckades",
-    networkError: "Nätverksfel. Kontrollera din anslutning.",
-    quotaExceeded: "Lagringskvot överskriden. Rensa några webbläsardata.",
-    autoSaveFailed: "Automatisk sparning misslyckades. Dina ändringar kanske inte sparas."
+    pdfGenerationError: "PDF-generatie mislukt",
+    pdfExportError: "PDF-export mislukt, controleer de console voor details",
+    mermaidRenderError: "Mermaid renderfout",
+    mermaidSyntaxError: "Controleer de Mermaid-syntaxis",
+    mermaidExampleSyntax: "Förhandsgranskning van syntaxis:",
+    mermaidRenderRetry: "Mermaid render poging {count} mislukt, zal opnieuw proberen in 100ms",
+    mermaidFinalError: "Mermaid render uiteindelijk mislukt",
+    unknownError: "Onbekende fout",
+    highlightJsError: "Highlight.js-fout voor taal \"{lang}\":",
+    katexRenderError: "KaTeX-renderfout:",
+    mermaidInitError: "Mermaid-initialisatiefout:",
+    mermaidLoading: "Diagram laden...",
+    mermaidRendering: "Diagram renderen...",
+    templateLoaded: "Sjabloon geladen",
+    templateLoadedMessage: "Het sjabloon is toegepast op de editor.",
+    fileTooLarge: "Bestand is te groot. Maximale grootte is 5MB.",
+    invalidFileType: "Ongeldig bestandstype. Upload een .md of .txt bestand.",
+    fileUploadFailed: "Bestand uploaden mislukt. Probeer opnieuw.",
+    fileUploaded: "Bestand succesvol geüpload",
+    resetComplete: "Reset voltooid",
+    resetCompleteMessage: "Redigerare en instellingen zijn teruggezet naar de standaardwaarden.",
+    copySuccess: "Gekopieerd naar klembord",
+    copyFailed: "Kopiëren naar klembord mislukt",
+    networkError: "Netwerkfout. Controleer uw verbinding.",
+    quotaExceeded: "Opslagquota overschreden. Wis enkele browsergegevens.",
+    autoSaveFailed: "Automatisch opslaan mislukt. Uw wijzigingen worden mogelijk niet opgeslagen."
   },
 
   // Templates
   templates: {
-    title: "Välj en Mall",
-    description: "Välj bland professionellt utformade mallar för att snabbstarta",
-    selectTemplate: "Klicka på en mall för att ladda den i redigeraren. Ditt nuvarande innehåll kommer att ersättas.",
+    title: "Selecteer een Sjabloon",
+    description: "Kies uit professioneel ontworpen sjablonen om snel te beginnen",
+    selectTemplate: "Klik op een sjabloon om het in de editor te laden. Uw huidige inhoud wordt vervangen.",
     categories: {
-      all: "Alla Mallar",
-      basic: "Grundläggande",
+      all: "Alle Sjablonen",
+      basic: "Basis",
       academic: "Akademisk",
-      technical: "Teknisk",
-      documentation: "Dokumentation"
-    }
+      technical: "Technisch",
+      documentation: "Documentatie"
+    },
+    // Document templates
+    blank: {
+      name: "Leeg Document",
+      description: "Begin met een schone lei"
+    },
+    article: {
+      name: "Blogartikel",
+      description: "Standard blogpost structuur"
+    },
+    readme: {
+      name: "README.md",
+      description: "Projectdocumentatie sjabloon"
+    },
+    resume: {
+      name: "CV",
+      description: "Professioneel cv-sjabloon"
+    },
+    essay: {
+      name: "Akademisk Essay",
+      description: "Gestructureerd academisch paper"
+    },
+    meeting: {
+      name: "Mötesanteckningar",
+      description: "Gestructureerd notulen sjabloon"
+    },
+    tutorial: {
+      name: "Tutorial/Gids",
+      description: "Stap-voor-stap tutorial sjabloon"
+    },
+    templates: "Sjablonen"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "API-slutpunkt",
+    codeSnippet: "Kodsnutt",
+    meetingNotes: "Mötesanteckningar",
+    bugReport: "Buggrapport",
+    dailyStandup: "Daglig Standup",
+    featureRequest: "Funktionsförfrågan",
+    codeReview: "Kodgranskning",
+    projectReadme: "Projekt README"
+  },
+  textTransform: {
+    title: "Transformera Text",
+    close: "Stäng",
+    uppercase: "STORA BOKSTÄVER",
+    lowercase: "kleine letters",
+    titleCase: "Titelstorabokstäver",
+    sentenceCase: "Meningstorabokstäver",
+    camelCase: "kameelHuis",
+    kebabCase: "kebab-huis",
+    snakeCase: "slang_huis",
+    toggleCase: "hOOFDlETTERS wISSELEN",
+    capitalize: "Hoofdfletter",
+    uppercaseDesc: "Konvertera till hoofdletters",
+    lowercaseDesc: "Konvertera till kleine letters",
+    titleCaseDesc: "Varje ord med stor bokstav",
+    sentenceCaseDesc: "Alleen eerste woord met hoofdletter",
+    camelCaseDesc: "Konvertera till camelCase",
+    kebabCaseDesc: "Konvertera till kebab-case",
+    snakeCaseDesc: "Konvertera till snake_case",
+    toggleCaseDesc: "Hoofdletter/kleine letter wisselen",
+    capitalizeDesc: "Eerste letter hoofdletter"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "Språk",
+    insertCodeBlock: "Infoga Kodblock",
+    preview: "Förhandsgranskning"
+  },
+  dateTime: {
+    insertDateTime: "Infoga Datum/Tid",
+    date: "Datum",
+    time: "Tid",
+    dateTime: "Datum & Tid",
+    iso8601: "ISO 8601",
+    usFormat: "US Formaat",
+    euFormat: "EU Formaat",
+    readable: "Leesbaar",
+    cancel: "Avbryt"
+  },
+  listHelper: {
+    listType: "Listtyp",
+    bullet: "Punkt",
+    numbered: "Numrerad",
+    numberOfItems: "Aantal Items",
+    listItems: "Lijstitems",
+    insertList: "Lijst Invoegen",
+    cancel: "Avbryt",
+    item: "Item"
+  },
+  highlightHelper: {
+    insertHighlight: "Infoga Markering",
+    highlightText: "Markera Text",
+    textToHighlight: "Te markeren tekst",
+    color: "Kleur",
+    visualOnly: "(alleen visueel)",
+    note: "Let op: Markering gebruikt ==tekst== syntaxis. Mogelijk niet ondersteund door alle markdown renderers.",
+    cancel: "Avbryt",
+    yellow: "Gul",
+    red: "Röd",
+    green: "Grön",
+    blue: "Blå",
+    purple: "Lila",
+    pink: "Rosa"
+  },
+
+  helpDialog: {
+    title: "Markdown Snabbreferens",
+    close: "Stäng",
+    headings: "Rubriker",
+    textStyles: "Textstilar",
+    codeBlocks: "Kodblock",
+    lists: "Listor",
+    links: "Länkar",
+    images: "Bilder",
+    quotes: "Citat",
+    tables: "Tabeller"
   },
 
   // Default Content
   defaultContent: `# Markdown till PDF Converter
 
-> 🎯 **Konvertera dina Markdown-dokument till professionella PDF:er med matematiska formler, flödesscheman, kodmarkering och flera teman**
+> 🎯 **Converteer uw Markdown-documenten naar professionele PDF's met wiskundige formules, stroomdiagrammen, code-highlighting en meerdere thema's**
 
-## ✨ Funktioner
+## ✨ Functies
 
-### 📊 **Komplett Markdown-stöd**
-- **Textformatering**: **Fet**, *Kursiv*, ~~Genomstruken~~, \`Inline-kod\`
-- **Rubriknivåer**: Komplett H1-H6 rubrikstrukturstöd
-- **Listor: Ordnade listor, oordnade listor, uppgiftslistor
-- **Länkar och Bilder**: Automatisk länkigenkänning, stöd för inbäddning av bilder
-- **Tabeller**: Stöd för justering och komplexa tabellstrukturer
-- **Citat: Blockcitat och nästlade citat
+### 📊 **Volledige Markdown-ondersteuning**
+- **Tekstopmaak**: **Vet**, *Cursief*, ~~Doorhalen~~, \`Inline code\`
+- **Kopniveaus**: Volledige H1-H6 kopstructuurondersteuning
+- **Lijsten**: Geordende lijsten, ongeordende lijsten, takenlijsten
+- **Links en Afbeeldingen**: Automatische linkherkenning, ondersteuning voor het insluiten van afbeeldingen
+- **Tabellen**: Ondersteuning voor uitlijning en complexe tabelstructuren
+- **Citaten**: Blokcitaten en geneste citaten
 
-### 🧮 **Matematisk Formel Rendering (KaTeX)**
-**Inline-formel**: Einsteins massa-energi-ekvation $E = mc^2$
+### 🧮 **Wiskundige Formule Rendering (KaTeX)**
+**Inline formule**: Einsteins massa-energievergelijking $E = mc^2$
 
-**Blockformel**:
+**Blokformule**:
 $$\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}$$
 
-**Komplex formel**:
+**Complexe formule**:
 $$\\sum_{i=1}^{n} x_i = x_1 + x_2 + \\cdots + x_n$$
 
-**Matrisrepresentation**:
+**Matrixrepresentatie**:
 $$\\begin{bmatrix}
 a & b \\\\
 c & d
 \\end{bmatrix}$$
 
-### 📈 **Diagram Rita (Mermaid)**
+### 📈 **Diagram Tekenen (Mermaid)**
 
-#### Flödesschema
+#### Stroomdiagram
 \`\`\`mermaid
 graph TD
-    A[Start] --> B{Villkor}
-    B -->|Ja| C[Utför A]
-    B -->|Nej| D[Utför B]
-    C --> E[Slut]
+    A[Start] --> B{Voorwaarde}
+    B -->|Ja| C[Voer A uit]
+    B -->|Nee| D[Voer B uit]
+    C --> E[Einde]
     D --> E
 \`\`\`
 
-#### Grafdiagram
+#### Grafiekdiagram
 \`\`\`mermaid
 graph LR
-    A[Användare] --> B[System]
-    B --> A[Svar]
+    A[Gebruiker] --> B[Systeem]
+    B --> A[Antwoord]
 \`\`\`
 
-### 💻 **Kodmarkering**
+### 💻 **Code Highlighting**
 
-#### JavaScript Exempel
+#### JavaScript Förhandsgranskning
 \`\`\`javascript
 function fibonacci(n) {
   if (n <= 1) return n;
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-// Användningsexempel
-console.log(fibonacci(10)); // Utdata: 55
+// Gebruiksvoorbeeld
+console.log(fibonacci(10)); // Uitvoer: 55
 \`\`\`
 
-#### Python Exempel
+#### Python Förhandsgranskning
 \`\`\`python
 def quicksort(arr):
     if len(arr) <= 1:
@@ -193,380 +334,364 @@ def quicksort(arr):
     return quicksort(left) + middle + quicksort(right)
 \`\`\`
 
-### 📋 **Tabellfunktioner**
+### 📋 **Tabel Functies**
 
-| Funktion | Status | Beskrivning | Genväg |
+| Functie | Status | Beschrijving | Snelkoppeling |
 |---------|:------:|-------------|----------|
-| Matematiska formler | ✅ | Komplett KaTeX-stöd | \`$...\$ |
-| Flödesscheman | ✅ | Mermaid-diagram | \`mermaid |
-| Kodmarkering | ✅ | Flerspråkigt stöd | \`lang |
-| Tabeller | ✅ | Komplett tabellfunktionalitet | \| \| \| |
-| Länkar | ✅ | Automatisk länkigenkänning | [text](url) |
+| Wiskundige Formules | ✅ | Volledige KaTeX-ondersteuning | \`$...\$ |
+| Stroomdiagrammen | ✅ | Mermaid-diagrammen | \`mermaid |
+| Code Highlighting | ✅ | Meertalige ondersteuning | \`lang |
+| Tabellen | ✅ | Volledige tabelfunctionaliteit | \| \| \| |
+| Links | ✅ | Automatische linkherkenning | [tekst](url) |
 
 ---
 
-## 📖 Användarguide
+## 📖 Gebruikershandleiding
 
-### 🚀 **Snabbstart**
+### 🚀 **Snelstart**
 
-1. **Redigera Innehåll**
-   - Skriv eller klistra in Markdown-innehåll i den vänstra redigeraren
-   - Realtidsförhandsgranskning med WYSIWYG
+1. **Inhoud bewerken**
+   - Typ of plak Markdown-inhoud in de linkereditor
+   - Real-time voorbeeld met WYSIWYG
 
-2. **Ladda upp filer**
-   - Klicka på knappen "Ladda upp" för att välja .md eller .txt filer
-   - Eller dra och släpp filer direkt i redigerarområdet
+2. **Bestanden uploaden**
+   - Klik op de knop "Ladda upp" om .md of .txt bestanden te selecteren
+   - Of sleep bestanden direct naar het editorgebied
 
-3. **Anpassa Stilar**
-   - Välj temastil (Standard/Akademisk/Modern/Minimalistisk)
-   - Justera pappersstorlek och teckenstorlek
-   - Realtidsförhandsgranskning av effekter
+3. **Stijlen aanpassen**
+   - Kies de themastijl (Standard/Akademisk/Modern/Minimalistisk)
+   - Pas papierformaat en lettergrootte aan
+   - Real-time voorbeeld van effecten
 
-4. **Exportera PDF**
-   - Klicka på knappen "Hämta PDF"
-   - Automatisk nedladdning av det genererade PDF-dokumentet
-   - Filnamn genereras automatiskt baserat på dokumenttiteln
+4. **PDF exporteren**
+   - Klik op de knop "Hämta PDF"
+   - Automatische download van het gegenereerde PDF-document
+   - Bestandsnaam wordt automatisch gegenereerd op basis van de documenttitel
 
-### ⌨️ **Markdown Syntax Fuskark**
+### ⌨️ **Markdown Syntaxis Cheat Sheet\`
 
-### Grundläggande Syntax
+#### Basis Syntaxis
 \`\`\`markdown
-# Nivå 1 Rubrik
-## Nivå 2 Rubrik
-### Nivå 3 Rubrik
+# Niveau 1 Kop
+## Niveau 2 Kop
+### Niveau 3 Kop
 
-**Fet text** eller __Fet text__
-*Kursiv text* eller _Kursiv text_
-~~Genomstruken~~
+**Vette tekst** of __Vette tekst__
+*Cursieve tekst* of _Cursieve tekst_
+~~Doorhalen~~
 
-- Oordnat listobjekt
-  - Nästlat listobjekt
+- Ongeordend lijstitem
+  - Genest lijstitem
 
-1. Ordnat listobjekt
-2. Andra objekt
-   1. Nästlat ordnat objekt
+1. Geordend lijstitem
+2. Tweede item
+   1. Genest geordend item
 
->Citattext
->> Nästlat citat
+>Citeertekst
+>> Genest citaat
 
-[Länktext](https://example.com)
-![Bildbeskrivning](bild.jpg)
+[Linktekst](https://example.com)
+![Afbeeldingbeschrijving](afbeelding.jpg)
 
-\`Inline-kod\`
+\`Inline code\`
 
-\`\`\`språk
-Kodblock
+\`\`\`taal
+Codeblok
 \`\`\`
 
-### 💡 **Användningstips**
+### 💡 **Gebruikstips**
 
-1. **Matematiska formler**
-   - Använd \`$...\` för inline-formler
-   - Använd \`$$...$$\` för blockformler
-   - Komplett LaTeX-matematiksyntax stöds
+1. **Wiskundige Formules**
+   - Gebruik \`$...\` voor inline formules
+   - Gebruik \`$$...$$\` voor blokformules
+   - Volledige LaTeX-wiskundesyntaxis ondersteund
 
-2. **Kodblock**
-   - Ange språk för syntaxmarkering: \`\`\`javascript
-   - Språk som stöds: JavaScript, Python, JSON, Bash, etc.
+2. **Codeblokken**
+   - Geef de taal op voor syntaxis-highlighting: \`\`\`javascript
+   - Ondersteunde talen: JavaScript, Python, JSON, Bash, etc.
 
-3. **Diagram Rita**
-   - Använd Mermaid-syntax för att skapa flödesscheman, grafer, etc.
-   - Stöd för flera diagramtyper: graf, flödesschema, etc.
+3. **Diagram Tekenen**
+   - Gebruik Mermaid-syntaxis om stroomdiagrammen, grafieken, etc. te maken
+   - Ondersteuning voor meerdere diagramtypen: graaf, stroomdiagram, etc.
 
-4. **Tabellformatering**
-   - Använd \`|\` för att separera kolumner
-   - Använd \`-\` för att separera rubriker och innehåll
-   - Stöd för justering: \`:---\` (vänster), \`---:\` (höger), \`:---:\` (centrerad)
+4. **Tabelopmaak**
+   - Gebruik \`|\` om kolommen te scheiden
+   - Gebruik \`-\` om kopteksten en inhoud te scheiden
+   - Ondersteuning voor uitlijning: \`:---\` (links), \`---:\` (rechts), \`:---:\` (midden)
 
 ---
 
-## ❓ Vanliga Frågor (FAQ)
+## ❓ Vaak Gestelde Vragen (FAQ)
 
-### F1: Vilken Markdown-syntax stöds?
-**S**: Detta verktyg stöder standard Markdown-syntax och GitHub Flavored Markdown (GFM) tillägg, inklusive tabeller, uppgiftslistor, genomstruket, etc. Det stöder också matematiska formler (KaTeX) och diagram rita (Mermaid).
+### V1: Welke Markdown-syntaxis wordt ondersteund?
+**A**: Deze tool ondersteunt de standaard Markdown-syntaxis en GitHub Flavored Markdown (GFM) extensies, inclusief tabellen, takenlijsten, doorhalen, etc. Het ondersteunt ook wiskundige formules (KaTeX) en diagram tekenen (Mermaid).
 
-### F2: Vad göra om matematiska formler inte visas?
-**S**: Se till att du använder rätt syntax:
-- Inline-formler: \`$formel$\`
-- Blockformler: \`$$formel$$\`
-Om de fortfarande inte visas, kontrollera om formelsyntaxen är korrekt.
+### V2: Wat te doen als wiskundige formules niet worden weergegeven?
+**A**: Zorg ervoor dat u de juiste syntaxis gebruikt:
+- Inline formules: \`$formule$\`
+- Blokformules: \`$$formule$$\`
+Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis correct is.
 
-### F3: Hur är kvaliteten på exporterade PDF:er?
-**S**: Vi använder professionella PDF-genereringsmotorer för att säkerstlla utdatakvalitet:
-- High-definition vektorgrafik
-- Tydlig textrendering
-- Korrekt sidnumrering
-- Behåll originalformatering
+### V3: Hoe is de kwaliteit van geëxporteerde PDF's?
+**A**: Wij gebruiken professionele PDF-generatie-engines om de outputkwaliteit te waarborgen:
+- High-definition vectorafbeeldingen
+- Duidelijke tekstweergave
+- Correcte paginering
+- Oorspronkelijke opmaak behouden
 
-### F4: Är mina data säkra?
-**S**: Helt säkra! All bearbetning görs lokalt i din webbläsare:
-- Inga data laddas upp till någon server
-- Ingen lagring av ditt dokumentinnehåll
-- Data raderas automatiskt efter bearbetning
+### V4: Zijn mijn gegevens veilig?
+**A**: Volledig veilig! Alle verwerking wordt lokaal in uw browser uitgevoerd:
+- Geen gegevens worden naar een server geüpload
+- Geen opslag van uw documentinhoud
+- Gegevens worden automatisch gewist na verwerking
 
-### F5: Vilka webbläsare stöds?
-**S**: Stöder alla moderna webbläsare:
+### V5: Welke browsers worden ondersteund?
+**A**: Ondersteunt alle moderne browsers:
 - Chrome 65+
 - Firefox 60+
 - Safari 12+
 - Edge 79+
 
-### F6: Hur hantera stora dokument?
-**S**: För stora dokument rekommenderar vi:
-- Bearbeta i sektioner
-- Justera teckenstorlek lämpligt
-- Använd sidbrytningar för rimlig segmentering
-- Förhandsgranska för att bekräpta effekter före export
+### V6: Hoe ga ik om met grote documenten?
+**A**: Voor grote documenten raden wij aan:
+- Verwerken in secties
+- Teckenstorlek indien aanpassen
+- Pagina-einden gebruiken voor redelijke segmentering
+- Förhandsgranskning bekijken om effecten te bevestigen voordat u exporteert
 
-### F7: Vad är filnamnet på den exporterade PDF:en?
-**S**: Filnamnet genereras automatiskt baserat på titeln på dokumentets första rad, till exempel:
-- Titel "Projektrapport" → "Projektrapport.pdf"
-- Använder "document.pdf" när det inte finns någon titel
+### V7: Wat is de bestandsnaam van de geëxporteerde PDF?
+**A**: De bestandsnaam wordt automatisch gegenereerd op basis van de titel van de eerste regel van het document, bijvoorbeeld:
+- Titel "Projectrapport" → "Projectrapport.pdf"
+- Gebruikt "document.pdf" wanneer er geen titel is
 
 ---
 
-## 📞 Teknisk Support
+## 📞 Technische Ondersteuning
 
-### 🔧 **Teknisk Stack**
-- **Next.js** - React-ramverk
-- **Tailwind CSS** - Styling-ramverk
-- **Marked** - Markdown-tolk
-- **KaTeX** - Matematisk formel rendering
-- **Mermaid** - Diagram rita
-- **html2pdf.js** - PDF-generering
-- **Highlight.js** - Kodmarkering
+### 🔧 **Tech Stack**
+- **Next.js** - React-framework
+- **Tailwind CSS** - Styling-framework
+- **Marked** - Markdown-parser
+- **KaTeX** - Wiskundige formule rendering
+- **Mermaid** - Diagram tekenen
+- **html2pdf.js** - PDF-generatie
+- **Highlight.js** - Code highlighting
 
-### 📧 **Kontakta Oss**
-[Open Source](https://github.com/szlizhenhua/markdown-to-pdf). För frågor eller förslag, kontakta oss via:
-- GitHub Issues: Rapportera problem eller begär funktioner
-- E-postfeedback: support@markdown-to-pdf.org
+### 📧 **Neem Contact Op**
+[Open Source](https://github.com/szlizhenhua/markdown-to-pdf). Voor vragen of suggesties, neem contact met ons op via:
+- GitHub Issues: Problemen melden of functies aanvragen
+- E-mailfeedback: support@markdown-to-pdf.org
 
-### 🔄 **Ändringslogg**
-- **v1.0.0** - Första utgåvan
-- KaTeX matematisk formel stöd
-- Mermaid diagram stöd
-- Val av flera temastilar
-- Responsiv designoptimering
+### 🔄 **Wijzigingenlog**
+- **v1.0.0** - Eerste release
+- KaTeX wiskundige formule ondersteuning
+- Mermaid diagram ondersteuning
+- Selectie van meerdere themastijlen
+- Responsief ontwerp optimalisatie
 
 ---
 
 <div style="text-align: center; margin-top: 3em; padding: 2em; border-top: 1px solid #eee; color: #666;">
   <p><strong>Markdown till PDF Converter</strong></p>
-  <p>Professionellt Markdown till PDF Konverteringsverktyg</p>
+  <p>Professionele Markdown naar PDF Conversie Tool</p>
   <p style="font-size: 0.9em; margin-top: 1em;">
-    Gjord med ❤️ | Privatkomst Först
+    Gemaakt met ❤️ | Privacy First
   </p>
   <p style="font-size: 0.8em; margin-top: 0.5em;">
-    © 2025 Markdown to PDF. Alla rättigheter förbehållna.
+    © 2025 Markdown to PDF. Alle rechten voorbehouden.
   </p>
 </div>`,
 
   // SEO
   seo: {
-    title: "Markdown till PDF Converter | Professionell Dokumentexport",
-    description: "Konvertera Markdown till professionella PDF-dokument med matematik, kod, diagram, innehållsförteckning, teman. Publiceringskvalitetsutdata för akademisk och kommersiell användning.",
-    keywords: "Markdown, PDF, converter, KaTeX, Mermaid, kodmarkering, innehållsförteckning, teman, export, akademisk, professionell"
+    title: "Markdown till PDF Converter | Professionele Document Export",
+    description: "Konvertera Markdown till professionella PDF-documenten met wiskunde, code, diagrammen, inhoudsopgave, thema's. Publicatiekwaliteit output voor academisch en commercieel gebruik.",
+    keywords: "Markdown, PDF, converter, KaTeX, Mermaid, code highlighting, inhoudsopgave, thema's, export, academisch, professioneel"
   },
 
   // SEO Content
   seoContent: {
     whyChooseUs: {
-      label: "Varför välja oss",
-      title: "Varför använda vår Markdown till PDF-konverterare?",
-      subtitle: "En Apple-liknande upplevelse för publicering: ren, snabb och vackert konsekvent från utkast till PDF.",
+      label: "Waarom ons",
+      title: "Waarom onze Markdown naar PDF converter gebruiken?",
+      subtitle: "Een Apple-achtige ervaring voor publiceren: schoon, snel en mooi consistent van concept tot PDF.",
       features: {
         privacy: {
-          title: "Fokus på integritet",
-          description: "Dina data är säkra hos oss. Alla konverteringar sker lokalt i din webbläsare. Vi laddar aldrig upp dina Markdown-filer till någon server."
+          title: "Privacy-gericht",
+          description: "Uw gegevens zijn veilig bij ons. Alle conversies vinden lokaal in uw browser plaats. We uploaden nooit uw Markdown-bestanden naar een server."
         },
         instant: {
-          title: "Omedelbar konvertering",
-          description: "Inga köer. Vår optimerade motor konverterar dina dokument omedelbart och stöder stora filer med lätthet."
+          title: "Directe conversie",
+          description: "Geen wachtrijen. Onze geoptimaliseerde engine converteert uw documenten direct en ondersteunt grote bestanden met gemak."
         },
         richSupport: {
-          title: "Riktigt stöd",
-          description: "Fullt stöd för GFM (GitHub Flavored Markdown), KaTeX matematiska formler, Mermaid-diagram och kod-syntaxmarkering."
+          title: "Rijke ondersteuning",
+          description: "Volledige ondersteuning voor GFM (GitHub Flavored Markdown), KaTeX wiskundige formules, Mermaid diagrammen en code syntax highlighting."
         }
       }
     },
     howToConvert: {
-      label: "Enkelt arbetsflöde",
-      title: "Hur man konverterar Markdown till PDF",
-      subtitle: "Ett lugnt trestegsprocess designat för att hålla dig fokuserad och få en polerad PDF på sekunder.",
+      label: "Eenvoudige workflow",
+      title: "Markdown naar PDF converteren",
+      subtitle: "Een rustig driestappenproces ontworpen om u gefocust te houden en binnen enkele seconden een gepolijste PDF te krijgen.",
       steps: {
         step1: {
-          title: "Skriv eller klistra in Markdown",
-          description: "Skriv direkt i vår realtidsredigerare eller klistra in din befintliga Markdown-kod. Du kan också dra och släppa .md-filer."
+          title: "Markdown schrijven of plakken",
+          description: "Typ direct in onze real-time editor of plak uw bestaande Markdown-code. U kunt ook .md-bestanden slepen en neerzetten."
         },
         step2: {
-          title: "Anpassa stilen",
-          description: "Välj från våra professionella teman (Akademisk, Modern, etc.) och justera teckenstorlekar, marginaler och pappersstorlek (A4, Letter)."
+          title: "Stijl aanpassen",
+          description: "Kies uit onze professionele thema's (Akademisk, Modern, enz.) en pas lettergroottes, marges en papierformaat (A4, Letter) aan."
         },
         step3: {
-          title: "Ladda ner PDF",
-          description: "Klicka på knappen Exportera för att omedelbart få ett formaterat PDF-dokument redo att delas eller skrivas ut."
+          title: "PDF downloaden",
+          description: "Klik op de knop Exporteren om direct een opgemaakt PDF-document te krijgen dat klaar is om te delen of af te drukken."
         }
       }
     },
     faq: {
-      label: "Vanliga frågor",
-      title: "Vanliga frågor",
+      label: "FAQ",
+      title: "Veelgestelde vragen",
       items: {
         isFree: {
-          question: "Är detta verktyg gratis?",
-          answer: "Ja, vår Markdown till PDF-konverterare är 100% gratis för personligt och kommersiellt bruk."
+          question: "Is deze tool gratis?",
+          answer: "Ja, onze Markdown naar PDF converter is 100% gratis voor persoonlijk en commercieel gebruik."
         },
         dataStorage: {
-          question: "Lagrar ni mina data?",
-          answer: "Nej. Vi bearbetar allt i din webbläsare. Dina dokument lämnar aldrig din enhet."
+          question: "Slaan jullie mijn gegevens op?",
+          answer: "Nee. We verwerken alles in uw browser. Uw documenten verlaten nooit uw apparaat."
         },
         mathSupport: {
-          question: "Stöder den matematiska ekvationer?",
-          answer: "Ja! Vi använder KaTeX för att vackert återge komplexa matematiska formler och ekvationer."
+          question: "Ondersteunt het wiskundige vergelijkingen?",
+          answer: "Ja! We gebruiken KaTeX om complexe wiskundige formules en vergelijkingen mooi weer te geven."
         },
         diagrams: {
-          question: "Kan jag skapa diagram?",
-          answer: "Absolut. Vi stöder Mermaid.js för att skapa flödesdiagram, sekvensdiagram och Gantt-diagram från text."
+          question: "Kan ik diagrammen maken?",
+          answer: "Absoluut. We ondersteunen Mermaid.js om stroomdiagrammen, sequentiediagrammen en Gantt-diagrammen van tekst te maken."
         }
       }
     },
     comprehensive: {
-      title: "Omfattande Markdown-lösning",
-      description1: "Oavsett om du är en student som skriver en avhandling, en utvecklare som dokumenterar kod eller en författare som skriver en roman, ger vår Markdown-redigerare de verktyg du behöver. Med funktioner som realtidsförhandsgranskning, ordräknings-spårning och fokusläge kan du skriva utan distraktioner.",
-      description2: "Vår konverterare hanterar all standard Markdown-syntax inklusive rubriker, listor, länkar, bilder och citatblock. Avancerade användare kommer att uppskatta stödet för kodblock med språkspecifik syntaxmarkering, fotnoter och uppgiftslistor."
+      title: "Compleet Markdown-oplossing",
+      description1: "Of u nu een student bent die een scriptie schrijft, een ontwikkelaar die code documenteert of een schrijver die aan een roman werkt, onze Markdown-editor biedt de tools die u nodig heeft. Met functies zoals real-time voorbeeld, woordentaltracking en focusmodus kunt u zonder afleiding schrijven.",
+      description2: "Onze converter verwerkt alle standaard Markdown-syntaxis inclusief koppen, lijsten, links, afbeeldingen en citaatblokken. Geavanceerde gebruikers zullen de ondersteuning voor codeblokken met taalspecifieke syntax-highlighting, voetnoten en takenlijsten op prijs stellen."
     }
   },
 
   // Footer
   footer: {
-    tagline: "Markdown till PDF",
-    subtitle: "Eleganta konverteringar varje gång.",
-    description: "Professionellt dokumentkonverteringsverktyg för alla. Gratis, säkert och snabbt.",
+    tagline: "Markdown naar PDF",
+    subtitle: "Elke keer elegante conversies.",
+    description: "Professionele documentconversietool voor iedereen. Gratis, veilig en snel.",
     legal: {
-      title: "Juridisk",
-      privacyPolicy: "Integritetspolicy",
-      termsOfService: "Användarvillkor"
+      title: "Juridisch",
+      privacyPolicy: "Privacybeleid",
+      termsOfService: "Servicevoorwaarden"
     },
     links: {
-      title: "Länkar",
-      aboutUs: "Om oss",
-      contact: "Kontakt"
+      title: "Links",
+      aboutUs: "Over ons",
+      contact: "Contact"
     },
     connect: {
-      title: "Anslut",
-      description: "Frågor eller feedback?"
+      title: "Verbinden",
+      description: "Vragen of feedback?"
     },
-    copyright: "© {year} Markdown to PDF. Alla rättigheter förbehållna.",
-    designed: "Designad för tydlighet"
+    copyright: "© {year} Markdown to PDF. Alle rechten voorbehouden.",
+    designed: "Ontworpen voor helderheid"
   },
 
   // Toolbar
   toolbar: {
-    heading: "Rubrik",
-    bold: "Fet",
-    italic: "Kursiv",
-    strikethrough: "Genomstruken",
-    code: "Kod",
-    link: "Länk",
-    image: "Bild",
-    bulletList: "Punktlista",
-    numberedList: "Numrerad lista",
-    quote: "Citat",
-    codeBlock: "Kodblock",
-    horizontalRule: "Horisontell linje",
-    undo: "Ångra",
-    redo: "Gör om",
-    showLess: "Visa mindre",
-    showMore: "Visa mer",
-    disableWordWrap: "Inaktivera ordbrytning",
-    enableWordWrap: "Aktivera ordbrytning",
-    findAndReplace: "Sök och ersätt",
-    showTools: "Visa verktyg",
-    hideTools: "Dölj verktyg",
+    heading: "Kop",
+    bold: "Vet",
+    italic: "Cursief",
+    strikethrough: "Doorhalen",
+    code: "Code",
+    link: "Link",
+    image: "Afbeelding",
+    bulletList: "Lijst met opsommingstekens",
+    numberedList: "Numrerade lijst",
+    quote: "Citaat",
+    codeBlock: "Codeblok",
+    horizontalRule: "Horizontale lijn",
+    undo: "Ongedaan maken",
+    redo: "Opnieuw",
+    showLess: "Minder weergeven",
+    showMore: "Meer weergeven",
+    disableWordWrap: "Woordafbreking uitschakelen",
+    enableWordWrap: "Woordafbreking inschakelen",
+    findAndReplace: "Zoeken en vervangen",
+    showTools: "Tools weergeven",
+    hideTools: "Tools verbergen",
     exportTXT: "TXT",
-    special: "Särskild",
-    lineOps: "Radoperationer"
+    special: "Speciaal",
+    lineOps: "Regelbewerkingen"
   },
 
   // Dialogs
   dialogs: {
-    markdownCheatSheet: "Markdown-fuskblad",
-    documentStatistics: "Dokumentstatistik",
+    markdownCheatSheet: "Markdown-spiekkaart",
+    documentStatistics: "Documentstatistieken",
     close: "Stäng",
     focusMode: {
-      title: "Fokusläge",
-      enter: "Gå in i fokusläge",
-      exit: "Avsluta fokusläge",
-      description: "Störfri skrivmiljö"
+      title: "Focusmodus",
+      enter: "Focusmodus betreden",
+      exit: "Focusmodus verlaten",
+      description: "Afleidingsvrij schrijfmilieu"
     },
     wordGoal: {
-      title: "Ordmåls-trackerare",
-      setGoal: "Ange ordmål",
-      currentWords: "Nuvarande ord",
-      goalWords: "Mål",
-      remaining: "Återstående",
-      progress: "Förlopp",
-      achieved: "Mål uppnått! 🎉"
+      title: "Woordendoel-tracker",
+      setGoal: "Woordendoel instellen",
+      currentWords: "Huidige woorden",
+      goalWords: "Doel",
+      remaining: "Resterend",
+      progress: "Voortgang",
+      achieved: "Doel bereikt! 🎉"
     },
     timeTracker: {
-      title: "Tidspårare",
-      startTime: "Starta session",
-      stopTime: "Stoppa session",
-      reset: "Återställ",
-      totalTime: "Total tid",
-      sessions: "Dagens sessioner"
+      title: "Tidstracker",
+      startTime: "Sessie starten",
+      stopTime: "Sessie stoppen",
+      reset: "Resetten",
+      totalTime: "Totale tijd",
+      sessions: "Sessies vandaag",
+      wordsPerMin: "Woorden/min",
+      recording: "Opnemen",
+      stopped: "Gestopt",
+      today: "Vandaag",
+      thisWeek: "Deze week",
+      avgSession: "Gemiddelde sessie",
+      dailyTimeGoal: "Dagelijks tijddoel",
+      hours: "2 uur",
+      recentSessions: "Recente sessies"
     },
     pomodoro: {
       title: "Pomodoro-timer",
-      start: "Starta",
-      pause: "Pausa",
-      reset: "Återställ",
-      work: "Arbete",
-      shortBreak: "Kort paus",
-      longBreak: "Lång paus",
-      sessions: "Slutförda sessioner"
-    },
-    quickTemplates: {
-      title: "Snabbb mallar",
-      select: "Välj en mall att infoga"
-    },
-    documentTemplates: {
-      title: "Dokumentmallar",
-      description: "Välj en mall för att börja"
-    },
-    performance: {
-      title: "Prestandainställningar",
-      debounceTime: "Debounce-tid",
-      description: "Justera renderingsprestanda"
-    },
-    autosave: {
-      title: "Inställningar för autospar",
-      interval: "Spara-intervall",
-      description: "Hur ofta ditt arbete sparas automatiskt",
-      status: {
-        saved: "Sparad",
-        saving: "Sparar...",
-        unsaved: "Osparade ändringar",
-        error: "Sparfel"
-      }
+      description: "Använd Pomodoro-tekniken för fokuserade skrivsessioner",
+      start: "Starten",
+      pause: "Pauzeren",
+      reset: "Resetten",
+      work: "Werk",
+      shortBreak: "Korte pauze",
+      longBreak: "Lange pauze",
+      sessions: "Voltooide sessies"
     },
     typography: {
-      title: "Typografi-kontroller",
+      title: "Typografikontroller",
+      description: "Anpassa utseendet på förhandsgranskningstexten",
       fontSize: "Teckenstorlek",
       lineHeight: "Radhöjd",
       fontFamily: "Teckenfamilj"
     },
     snippets: {
-      title: "Snutt-bibliotek",
-      add: "Lägg till snutt",
-      save: "Spara snutt",
+      title: "Utökningsbibliotek",
+      description: "Snabb åtkomst till återanvändbara Markdown-mönster och mallar",
+      add: "Utökning lägga till",
+      save: "Utökning spara",
       cancel: "Avbryt",
       name: "Namn",
       content: "Innehåll"
-    },
-    keyboardShortcuts: {
-      title: "Tangentbordsgenvägar",
-      description: "Påskynda ditt arbetsflöde med dessa genvägar"
     }
   }
 }

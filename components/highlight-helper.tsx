@@ -3,24 +3,27 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Highlighter } from 'lucide-react'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface HighlightHelperProps {
   onInsert: (markdown: string) => void
   className?: string
+  t: LocaleTranslations
 }
 
-const highlightColors = [
-  { name: 'Yellow', bg: 'bg-yellow-200', markdown: '==highlight==' },
-  { name: 'Red', bg: 'bg-red-200', markdown: '==highlight==' },
-  { name: 'Green', bg: 'bg-green-200', markdown: '==highlight==' },
-  { name: 'Blue', bg: 'bg-blue-200', markdown: '==highlight==' },
-  { name: 'Purple', bg: 'bg-purple-200', markdown: '==highlight==' },
-  { name: 'Pink', bg: 'bg-pink-200', markdown: '==highlight==' }
+const getHighlightColors = (t: LocaleTranslations) => [
+  { name: t.highlightHelper.yellow, bg: 'bg-yellow-200', markdown: '==highlight==' },
+  { name: t.highlightHelper.red, bg: 'bg-red-200', markdown: '==highlight==' },
+  { name: t.highlightHelper.green, bg: 'bg-green-200', markdown: '==highlight==' },
+  { name: t.highlightHelper.blue, bg: 'bg-blue-200', markdown: '==highlight==' },
+  { name: t.highlightHelper.purple, bg: 'bg-purple-200', markdown: '==highlight==' },
+  { name: t.highlightHelper.pink, bg: 'bg-pink-200', markdown: '==highlight==' }
 ]
 
-export function HighlightHelper({ onInsert, className }: HighlightHelperProps) {
+export function HighlightHelper({ onInsert, className, t }: HighlightHelperProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [text, setText] = useState('')
+  const highlightColors = getHighlightColors(t)
 
   const handleInsert = () => {
     const highlightText = text || 'highlighted text'
@@ -38,8 +41,8 @@ export function HighlightHelper({ onInsert, className }: HighlightHelperProps) {
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
         className="h-8 w-8 p-0 touch-manipulation"
-        title="Insert highlight"
-        aria-label="Insert highlight"
+        title={t.highlightHelper.insertHighlight}
+        aria-label={t.highlightHelper.insertHighlight}
         aria-expanded={isOpen}
       >
         <Highlighter className="h-4 w-4" />
@@ -49,25 +52,25 @@ export function HighlightHelper({ onInsert, className }: HighlightHelperProps) {
         <div className="absolute left-0 top-full mt-1 z-50 w-64 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15">
           <div className="p-4 space-y-3">
             <div>
-              <label className="text-sm font-medium mb-1.5 block">Highlight Text</label>
+              <label className="text-sm font-medium mb-1.5 block">{t.highlightHelper.highlightText}</label>
               <input
                 type="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder="Text to highlight"
+                placeholder={t.highlightHelper.textToHighlight}
                 className="w-full px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary/40"
               />
             </div>
 
             <div>
-              <label className="text-sm font-medium mb-2 block">Color (visual only)</label>
+              <label className="text-sm font-medium mb-2 block">{t.highlightHelper.color} {t.highlightHelper.visualOnly}</label>
               <div className="grid grid-cols-3 gap-2">
                 {highlightColors.map((color) => (
                   <button
                     key={color.name}
                     onClick={handleInsert}
                     className={`px-3 py-2 text-sm rounded ${color.bg} hover:opacity-80 transition-opacity`}
-                    title={`Insert ${color.name} highlight`}
+                    title={`${t.highlightHelper.insertHighlight} ${color.name}`}
                   >
                     {color.name}
                   </button>
@@ -76,7 +79,7 @@ export function HighlightHelper({ onInsert, className }: HighlightHelperProps) {
             </div>
 
             <div className="p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded text-xs text-yellow-800 dark:text-yellow-200">
-              <strong>Note:</strong> Highlighting uses ==text== syntax. May not be supported by all markdown renderers.
+              <strong>{t.highlightHelper.note.split(':')[0]}:</strong>{t.highlightHelper.note.split(':').slice(1).join(':')}
             </div>
 
             <Button
@@ -85,7 +88,7 @@ export function HighlightHelper({ onInsert, className }: HighlightHelperProps) {
               size="sm"
               className="w-full"
             >
-              Cancel
+              {t.highlightHelper.cancel}
             </Button>
           </div>
         </div>

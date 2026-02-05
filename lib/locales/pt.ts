@@ -116,7 +116,148 @@ export const pt = {
       academic: "Acadêmico",
       technical: "Técnico",
       documentation: "Documentação"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "Documento em Branco",
+      description: "Começar do zero"
+    },
+    article: {
+      name: "Artigo de Blog",
+      description: "Estrutura padrão de postagem de blog"
+    },
+    readme: {
+      name: "README.md",
+      description: "Modelo de documentação de projeto"
+    },
+    resume: {
+      name: "Currículo/CV",
+      description: "Modelo de currículo profissional"
+    },
+    essay: {
+      name: "Ensaio Acadêmico",
+      description: "Trabalho acadêmico estruturado"
+    },
+    meeting: {
+      name: "Notas de Reunião",
+      description: "Modelo de notas de reunião estruturadas"
+    },
+    tutorial: {
+      name: "Tutorial/Guia",
+      description: "Modelo de tutorial passo a passo"
+    },
+    templates: "Modelos"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "Endpoint de API",
+    codeSnippet: "Snippet de Código",
+    meetingNotes: "Notas de Reunião",
+    bugReport: "Relatório de Bug",
+    dailyStandup: "Daily Standup",
+    featureRequest: "Solicitação de Recurso",
+    codeReview: "Revisão de Código",
+    projectReadme: "README do Projeto"
+  },
+  textTransform: {
+    title: "Transformar Texto",
+    close: "Fechar",
+    uppercase: "MAIÚSCULO",
+    lowercase: "minúsculo",
+    titleCase: "Título",
+    sentenceCase: "Frase",
+    camelCase: "camelCase",
+    kebabCase: "kebab-case",
+    snakeCase: "snake_case",
+    toggleCase: "tOGGLE cASE",
+    capitalize: "Capitalizar",
+    uppercaseDesc: "Converter para maiúsculo",
+    lowercaseDesc: "Converter para minúsculo",
+    titleCaseDesc: "Capitalizar Cada Palavra",
+    sentenceCaseDesc: "Capitalizar apenas a primeira palavra",
+    camelCaseDesc: "Converter para camelCase",
+    kebabCaseDesc: "Converter para kebab-case",
+    snakeCaseDesc: "Converter para snake_case",
+    toggleCaseDesc: "Alternar maiúsculo/minúsculo",
+    capitalizeDesc: "Capitalizar primeira letra"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "Idioma",
+    insertCodeBlock: "Inserir Bloco de Código",
+    preview: "Visualização"
+  },
+  dateTime: {
+    insertDateTime: "Inserir Data/Hora",
+    date: "Data",
+    time: "Hora",
+    dateTime: "Data e Hora",
+    iso8601: "ISO 8601",
+    usFormat: "Formato EUA",
+    euFormat: "Formato UE",
+    readable: "Legível",
+    cancel: "Cancelar"
+  },
+  listHelper: {
+    listType: "Tipo de Lista",
+    bullet: "Marcadores",
+    numbered: "Numerada",
+    numberOfItems: "Número de Itens",
+    listItems: "Itens da Lista",
+    insertList: "Inserir Lista",
+    cancel: "Cancelar",
+    item: "Item"
+  },
+  highlightHelper: {
+    insertHighlight: "Inserir destaque",
+    highlightText: "Destacar Texto",
+    textToHighlight: "Texto para destacar",
+    color: "Cor",
+    visualOnly: "(apenas visual)",
+    note: "Nota: O destaque usa a sintaxe ==texto==. Pode não ser suportado por todos os renderizadores Markdown.",
+    cancel: "Cancelar",
+    yellow: "Amarelo",
+    red: "Vermelho",
+    green: "Verde",
+    blue: "Azul",
+    purple: "Roxo",
+    pink: "Rosa"
+  },
+
+  helpDialog: {
+    title: "Referência Rápida de Markdown",
+    close: "Fechar",
+    headings: "Cabeçalhos",
+    textStyles: "Estilos de Texto",
+    codeBlocks: "Blocos de Código",
+    lists: "Listas",
+    links: "Links",
+    images: "Imagens",
+    quotes: "Citações",
+    tables: "Tabelas"
   },
 
   // Default Content
@@ -510,14 +651,24 @@ Se ainda não forem exibidas, verifique se a sintaxe da fórmula está correta.
     },
     timeTracker: {
       title: "Rastreador de tempo",
-      startTime: "Iniciar sessão",
-      stopTime: "Parar sessão",
+      startTime: "Iniciar",
+      stopTime: "Pausar",
       reset: "Redefinir",
       totalTime: "Tempo total",
-      sessions: "Sessões hoje"
+      sessions: "Sessões hoje",
+      wordsPerMin: "palavras/min",
+      recording: "Gravando",
+      stopped: "Parado",
+      today: "Hoje",
+      thisWeek: "Esta Semana",
+      avgSession: "Sessão Média",
+      dailyTimeGoal: "Meta de Tempo Diária",
+      hours: "2 horas",
+      recentSessions: "Sessões Recentes"
     },
     pomodoro: {
       title: "Timer Pomodoro",
+      description: "Use a técnica Pomodoro para sessões de escritura focadas",
       start: "Iniciar",
       pause: "Pausar",
       reset: "Redefinir",
@@ -552,21 +703,22 @@ Se ainda não forem exibidas, verifique se a sintaxe da fórmula está correta.
     },
     typography: {
       title: "Controles de tipografia",
+      description: "Personalize a aparência do texto de visualização",
       fontSize: "Tamanho da fonte",
       lineHeight: "Altura da linha",
       fontFamily: "Família da fonte"
     },
     snippets: {
       title: "Biblioteca de snippets",
+      description: "Acesso rápido a padrões e modelos Markdown reutilizáveis",
       add: "Adicionar snippet",
       save: "Salvar snippet",
       cancel: "Cancelar",
       name: "Nome",
-      content: "Conteúdo"
     },
     keyboardShortcuts: {
       title: "Atalhos de teclado",
       description: "Acelere seu fluxo de trabalho com estes atalhos"
     }
-  }
+  },
 }

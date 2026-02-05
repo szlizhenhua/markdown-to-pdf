@@ -116,7 +116,148 @@ export const zhTW = {
       academic: "學術",
       technical: "技術",
       documentation: "文檔"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "空白文檔",
+      description: "從空白開始"
+    },
+    article: {
+      name: "博客文章",
+      description: "標準博客文章結構"
+    },
+    readme: {
+      name: "README.md",
+      description: "項目文檔模板"
+    },
+    resume: {
+      name: "簡歷/CV",
+      description: "專業簡歷模板"
+    },
+    essay: {
+      name: "學術論文",
+      description: "結構化論文"
+    },
+    meeting: {
+      name: "會議記錄",
+      description: "結構化會議記錄模板"
+    },
+    tutorial: {
+      name: "教程/指南",
+      description: "分步教程模板"
+    },
+    templates: "模板"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "API 接口",
+    codeSnippet: "代碼片段",
+    meetingNotes: "會議記錄",
+    bugReport: "缺陷報告",
+    dailyStandup: "每日站會",
+    featureRequest: "功能請求",
+    codeReview: "代碼評審",
+    projectReadme: "項目說明"
+  },
+  textTransform: {
+    title: "文本轉換",
+    close: "關閉",
+    uppercase: "大寫",
+    lowercase: "小寫",
+    titleCase: "首字母大寫",
+    sentenceCase: "句首大寫",
+    camelCase: "駝峰命名",
+    kebabCase: "短橫線命名",
+    snakeCase: "下劃線命名",
+    toggleCase: "切換大小寫",
+    capitalize: "首字母大寫",
+    uppercaseDesc: "轉換為大寫",
+    lowercaseDesc: "轉換為小寫",
+    titleCaseDesc: "每個單詞首字母大寫",
+    sentenceCaseDesc: "僅首字母大寫",
+    camelCaseDesc: "轉換為駝峰命名",
+    kebabCaseDesc: "轉換為短橫線命名",
+    snakeCaseDesc: "轉換為下劃線命名",
+    toggleCaseDesc: "切換字母大小寫",
+    capitalizeDesc: "首字母大寫"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "語言",
+    insertCodeBlock: "插入代碼塊",
+    preview: "預覽"
+  },
+  dateTime: {
+    insertDateTime: "插入日期/時間",
+    date: "日期",
+    time: "時間",
+    dateTime: "日期時間",
+    iso8601: "ISO 8601",
+    usFormat: "美國格式",
+    euFormat: "歐洲格式",
+    readable: "可讀格式",
+    cancel: "取消"
+  },
+  listHelper: {
+    listType: "列表類型",
+    bullet: "無序",
+    numbered: "有序",
+    numberOfItems: "項目數量",
+    listItems: "列表項",
+    insertList: "插入列表",
+    cancel: "取消",
+    item: "項目"
+  },
+  highlightHelper: {
+    insertHighlight: "插入高亮",
+    highlightText: "高亮文本",
+    textToHighlight: "要高亮的文本",
+    color: "顏色",
+    visualOnly: "（僅視覺效果）",
+    note: "注意：高亮使用 ==文本== 語法。可能不被所有 Markdown 渲染器支持。",
+    cancel: "取消",
+    yellow: "黃色",
+    red: "紅色",
+    green: "綠色",
+    blue: "藍色",
+    purple: "紫色",
+    pink: "粉色"
+  },
+
+  helpDialog: {
+    title: "Markdown 快速參考",
+    close: "關閉",
+    headings: "標題",
+    textStyles: "文本樣式",
+    codeBlocks: "代碼塊",
+    lists: "列表",
+    links: "鏈接",
+    images: "圖片",
+    quotes: "引用",
+    tables: "表格"
   },
 
   // Default Content
@@ -624,15 +765,25 @@ def quicksort(arr):
       achieved: "目標達成！🎉"
     },
     timeTracker: {
-      title: "時間追踪器",
-      startTime: "開始會話",
-      stopTime: "停止會話",
+      title: "時間追蹤器",
+      startTime: "開始",
+      stopTime: "暫停",
       reset: "重置",
       totalTime: "總時間",
-      sessions: "今日會話"
+      sessions: "今日會話",
+      wordsPerMin: "字/分鐘",
+      recording: "記錄中",
+      stopped: "已停止",
+      today: "今天",
+      thisWeek: "本週",
+      avgSession: "平均會話",
+      dailyTimeGoal: "每日時間目標",
+      hours: "2 小時",
+      recentSessions: "最近會話"
     },
     pomodoro: {
       title: "番茄工作法定時器",
+      description: "使用番茄工作法進行專注寫作",
       start: "開始",
       pause: "暫停",
       reset: "重置",
@@ -667,12 +818,14 @@ def quicksort(arr):
     },
     typography: {
       title: "排版控制",
+      description: "自定義預覽文本的外觀",
       fontSize: "字體大小",
       lineHeight: "行高",
       fontFamily: "字體系列"
     },
     snippets: {
       title: "片段庫",
+      description: "快速訪問可重用的 Markdown 模式和模板",
       add: "添加片段",
       save: "保存片段",
       cancel: "取消",
@@ -681,7 +834,7 @@ def quicksort(arr):
     },
     keyboardShortcuts: {
       title: "鍵盤快捷鍵",
-      description: "使用這些快捷鍵提高您的工作效率"
+      description: "使用這些快捷鍵提高工作效率"
     }
   }
 }

@@ -116,7 +116,148 @@ export const ru = {
       academic: "Академический",
       technical: "Технический",
       documentation: "Документация"
-    }
+    },
+    // Document templates
+    blank: {
+      name: "Пустой документ",
+      description: "Начать с чистого листа"
+    },
+    article: {
+      name: "Блог-статья",
+      description: "Стандартная структура блога"
+    },
+    readme: {
+      name: "README.md",
+      description: "Шаблон документации проекта"
+    },
+    resume: {
+      name: "Резюме/CV",
+      description: "Профессиональный шаблон резюме"
+    },
+    essay: {
+      name: "Академическое эссе",
+      description: "Структурированная академическая работа"
+    },
+    meeting: {
+      name: "Заметки встречи",
+      description: "Шаблон структурированных заметок встречи"
+    },
+    tutorial: {
+      name: "Учебник/Руководство",
+      description: "Пошаговый шаблон учебника"
+    },
+    templates: "Шаблоны"
+  },
+
+  quickTemplates: {
+    apiEndpoint: "Конечная точка API",
+    codeSnippet: "Фрагмент кода",
+    meetingNotes: "Заметки встречи",
+    bugReport: "Отчет об ошибке",
+    dailyStandup: "Ежедневная планерка",
+    featureRequest: "Запрос функции",
+    codeReview: "Обзор кода",
+    projectReadme: "README проекта"
+  },
+  textTransform: {
+    title: "Преобразовать текст",
+    close: "Закрыть",
+    uppercase: "ВЕРХНИЙ РЕГИСТР",
+    lowercase: "нижний регистр",
+    titleCase: "Заголовочный Регистр",
+    sentenceCase: "Предложный регистр",
+    camelCase: "верблюжийРегистр",
+    kebabCase: "кебаб-регистр",
+    snakeCase: "змеиный_регистр",
+    toggleCase: "ПЕРЕКЛЮЧИТЬ рЕГИСТР",
+    capitalize: "С заглавной",
+    uppercaseDesc: "Преобразовать в верхний регистр",
+    lowercaseDesc: "Преобразовать в нижний регистр",
+    titleCaseDesc: "Каждое слово с заглавной",
+    sentenceCaseDesc: "Только первое слово с заглавной",
+    camelCaseDesc: "Преобразовать в camelCase",
+    kebabCaseDesc: "Преобразовать в kebab-case",
+    snakeCaseDesc: "Преобразовать в snake_case",
+    toggleCaseDesc: "Переключить регистр букв",
+    capitalizeDesc: "С заглавной буквы"
+  },
+  codeLanguages: {
+    javascript: "JavaScript",
+    typescript: "TypeScript",
+    python: "Python",
+    java: "Java",
+    cpp: "C++",
+    csharp: "C#",
+    go: "Go",
+    rust: "Rust",
+    php: "PHP",
+    ruby: "Ruby",
+    swift: "Swift",
+    kotlin: "Kotlin",
+    html: "HTML",
+    css: "CSS",
+    scss: "SCSS",
+    sql: "SQL",
+    bash: "Bash",
+    shell: "Shell",
+    json: "JSON",
+    yaml: "YAML",
+    xml: "XML",
+    markdown: "Markdown",
+    dockerfile: "Dockerfile",
+    diff: "Diff",
+    language: "Язык",
+    insertCodeBlock: "Вставить блок кода",
+    preview: "Предварительный просмотр"
+  },
+  dateTime: {
+    insertDateTime: "Вставить дату/время",
+    date: "Дата",
+    time: "Время",
+    dateTime: "Дата и время",
+    iso8601: "ISO 8601",
+    usFormat: "Формат США",
+    euFormat: "Формат ЕС",
+    readable: "Читаемый",
+    cancel: "Отмена"
+  },
+  listHelper: {
+    listType: "Тип списка",
+    bullet: "Маркированный",
+    numbered: "Нумерованный",
+    numberOfItems: "Количество элементов",
+    listItems: "Элементы списка",
+    insertList: "Вставить список",
+    cancel: "Отмена",
+    item: "Элемент"
+  },
+  highlightHelper: {
+    insertHighlight: "Вставить выделение",
+    highlightText: "Выделить текст",
+    textToHighlight: "Текст для выделения",
+    color: "Цвет",
+    visualOnly: "(только визуально)",
+    note: "Примечание: Выделение использует синтаксис ==текст==. Может не поддерживаться всеми рендерерами Markdown.",
+    cancel: "Отмена",
+    yellow: "Желтый",
+    red: "Красный",
+    green: "Зеленый",
+    blue: "Синий",
+    purple: "Фиолетовый",
+    pink: "Розовый"
+  },
+
+  helpDialog: {
+    title: "Краткий Справочник по Markdown",
+    close: "Закрыть",
+    headings: "Заголовки",
+    textStyles: "Стили Текста",
+    codeBlocks: "Блоки Кода",
+    lists: "Списки",
+    links: "Ссылки",
+    images: "Изображения",
+    quotes: "Цитаты",
+    tables: "Таблицы"
   },
 
   // Default Content
@@ -510,14 +651,24 @@ def quicksort(arr):
     },
     timeTracker: {
       title: "Трекер времени",
-      startTime: "Начать сессию",
-      stopTime: "Остановить сессию",
+      startTime: "Начать",
+      stopTime: "Пауза",
       reset: "Сбросить",
       totalTime: "Общее время",
-      sessions: "Сессий сегодня"
+      sessions: "Сессий сегодня",
+      wordsPerMin: "слов/мин",
+      recording: "Запись",
+      stopped: "Остановлено",
+      today: "Сегодня",
+      thisWeek: "Эта Неделя",
+      avgSession: "Средняя Сессия",
+      dailyTimeGoal: "Дневная Цель по Времени",
+      hours: "2 часа",
+      recentSessions: "Недавние Сессии"
     },
     pomodoro: {
       title: "Таймер Pomodoro",
+      description: "Используйте технику Pomodoro для сосредоточенных сессий письма",
       start: "Начать",
       pause: "Пауза",
       reset: "Сбросить",
@@ -552,21 +703,22 @@ def quicksort(arr):
     },
     typography: {
       title: "Управление типографикой",
+      description: "Настройте внешний вид текста предварительного просмотра",
       fontSize: "Размер шрифта",
       lineHeight: "Высота строки",
       fontFamily: "Семейство шрифтов"
     },
     snippets: {
       title: "Библиотека фрагментов",
+      description: "Быстрый доступ к повторно используемым шаблонам и паттернам Markdown",
       add: "Добавить фрагмент",
       save: "Сохранить фрагмент",
       cancel: "Отмена",
       name: "Название",
-      content: "Содержание"
     },
     keyboardShortcuts: {
-      title: "Клавиатурные сокращения",
-      description: "Ускорьте свой рабочий процесс с этими сокращениями"
+      title: "Горячие клавиши",
+      description: "Увеличьте свою продуктивность с помощью этих горячих клавиш"
     }
   }
 }
