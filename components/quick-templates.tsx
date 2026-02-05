@@ -1,10 +1,12 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface QuickTemplatesProps {
   onInsert: (markdown: string) => void
   className?: string
+  t: LocaleTranslations
 }
 
 const quickTemplates = [
@@ -58,7 +60,7 @@ const quickTemplates = [
   }
 ]
 
-export function QuickTemplates({ onInsert, className }: QuickTemplatesProps) {
+export function QuickTemplates({ onInsert, className, t }: QuickTemplatesProps) {
   const handleInsertTemplate = (template: string) => {
     const now = new Date()
     const dateStr = now.toLocaleDateString('en-US', {

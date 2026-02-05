@@ -252,9 +252,10 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
           currentFontSize={previewFontSize}
           currentLineHeight={previewLineHeight}
           currentFontFamily={previewFontFamily}
+          t={t}
         />
         <DocumentHistory currentContent={content} onRestore={(newContent) => onReplace?.(content, newContent)} />
-        <SnippetLibrary onInsertSnippet={onInsert} />
+        <SnippetLibrary onInsertSnippet={onInsert} t={t} />
         <CollaborationIndicator />
         <QuickActionsMenu
           onExportPDF={onExportPDF}
@@ -275,17 +276,17 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
           onTogglePreview={onTogglePreview}
           onNewDocument={onClear}
         />
-        <PerformanceSettings content={content} onDebounceChange={onDebounceChange} currentDebounce={debounceValue} />
-        <WordGoalTracker content={content} />
-        <TimeTracker content={content} />
-        <PomodoroTimer />
-        <CheatSheet />
-        <DocumentTemplates onTemplateSelect={(content) => onInsert(content)} />
-        <QuickTemplates onInsert={onInsert} />
-        <FocusMode />
-        <StatisticsPanel content={content} />
-        {onAutosaveIntervalChange && <AutosaveControl onIntervalChange={onAutosaveIntervalChange} currentInterval={autosaveInterval} />}
-        <KeyboardShortcutsDialog />
+        <PerformanceSettings content={content} onDebounceChange={onDebounceChange} currentDebounce={debounceValue} t={t} />
+        <WordGoalTracker content={content} t={t} />
+        <TimeTracker content={content} t={t} />
+        <PomodoroTimer t={t} />
+        <CheatSheet t={t} />
+        <DocumentTemplates onTemplateSelect={(content) => onInsert(content)} t={t} />
+        <QuickTemplates onInsert={onInsert} t={t} />
+        <FocusMode t={t} />
+        <StatisticsPanel content={content} t={t} />
+        {onAutosaveIntervalChange && <AutosaveControl onIntervalChange={onAutosaveIntervalChange} currentInterval={autosaveInterval} t={t} />}
+        <KeyboardShortcutsDialog t={t} />
         {content && (
           <>
             <div className="w-px h-6 bg-border mx-1 hidden sm:block" />

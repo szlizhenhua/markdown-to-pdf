@@ -14,19 +14,22 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Slider } from '@/components/ui/slider'
 import { Label } from '@/components/ui/label'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface PerformanceSettingsProps {
   className?: string
   content?: string
   onDebounceChange?: (ms: number) => void
   currentDebounce?: number
+  t: LocaleTranslations
 }
 
 export function PerformanceSettings({
   className,
   content = '',
   onDebounceChange,
-  currentDebounce = 300
+  currentDebounce = 300,
+  t
 }: PerformanceSettingsProps) {
   const [open, setOpen] = useState(false)
   const [stats, setStats] = useState({
@@ -112,10 +115,10 @@ export function PerformanceSettings({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Gauge className="h-5 w-5 text-primary" />
-            Performance Settings
+            {t.dialogs.performance.title}
           </DialogTitle>
           <DialogDescription>
-            Optimize the editor for better performance
+            {t.dialogs.performance.description}
           </DialogDescription>
         </DialogHeader>
 

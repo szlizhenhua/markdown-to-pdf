@@ -633,6 +633,7 @@ If still not displaying, please check if the formula syntax is correct.
     },
     pomodoro: {
       title: "Pomodoro Timer",
+      description: "Use the Pomodoro technique for focused writing sessions",
       start: "Start",
       pause: "Pause",
       reset: "Reset",
@@ -667,12 +668,14 @@ If still not displaying, please check if the formula syntax is correct.
     },
     typography: {
       title: "Typography Controls",
+      description: "Customize the appearance of the preview text",
       fontSize: "Font Size",
       lineHeight: "Line Height",
       fontFamily: "Font Family"
     },
     snippets: {
       title: "Snippet Library",
+      description: "Quick access to reusable markdown patterns and templates",
       add: "Add Snippet",
       save: "Save Snippet",
       cancel: "Cancel",

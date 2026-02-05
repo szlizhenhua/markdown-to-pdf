@@ -3,9 +3,11 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { BookOpen } from 'lucide-react'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface CheatSheetProps {
   className?: string
+  t: LocaleTranslations
 }
 
 const cheatSheetCategories = [
@@ -67,7 +69,7 @@ const cheatSheetCategories = [
   }
 ]
 
-export function CheatSheet({ className }: CheatSheetProps) {
+export function CheatSheet({ className, t }: CheatSheetProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -77,8 +79,8 @@ export function CheatSheet({ className }: CheatSheetProps) {
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
         className="h-8 w-8 p-0 touch-manipulation"
-        title="Markdown cheat sheet"
-        aria-label="Markdown cheat sheet"
+        title={t.dialogs.markdownCheatSheet}
+        aria-label={t.dialogs.markdownCheatSheet}
         aria-expanded={isOpen}
       >
         <BookOpen className="h-4 w-4" />
@@ -93,12 +95,12 @@ export function CheatSheet({ className }: CheatSheetProps) {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <div className="bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15 max-w-4xl w-full max-h-[85vh] overflow-auto">
               <div className="sticky top-0 bg-popover p-4 border-b border-border flex items-center justify-between">
-                <h2 className="text-lg font-semibold">Markdown Cheat Sheet</h2>
+                <h2 className="text-lg font-semibold">{t.dialogs.markdownCheatSheet}</h2>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsOpen(false)}
-                  aria-label="Close"
+                  aria-label={t.dialogs.close}
                 >
                   ✕
                 </Button>

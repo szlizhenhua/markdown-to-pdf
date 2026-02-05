@@ -15,15 +15,17 @@ import { Slider } from '@/components/ui/slider'
 import { Label } from '@/components/ui/label'
 import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface WordGoalTrackerProps {
   className?: string
   content: string
+  t: LocaleTranslations
 }
 
 const GOAL_PRESETS = [100, 250, 500, 750, 1000, 1500, 2000, 3000, 5000]
 
-export function WordGoalTracker({ className, content }: WordGoalTrackerProps) {
+export function WordGoalTracker({ className, content, t }: WordGoalTrackerProps) {
   const [open, setOpen] = useState(false)
   const [goal, setGoal] = useState(() => {
     const saved = localStorage.getItem('word-goal')
@@ -153,10 +155,10 @@ export function WordGoalTracker({ className, content }: WordGoalTrackerProps) {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Target className="h-5 w-5 text-primary" />
-            Word Goal Tracker
+            {t.dialogs.wordGoal.title}
           </DialogTitle>
           <DialogDescription>
-            Set writing goals and track your progress
+            {t.dialogs.wordGoal.setGoal}
           </DialogDescription>
         </DialogHeader>
 

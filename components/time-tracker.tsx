@@ -10,11 +10,13 @@ import {
 } from '@/components/ui/popover'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface TimeTrackerProps {
   className?: string
   isActive?: boolean
   content?: string
+  t: LocaleTranslations
 }
 
 interface Session {
@@ -27,7 +29,7 @@ interface Session {
 const STORAGE_KEY = 'writing-timer-sessions'
 const ACTIVE_SESSION_KEY = 'writing-timer-active'
 
-export function TimeTracker({ className, content = '' }: TimeTrackerProps) {
+export function TimeTracker({ className, content = '', t }: TimeTrackerProps) {
   const [isRunning, setIsRunning] = useState(false)
   const [elapsed, setElapsed] = useState(0)
   const [sessions, setSessions] = useState<Session[]>([])

@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dialog'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Badge } from '@/components/ui/badge'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface ShortcutCategory {
   name: string
@@ -132,9 +133,10 @@ const shortcutCategories: ShortcutCategory[] = [
 
 interface KeyboardShortcutsDialogProps {
   className?: string
+  t: LocaleTranslations
 }
 
-export function KeyboardShortcutsDialog({ className }: KeyboardShortcutsDialogProps) {
+export function KeyboardShortcutsDialog({ className, t }: KeyboardShortcutsDialogProps) {
   const [open, setOpen] = useState(false)
 
   // Keyboard shortcut to open dialog: Ctrl/Cmd + ?
@@ -181,7 +183,7 @@ export function KeyboardShortcutsDialog({ className }: KeyboardShortcutsDialogPr
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Keyboard className="h-5 w-5 text-primary" />
-            Keyboard Shortcuts
+            {t.dialogs.keyboardShortcuts.title}
             {newShortcutsCount > 0 && (
               <Badge variant="secondary" className="ml-2">
                 {newShortcutsCount} new
@@ -189,7 +191,7 @@ export function KeyboardShortcutsDialog({ className }: KeyboardShortcutsDialogPr
             )}
           </DialogTitle>
           <DialogDescription>
-            Master these shortcuts to boost your productivity
+            {t.dialogs.keyboardShortcuts.description}
           </DialogDescription>
         </DialogHeader>
 

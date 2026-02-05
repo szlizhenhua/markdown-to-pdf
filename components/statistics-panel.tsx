@@ -3,13 +3,15 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { BarChart3 } from 'lucide-react'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface StatisticsPanelProps {
   content: string
   className?: string
+  t: LocaleTranslations
 }
 
-export function StatisticsPanel({ content, className }: StatisticsPanelProps) {
+export function StatisticsPanel({ content, className, t }: StatisticsPanelProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const calculateStats = () => {
@@ -88,12 +90,12 @@ export function StatisticsPanel({ content, className }: StatisticsPanelProps) {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <div className="bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15 max-w-md w-full max-h-[80vh] overflow-auto">
               <div className="sticky top-0 bg-popover p-4 border-b border-border flex items-center justify-between">
-                <h2 className="text-lg font-semibold">Document Statistics</h2>
+                <h2 className="text-lg font-semibold">{t.dialogs.documentStatistics}</h2>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsOpen(false)}
-                  aria-label="Close"
+                  aria-label={t.dialogs.close}
                 >
                   ✕
                 </Button>
@@ -189,7 +191,7 @@ export function StatisticsPanel({ content, className }: StatisticsPanelProps) {
                   size="sm"
                   className="w-full"
                 >
-                  Close
+                  {t.dialogs.close}
                 </Button>
               </div>
             </div>

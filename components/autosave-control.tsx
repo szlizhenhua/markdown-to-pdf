@@ -3,11 +3,13 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Clock } from 'lucide-react'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface AutosaveControlProps {
   onIntervalChange: (interval: number) => void
   currentInterval?: number
   className?: string
+  t: LocaleTranslations
 }
 
 const intervals = [
@@ -19,7 +21,7 @@ const intervals = [
   { value: 60000, label: '1m', description: 'Very slow' }
 ]
 
-export function AutosaveControl({ onIntervalChange, currentInterval = 5000, className }: AutosaveControlProps) {
+export function AutosaveControl({ onIntervalChange, currentInterval = 5000, className, t }: AutosaveControlProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleIntervalChange = (interval: number) => {
@@ -44,8 +46,8 @@ export function AutosaveControl({ onIntervalChange, currentInterval = 5000, clas
       {isOpen && (
         <div className="absolute left-0 top-full mt-1 z-50 w-56 bg-popover text-popover-foreground shadow-lg rounded-lg border border-primary/15">
           <div className="p-3">
-            <h3 className="text-sm font-medium mb-2">Autosave Interval</h3>
-            <p className="text-xs text-muted-foreground mb-3">How often to save automatically</p>
+            <h3 className="text-sm font-medium mb-2">{t.dialogs.autosave.title}</h3>
+            <p className="text-xs text-muted-foreground mb-3">{t.dialogs.autosave.description}</p>
             <div className="space-y-1">
               {intervals.map((interval) => (
                 <button

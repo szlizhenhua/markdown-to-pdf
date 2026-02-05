@@ -11,10 +11,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface DocumentTemplatesProps {
   onTemplateSelect: (content: string) => void
   className?: string
+  t: LocaleTranslations
 }
 
 const templates = [
@@ -287,7 +289,7 @@ Summarize what was accomplished and suggest next steps for further learning.
   }
 ]
 
-export function DocumentTemplates({ onTemplateSelect, className }: DocumentTemplatesProps) {
+export function DocumentTemplates({ onTemplateSelect, className, t }: DocumentTemplatesProps) {
   const [open, setOpen] = useState(false)
 
   const handleSelectTemplate = (template: typeof templates[0]) => {
@@ -311,9 +313,9 @@ export function DocumentTemplates({ onTemplateSelect, className }: DocumentTempl
       </DialogTrigger>
       <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Document Templates</DialogTitle>
+          <DialogTitle>{t.dialogs.documentTemplates.title}</DialogTitle>
           <DialogDescription>
-            Choose a template to get started quickly
+            {t.dialogs.documentTemplates.description}
           </DialogDescription>
         </DialogHeader>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">

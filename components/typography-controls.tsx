@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dialog'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface TypographyControlsProps {
   className?: string
@@ -22,6 +23,7 @@ interface TypographyControlsProps {
   currentFontSize?: number
   currentLineHeight?: number
   currentFontFamily?: string
+  t: LocaleTranslations
 }
 
 const fontFamilies = [
@@ -41,7 +43,8 @@ export function TypographyControls({
   onFontFamilyChange,
   currentFontSize = 16,
   currentLineHeight = 1.6,
-  currentFontFamily = 'system-ui'
+  currentFontFamily = 'system-ui',
+  t
 }: TypographyControlsProps) {
   const [open, setOpen] = useState(false)
   const [fontSize, setFontSize] = useState(currentFontSize)
@@ -89,16 +92,16 @@ export function TypographyControls({
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Typography Settings</DialogTitle>
+          <DialogTitle>{t.dialogs.typography.title}</DialogTitle>
           <DialogDescription>
-            Customize the appearance of the preview text
+            {t.dialogs.typography.description || "Customize the appearance of the preview text"}
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-6 py-4">
           {/* Font Size */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <Label htmlFor="font-size">Font Size</Label>
+              <Label htmlFor="font-size">{t.dialogs.typography.fontSize}</Label>
               <span className="text-sm text-muted-foreground">{fontSize}px</span>
             </div>
             <Slider
@@ -120,7 +123,7 @@ export function TypographyControls({
           {/* Line Height */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <Label htmlFor="line-height">Line Height</Label>
+              <Label htmlFor="line-height">{t.dialogs.typography.lineHeight}</Label>
               <span className="text-sm text-muted-foreground">{lineHeight.toFixed(1)}</span>
             </div>
             <Slider
@@ -141,7 +144,7 @@ export function TypographyControls({
 
           {/* Font Family */}
           <div className="space-y-3">
-            <Label>Font Family</Label>
+            <Label>{t.dialogs.typography.fontFamily}</Label>
             <div className="grid grid-cols-2 gap-2">
               {fontFamilies.map((font) => (
                 <button

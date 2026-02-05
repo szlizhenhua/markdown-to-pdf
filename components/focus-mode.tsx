@@ -3,12 +3,14 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Monitor } from 'lucide-react'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface FocusModeProps {
   className?: string
+  t: LocaleTranslations
 }
 
-export function FocusMode({ className }: FocusModeProps) {
+export function FocusMode({ className, t }: FocusModeProps) {
   const [isFocusMode, setIsFocusMode] = useState(false)
 
   useEffect(() => {
@@ -70,8 +72,8 @@ export function FocusMode({ className }: FocusModeProps) {
         size="sm"
         onClick={() => setIsFocusMode(!isFocusMode)}
         className={`h-8 px-2 touch-manipulation text-xs ${isFocusMode ? 'bg-green-600 text-white hover:bg-green-700' : ''} ${className}`}
-        title={isFocusMode ? 'Exit focus mode (Esc)' : 'Focus mode (Ctrl+Shift+F)'}
-        aria-label={isFocusMode ? 'Exit focus mode' : 'Enter focus mode'}
+        title={isFocusMode ? `${t.dialogs.focusMode.exit} (Esc)` : `${t.dialogs.focusMode.enter} (Ctrl+Shift+F)`}
+        aria-label={isFocusMode ? t.dialogs.focusMode.exit : t.dialogs.focusMode.enter}
         aria-pressed={isFocusMode}
       >
         <Monitor className="h-4 w-4 mr-1" />

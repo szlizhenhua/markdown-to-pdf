@@ -15,6 +15,7 @@ import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { Slider } from '@/components/ui/slider'
 import { Label } from '@/components/ui/label'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 type PomodoroMode = 'focus' | 'shortBreak' | 'longBreak'
 
@@ -40,9 +41,10 @@ const DEFAULT_SETTINGS: PomodoroSettings = {
 
 interface PomodoroTimerProps {
   className?: string
+  t: LocaleTranslations
 }
 
-export function PomodoroTimer({ className }: PomodoroTimerProps) {
+export function PomodoroTimer({ className, t }: PomodoroTimerProps) {
   const [open, setOpen] = useState(false)
   const [mode, setMode] = useState<PomodoroMode>('focus')
   const [timeLeft, setTimeLeft] = useState(DEFAULT_SETTINGS.focusTime)
@@ -254,10 +256,10 @@ export function PomodoroTimer({ className }: PomodoroTimerProps) {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Timer className="h-5 w-5 text-primary" />
-            Pomodoro Timer
+            {t.dialogs.pomodoro.title}
           </DialogTitle>
           <DialogDescription>
-            Use the Pomodoro technique for focused writing sessions
+            {t.dialogs.pomodoro.description || "Use the Pomodoro technique for focused writing sessions"}
           </DialogDescription>
         </DialogHeader>
 

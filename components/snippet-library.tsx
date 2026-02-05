@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface Snippet {
   id: string
@@ -25,6 +26,7 @@ interface Snippet {
 interface SnippetLibraryProps {
   className?: string
   onInsertSnippet: (content: string) => void
+  t: LocaleTranslations
 }
 
 const snippets: Snippet[] = [
@@ -150,7 +152,7 @@ const snippets: Snippet[] = [
 
 const categories = Array.from(new Set(snippets.map(s => s.category)))
 
-export function SnippetLibrary({ className, onInsertSnippet }: SnippetLibraryProps) {
+export function SnippetLibrary({ className, onInsertSnippet, t }: SnippetLibraryProps) {
   const [open, setOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
@@ -187,10 +189,10 @@ export function SnippetLibrary({ className, onInsertSnippet }: SnippetLibraryPro
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <BookMarked className="h-5 w-5 text-primary" />
-            Markdown Snippet Library
+            {t.dialogs.snippets.title}
           </DialogTitle>
           <DialogDescription>
-            Quick access to reusable markdown patterns and templates
+            {t.dialogs.snippets.description || "Quick access to reusable markdown patterns and templates"}
           </DialogDescription>
         </DialogHeader>
 
