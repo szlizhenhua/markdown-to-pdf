@@ -1195,6 +1195,7 @@ ${previewCard.innerHTML}
                           isVertical={isVerticalView}
                           onToggle={() => setIsVerticalView(!isVerticalView)}
                           className="hidden sm:flex hover:!bg-primary/10 hover:!text-primary transition-colors"
+                          t={t}
                         />
                         <Button
                           variant="outline"

@@ -28,7 +28,10 @@ export const de = {
       characters: "Zeichen",
       words: "Wörter",
       lines: "Zeilen",
-      readingTime: "Lesezeit"
+      readingTime: "Lesezeit",
+      readingTimeLessThanOne: "< 1 Min",
+      readingTimeMinute: "Min",
+      readingTimeHour: "Std"
     }
   },
 
@@ -650,7 +653,25 @@ Wenn sie immer noch nicht angezeigt werden, überprüfen Sie, ob die Formelsynta
     hideTools: "Tools ausblenden",
     exportTXT: "TXT",
     special: "Spezial",
-    lineOps: "Zeilenoperationen"
+    lineOps: "Zeilenoperationen",
+    focus: "Fokus",
+    focused: "Fokussiert",
+    exportMarkdownLabel: "Export .md",
+    splitView: {
+      sideBySide: "Nebeneinander",
+      vertical: "Vertikal",
+      switchToSideBySide: "Zur Nebeneinander-Ansicht wechseln",
+      switchToVertical: "Zur vertikalen Ansicht wechseln"
+    },
+    lineOpsActions: {
+      duplicate: "Zeile duplizieren",
+      delete: "Zeile löschen",
+      join: "Verbinden",
+      sortAsc: "Sortieren ↑",
+      sortDesc: "Sortieren ↓",
+      reverse: "Umkehren",
+      clean: "Bereinigen"
+    }
   },
 
   // Dialogs
@@ -662,7 +683,18 @@ Wenn sie immer noch nicht angezeigt werden, überprüfen Sie, ob die Formelsynta
       title: "Fokusmodus",
       enter: "Fokusmodus betreten",
       exit: "Fokusmodus beenden",
-      description: "Ablenkungsfreie Schreibumgebung"
+      description: "Ablenkungsfreie Schreibumgebung",
+      activeHint: "Fokusmodus aktiv – Esc zum Beenden"
+    },
+    markdownExport: {
+      title: "Markdown exportieren",
+      description: "Markdown als .md-Datei herunterladen oder in die Zwischenablage kopieren",
+      filenameLabel: "Dateiname",
+      filenamePlaceholder: "document",
+      filenameHint: "Datei wird als \"{filename}\" gespeichert",
+      download: ".md herunterladen",
+      copy: "In Zwischenablage kopieren",
+      fileInfoTitle: "Dateiinfo:"
     },
     wordGoal: {
       title: "Wortziel-Tracker",
@@ -671,7 +703,8 @@ Wenn sie immer noch nicht angezeigt werden, überprüfen Sie, ob die Formelsynta
       goalWords: "Ziel",
       remaining: "Verbleibend",
       progress: "Fortschritt",
-      achieved: "Ziel erreicht! 🎉"
+      achieved: "Ziel erreicht! 🎉",
+      doneBadge: "Fertig"
     },
     timeTracker: {
       title: "Zeit-Tracker",

@@ -28,7 +28,10 @@ export const es = {
       characters: "Caracteres",
       words: "Palabras",
       lines: "Líneas",
-      readingTime: "Tiempo de lectura"
+      readingTime: "Tiempo de lectura",
+      readingTimeLessThanOne: "< 1 min",
+      readingTimeMinute: "min",
+      readingTimeHour: "h"
     }
   },
 
@@ -650,7 +653,25 @@ Si aún no se muestran, verifica si la sintaxis de la fórmula es correcta.
     hideTools: "Ocultar herramientas",
     exportTXT: "TXT",
     special: "Especial",
-    lineOps: "Operaciones de línea"
+    lineOps: "Operaciones de línea",
+    focus: "Enfocar",
+    focused: "Enfocado",
+    exportMarkdownLabel: "Exportar .md",
+    splitView: {
+      sideBySide: "Lado a lado",
+      vertical: "Vertical",
+      switchToSideBySide: "Cambiar a vista lado a lado",
+      switchToVertical: "Cambiar a vista vertical"
+    },
+    lineOpsActions: {
+      duplicate: "Duplicar línea",
+      delete: "Eliminar línea",
+      join: "Unir",
+      sortAsc: "Ordenar ↑",
+      sortDesc: "Ordenar ↓",
+      reverse: "Invertir",
+      clean: "Limpiar"
+    }
   },
 
   // Dialogs
@@ -662,7 +683,18 @@ Si aún no se muestran, verifica si la sintaxis de la fórmula es correcta.
       title: "Modo de enfoque",
       enter: "Entrar en modo de enfoque",
       exit: "Salir del modo de enfoque",
-      description: "Entorno de escritura sin distracciones"
+      description: "Entorno de escritura sin distracciones",
+      activeHint: "Modo enfoque activo - Presiona Esc para salir"
+    },
+    markdownExport: {
+      title: "Exportar Markdown",
+      description: "Descarga tu markdown como .md o copia al portapapeles",
+      filenameLabel: "Nombre de archivo",
+      filenamePlaceholder: "document",
+      filenameHint: "El archivo se guardará como \"{filename}\"",
+      download: "Descargar .md",
+      copy: "Copiar al portapapeles",
+      fileInfoTitle: "Info del archivo:"
     },
     wordGoal: {
       title: "Rastreador de objetivos de palabras",
@@ -671,7 +703,8 @@ Si aún no se muestran, verifica si la sintaxis de la fórmula es correcta.
       goalWords: "Objetivo",
       remaining: "Restantes",
       progress: "Progreso",
-      achieved: "¡Objetivo alcanzado! 🎉"
+      achieved: "¡Objetivo alcanzado! 🎉",
+      doneBadge: "Listo"
     },
     timeTracker: {
       title: "Rastreador de tiempo",

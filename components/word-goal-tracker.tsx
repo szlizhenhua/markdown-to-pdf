@@ -146,7 +146,7 @@ export function WordGoalTracker({ className, content, t }: WordGoalTrackerProps)
           </span>
           {goalReached && (
             <Badge variant="secondary" className="ml-1 text-[10px] px-1 py-0 h-4">
-              Done!
+              {t.dialogs.wordGoal.doneBadge}
             </Badge>
           )}
         </Button>

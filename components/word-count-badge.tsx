@@ -1,13 +1,15 @@
 'use client'
 
 import { memo } from 'react'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface WordCountBadgeProps {
   content: string
   className?: string
+  t: LocaleTranslations
 }
 
-export const WordCountBadge = memo(function WordCountBadge({ content, className }: WordCountBadgeProps) {
+export const WordCountBadge = memo(function WordCountBadge({ content, className, t }: WordCountBadgeProps) {
   // Count words
   const wordCount = content.trim().split(/\s+/).filter(word => word.length > 0).length
 
@@ -23,9 +25,9 @@ export const WordCountBadge = memo(function WordCountBadge({ content, className 
 
   return (
     <div className={`flex items-center gap-2 text-xs text-muted-foreground ${className}`}>
-      <span className="hidden sm:inline">{formatNumber(wordCount)} words</span>
+      <span className="hidden sm:inline">{formatNumber(wordCount)} {t.editor.stats.words}</span>
       <span className="hidden sm:inline">·</span>
-      <span>{formatNumber(charCount)} chars</span>
+      <span>{formatNumber(charCount)} {t.editor.stats.characters}</span>
     </div>
   )
 })

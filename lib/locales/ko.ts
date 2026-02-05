@@ -28,7 +28,10 @@ export const ko = {
       characters: "문자",
       words: "단어",
       lines: "줄",
-      readingTime: "읽는 시간"
+      readingTime: "읽는 시간",
+      readingTimeLessThanOne: "< 1분",
+      readingTimeMinute: "분",
+      readingTimeHour: "시간"
     }
   },
 
@@ -650,7 +653,25 @@ def quicksort(arr):
     hideTools: "도구 숨기기",
     exportTXT: "TXT",
     special: "특수",
-    lineOps: "줄 작업"
+    lineOps: "줄 작업",
+    focus: "집중",
+    focused: "집중 중",
+    exportMarkdownLabel: "내보내기 .md",
+    splitView: {
+      sideBySide: "나란히",
+      vertical: "세로",
+      switchToSideBySide: "나란히 보기로 전환",
+      switchToVertical: "세로 보기로 전환"
+    },
+    lineOpsActions: {
+      duplicate: "줄 복제",
+      delete: "줄 삭제",
+      join: "합치기",
+      sortAsc: "오름차순",
+      sortDesc: "내림차순",
+      reverse: "반전",
+      clean: "정리"
+    }
   },
 
   // Dialogs
@@ -662,7 +683,18 @@ def quicksort(arr):
       title: "집중 모드",
       enter: "집중 모드 시작",
       exit: "집중 모드 종료",
-      description: "산만하지 않은 글쓰기 환경"
+      description: "산만하지 않은 글쓰기 환경",
+      activeHint: "집중 모드 활성화됨 - Esc로 종료"
+    },
+    markdownExport: {
+      title: "Markdown 내보내기",
+      description: "Markdown을 .md 파일로 다운로드하거나 클립보드에 복사합니다",
+      filenameLabel: "파일명",
+      filenamePlaceholder: "document",
+      filenameHint: "파일은 \"{filename}\" 로 저장됩니다",
+      download: ".md 다운로드",
+      copy: "클립보드에 복사",
+      fileInfoTitle: "파일 정보:"
     },
     wordGoal: {
       title: "단어 목표 추적기",
@@ -671,7 +703,8 @@ def quicksort(arr):
       goalWords: "목표",
       remaining: "남음",
       progress: "진행률",
-      achieved: "목표 달성! 🎉"
+      achieved: "목표 달성! 🎉",
+      doneBadge: "완료"
     },
     timeTracker: {
       title: "시간 추적기",

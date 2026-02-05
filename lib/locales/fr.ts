@@ -28,7 +28,10 @@ export const fr = {
       characters: "Caractères",
       words: "Mots",
       lines: "Lignes",
-      readingTime: "Temps de lecture"
+      readingTime: "Temps de lecture",
+      readingTimeLessThanOne: "< 1 min",
+      readingTimeMinute: "min",
+      readingTimeHour: "h"
     }
   },
 
@@ -650,7 +653,25 @@ Si elles ne s'affichent toujours pas, vérifiez si la syntaxe de la formule est 
     hideTools: "Masquer les outils",
     exportTXT: "TXT",
     special: "Spécial",
-    lineOps: "Opérations de ligne"
+    lineOps: "Opérations de ligne",
+    focus: "Focus",
+    focused: "Concentré",
+    exportMarkdownLabel: "Exporter .md",
+    splitView: {
+      sideBySide: "Côte à côte",
+      vertical: "Vertical",
+      switchToSideBySide: "Passer en vue côte à côte",
+      switchToVertical: "Passer en vue verticale"
+    },
+    lineOpsActions: {
+      duplicate: "Dupliquer la ligne",
+      delete: "Supprimer la ligne",
+      join: "Fusionner",
+      sortAsc: "Trier ↑",
+      sortDesc: "Trier ↓",
+      reverse: "Inverser",
+      clean: "Nettoyer"
+    }
   },
 
   // Dialogs
@@ -662,7 +683,18 @@ Si elles ne s'affichent toujours pas, vérifiez si la syntaxe de la formule est 
       title: "Mode focus",
       enter: "Entrer en mode focus",
       exit: "Quitter le mode focus",
-      description: "Environnement d'écriture sans distraction"
+      description: "Environnement d'écriture sans distraction",
+      activeHint: "Mode Focus activé - Appuyez sur Échap pour quitter"
+    },
+    markdownExport: {
+      title: "Exporter Markdown",
+      description: "Téléchargez votre markdown en .md ou copiez-le dans le presse-papiers",
+      filenameLabel: "Nom de fichier",
+      filenamePlaceholder: "document",
+      filenameHint: "Le fichier sera enregistré sous \"{filename}\"",
+      download: "Télécharger .md",
+      copy: "Copier dans le presse-papiers",
+      fileInfoTitle: "Infos du fichier :"
     },
     wordGoal: {
       title: "Suivi des objectifs de mots",
@@ -671,7 +703,8 @@ Si elles ne s'affichent toujours pas, vérifiez si la syntaxe de la formule est 
       goalWords: "Objectif",
       remaining: "Restant",
       progress: "Progrès",
-      achieved: "Objectif atteint ! 🎉"
+      achieved: "Objectif atteint ! 🎉",
+      doneBadge: "Terminé"
     },
     timeTracker: {
       title: "Suivi du temps",

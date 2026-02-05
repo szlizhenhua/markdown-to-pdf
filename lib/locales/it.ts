@@ -28,7 +28,10 @@ export const it = {
       characters: "Caratteri",
       words: "Parole",
       lines: "Righe",
-      readingTime: "Tempo di lettura"
+      readingTime: "Tempo di lettura",
+      readingTimeLessThanOne: "< 1 min",
+      readingTimeMinute: "min",
+      readingTimeHour: "h"
     }
   },
 
@@ -650,7 +653,25 @@ Se ancora non vengono visualizzate, verifica se la sintassi della formula è cor
     hideTools: "Nascondi strumenti",
     exportTXT: "TXT",
     special: "Speciale",
-    lineOps: "Operazioni di riga"
+    lineOps: "Operazioni di riga",
+    focus: "Focus",
+    focused: "In focus",
+    exportMarkdownLabel: "Esporta .md",
+    splitView: {
+      sideBySide: "Affiancato",
+      vertical: "Verticale",
+      switchToSideBySide: "Passa alla vista affiancata",
+      switchToVertical: "Passa alla vista verticale"
+    },
+    lineOpsActions: {
+      duplicate: "Duplica riga",
+      delete: "Elimina riga",
+      join: "Unisci",
+      sortAsc: "Ordina ↑",
+      sortDesc: "Ordina ↓",
+      reverse: "Inverti",
+      clean: "Pulisci"
+    }
   },
 
   // Dialogs
@@ -662,7 +683,18 @@ Se ancora non vengono visualizzate, verifica se la sintassi della formula è cor
       title: "Modalità focus",
       enter: "Entra in modalità focus",
       exit: "Esci dalla modalità focus",
-      description: "Ambiente di scrittura senza distrazioni"
+      description: "Ambiente di scrittura senza distrazioni",
+      activeHint: "Modalità focus attiva - Premi Esc per uscire"
+    },
+    markdownExport: {
+      title: "Esporta Markdown",
+      description: "Scarica il markdown come .md o copialo negli appunti",
+      filenameLabel: "Nome file",
+      filenamePlaceholder: "document",
+      filenameHint: "Il file verrà salvato come \"{filename}\"",
+      download: "Scarica .md",
+      copy: "Copia negli appunti",
+      fileInfoTitle: "Info file:"
     },
     wordGoal: {
       title: "Tracker obiettivo parole",
@@ -671,7 +703,8 @@ Se ancora non vengono visualizzate, verifica se la sintassi della formula è cor
       goalWords: "Obiettivo",
       remaining: "Rimanenti",
       progress: "Progresso",
-      achieved: "Obiettivo raggiunto! 🎉"
+      achieved: "Obiettivo raggiunto! 🎉",
+      doneBadge: "Fatto"
     },
     timeTracker: {
       title: "Tracker del tempo",

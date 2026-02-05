@@ -244,7 +244,7 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
         <CopyToClipboard content={content} />
         <FullScreenToggle />
         <PrintPreview content={content} />
-        <MarkdownExport content={content} />
+        <MarkdownExport content={content} t={t} />
         <TypographyControls
           onFontSizeChange={onFontSizeChange}
           onLineHeightChange={onLineHeightChange}
@@ -290,8 +290,8 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
         {content && (
           <>
             <div className="w-px h-6 bg-border mx-1 hidden sm:block" />
-            <WordCountBadge content={content} />
-            <ReadingTimeBadge content={content} />
+            <WordCountBadge content={content} t={t} />
+            <ReadingTimeBadge content={content} t={t} />
           </>
         )}
       </div>
@@ -335,7 +335,7 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
       {content && onReplace && (
         <div className="flex items-center gap-1 p-2 pt-0 flex-wrap border-t">
           <span className="text-xs text-muted-foreground mr-2">{t.toolbar.lineOps}:</span>
-          <LineOperations content={content} onReplace={onReplace} />
+          <LineOperations content={content} onReplace={onReplace} t={t} />
         </div>
       )}
     </div>

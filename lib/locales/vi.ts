@@ -28,7 +28,10 @@ export const vi = {
       characters: "Tekens",
       words: "Woorden",
       lines: "Regels",
-      readingTime: "Leestijd"
+      readingTime: "Leestijd",
+      readingTimeLessThanOne: "< 1 phút",
+      readingTimeMinute: "phút",
+      readingTimeHour: "giờ"
     }
   },
 
@@ -650,7 +653,25 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
     hideTools: "Tools verbergen",
     exportTXT: "TXT",
     special: "Speciaal",
-    lineOps: "Regelbewerkingen"
+    lineOps: "Regelbewerkingen",
+    focus: "Tập trung",
+    focused: "Đang tập trung",
+    exportMarkdownLabel: "Xuất .md",
+    splitView: {
+      sideBySide: "Song song",
+      vertical: "Dọc",
+      switchToSideBySide: "Chuyển sang chế độ song song",
+      switchToVertical: "Chuyển sang chế độ dọc"
+    },
+    lineOpsActions: {
+      duplicate: "Nhân đôi dòng",
+      delete: "Xóa dòng",
+      join: "Gộp",
+      sortAsc: "Sắp xếp ↑",
+      sortDesc: "Sắp xếp ↓",
+      reverse: "Đảo ngược",
+      clean: "Làm sạch"
+    }
   },
 
   // Dialogs
@@ -662,7 +683,18 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       title: "Focusmodus",
       enter: "Focusmodus betreden",
       exit: "Focusmodus verlaten",
-      description: "Afleidingsvrij schrijfmilieu"
+      description: "Afleidingsvrij schrijfmilieu",
+      activeHint: "Chế độ tập trung đang bật - Nhấn Esc để thoát"
+    },
+    markdownExport: {
+      title: "Xuất Markdown",
+      description: "Tải markdown dưới dạng .md hoặc sao chép vào clipboard",
+      filenameLabel: "Tên tệp",
+      filenamePlaceholder: "document",
+      filenameHint: "Tệp sẽ được lưu dưới dạng \"{filename}\"",
+      download: "Tải .md",
+      copy: "Sao chép vào clipboard",
+      fileInfoTitle: "Thông tin tệp:"
     },
     wordGoal: {
       title: "Woordendoel-tracker",
@@ -671,7 +703,8 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       goalWords: "Doel",
       remaining: "Resterend",
       progress: "Voortgang",
-      achieved: "Doel bereikt! 🎉"
+      achieved: "Doel bereikt! 🎉",
+      doneBadge: "Xong"
     },
     timeTracker: {
       title: "Giờstracker",

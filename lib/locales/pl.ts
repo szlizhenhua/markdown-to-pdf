@@ -28,7 +28,10 @@ export const pl = {
       characters: "Tekens",
       words: "Woorden",
       lines: "Regels",
-      readingTime: "Leestijd"
+      readingTime: "Leestijd",
+      readingTimeLessThanOne: "< 1 min",
+      readingTimeMinute: "min",
+      readingTimeHour: "h"
     }
   },
 
@@ -650,7 +653,25 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
     hideTools: "Tools verbergen",
     exportTXT: "TXT",
     special: "Speciaal",
-    lineOps: "Regelbewerkingen"
+    lineOps: "Regelbewerkingen",
+    focus: "Skupienie",
+    focused: "Skupiony",
+    exportMarkdownLabel: "Eksportuj .md",
+    splitView: {
+      sideBySide: "Obok siebie",
+      vertical: "Pionowo",
+      switchToSideBySide: "Przełącz na widok obok siebie",
+      switchToVertical: "Przełącz na widok pionowy"
+    },
+    lineOpsActions: {
+      duplicate: "Duplikuj wiersz",
+      delete: "Usuń wiersz",
+      join: "Połącz",
+      sortAsc: "Sortuj ↑",
+      sortDesc: "Sortuj ↓",
+      reverse: "Odwróć",
+      clean: "Wyczyść"
+    }
   },
 
   // Dialogs
@@ -662,7 +683,18 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       title: "Focusmodus",
       enter: "Focusmodus betreden",
       exit: "Focusmodus verlaten",
-      description: "Afleidingsvrij schrijfmilieu"
+      description: "Afleidingsvrij schrijfmilieu",
+      activeHint: "Tryb skupienia aktywny — naciśnij Esc, aby wyjść"
+    },
+    markdownExport: {
+      title: "Eksportuj Markdown",
+      description: "Pobierz markdown jako .md lub skopiuj do schowka",
+      filenameLabel: "Nazwa pliku",
+      filenamePlaceholder: "document",
+      filenameHint: "Plik zostanie zapisany jako \"{filename}\"",
+      download: "Pobierz .md",
+      copy: "Kopiuj do schowka",
+      fileInfoTitle: "Informacje o pliku:"
     },
     wordGoal: {
       title: "Woordendoel-tracker",
@@ -671,7 +703,8 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       goalWords: "Doel",
       remaining: "Resterend",
       progress: "Voortgang",
-      achieved: "Doel bereikt! 🎉"
+      achieved: "Doel bereikt! 🎉",
+      doneBadge: "Gotowe"
     },
     timeTracker: {
       title: "Czasstracker",

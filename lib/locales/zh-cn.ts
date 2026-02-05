@@ -28,7 +28,10 @@ export const zhCN = {
       characters: "字符",
       words: "词数",
       lines: "行数",
-      readingTime: "阅读时间"
+      readingTime: "阅读时间",
+      readingTimeLessThanOne: "< 1 分钟",
+      readingTimeMinute: "分钟",
+      readingTimeHour: "小时"
     }
   },
 
@@ -654,7 +657,25 @@ def quicksort(arr):
     hideTools: "隐藏功能按钮",
     exportTXT: "TXT",
     special: "特殊格式",
-    lineOps: "行操作"
+    lineOps: "行操作",
+    focus: "专注",
+    focused: "专注中",
+    exportMarkdownLabel: "导出 .md",
+    splitView: {
+      sideBySide: "并排",
+      vertical: "上下",
+      switchToSideBySide: "切换为并排视图",
+      switchToVertical: "切换为上下视图"
+    },
+    lineOpsActions: {
+      duplicate: "复制行",
+      delete: "删除行",
+      join: "合并",
+      sortAsc: "升序排序",
+      sortDesc: "降序排序",
+      reverse: "反转",
+      clean: "清理"
+    }
   },
 
   // Dialogs
@@ -666,7 +687,18 @@ def quicksort(arr):
       title: "专注模式",
       enter: "进入专注模式",
       exit: "退出专注模式",
-      description: "无干扰写作环境"
+      description: "无干扰写作环境",
+      activeHint: "专注模式已开启 - 按 Esc 退出"
+    },
+    markdownExport: {
+      title: "导出 Markdown",
+      description: "将 Markdown 下载为 .md 文件或复制到剪贴板",
+      filenameLabel: "文件名",
+      filenamePlaceholder: "document",
+      filenameHint: "文件将保存为 \"{filename}\"",
+      download: "下载 .md",
+      copy: "复制到剪贴板",
+      fileInfoTitle: "文件信息："
     },
     wordGoal: {
       title: "字数目标追踪",
@@ -675,7 +707,8 @@ def quicksort(arr):
       goalWords: "目标",
       remaining: "剩余",
       progress: "进度",
-      achieved: "目标达成！🎉"
+      achieved: "目标达成！🎉",
+      doneBadge: "完成"
     },
     timeTracker: {
       title: "时间追踪",

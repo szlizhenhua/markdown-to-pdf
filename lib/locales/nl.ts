@@ -28,7 +28,10 @@ export const nl = {
       characters: "Tekens",
       words: "Woorden",
       lines: "Regels",
-      readingTime: "Leestijd"
+      readingTime: "Leestijd",
+      readingTimeLessThanOne: "< 1 min",
+      readingTimeMinute: "min",
+      readingTimeHour: "u"
     }
   },
 
@@ -650,7 +653,25 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
     hideTools: "Tools verbergen",
     exportTXT: "TXT",
     special: "Speciaal",
-    lineOps: "Regelbewerkingen"
+        lineOps: "Regelbewerkingen",
+        focus: "Focus",
+        focused: "Gefocust",
+        exportMarkdownLabel: "Exporteer .md",
+        splitView: {
+          sideBySide: "Naast elkaar",
+          vertical: "Verticaal",
+          switchToSideBySide: "Schakel naar naast-elkaar weergave",
+          switchToVertical: "Schakel naar verticale weergave"
+        },
+        lineOpsActions: {
+          duplicate: "Regel dupliceren",
+          delete: "Regel verwijderen",
+          join: "Samenvoegen",
+          sortAsc: "Sorteren ↑",
+          sortDesc: "Sorteren ↓",
+          reverse: "Omkeren",
+          clean: "Opschonen"
+        }
   },
 
   // Dialogs
@@ -662,7 +683,8 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       title: "Focusmodus",
       enter: "Focusmodus betreden",
       exit: "Focusmodus verlaten",
-      description: "Afleidingsvrij schrijfmilieu"
+      description: "Afleidingsvrij schrijfmilieu",
+      activeHint: "Focusmodus actief - Druk op Esc om te stoppen"
     },
     wordGoal: {
       title: "Woordendoel-tracker",
@@ -671,7 +693,8 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       goalWords: "Doel",
       remaining: "Resterend",
       progress: "Voortgang",
-      achieved: "Doel bereikt! 🎉"
+      achieved: "Doel bereikt! 🎉",
+      doneBadge: "Klaar"
     },
     timeTracker: {
       title: "Tijdstracker",
@@ -689,6 +712,16 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       dailyTimeGoal: "Dagelijks tijddoel",
       hours: "2 uur",
       recentSessions: "Recente sessies"
+    },
+    markdownExport: {
+      title: "Markdown exporteren",
+      description: "Download je markdown als .md of kopieer naar het klembord",
+      filenameLabel: "Bestandsnaam",
+      filenamePlaceholder: "document",
+      filenameHint: "Bestand wordt opgeslagen als \"{filename}\"",
+      download: ".md downloaden",
+      copy: "Kopieer naar klembord",
+      fileInfoTitle: "Bestandsinfo:"
     },
     pomodoro: {
       title: "Pomodoro-timer",

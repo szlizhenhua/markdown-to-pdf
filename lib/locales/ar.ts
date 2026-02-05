@@ -28,7 +28,10 @@ export const ar = {
       characters: "الأحرف",
       words: "الكلمات",
       lines: "الأسطر",
-      readingTime: "وقت القراءة"
+      readingTime: "وقت القراءة",
+      readingTimeLessThanOne: "< 1 د",
+      readingTimeMinute: "د",
+      readingTimeHour: "س"
     }
   },
 
@@ -650,7 +653,25 @@ def quicksort(arr):
     hideTools: "إخفاء الأدوات",
     exportTXT: "TXT",
     special: "خاص",
-    lineOps: "عمليات السطر"
+    lineOps: "عمليات السطر",
+    focus: "تركيز",
+    focused: "قيد التركيز",
+    exportMarkdownLabel: "تصدير .md",
+    splitView: {
+      sideBySide: "جنبًا إلى جنب",
+      vertical: "عمودي",
+      switchToSideBySide: "التبديل إلى عرض جنبًا إلى جنب",
+      switchToVertical: "التبديل إلى العرض العمودي"
+    },
+    lineOpsActions: {
+      duplicate: "تكرار السطر",
+      delete: "حذف السطر",
+      join: "دمج",
+      sortAsc: "فرز ↑",
+      sortDesc: "فرز ↓",
+      reverse: "عكس",
+      clean: "تنظيف"
+    }
   },
 
   // Dialogs
@@ -662,7 +683,18 @@ def quicksort(arr):
       title: "وضع التركيز",
       enter: "دخول وضع التركيز",
       exit: "خروج وضع التركيز",
-      description: "بيئة كتابة بدون تشتيت"
+      description: "بيئة كتابة بدون تشتيت",
+      activeHint: "وضع التركيز نشط - اضغط Esc للخروج"
+    },
+    markdownExport: {
+      title: "تصدير Markdown",
+      description: "قم بتنزيل markdown كملف .md أو نسخه إلى الحافظة",
+      filenameLabel: "اسم الملف",
+      filenamePlaceholder: "document",
+      filenameHint: "سيتم حفظ الملف باسم \"{filename}\"",
+      download: "تنزيل .md",
+      copy: "نسخ إلى الحافظة",
+      fileInfoTitle: "معلومات الملف:"
     },
     wordGoal: {
       title: "متتبع هدف الكلمات",
@@ -671,7 +703,8 @@ def quicksort(arr):
       goalWords: "الهدف",
       remaining: "المتبقي",
       progress: "التقدم",
-      achieved: "تم تحقيق الهدف! 🎉"
+      achieved: "تم تحقيق الهدف! 🎉",
+      doneBadge: "تم"
     },
     timeTracker: {
       title: "متتبع الوقت",

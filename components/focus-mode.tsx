@@ -77,12 +77,12 @@ export function FocusMode({ className, t }: FocusModeProps) {
         aria-pressed={isFocusMode}
       >
         <Monitor className="h-4 w-4 mr-1" />
-        {isFocusMode ? 'Focused' : 'Focus'}
+        {isFocusMode ? t.toolbar.focused : t.toolbar.focus}
       </Button>
 
       {isFocusMode && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg text-sm">
-          Focus Mode Active - Press Esc to exit
+          {t.dialogs.focusMode.activeHint}
         </div>
       )}
     </>

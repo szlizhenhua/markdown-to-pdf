@@ -28,7 +28,10 @@ export const en = {
       characters: "Characters",
       words: "Words",
       lines: "Lines",
-      readingTime: "Reading time"
+      readingTime: "Reading time",
+      readingTimeLessThanOne: "< 1 min",
+      readingTimeMinute: "min",
+      readingTimeHour: "h"
     }
   },
 
@@ -654,7 +657,25 @@ If still not displaying, please check if the formula syntax is correct.
     hideTools: "Hide tools",
     exportTXT: "TXT",
     special: "Special",
-    lineOps: "Line Ops"
+    lineOps: "Line Ops",
+    focus: "Focus",
+    focused: "Focused",
+    exportMarkdownLabel: "Export .md",
+    splitView: {
+      sideBySide: "Side by Side",
+      vertical: "Vertical",
+      switchToSideBySide: "Switch to side by side view",
+      switchToVertical: "Switch to vertical view"
+    },
+    lineOpsActions: {
+      duplicate: "Duplicate line",
+      delete: "Delete Line",
+      join: "Join",
+      sortAsc: "Sort ↑",
+      sortDesc: "Sort ↓",
+      reverse: "Reverse",
+      clean: "Clean"
+    }
   },
 
   // Dialogs
@@ -666,7 +687,18 @@ If still not displaying, please check if the formula syntax is correct.
       title: "Focus Mode",
       enter: "Enter Focus Mode",
       exit: "Exit Focus Mode",
-      description: "Distraction-free writing environment"
+      description: "Distraction-free writing environment",
+      activeHint: "Focus Mode Active - Press Esc to exit"
+    },
+    markdownExport: {
+      title: "Export Markdown",
+      description: "Download your markdown as a .md file or copy to clipboard",
+      filenameLabel: "Filename",
+      filenamePlaceholder: "document",
+      filenameHint: "File will be saved as \"{filename}\"",
+      download: "Download .md",
+      copy: "Copy to Clipboard",
+      fileInfoTitle: "File Info:"
     },
     wordGoal: {
       title: "Word Goal Tracker",
@@ -675,7 +707,8 @@ If still not displaying, please check if the formula syntax is correct.
       goalWords: "Goal",
       remaining: "Remaining",
       progress: "Progress",
-      achieved: "Goal achieved! 🎉"
+      achieved: "Goal achieved! 🎉",
+      doneBadge: "Done!"
     },
     timeTracker: {
       title: "Time Tracker",

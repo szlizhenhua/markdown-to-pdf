@@ -28,7 +28,10 @@ export const ja = {
       characters: "文字",
       words: "単語",
       lines: "行",
-      readingTime: "読了時間"
+      readingTime: "読了時間",
+      readingTimeLessThanOne: "< 1 分",
+      readingTimeMinute: "分",
+      readingTimeHour: "時間"
     }
   },
 
@@ -650,7 +653,25 @@ def quicksort(arr):
     hideTools: "ツールを非表示",
     exportTXT: "TXT",
     special: "特別",
-    lineOps: "行操作"
+    lineOps: "行操作",
+    focus: "集中",
+    focused: "集中中",
+    exportMarkdownLabel: "エクスポート .md",
+    splitView: {
+      sideBySide: "横並び",
+      vertical: "縦",
+      switchToSideBySide: "横並び表示に切り替え",
+      switchToVertical: "縦表示に切り替え"
+    },
+    lineOpsActions: {
+      duplicate: "行を複製",
+      delete: "行を削除",
+      join: "結合",
+      sortAsc: "昇順",
+      sortDesc: "降順",
+      reverse: "反転",
+      clean: "整理"
+    }
   },
 
   // Dialogs
@@ -662,7 +683,18 @@ def quicksort(arr):
       title: "フォーカスモード",
       enter: "フォーカスモードに入る",
       exit: "フォーカスモードを終了",
-      description: "気を散らさない執筆環境"
+      description: "気を散らさない執筆環境",
+      activeHint: "集中モード中 - Esc で終了"
+    },
+    markdownExport: {
+      title: "Markdown をエクスポート",
+      description: "Markdown を .md ファイルでダウンロードするかクリップボードにコピーします",
+      filenameLabel: "ファイル名",
+      filenamePlaceholder: "document",
+      filenameHint: "ファイルは \"{filename}\" として保存されます",
+      download: ".md をダウンロード",
+      copy: "クリップボードにコピー",
+      fileInfoTitle: "ファイル情報："
     },
     wordGoal: {
       title: "単語目標トラッカー",
@@ -671,7 +703,8 @@ def quicksort(arr):
       goalWords: "目標",
       remaining: "残り",
       progress: "進捗",
-      achieved: "目標達成！🎉"
+      achieved: "目標達成！🎉",
+      doneBadge: "完了"
     },
     timeTracker: {
       title: "時間トラッカー",

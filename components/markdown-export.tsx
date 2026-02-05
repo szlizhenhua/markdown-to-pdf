@@ -12,15 +12,18 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface MarkdownExportProps {
   content: string
   className?: string
+  t: LocaleTranslations
 }
 
-export function MarkdownExport({ content, className }: MarkdownExportProps) {
+export function MarkdownExport({ content, className, t }: MarkdownExportProps) {
   const [open, setOpen] = useState(false)
   const [filename, setFilename] = useState('document')
+  const safeFilename = filename.trim() || t.dialogs.markdownExport.filenamePlaceholder
 
   const handleExport = () => {
     if (!content) return
@@ -31,7 +34,6 @@ export function MarkdownExport({ content, className }: MarkdownExportProps) {
 
     // Create temporary link and trigger download
     const link = document.createElement('a')
-    const safeFilename = filename.trim() || 'document'
     link.href = url
     link.download = safeFilename.endsWith('.md') ? safeFilename : `${safeFilename}.md`
     document.body.appendChild(link)
@@ -60,31 +62,31 @@ export function MarkdownExport({ content, className }: MarkdownExportProps) {
           variant="ghost"
           size="sm"
           className={`h-8 px-2 touch-manipulation text-xs ${className}`}
-          title="Export markdown"
-          aria-label="Export markdown"
+          title={t.dialogs.markdownExport.title}
+          aria-label={t.dialogs.markdownExport.title}
           disabled={!content}
         >
           <FileDown className="h-4 w-4" />
-          <span className="hidden sm:inline ml-1">Export .md</span>
+          <span className="hidden sm:inline ml-1">{t.toolbar.exportMarkdownLabel}</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Export Markdown</DialogTitle>
+          <DialogTitle>{t.dialogs.markdownExport.title}</DialogTitle>
           <DialogDescription>
-            Download your markdown as a .md file or copy to clipboard
+            {t.dialogs.markdownExport.description}
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 py-4">
           <div className="space-y-2">
             <label htmlFor="filename" className="text-sm font-medium">
-              Filename
+              {t.dialogs.markdownExport.filenameLabel}
             </label>
             <Input
               id="filename"
               value={filename}
               onChange={(e) => setFilename(e.target.value)}
-              placeholder="document"
+              placeholder={t.dialogs.markdownExport.filenamePlaceholder}
               className="w-full"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
@@ -93,7 +95,7 @@ export function MarkdownExport({ content, className }: MarkdownExportProps) {
               }}
             />
             <p className="text-xs text-muted-foreground">
-              File will be saved as &quot;<code>{filename || 'document'}.md</code>&quot;
+              {t.dialogs.markdownExport.filenameHint.replace('{filename}', `${safeFilename}.md`)}
             </p>
           </div>
 
@@ -104,7 +106,7 @@ export function MarkdownExport({ content, className }: MarkdownExportProps) {
               disabled={!content}
             >
               <Download className="h-4 w-4 mr-2" />
-              Download .md
+              {t.dialogs.markdownExport.download}
             </Button>
             <Button
               onClick={handleCopy}
@@ -112,15 +114,15 @@ export function MarkdownExport({ content, className }: MarkdownExportProps) {
               className="flex-1"
               disabled={!content}
             >
-              Copy to Clipboard
+              {t.dialogs.markdownExport.copy}
             </Button>
           </div>
 
           <div className="text-xs text-muted-foreground bg-muted/50 p-3 rounded-md">
-            <p className="font-medium mb-1">File Info:</p>
-            <p>• Characters: {content.length.toLocaleString()}</p>
-            <p>• Words: {content.trim().split(/\s+/).filter(w => w.length > 0).length.toLocaleString()}</p>
-            <p>• Lines: {content.split('\n').length.toLocaleString()}</p>
+            <p className="font-medium mb-1">{t.dialogs.markdownExport.fileInfoTitle}</p>
+            <p>• {t.editor.stats.characters}: {content.length.toLocaleString()}</p>
+            <p>• {t.editor.stats.words}: {content.trim().split(/\s+/).filter(w => w.length > 0).length.toLocaleString()}</p>
+            <p>• {t.editor.stats.lines}: {content.split('\n').length.toLocaleString()}</p>
           </div>
         </div>
       </DialogContent>

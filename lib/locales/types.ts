@@ -24,6 +24,9 @@ export interface LocaleTranslations {
       words: string
       lines: string
       readingTime: string
+      readingTimeLessThanOne: string
+      readingTimeMinute: string
+      readingTimeHour: string
     }
   }
   preview: {
@@ -269,6 +272,24 @@ export interface LocaleTranslations {
     exportTXT: string
     special: string
     lineOps: string
+    focus: string
+    focused: string
+    exportMarkdownLabel: string
+    splitView: {
+      sideBySide: string
+      vertical: string
+      switchToSideBySide: string
+      switchToVertical: string
+    }
+    lineOpsActions: {
+      duplicate: string
+      delete: string
+      join: string
+      sortAsc: string
+      sortDesc: string
+      reverse: string
+      clean: string
+    }
   }
   dialogs: {
     markdownCheatSheet: string
@@ -279,6 +300,7 @@ export interface LocaleTranslations {
       enter: string
       exit: string
       description: string
+      activeHint: string
     }
     wordGoal: {
       title: string
@@ -288,6 +310,17 @@ export interface LocaleTranslations {
       remaining: string
       progress: string
       achieved: string
+      doneBadge: string
+    }
+    markdownExport: {
+      title: string
+      description: string
+      filenameLabel: string
+      filenamePlaceholder: string
+      filenameHint: string
+      download: string
+      copy: string
+      fileInfoTitle: string
     }
     timeTracker: {
       title: string

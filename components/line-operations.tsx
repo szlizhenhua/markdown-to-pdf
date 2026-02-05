@@ -3,14 +3,16 @@
 import { Button } from '@/components/ui/button'
 import { Copy } from 'lucide-react'
 import { useToast } from '@/lib/hooks/use-toast'
+import type { LocaleTranslations } from '@/lib/locales/types'
 
 interface LineOperationsProps {
   content: string
   onReplace: (oldContent: string, newContent: string) => void
   className?: string
+  t: LocaleTranslations
 }
 
-export function LineOperations({ content, onReplace, className }: LineOperationsProps) {
+export function LineOperations({ content, onReplace, className, t }: LineOperationsProps) {
   const { addToast } = useToast()
 
   const getCurrentLine = () => {
@@ -126,8 +128,8 @@ export function LineOperations({ content, onReplace, className }: LineOperations
         size="sm"
         onClick={duplicateLine}
         className="h-8 w-8 p-0 touch-manipulation"
-        title="Duplicate line"
-        aria-label="Duplicate line"
+        title={t.toolbar.lineOpsActions.duplicate}
+        aria-label={t.toolbar.lineOpsActions.duplicate}
       >
         <Copy className="h-4 w-4" />
       </Button>
@@ -136,60 +138,60 @@ export function LineOperations({ content, onReplace, className }: LineOperations
         size="sm"
         onClick={deleteLine}
         className="h-8 px-2 touch-manipulation text-xs"
-        title="Delete line"
-        aria-label="Delete line"
+        title={t.toolbar.lineOpsActions.delete}
+        aria-label={t.toolbar.lineOpsActions.delete}
       >
-        Delete Line
+        {t.toolbar.lineOpsActions.delete}
       </Button>
       <Button
         variant="ghost"
         size="sm"
         onClick={joinLines}
         className="h-8 px-2 touch-manipulation text-xs"
-        title="Join all lines"
-        aria-label="Join all lines"
+        title={t.toolbar.lineOpsActions.join}
+        aria-label={t.toolbar.lineOpsActions.join}
       >
-        Join
+        {t.toolbar.lineOpsActions.join}
       </Button>
       <Button
         variant="ghost"
         size="sm"
         onClick={sortLinesAsc}
         className="h-8 px-2 touch-manipulation text-xs"
-        title="Sort lines A-Z"
-        aria-label="Sort lines A-Z"
+        title={t.toolbar.lineOpsActions.sortAsc}
+        aria-label={t.toolbar.lineOpsActions.sortAsc}
       >
-        Sort ↑
+        {t.toolbar.lineOpsActions.sortAsc}
       </Button>
       <Button
         variant="ghost"
         size="sm"
         onClick={sortLinesDesc}
         className="h-8 px-2 touch-manipulation text-xs"
-        title="Sort lines Z-A"
-        aria-label="Sort lines Z-A"
+        title={t.toolbar.lineOpsActions.sortDesc}
+        aria-label={t.toolbar.lineOpsActions.sortDesc}
       >
-        Sort ↓
+        {t.toolbar.lineOpsActions.sortDesc}
       </Button>
       <Button
         variant="ghost"
         size="sm"
         onClick={reverseLines}
         className="h-8 px-2 touch-manipulation text-xs"
-        title="Reverse lines"
-        aria-label="Reverse lines"
+        title={t.toolbar.lineOpsActions.reverse}
+        aria-label={t.toolbar.lineOpsActions.reverse}
       >
-        Reverse
+        {t.toolbar.lineOpsActions.reverse}
       </Button>
       <Button
         variant="ghost"
         size="sm"
         onClick={removeEmptyLines}
         className="h-8 px-2 touch-manipulation text-xs"
-        title="Remove empty lines"
-        aria-label="Remove empty lines"
+        title={t.toolbar.lineOpsActions.clean}
+        aria-label={t.toolbar.lineOpsActions.clean}
       >
-        Clean
+        {t.toolbar.lineOpsActions.clean}
       </Button>
     </div>
   )

@@ -28,7 +28,10 @@ export const tr = {
       characters: "Karakter",
       words: "Kelime",
       lines: "Satır",
-      readingTime: "Okuma süresi"
+      readingTime: "Okuma süresi",
+      readingTimeLessThanOne: "< 1 dk",
+      readingTimeMinute: "dk",
+      readingTimeHour: "sa"
     }
   },
 
@@ -650,7 +653,25 @@ Hala görünmüyorsa, formül sözdiziminin doğru olup olmadığını kontrol e
     hideTools: "Araçları gizle",
     exportTXT: "TXT",
     special: "Özel",
-    lineOps: "Satır işlemleri"
+    lineOps: "Satır işlemleri",
+    focus: "Odak",
+    focused: "Odaklı",
+    exportMarkdownLabel: "Dışa aktar .md",
+    splitView: {
+      sideBySide: "Yan yana",
+      vertical: "Dikey",
+      switchToSideBySide: "Yan yana görünüme geç",
+      switchToVertical: "Dikey görünüme geç"
+    },
+    lineOpsActions: {
+      duplicate: "Satır kopyala",
+      delete: "Satırı sil",
+      join: "Birleştir",
+      sortAsc: "Sırala ↑",
+      sortDesc: "Sırala ↓",
+      reverse: "Ters çevir",
+      clean: "Temizle"
+    }
   },
 
   // Dialogs
@@ -662,7 +683,18 @@ Hala görünmüyorsa, formül sözdiziminin doğru olup olmadığını kontrol e
       title: "Odak Modu",
       enter: "Odak moduna gir",
       exit: "Odak modundan çık",
-      description: "Dağınıksız yazma ortamı"
+      description: "Dikkat dağıtmayan yazma ortamı",
+      activeHint: "Odak modu etkin - Çıkmak için Esc"
+    },
+    markdownExport: {
+      title: "Markdown Dışa Aktar",
+      description: "Markdown'u .md olarak indir veya panoya kopyala",
+      filenameLabel: "Dosya adı",
+      filenamePlaceholder: "document",
+      filenameHint: "Dosya \"{filename}\" olarak kaydedilecek",
+      download: ".md indir",
+      copy: "Panoya kopyala",
+      fileInfoTitle: "Dosya bilgisi:"
     },
     wordGoal: {
       title: "Kelime Hedefi Takipçisi",
@@ -671,7 +703,8 @@ Hala görünmüyorsa, formül sözdiziminin doğru olup olmadığını kontrol e
       goalWords: "Hedef",
       remaining: "Kalan",
       progress: "İlerleme",
-      achieved: "Hedefe ulaşıldı! 🎉"
+      achieved: "Hedefe ulaşıldı! 🎉",
+      doneBadge: "Bitti"
     },
     timeTracker: {
       title: "Zaman Takipçisi",

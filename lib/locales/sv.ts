@@ -28,7 +28,10 @@ export const sv = {
       characters: "Tekens",
       words: "Woorden",
       lines: "Regels",
-      readingTime: "Leestijd"
+      readingTime: "Leestijd",
+      readingTimeLessThanOne: "< 1 min",
+      readingTimeMinute: "min",
+      readingTimeHour: "h"
     }
   },
 
@@ -650,7 +653,25 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
     hideTools: "Tools verbergen",
     exportTXT: "TXT",
     special: "Speciaal",
-    lineOps: "Regelbewerkingen"
+    lineOps: "Regelbewerkingen",
+    focus: "Fokus",
+    focused: "Fokuserad",
+    exportMarkdownLabel: "Exportera .md",
+    splitView: {
+      sideBySide: "Sida vid sida",
+      vertical: "Vertikal",
+      switchToSideBySide: "Växla till sida-vid-sida-vy",
+      switchToVertical: "Växla till vertikal vy"
+    },
+    lineOpsActions: {
+      duplicate: "Duplicera rad",
+      delete: "Ta bort rad",
+      join: "Slå ihop",
+      sortAsc: "Sortera ↑",
+      sortDesc: "Sortera ↓",
+      reverse: "Vänd",
+      clean: "Rensa"
+    }
   },
 
   // Dialogs
@@ -662,7 +683,18 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       title: "Focusmodus",
       enter: "Focusmodus betreden",
       exit: "Focusmodus verlaten",
-      description: "Afleidingsvrij schrijfmilieu"
+      description: "Afleidingsvrij schrijfmilieu",
+      activeHint: "Fokuseringsläge aktivt – tryck Esc för att avsluta"
+    },
+    markdownExport: {
+      title: "Exportera Markdown",
+      description: "Ladda ner markdown som .md eller kopiera till urklipp",
+      filenameLabel: "Filnamn",
+      filenamePlaceholder: "document",
+      filenameHint: "Filen sparas som \"{filename}\"",
+      download: "Ladda ner .md",
+      copy: "Kopiera till urklipp",
+      fileInfoTitle: "Filinfo:"
     },
     wordGoal: {
       title: "Woordendoel-tracker",
@@ -671,7 +703,8 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       goalWords: "Doel",
       remaining: "Resterend",
       progress: "Voortgang",
-      achieved: "Doel bereikt! 🎉"
+      achieved: "Doel bereikt! 🎉",
+      doneBadge: "Klar"
     },
     timeTracker: {
       title: "Tidstracker",
