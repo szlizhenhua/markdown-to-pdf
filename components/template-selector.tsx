@@ -47,10 +47,10 @@ export function TemplateSelector({ onSelectTemplate }: TemplateSelectorProps) {
         size="sm"
         onClick={() => setOpen(true)}
         className="gap-2 touch-manipulation"
-        aria-label="Open templates"
+        aria-label={t.templates.templates}
       >
         <FolderOpen className="w-4 h-4" />
-        <span className="hidden sm:inline">Templates</span>
+        <span className="hidden sm:inline">{t.templates.templates}</span>
       </Button>
 
       {open && (
@@ -64,7 +64,7 @@ export function TemplateSelector({ onSelectTemplate }: TemplateSelectorProps) {
               <button
                 onClick={() => setOpen(false)}
                 className="text-muted-foreground hover:text-foreground p-1 -mr-1 sm:p-0 sm:mr-0 touch-manipulation"
-                aria-label="Close"
+                aria-label={t.dialogs.close}
               >
                 <X className="h-5 w-5" />
               </button>
