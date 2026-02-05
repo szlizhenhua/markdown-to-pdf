@@ -458,5 +458,115 @@ Jeśli nadal nie są wyświetlane, sprawdź, czy składnia formuły jest poprawn
     },
     copyright: "© {year} Markdown to PDF. Wszelkie prawa zastrzeżone.",
     designed: "Zaprojektowany dla jasności"
+  },
+
+  // Toolbar
+  toolbar: {
+    heading: "Nagłówek",
+    bold: "Pogrubienie",
+    italic: "Kursywa",
+    strikethrough: "Przekreślenie",
+    code: "Kod",
+    link: "Link",
+    image: "Obraz",
+    bulletList: "Lista wypunktowana",
+    numberedList: "Lista numerowana",
+    quote: "Cytat",
+    codeBlock: "Blok kodu",
+    horizontalRule: "Linia pozioma",
+    undo: "Cofnij",
+    redo: "Ponów",
+    showLess: "Pokaż mniej",
+    showMore: "Pokaż więcej",
+    disableWordWrap: "Wyłącz zawijanie słów",
+    enableWordWrap: "Włącz zawijanie słów",
+    findAndReplace: "Znajdź i zamień",
+    showTools: "Pokaż narzędzia",
+    hideTools: "Ukryj narzędzia",
+    exportTXT: "TXT",
+    special: "Specjalny",
+    lineOps: "Operacje linii"
+  },
+
+  // Dialogs
+  dialogs: {
+    markdownCheatSheet: "Ściąga Markdown",
+    documentStatistics: "Statystyki dokumentu",
+    close: "Zamknij",
+    focusMode: {
+      title: "Tryb skupienia",
+      enter: "Wejdź w tryb skupienia",
+      exit: "Wyjdź z trybu skupienia",
+      description: "Środowisko pisania bez rozpraszaczy"
+    },
+    wordGoal: {
+      title: "Śledzenie celu słów",
+      setGoal: "Ustaw cel słów",
+      currentWords: "Bieżące słowa",
+      goalWords: "Cel",
+      remaining: "Pozostało",
+      progress: "Postęp",
+      achieved: "Cel osiągnięty! 🎉"
+    },
+    timeTracker: {
+      title: "Tracker czasu",
+      startTime: "Rozpocznij sesję",
+      stopTime: "Zatrzymaj sesję",
+      reset: "Zresetuj",
+      totalTime: "Całkowity czas",
+      sessions: "Dzisiejsze sesje"
+    },
+    pomodoro: {
+      title: "Timer Pomodoro",
+      start: "Rozpocznij",
+      pause: "Wstrzymaj",
+      reset: "Zresetuj",
+      work: "Praca",
+      shortBreak: "Krótka przerwa",
+      longBreak: "Długa przerwa",
+      sessions: "Ukończone sesje"
+    },
+    quickTemplates: {
+      title: "Szybkie szablony",
+      select: "Wybierz szablon do wstawienia"
+    },
+    documentTemplates: {
+      title: "Szablony dokumentów",
+      description: "Wybierz szablon, aby rozpocząć"
+    },
+    performance: {
+      title: "Ustawienia wydajności",
+      debounceTime: "Czas debounce",
+      description: "Dostosuj wydajność renderowania"
+    },
+    autosave: {
+      title: "Ustawienia auto-zapisu",
+      interval: "Interwał zapisu",
+      description: "Jak często automatycznie zapisywać pracę",
+      status: {
+        saved: "Zapisano",
+        saving: "Zapisywanie...",
+        unsaved: "Niezapisane zmiany",
+        error: "Błąd zapisu"
+      }
+    },
+    typography: {
+      title: "Kontroly typografii",
+      fontSize: "Rozmiar czcionki",
+      lineHeight: "Wysokość linii",
+      fontFamily: "Rodzina czcionek"
+    },
+    snippets: {
+      title: "Biblioteka fragmentów",
+      add: "Dodaj fragment",
+      save: "Zapisz fragment",
+      cancel: "Anuluj",
+      name: "Nazwa",
+      content: "Treść"
+    },
+    keyboardShortcuts: {
+      title: "Skróty klawiaturowe",
+      description: "Przyspiesz swój przepływ pracy tymi skrótami"
+    }
   }
 }

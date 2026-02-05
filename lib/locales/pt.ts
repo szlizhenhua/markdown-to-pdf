@@ -458,5 +458,115 @@ Se ainda não forem exibidas, verifique se a sintaxe da fórmula está correta.
     },
     copyright: "© {year} Markdown to PDF. Todos os direitos reservados.",
     designed: "Projetado para clareza"
+  },
+
+  // Toolbar
+  toolbar: {
+    heading: "Cabeçalho",
+    bold: "Negrito",
+    italic: "Itálico",
+    strikethrough: "Tachado",
+    code: "Código",
+    link: "Link",
+    image: "Imagem",
+    bulletList: "Lista com marcadores",
+    numberedList: "Lista numerada",
+    quote: "Citação",
+    codeBlock: "Bloco de código",
+    horizontalRule: "Linha horizontal",
+    undo: "Desfazer",
+    redo: "Refazer",
+    showLess: "Mostrar menos",
+    showMore: "Mostrar mais",
+    disableWordWrap: "Desativar quebra de linha",
+    enableWordWrap: "Ativar quebra de linha",
+    findAndReplace: "Localizar e substituir",
+    showTools: "Mostrar ferramentas",
+    hideTools: "Ocultar ferramentas",
+    exportTXT: "TXT",
+    special: "Especial",
+    lineOps: "Operações de linha"
+  },
+
+  // Dialogs
+  dialogs: {
+    markdownCheatSheet: "Folha de cola do Markdown",
+    documentStatistics: "Estatísticas do documento",
+    close: "Fechar",
+    focusMode: {
+      title: "Modo de foco",
+      enter: "Entrar no modo de foco",
+      exit: "Sair do modo de foco",
+      description: "Ambiente de escrita sem distrações"
+    },
+    wordGoal: {
+      title: "Rastreador de meta de palavras",
+      setGoal: "Definir meta de palavras",
+      currentWords: "Palavras atuais",
+      goalWords: "Meta",
+      remaining: "Restantes",
+      progress: "Progresso",
+      achieved: "Meta alcançada! 🎉"
+    },
+    timeTracker: {
+      title: "Rastreador de tempo",
+      startTime: "Iniciar sessão",
+      stopTime: "Parar sessão",
+      reset: "Redefinir",
+      totalTime: "Tempo total",
+      sessions: "Sessões hoje"
+    },
+    pomodoro: {
+      title: "Timer Pomodoro",
+      start: "Iniciar",
+      pause: "Pausar",
+      reset: "Redefinir",
+      work: "Trabalho",
+      shortBreak: "Pausa curta",
+      longBreak: "Pausa longa",
+      sessions: "Sessões concluídas"
+    },
+    quickTemplates: {
+      title: "Modelos rápidos",
+      select: "Selecionar um modelo para inserir"
+    },
+    documentTemplates: {
+      title: "Modelos de documento",
+      description: "Escolher um modelo para começar"
+    },
+    performance: {
+      title: "Configurações de desempenho",
+      debounceTime: "Tempo de debounce",
+      description: "Ajustar o desempenho de renderização"
+    },
+    autosave: {
+      title: "Configurações de salvamento automático",
+      interval: "Intervalo de salvamento",
+      description: "Com que frequência salvar seu trabalho automaticamente",
+      status: {
+        saved: "Salvo",
+        saving: "Salvando...",
+        unsaved: "Alterações não salvas",
+        error: "Erro ao salvar"
+      }
+    },
+    typography: {
+      title: "Controles de tipografia",
+      fontSize: "Tamanho da fonte",
+      lineHeight: "Altura da linha",
+      fontFamily: "Família da fonte"
+    },
+    snippets: {
+      title: "Biblioteca de snippets",
+      add: "Adicionar snippet",
+      save: "Salvar snippet",
+      cancel: "Cancelar",
+      name: "Nome",
+      content: "Conteúdo"
+    },
+    keyboardShortcuts: {
+      title: "Atalhos de teclado",
+      description: "Acelere seu fluxo de trabalho com estes atalhos"
+    }
   }
 }

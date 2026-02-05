@@ -458,5 +458,115 @@ Se ancora non vengono visualizzate, verifica se la sintassi della formula è cor
     },
     copyright: "© {year} Markdown to PDF. Tutti i diritti riservati.",
     designed: "Progettato per la chiarezza"
+  },
+
+  // Toolbar
+  toolbar: {
+    heading: "Intestazione",
+    bold: "Grassetto",
+    italic: "Corsivo",
+    strikethrough: "Barrato",
+    code: "Codice",
+    link: "Collegamento",
+    image: "Immagine",
+    bulletList: "Elenco puntato",
+    numberedList: "Elenco numerato",
+    quote: "Citazione",
+    codeBlock: "Blocco di codice",
+    horizontalRule: "Linea orizzontale",
+    undo: "Annulla",
+    redo: "Ripeti",
+    showLess: "Mostra meno",
+    showMore: "Mostra di più",
+    disableWordWrap: "Disabilita a capo automatico",
+    enableWordWrap: "Abilita a capo automatico",
+    findAndReplace: "Trova e sostituisci",
+    showTools: "Mostra strumenti",
+    hideTools: "Nascondi strumenti",
+    exportTXT: "TXT",
+    special: "Speciale",
+    lineOps: "Operazioni di riga"
+  },
+
+  // Dialogs
+  dialogs: {
+    markdownCheatSheet: "Cheat sheet Markdown",
+    documentStatistics: "Statistiche del documento",
+    close: "Chiudi",
+    focusMode: {
+      title: "Modalità focus",
+      enter: "Entra in modalità focus",
+      exit: "Esci dalla modalità focus",
+      description: "Ambiente di scrittura senza distrazioni"
+    },
+    wordGoal: {
+      title: "Tracker obiettivo parole",
+      setGoal: "Imposta obiettivo parole",
+      currentWords: "Parole attuali",
+      goalWords: "Obiettivo",
+      remaining: "Rimanenti",
+      progress: "Progresso",
+      achieved: "Obiettivo raggiunto! 🎉"
+    },
+    timeTracker: {
+      title: "Tracker del tempo",
+      startTime: "Avvia sessione",
+      stopTime: "Ferma sessione",
+      reset: "Resetta",
+      totalTime: "Tempo totale",
+      sessions: "Sessioni di oggi"
+    },
+    pomodoro: {
+      title: "Timer Pomodoro",
+      start: "Avvia",
+      pause: "Pausa",
+      reset: "Resetta",
+      work: "Lavoro",
+      shortBreak: "Pausa breve",
+      longBreak: "Pausa lunga",
+      sessions: "Sessioni completate"
+    },
+    quickTemplates: {
+      title: "Modelli rapidi",
+      select: "Seleziona un modello da inserire"
+    },
+    documentTemplates: {
+      title: "Modelli di documento",
+      description: "Scegli un modello per iniziare"
+    },
+    performance: {
+      title: "Impostazioni prestazioni",
+      debounceTime: "Tempo di debounce",
+      description: "Regola le prestazioni di rendering"
+    },
+    autosave: {
+      title: "Impostazioni salvataggio automatico",
+      interval: "Intervallo di salvataggio",
+      description: "Con quale frequenza salvare automaticamente il lavoro",
+      status: {
+        saved: "Salvato",
+        saving: "Salvataggio...",
+        unsaved: "Modifiche non salvate",
+        error: "Errore di salvataggio"
+      }
+    },
+    typography: {
+      title: "Controlli tipografici",
+      fontSize: "Dimensione carattere",
+      lineHeight: "Altezza riga",
+      fontFamily: "Famiglia carattere"
+    },
+    snippets: {
+      title: "Libreria snippet",
+      add: "Aggiungi snippet",
+      save: "Salva snippet",
+      cancel: "Annulla",
+      name: "Nome",
+      content: "Contenuto"
+    },
+    keyboardShortcuts: {
+      title: "Scorciatoie da tastiera",
+      description: "Accelera il tuo flusso di lavoro con queste scorciatoie"
+    }
   }
 }

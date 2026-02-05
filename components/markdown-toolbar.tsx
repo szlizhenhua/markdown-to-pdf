@@ -41,6 +41,8 @@ import { WordGoalTracker } from '@/components/word-goal-tracker'
 import { TimeTracker } from '@/components/time-tracker'
 import { PomodoroTimer } from '@/components/pomodoro-timer'
 
+import type { LocaleTranslations } from '@/lib/locales/types'
+
 interface MarkdownToolbarProps {
   onInsert: (markdown: string) => void
   wordWrap?: boolean
@@ -69,9 +71,10 @@ interface MarkdownToolbarProps {
   onTogglePreview?: () => void
   onDebounceChange?: (ms: number) => void
   debounceValue?: number
+  t: LocaleTranslations
 }
 
-export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFindReplace, onFindReplaceToggle, canUndo, canRedo, onUndo, onRedo, className, content = '', onClear, onReplace, onAutosaveIntervalChange, autosaveInterval, onFontSizeChange, onLineHeightChange, onFontFamilyChange, previewFontSize, previewLineHeight, previewFontFamily, onExportPDF, onExportMarkdown, onPrint, onTogglePreview, onDebounceChange, debounceValue }: MarkdownToolbarProps) {
+export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFindReplace, onFindReplaceToggle, canUndo, canRedo, onUndo, onRedo, className, content = '', onClear, onReplace, onAutosaveIntervalChange, autosaveInterval, onFontSizeChange, onLineHeightChange, onFontFamilyChange, previewFontSize, previewLineHeight, previewFontFamily, onExportPDF, onExportMarkdown, onPrint, onTogglePreview, onDebounceChange, debounceValue, t }: MarkdownToolbarProps) {
   const [expanded, setExpanded] = useState(false)
 
   const insertMarkdown = (before: string, after: string = '', placeholder: string = '') => {
@@ -82,78 +85,78 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
     {
       id: 'heading',
       icon: <Heading1 className="h-4 w-4" />,
-      label: 'Heading',
+      label: t.toolbar.heading,
       shortcuts: ['# ', '## ', '### '],
       insert: () => insertMarkdown('## ', '')
     },
     {
       id: 'bold',
       icon: <Bold className="h-4 w-4" />,
-      label: 'Bold',
+      label: t.toolbar.bold,
       shortcut: '**',
       insert: () => insertMarkdown('**', '**', 'bold text')
     },
     {
       id: 'italic',
       icon: <Italic className="h-4 w-4" />,
-      label: 'Italic',
+      label: t.toolbar.italic,
       shortcut: '*',
       insert: () => insertMarkdown('*', '*', 'italic text')
     },
     {
       id: 'strike',
       icon: <Strikethrough className="h-4 w-4" />,
-      label: 'Strikethrough',
+      label: t.toolbar.strikethrough,
       shortcut: '~~',
       insert: () => insertMarkdown('~~', '~~', 'strikethrough')
     },
     {
       id: 'code',
       icon: <Code className="h-4 w-4" />,
-      label: 'Code',
+      label: t.toolbar.code,
       shortcuts: ['`', '```'],
       insert: () => insertMarkdown('`', '`', 'code')
     },
     {
       id: 'link',
       icon: <Link className="h-4 w-4" />,
-      label: 'Link',
+      label: t.toolbar.link,
       insert: () => insertMarkdown('[', '](url)', 'link text')
     },
     {
       id: 'image',
       icon: <Image className="h-4 w-4" />, // eslint-disable-line jsx-a11y/alt-text
-      label: 'Image',
+      label: t.toolbar.image,
       insert: () => insertMarkdown('![alt](', ')]', 'image-url')
     },
     {
       id: 'ulist',
       icon: <List className="h-4 w-4" />,
-      label: 'Bullet List',
+      label: t.toolbar.bulletList,
       insert: () => insertMarkdown('- ', '')
     },
     {
       id: 'olist',
       icon: <ListOrdered className="h-4 w-4" />,
-      label: 'Numbered List',
+      label: t.toolbar.numberedList,
       insert: () => insertMarkdown('1. ', '')
     },
     {
       id: 'quote',
       icon: <Quote className="h-4 w-4" />,
-      label: 'Quote',
+      label: t.toolbar.quote,
       insert: () => insertMarkdown('> ', '')
     },
     {
       id: 'codeblock',
       icon: <Type className="h-4 w-4" />,
-      label: 'Code Block',
+      label: t.toolbar.codeBlock,
       insert: () => insertMarkdown('```\n', '\n```', 'code')
     },
     {
       id: 'hr',
       icon: <Hash className="h-4 w-4" />,
-      label: 'Horizontal Rule',
+      label: t.toolbar.horizontalRule,
       insert: () => insertMarkdown('\n---\n', '')
     }
   ]
@@ -185,8 +188,8 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
             onClick={onUndo}
             disabled={!canUndo}
             className="h-8 w-8 p-0 touch-manipulation"
-            title="Undo (Ctrl+Z)"
-            aria-label="Undo"
+            title={`Undo (Ctrl+Z)`}
+            aria-label={t.toolbar.undo}
           >
             <Undo className="h-4 w-4" />
           </Button>
@@ -198,8 +201,8 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
             onClick={onRedo}
             disabled={!canRedo}
             className="h-8 w-8 p-0 touch-manipulation"
-            title="Redo (Ctrl+Y or Ctrl+Shift+Z)"
-            aria-label="Redo"
+            title={`Redo (Ctrl+Y or Ctrl+Shift+Z)`}
+            aria-label={t.toolbar.redo}
           >
             <Redo className="h-4 w-4" />
           </Button>
@@ -209,8 +212,8 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
           size="sm"
           onClick={() => setExpanded(!expanded)}
           className="h-8 w-8 p-0 touch-manipulation"
-          title={expanded ? 'Show less' : 'Show more'}
-          aria-label={expanded ? 'Show less' : 'Show more'}
+          title={expanded ? t.toolbar.showLess : t.toolbar.showMore}
+          aria-label={expanded ? t.toolbar.showLess : t.toolbar.showMore}
         >
           {expanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
         </Button>
@@ -220,8 +223,8 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
             size="sm"
             onClick={onWordWrapToggle}
             className={`h-8 w-8 p-0 touch-manipulation ${wordWrap ? 'bg-accent' : ''}`}
-            title={wordWrap ? 'Disable word wrap' : 'Enable word wrap'}
-            aria-label={wordWrap ? 'Disable word wrap' : 'Enable word wrap'}
+            title={wordWrap ? t.toolbar.disableWordWrap : t.toolbar.enableWordWrap}
+            aria-label={wordWrap ? t.toolbar.disableWordWrap : t.toolbar.enableWordWrap}
           >
             <TextSelection className="h-4 w-4" />
           </Button>
@@ -232,8 +235,8 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
             size="sm"
             onClick={onFindReplaceToggle}
             className={`h-8 w-8 p-0 touch-manipulation ${showFindReplace ? 'bg-accent' : ''}`}
-            title="Find and Replace (Ctrl+F)"
-            aria-label="Find and Replace"
+            title={`${t.toolbar.findAndReplace} (Ctrl+F)`}
+            aria-label={t.toolbar.findAndReplace}
           >
             <Search className="h-4 w-4" />
           </Button>
@@ -324,13 +327,13 @@ export function MarkdownToolbar({ onInsert, wordWrap, onWordWrapToggle, showFind
       )}
       {content && (
         <div className="flex items-center gap-1 p-2 pt-0 flex-wrap border-t">
-          <span className="text-xs text-muted-foreground mr-2 hidden sm:inline">Special:</span>
+          <span className="text-xs text-muted-foreground mr-2 hidden sm:inline">{t.toolbar.special}:</span>
           <SpecialFormatting onInsert={onInsert} />
         </div>
       )}
       {content && onReplace && (
         <div className="flex items-center gap-1 p-2 pt-0 flex-wrap border-t">
-          <span className="text-xs text-muted-foreground mr-2">Line Ops:</span>
+          <span className="text-xs text-muted-foreground mr-2">{t.toolbar.lineOps}:</span>
           <LineOperations content={content} onReplace={onReplace} />
         </div>
       )}

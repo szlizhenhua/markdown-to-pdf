@@ -458,5 +458,115 @@ Hala görünmüyorsa, formül sözdiziminin doğru olup olmadığını kontrol e
     },
     copyright: "© {year} Markdown to PDF. Tüm hakları saklıdır.",
     designed: "Netlik için tasarlandı"
+  },
+
+  // Toolbar
+  toolbar: {
+    heading: "Başlık",
+    bold: "Kalın",
+    italic: "İtalik",
+    strikethrough: "Üstü çizili",
+    code: "Kod",
+    link: "Bağlantı",
+    image: "Görüntü",
+    bulletList: "Madde işaretli liste",
+    numberedList: "Numaralı liste",
+    quote: "Alıntı",
+    codeBlock: "Kod bloğu",
+    horizontalRule: "Yatay çizgi",
+    undo: "Geri al",
+    redo: "Yinele",
+    showLess: "Daha az göster",
+    showMore: "Daha fazla göster",
+    disableWordWrap: "Kelime kaydırmayı devre dışı bırak",
+    enableWordWrap: "Kelime kaydırmayı etkinleştir",
+    findAndReplace: "Bul ve değiştir",
+    showTools: "Araçları göster",
+    hideTools: "Araçları gizle",
+    exportTXT: "TXT",
+    special: "Özel",
+    lineOps: "Satır işlemleri"
+  },
+
+  // Dialogs
+  dialogs: {
+    markdownCheatSheet: "Markdown Kopya Kağıdı",
+    documentStatistics: "Belge İstatistikleri",
+    close: "Kapat",
+    focusMode: {
+      title: "Odak Modu",
+      enter: "Odak moduna gir",
+      exit: "Odak modundan çık",
+      description: "Dağınıksız yazma ortamı"
+    },
+    wordGoal: {
+      title: "Kelime Hedefi Takipçisi",
+      setGoal: "Kelime hedefi belirle",
+      currentWords: "Geçerli kelimeler",
+      goalWords: "Hedef",
+      remaining: "Kalan",
+      progress: "İlerleme",
+      achieved: "Hedefe ulaşıldı! 🎉"
+    },
+    timeTracker: {
+      title: "Zaman Takipçisi",
+      startTime: "Oturumu başlat",
+      stopTime: "Oturumu durdur",
+      reset: "Sıfırla",
+      totalTime: "Toplam zaman",
+      sessions: "Bugünkü oturumlar"
+    },
+    pomodoro: {
+      title: "Pomodoro Zamanlayıcı",
+      start: "Başlat",
+      pause: "Duraklat",
+      reset: "Sıfırla",
+      work: "Çalışma",
+      shortBreak: "Kısa mola",
+      longBreak: "Uzun mola",
+      sessions: "Tamamlanan oturumlar"
+    },
+    quickTemplates: {
+      title: "Hızlı Şablonlar",
+      select: "Eklemek için bir şablon seçin"
+    },
+    documentTemplates: {
+      title: "Belge Şablonları",
+      description: "Başlamak için bir şablon seçin"
+    },
+    performance: {
+      title: "Performans Ayarları",
+      debounceTime: "Debounce süresi",
+      description: "İşleme performansını ayarla"
+    },
+    autosave: {
+      title: "Otomatik Kayıt Ayarları",
+      interval: "Kayıt aralığı",
+      description: "Çalışmanızın otomatik olarak kaydedilme sıklığı",
+      status: {
+        saved: "Kaydedildi",
+        saving: "Kaydediliyor...",
+        unsaved: "Kaydedilmemiş değişiklikler",
+        error: "Kayıt hatası"
+      }
+    },
+    typography: {
+      title: "Tipografi Kontrolleri",
+      fontSize: "Yazı tipi boyutu",
+      lineHeight: "Satır yüksekliği",
+      fontFamily: "Yazı tipi ailesi"
+    },
+    snippets: {
+      title: "Parçacık Kütüphanesi",
+      add: "Parçacık ekle",
+      save: "Parçacığı kaydet",
+      cancel: "İptal",
+      name: "Ad",
+      content: "İçerik"
+    },
+    keyboardShortcuts: {
+      title: "Klavye Kısayolları",
+      description: "Bu kısayollarla iş akışınızı hızlandırın"
+    }
   }
 }

@@ -458,5 +458,115 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
     },
     copyright: "© {year} Markdown to PDF. Alle rechten voorbehouden.",
     designed: "Ontworpen voor helderheid"
+  },
+
+  // Toolbar
+  toolbar: {
+    heading: "Kop",
+    bold: "Vet",
+    italic: "Cursief",
+    strikethrough: "Doorhalen",
+    code: "Code",
+    link: "Link",
+    image: "Afbeelding",
+    bulletList: "Lijst met opsommingstekens",
+    numberedList: "Genummerde lijst",
+    quote: "Citaat",
+    codeBlock: "Codeblok",
+    horizontalRule: "Horizontale lijn",
+    undo: "Ongedaan maken",
+    redo: "Opnieuw",
+    showLess: "Minder weergeven",
+    showMore: "Meer weergeven",
+    disableWordWrap: "Woordafbreking uitschakelen",
+    enableWordWrap: "Woordafbreking inschakelen",
+    findAndReplace: "Zoeken en vervangen",
+    showTools: "Tools weergeven",
+    hideTools: "Tools verbergen",
+    exportTXT: "TXT",
+    special: "Speciaal",
+    lineOps: "Regelbewerkingen"
+  },
+
+  // Dialogs
+  dialogs: {
+    markdownCheatSheet: "Markdown-spiekkaart",
+    documentStatistics: "Documentstatistieken",
+    close: "Sluiten",
+    focusMode: {
+      title: "Focusmodus",
+      enter: "Focusmodus betreden",
+      exit: "Focusmodus verlaten",
+      description: "Afleidingsvrij schrijfmilieu"
+    },
+    wordGoal: {
+      title: "Woordendoel-tracker",
+      setGoal: "Woordendoel instellen",
+      currentWords: "Huidige woorden",
+      goalWords: "Doel",
+      remaining: "Resterend",
+      progress: "Voortgang",
+      achieved: "Doel bereikt! 🎉"
+    },
+    timeTracker: {
+      title: "Tijdstracker",
+      startTime: "Sessie starten",
+      stopTime: "Sessie stoppen",
+      reset: "Resetten",
+      totalTime: "Totale tijd",
+      sessions: "Sessies vandaag"
+    },
+    pomodoro: {
+      title: "Pomodoro-timer",
+      start: "Starten",
+      pause: "Pauzeren",
+      reset: "Resetten",
+      work: "Werk",
+      shortBreak: "Korte pauze",
+      longBreak: "Lange pauze",
+      sessions: "Voltooide sessies"
+    },
+    quickTemplates: {
+      title: "Snel sjablonen",
+      select: "Selecteer een sjabloon om in te voegen"
+    },
+    documentTemplates: {
+      title: "Documentsjablonen",
+      description: "Kies een sjabloon om te beginnen"
+    },
+    performance: {
+      title: "Prestatie-instellingen",
+      debounceTime: "Debounce-tijd",
+      description: "Renderprestaties aanpassen"
+    },
+    autosave: {
+      title: "Auto-save instellingen",
+      interval: "Save-interval",
+      description: "Hoe vaak uw werk automatisch opslaan",
+      status: {
+        saved: "Opgeslagen",
+        saving: "Opslaan...",
+        unsaved: "Niet opgeslagen wijzigingen",
+        error: "Fout bij opslaan"
+      }
+    },
+    typography: {
+      title: "Typografie-besturingselementen",
+      fontSize: "Lettergrootte",
+      lineHeight: "Regelhoogte",
+      fontFamily: "Lettertypefamilie"
+    },
+    snippets: {
+      title: "Snippet-bibliotheek",
+      add: "Snippet toevoegen",
+      save: "Snippet opslaan",
+      cancel: "Annuleren",
+      name: "Naam",
+      content: "Inhoud"
+    },
+    keyboardShortcuts: {
+      title: "Sneltoetsen",
+      description: "Versnel uw workflow met deze sneltoetsen"
+    }
   }
 }

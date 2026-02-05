@@ -458,5 +458,115 @@ def quicksort(arr):
     },
     copyright: "© {year} Markdown to PDF. All rights reserved.",
     designed: "明確さのために設計"
+  },
+
+  // Toolbar
+  toolbar: {
+    heading: "見出し",
+    bold: "太字",
+    italic: "斜体",
+    strikethrough: "取り消し線",
+    code: "コード",
+    link: "リンク",
+    image: "画像",
+    bulletList: "箇条書き",
+    numberedList: "番号付きリスト",
+    quote: "引用",
+    codeBlock: "コードブロック",
+    horizontalRule: "水平線",
+    undo: "元に戻す",
+    redo: "やり直し",
+    showLess: "少なく表示",
+    showMore: "多く表示",
+    disableWordWrap: "単語折り返しを無効にする",
+    enableWordWrap: "単語折り返しを有効にする",
+    findAndReplace: "検索と置換",
+    showTools: "ツールを表示",
+    hideTools: "ツールを非表示",
+    exportTXT: "TXT",
+    special: "特別",
+    lineOps: "行操作"
+  },
+
+  // Dialogs
+  dialogs: {
+    markdownCheatSheet: "Markdownチートシート",
+    documentStatistics: "ドキュメント統計",
+    close: "閉じる",
+    focusMode: {
+      title: "フォーカスモード",
+      enter: "フォーカスモードに入る",
+      exit: "フォーカスモードを終了",
+      description: "気を散らさない執筆環境"
+    },
+    wordGoal: {
+      title: "単語目標トラッカー",
+      setGoal: "単語目標を設定",
+      currentWords: "現在の単語数",
+      goalWords: "目標",
+      remaining: "残り",
+      progress: "進捗",
+      achieved: "目標達成！🎉"
+    },
+    timeTracker: {
+      title: "時間トラッカー",
+      startTime: "セッションを開始",
+      stopTime: "セッションを停止",
+      reset: "リセット",
+      totalTime: "総時間",
+      sessions: "今日のセッション"
+    },
+    pomodoro: {
+      title: "ポモドーロタイマー",
+      start: "開始",
+      pause: "一時停止",
+      reset: "リセット",
+      work: "作業",
+      shortBreak: "短い休憩",
+      longBreak: "長い休憩",
+      sessions: "完了したセッション"
+    },
+    quickTemplates: {
+      title: "クイックテンプレート",
+      select: "挿入するテンプレートを選択"
+    },
+    documentTemplates: {
+      title: "ドキュメントテンプレート",
+      description: "開始するテンプレートを選択"
+    },
+    performance: {
+      title: "パフォーマンス設定",
+      debounceTime: "デバウンス時間",
+      description: "レンダリングパフォーマンスを調整"
+    },
+    autosave: {
+      title: "自動保存設定",
+      interval: "保存間隔",
+      description: "作業を自動的に保存する頻度",
+      status: {
+        saved: "保存済み",
+        saving: "保存中...",
+        unsaved: "未保存の変更",
+        error: "保存エラー"
+      }
+    },
+    typography: {
+      title: "タイポグラフィコントロール",
+      fontSize: "フォントサイズ",
+      lineHeight: "行の高さ",
+      fontFamily: "フォントファミリ"
+    },
+    snippets: {
+      title: "スニペットライブラリ",
+      add: "スニペットを追加",
+      save: "スニペットを保存",
+      cancel: "キャンセル",
+      name: "名前",
+      content: "内容"
+    },
+    keyboardShortcuts: {
+      title: "キーボードショートカット",
+      description: "これらのショートカットでワークフローを加速"
+    }
   }
 }

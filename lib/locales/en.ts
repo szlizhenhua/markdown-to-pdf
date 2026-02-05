@@ -573,5 +573,115 @@ If still not displaying, please check if the formula syntax is correct.
     },
     copyright: "© {year} Markdown to PDF. All rights reserved.",
     designed: "Designed for clarity"
+  },
+
+  // Toolbar
+  toolbar: {
+    heading: "Heading",
+    bold: "Bold",
+    italic: "Italic",
+    strikethrough: "Strikethrough",
+    code: "Code",
+    link: "Link",
+    image: "Image",
+    bulletList: "Bullet List",
+    numberedList: "Numbered List",
+    quote: "Quote",
+    codeBlock: "Code Block",
+    horizontalRule: "Horizontal Rule",
+    undo: "Undo",
+    redo: "Redo",
+    showLess: "Show less",
+    showMore: "Show more",
+    disableWordWrap: "Disable word wrap",
+    enableWordWrap: "Enable word wrap",
+    findAndReplace: "Find and Replace",
+    showTools: "Show tools",
+    hideTools: "Hide tools",
+    exportTXT: "TXT",
+    special: "Special",
+    lineOps: "Line Ops"
+  },
+
+  // Dialogs
+  dialogs: {
+    markdownCheatSheet: "Markdown Cheat Sheet",
+    documentStatistics: "Document Statistics",
+    close: "Close",
+    focusMode: {
+      title: "Focus Mode",
+      enter: "Enter Focus Mode",
+      exit: "Exit Focus Mode",
+      description: "Distraction-free writing environment"
+    },
+    wordGoal: {
+      title: "Word Goal Tracker",
+      setGoal: "Set Word Goal",
+      currentWords: "Current words",
+      goalWords: "Goal",
+      remaining: "Remaining",
+      progress: "Progress",
+      achieved: "Goal achieved! 🎉"
+    },
+    timeTracker: {
+      title: "Time Tracker",
+      startTime: "Start Session",
+      stopTime: "Stop Session",
+      reset: "Reset",
+      totalTime: "Total time",
+      sessions: "Sessions today"
+    },
+    pomodoro: {
+      title: "Pomodoro Timer",
+      start: "Start",
+      pause: "Pause",
+      reset: "Reset",
+      work: "Work",
+      shortBreak: "Short break",
+      longBreak: "Long break",
+      sessions: "Completed sessions"
+    },
+    quickTemplates: {
+      title: "Quick Templates",
+      select: "Select a template to insert"
+    },
+    documentTemplates: {
+      title: "Document Templates",
+      description: "Choose a template to get started"
+    },
+    performance: {
+      title: "Performance Settings",
+      debounceTime: "Debounce Time",
+      description: "Adjust rendering performance (lower = faster but more resource intensive)"
+    },
+    autosave: {
+      title: "Auto-save Settings",
+      interval: "Save interval",
+      description: "How often to save your work automatically",
+      status: {
+        saved: "Saved",
+        saving: "Saving...",
+        unsaved: "Unsaved changes",
+        error: "Save failed"
+      }
+    },
+    typography: {
+      title: "Typography Controls",
+      fontSize: "Font Size",
+      lineHeight: "Line Height",
+      fontFamily: "Font Family"
+    },
+    snippets: {
+      title: "Snippet Library",
+      add: "Add Snippet",
+      save: "Save Snippet",
+      cancel: "Cancel",
+      name: "Name",
+      content: "Content"
+    },
+    keyboardShortcuts: {
+      title: "Keyboard Shortcuts",
+      description: "Speed up your workflow with these shortcuts"
+    }
   }
 }

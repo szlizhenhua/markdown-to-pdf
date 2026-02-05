@@ -458,5 +458,115 @@ Om de fortfarande inte visas, kontrollera om formelsyntaxen är korrekt.
     },
     copyright: "© {year} Markdown to PDF. Alla rättigheter förbehållna.",
     designed: "Designad för tydlighet"
+  },
+
+  // Toolbar
+  toolbar: {
+    heading: "Rubrik",
+    bold: "Fet",
+    italic: "Kursiv",
+    strikethrough: "Genomstruken",
+    code: "Kod",
+    link: "Länk",
+    image: "Bild",
+    bulletList: "Punktlista",
+    numberedList: "Numrerad lista",
+    quote: "Citat",
+    codeBlock: "Kodblock",
+    horizontalRule: "Horisontell linje",
+    undo: "Ångra",
+    redo: "Gör om",
+    showLess: "Visa mindre",
+    showMore: "Visa mer",
+    disableWordWrap: "Inaktivera ordbrytning",
+    enableWordWrap: "Aktivera ordbrytning",
+    findAndReplace: "Sök och ersätt",
+    showTools: "Visa verktyg",
+    hideTools: "Dölj verktyg",
+    exportTXT: "TXT",
+    special: "Särskild",
+    lineOps: "Radoperationer"
+  },
+
+  // Dialogs
+  dialogs: {
+    markdownCheatSheet: "Markdown-fuskblad",
+    documentStatistics: "Dokumentstatistik",
+    close: "Stäng",
+    focusMode: {
+      title: "Fokusläge",
+      enter: "Gå in i fokusläge",
+      exit: "Avsluta fokusläge",
+      description: "Störfri skrivmiljö"
+    },
+    wordGoal: {
+      title: "Ordmåls-trackerare",
+      setGoal: "Ange ordmål",
+      currentWords: "Nuvarande ord",
+      goalWords: "Mål",
+      remaining: "Återstående",
+      progress: "Förlopp",
+      achieved: "Mål uppnått! 🎉"
+    },
+    timeTracker: {
+      title: "Tidspårare",
+      startTime: "Starta session",
+      stopTime: "Stoppa session",
+      reset: "Återställ",
+      totalTime: "Total tid",
+      sessions: "Dagens sessioner"
+    },
+    pomodoro: {
+      title: "Pomodoro-timer",
+      start: "Starta",
+      pause: "Pausa",
+      reset: "Återställ",
+      work: "Arbete",
+      shortBreak: "Kort paus",
+      longBreak: "Lång paus",
+      sessions: "Slutförda sessioner"
+    },
+    quickTemplates: {
+      title: "Snabbb mallar",
+      select: "Välj en mall att infoga"
+    },
+    documentTemplates: {
+      title: "Dokumentmallar",
+      description: "Välj en mall för att börja"
+    },
+    performance: {
+      title: "Prestandainställningar",
+      debounceTime: "Debounce-tid",
+      description: "Justera renderingsprestanda"
+    },
+    autosave: {
+      title: "Inställningar för autospar",
+      interval: "Spara-intervall",
+      description: "Hur ofta ditt arbete sparas automatiskt",
+      status: {
+        saved: "Sparad",
+        saving: "Sparar...",
+        unsaved: "Osparade ändringar",
+        error: "Sparfel"
+      }
+    },
+    typography: {
+      title: "Typografi-kontroller",
+      fontSize: "Teckenstorlek",
+      lineHeight: "Radhöjd",
+      fontFamily: "Teckenfamilj"
+    },
+    snippets: {
+      title: "Snutt-bibliotek",
+      add: "Lägg till snutt",
+      save: "Spara snutt",
+      cancel: "Avbryt",
+      name: "Namn",
+      content: "Innehåll"
+    },
+    keyboardShortcuts: {
+      title: "Tangentbordsgenvägar",
+      description: "Påskynda ditt arbetsflöde med dessa genvägar"
+    }
   }
 }

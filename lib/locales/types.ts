@@ -191,4 +191,110 @@ export interface LocaleTranslations {
     copyright: string
     designed: string
   }
+  toolbar: {
+    heading: string
+    bold: string
+    italic: string
+    strikethrough: string
+    code: string
+    link: string
+    image: string
+    bulletList: string
+    numberedList: string
+    quote: string
+    codeBlock: string
+    horizontalRule: string
+    undo: string
+    redo: string
+    showLess: string
+    showMore: string
+    disableWordWrap: string
+    enableWordWrap: string
+    findAndReplace: string
+    showTools: string
+    hideTools: string
+    exportTXT: string
+    special: string
+    lineOps: string
+  }
+  dialogs: {
+    markdownCheatSheet: string
+    documentStatistics: string
+    close: string
+    focusMode: {
+      title: string
+      enter: string
+      exit: string
+      description: string
+    }
+    wordGoal: {
+      title: string
+      setGoal: string
+      currentWords: string
+      goalWords: string
+      remaining: string
+      progress: string
+      achieved: string
+    }
+    timeTracker: {
+      title: string
+      startTime: string
+      stopTime: string
+      reset: string
+      totalTime: string
+      sessions: string
+    }
+    pomodoro: {
+      title: string
+      start: string
+      pause: string
+      reset: string
+      work: string
+      shortBreak: string
+      longBreak: string
+      sessions: string
+    }
+    quickTemplates: {
+      title: string
+      select: string
+    }
+    documentTemplates: {
+      title: string
+      description: string
+    }
+    performance: {
+      title: string
+      debounceTime: string
+      description: string
+    }
+    autosave: {
+      title: string
+      interval: string
+      description: string
+      status: {
+        saved: string
+        saving: string
+        unsaved: string
+        error: string
+      }
+    }
+    typography: {
+      title: string
+      fontSize: string
+      lineHeight: string
+      fontFamily: string
+    }
+    snippets: {
+      title: string
+      add: string
+      save: string
+      cancel: string
+      name: string
+      content: string
+    }
+    keyboardShortcuts: {
+      title: string
+      description: string
+    }
+  }
 }

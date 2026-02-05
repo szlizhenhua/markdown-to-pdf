@@ -458,5 +458,115 @@ def quicksort(arr):
     },
     copyright: "© {year} Markdown to PDF. All rights reserved.",
     designed: "명확성을 위해 설계됨"
+  },
+
+  // Toolbar
+  toolbar: {
+    heading: "제목",
+    bold: "굵게",
+    italic: "기울임",
+    strikethrough: "취소선",
+    code: "코드",
+    link: "링크",
+    image: "이미지",
+    bulletList: "글머리 기호 목록",
+    numberedList: "번호 매기기 목록",
+    quote: "인용",
+    codeBlock: "코드 블록",
+    horizontalRule: "가로선",
+    undo: "실행 취소",
+    redo: "다시 실행",
+    showLess: "적게 표시",
+    showMore: "더 보기",
+    disableWordWrap: "단어 줄 바꿈 비활성화",
+    enableWordWrap: "단어 줄 바꿈 활성화",
+    findAndReplace: "찾기 및 바꾸기",
+    showTools: "도구 표시",
+    hideTools: "도구 숨기기",
+    exportTXT: "TXT",
+    special: "특수",
+    lineOps: "줄 작업"
+  },
+
+  // Dialogs
+  dialogs: {
+    markdownCheatSheet: "Markdown 치트 시트",
+    documentStatistics: "문서 통계",
+    close: "닫기",
+    focusMode: {
+      title: "집중 모드",
+      enter: "집중 모드 시작",
+      exit: "집중 모드 종료",
+      description: "산만하지 않은 글쓰기 환경"
+    },
+    wordGoal: {
+      title: "단어 목표 추적기",
+      setGoal: "단어 목표 설정",
+      currentWords: "현재 단어",
+      goalWords: "목표",
+      remaining: "남음",
+      progress: "진행률",
+      achieved: "목표 달성! 🎉"
+    },
+    timeTracker: {
+      title: "시간 추적기",
+      startTime: "세션 시작",
+      stopTime: "세션 중지",
+      reset: "재설정",
+      totalTime: "총 시간",
+      sessions: "오늘 세션"
+    },
+    pomodoro: {
+      title: "뽀모도로 타이머",
+      start: "시작",
+      pause: "일시정지",
+      reset: "재설정",
+      work: "업무",
+      shortBreak: "짧은 휴식",
+      longBreak: "긴 휴식",
+      sessions: "완료된 세션"
+    },
+    quickTemplates: {
+      title: "빠른 템플릿",
+      select: "삽입할 템플릿 선택"
+    },
+    documentTemplates: {
+      title: "문서 템플릿",
+      description: "시작할 템플릿 선택"
+    },
+    performance: {
+      title: "성능 설정",
+      debounceTime: "디바운스 시간",
+      description: "렌더링 성능 조정"
+    },
+    autosave: {
+      title: "자동 저장 설정",
+      interval: "저장 간격",
+      description: "작업을 자동으로 저장하는 빈도",
+      status: {
+        saved: "저장됨",
+        saving: "저장 중...",
+        unsaved: "저장되지 않은 변경사항",
+        error: "저장 실패"
+      }
+    },
+    typography: {
+      title: "타이포그래피 컨트롤",
+      fontSize: "글꼴 크기",
+      lineHeight: "줄 높이",
+      fontFamily: "글꼴 계열"
+    },
+    snippets: {
+      title: "스니펫 라이브러리",
+      add: "스니펫 추가",
+      save: "스니펫 저장",
+      cancel: "취소",
+      name: "이름",
+      content: "내용"
+    },
+    keyboardShortcuts: {
+      title: "키보드 단축키",
+      description: "이 단축키로 작업 속도 향상"
+    }
   }
 }

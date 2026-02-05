@@ -573,5 +573,115 @@ def quicksort(arr):
     },
     copyright: "© {year} Markdown to PDF. 保留所有权利。",
     designed: "为清晰而设计"
+  },
+
+  // Toolbar
+  toolbar: {
+    heading: "标题",
+    bold: "粗体",
+    italic: "斜体",
+    strikethrough: "删除线",
+    code: "代码",
+    link: "链接",
+    image: "图片",
+    bulletList: "无序列表",
+    numberedList: "有序列表",
+    quote: "引用",
+    codeBlock: "代码块",
+    horizontalRule: "水平线",
+    undo: "撤销",
+    redo: "重做",
+    showLess: "收起",
+    showMore: "展开",
+    disableWordWrap: "禁用自动换行",
+    enableWordWrap: "启用自动换行",
+    findAndReplace: "查找和替换",
+    showTools: "显示功能按钮",
+    hideTools: "隐藏功能按钮",
+    exportTXT: "TXT",
+    special: "特殊格式",
+    lineOps: "行操作"
+  },
+
+  // Dialogs
+  dialogs: {
+    markdownCheatSheet: "Markdown 速查表",
+    documentStatistics: "文档统计",
+    close: "关闭",
+    focusMode: {
+      title: "专注模式",
+      enter: "进入专注模式",
+      exit: "退出专注模式",
+      description: "无干扰写作环境"
+    },
+    wordGoal: {
+      title: "字数目标追踪",
+      setGoal: "设置字数目标",
+      currentWords: "当前字数",
+      goalWords: "目标",
+      remaining: "剩余",
+      progress: "进度",
+      achieved: "目标达成！🎉"
+    },
+    timeTracker: {
+      title: "时间追踪",
+      startTime: "开始计时",
+      stopTime: "停止计时",
+      reset: "重置",
+      totalTime: "总时间",
+      sessions: "今日会话"
+    },
+    pomodoro: {
+      title: "番茄钟计时器",
+      start: "开始",
+      pause: "暂停",
+      reset: "重置",
+      work: "工作时间",
+      shortBreak: "短休息",
+      longBreak: "长休息",
+      sessions: "已完成会话"
+    },
+    quickTemplates: {
+      title: "快速模板",
+      select: "选择要插入的模板"
+    },
+    documentTemplates: {
+      title: "文档模板",
+      description: "选择一个模板开始"
+    },
+    performance: {
+      title: "性能设置",
+      debounceTime: "防抖时间",
+      description: "调整渲染性能（值越小越快，但占用资源更多）"
+    },
+    autosave: {
+      title: "自动保存设置",
+      interval: "保存间隔",
+      description: "自动保存工作的频率",
+      status: {
+        saved: "已保存",
+        saving: "保存中...",
+        unsaved: "未保存的更改",
+        error: "保存失败"
+      }
+    },
+    typography: {
+      title: "排版控制",
+      fontSize: "字体大小",
+      lineHeight: "行高",
+      fontFamily: "字体族"
+    },
+    snippets: {
+      title: "代码片段库",
+      add: "添加片段",
+      save: "保存片段",
+      cancel: "取消",
+      name: "名称",
+      content: "内容"
+    },
+    keyboardShortcuts: {
+      title: "键盘快捷键",
+      description: "使用这些快捷键提高工作效率"
+    }
   }
 }

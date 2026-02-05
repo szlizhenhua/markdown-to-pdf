@@ -167,7 +167,6 @@ export default function MarkdownToPDF() {
   const [showFindReplace, setShowFindReplace] = useState(false)
   const [showEditorTools, setShowEditorTools] = useState(false)
   const [prevMarkdownLength, setPrevMarkdownLength] = useState(0)
-  const isChinese = language === 'zh-cn' || language === 'zh-tw'
   const fileInputRef = useRef<HTMLInputElement>(null)
   const dropRef = useRef<HTMLDivElement>(null)
   const settingsRef = useRef<HTMLDivElement>(null)
@@ -557,7 +556,7 @@ export default function MarkdownToPDF() {
 
       // Generate filename
       const firstLine = markdown.split('\n')[0]?.replace(/^#+\s*/, '') || 'document'
-      const fileName = isChinese
+      const fileName = (language === 'zh-cn' || language === 'zh-tw')
         ? 'document.html'
         : `${firstLine.trim().replace(/\s+/g, '-').toLowerCase()}.html`
 
@@ -644,7 +643,7 @@ ${previewCard.innerHTML}
     try {
       // Generate filename from first heading
       const firstLine = markdown.split('\n')[0]?.replace(/^#+\s*/, '') || 'document'
-      const fileName = isChinese
+      const fileName = (language === 'zh-cn' || language === 'zh-tw')
         ? 'document.md'
         : `${firstLine.trim().replace(/\s+/g, '-').toLowerCase()}.md`
 
@@ -705,7 +704,7 @@ ${previewCard.innerHTML}
 
       // Generate filename
       const firstLine = markdown.split('\n')[0]?.replace(/^#+\s*/, '') || 'document'
-      const fileName = isChinese
+      const fileName = (language === 'zh-cn' || language === 'zh-tw')
         ? 'document.txt'
         : `${firstLine.trim().replace(/\s+/g, '-').toLowerCase()}.txt`
 
@@ -1208,11 +1207,11 @@ ${previewCard.innerHTML}
                             })
                           }}
                           className="hidden sm:flex w-full sm:w-auto transition-colors hover:!bg-primary/10 hover:!text-primary hover:!border-primary/40"
-                          aria-label={showEditorTools ? (isChinese ? '隐藏功能按钮' : 'Hide tools') : (isChinese ? '显示功能按钮' : 'Show tools')}
-                          title={showEditorTools ? (isChinese ? '隐藏功能按钮' : 'Hide tools') : (isChinese ? '显示功能按钮' : 'Show tools')}
+                          aria-label={showEditorTools ? t.toolbar.hideTools : t.toolbar.showTools}
+                          title={showEditorTools ? t.toolbar.hideTools : t.toolbar.showTools}
                         >
                           <SlidersHorizontal className="h-4 w-4 mr-2" />
-                          {showEditorTools ? (isChinese ? '隐藏功能按钮' : 'Hide tools') : (isChinese ? '显示功能按钮' : 'Show tools')}
+                          {showEditorTools ? t.toolbar.hideTools : t.toolbar.showTools}
                         </Button>
                       </div>
                     </div>
@@ -1250,6 +1249,7 @@ ${previewCard.innerHTML}
                         console.log('Debounce changed to:', ms)
                       }}
                       debounceValue={300}
+                      t={t}
                     />
                     {showFindReplace && (
                       <FindReplace

@@ -458,5 +458,115 @@ Nếu vẫn không hiển thị, hãy kiểm tra xem cú pháp công thức có 
     },
     copyright: "© {year} Markdown to PDF. Đã đăng ký bản quyền.",
     designed: "Được thiết kế để rõ ràng"
+  },
+
+  // Toolbar
+  toolbar: {
+    heading: "Tiêu đề",
+    bold: "In đậm",
+    italic: "In nghiêng",
+    strikethrough: "Gạch ngang",
+    code: "Mã",
+    link: "Liên kết",
+    image: "Hình ảnh",
+    bulletList: "Danh sách dấu đầu dòng",
+    numberedList: "Danh sách đánh số",
+    quote: "Trích dẫn",
+    codeBlock: "Khối mã",
+    horizontalRule: "Đường kẻ ngang",
+    undo: "Hoàn tác",
+    redo: "Làm lại",
+    showLess: "Hiện ít hơn",
+    showMore: "Hiển thị thêm",
+    disableWordWrap: "Tắt ngắt dòng",
+    enableWordWrap: "Bật ngắt dòng",
+    findAndReplace: "Tìm và thay thế",
+    showTools: "Hiện công cụ",
+    hideTools: "Ẩn công cụ",
+    exportTXT: "TXT",
+    special: "Đặc biệt",
+    lineOps: "Thao tác dòng"
+  },
+
+  // Dialogs
+  dialogs: {
+    markdownCheatSheet: "Bảng tham khảo Markdown",
+    documentStatistics: "Thống kê tài liệu",
+    close: "Đóng",
+    focusMode: {
+      title: "Chế độ tập trung",
+      enter: "Vào chế độ tập trung",
+      exit: "Thoát chế độ tập trung",
+      description: "Môi trường viết không bị xao nhãng"
+    },
+    wordGoal: {
+      title: "Theo dõi mục tiêu từ",
+      setGoal: "Đặt mục tiêu từ",
+      currentWords: "Từ hiện tại",
+      goalWords: "Mục tiêu",
+      remaining: "Còn lại",
+      progress: "Tiến độ",
+      achieved: "Đạt được mục tiêu! 🎉"
+    },
+    timeTracker: {
+      title: "Theo dõi thời gian",
+      startTime: "Bắt đầu phiên",
+      stopTime: "Dừng phiên",
+      reset: "Đặt lại",
+      totalTime: "Tổng thời gian",
+      sessions: "Phiên hôm nay"
+    },
+    pomodoro: {
+      title: "Bộ hẹn giờ Pomodoro",
+      start: "Bắt đầu",
+      pause: "Tạm dừng",
+      reset: "Đặt lại",
+      work: "Làm việc",
+      shortBreak: "Nghỉ ngắn",
+      longBreak: "Nghỉ dài",
+      sessions: "Phiên đã hoàn thành"
+    },
+    quickTemplates: {
+      title: "Mẫu nhanh",
+      select: "Chọn một mẫu để chèn"
+    },
+    documentTemplates: {
+      title: "Mẫu tài liệu",
+      description: "Chọn một mẫu để bắt đầu"
+    },
+    performance: {
+      title: "Cài đặt hiệu suất",
+      debounceTime: "Thời gian debounce",
+      description: "Điều chỉnh hiệu suất kết xuất"
+    },
+    autosave: {
+      title: "Cài đặt tự động lưu",
+      interval: "Khoảng lưu",
+      description: "Tần suất tự động lưu công việc của bạn",
+      status: {
+        saved: "Đã lưu",
+        saving: "Đang lưu...",
+        unsaved: "Thay đổi chưa được lưu",
+        error: "Lỗi lưu"
+      }
+    },
+    typography: {
+      title: "Điều khiển kiểu chữ",
+      fontSize: "Cỡ chữ",
+      lineHeight: "Chiều cao dòng",
+      fontFamily: "Họ phông chữ"
+    },
+    snippets: {
+      title: "Thư viện đoạn mã",
+      add: "Thêm đoạn mã",
+      save: "Lưu đoạn mã",
+      cancel: "Hủy",
+      name: "Tên",
+      content: "Nội dung"
+    },
+    keyboardShortcuts: {
+      title: "Phím tắt",
+      description: "Tăng tốc quy trình làm việc của bạn với các phím tắt này"
+    }
   }
 }

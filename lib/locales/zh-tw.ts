@@ -573,5 +573,115 @@ def quicksort(arr):
     },
     copyright: "© {year} Markdown to PDF. 保留所有權利。",
     designed: "爲清晰而設計"
+  },
+
+  // Toolbar
+  toolbar: {
+    heading: "標題",
+    bold: "粗體",
+    italic: "斜體",
+    strikethrough: "刪除線",
+    code: "代碼",
+    link: "鏈接",
+    image: "圖片",
+    bulletList: "項目符號列表",
+    numberedList: "編號列表",
+    quote: "引用",
+    codeBlock: "代碼塊",
+    horizontalRule: "水平線",
+    undo: "撤銷",
+    redo: "重做",
+    showLess: "顯示較少",
+    showMore: "顯示更多",
+    disableWordWrap: "禁用自動換行",
+    enableWordWrap: "啟用自動換行",
+    findAndReplace: "查找和替換",
+    showTools: "顯示工具",
+    hideTools: "隱藏工具",
+    exportTXT: "TXT",
+    special: "特殊",
+    lineOps: "行操作"
+  },
+
+  // Dialogs
+  dialogs: {
+    markdownCheatSheet: "Markdown 速查表",
+    documentStatistics: "文檔統計",
+    close: "關閉",
+    focusMode: {
+      title: "專注模式",
+      enter: "進入專注模式",
+      exit: "退出專注模式",
+      description: "無干擾的寫作環境"
+    },
+    wordGoal: {
+      title: "字數目標追踪器",
+      setGoal: "設置字數目標",
+      currentWords: "當前字數",
+      goalWords: "目標",
+      remaining: "剩餘",
+      progress: "進度",
+      achieved: "目標達成！🎉"
+    },
+    timeTracker: {
+      title: "時間追踪器",
+      startTime: "開始會話",
+      stopTime: "停止會話",
+      reset: "重置",
+      totalTime: "總時間",
+      sessions: "今日會話"
+    },
+    pomodoro: {
+      title: "番茄工作法定時器",
+      start: "開始",
+      pause: "暫停",
+      reset: "重置",
+      work: "工作",
+      shortBreak: "短休息",
+      longBreak: "長休息",
+      sessions: "已完成會話"
+    },
+    quickTemplates: {
+      title: "快速模板",
+      select: "選擇要插入的模板"
+    },
+    documentTemplates: {
+      title: "文檔模板",
+      description: "選擇模板以開始使用"
+    },
+    performance: {
+      title: "性能設置",
+      debounceTime: "防抖時間",
+      description: "調整渲染性能"
+    },
+    autosave: {
+      title: "自動保存設置",
+      interval: "保存間隔",
+      description: "自動保存工作的頻率",
+      status: {
+        saved: "已保存",
+        saving: "保存中...",
+        unsaved: "未保存的更改",
+        error: "保存失敗"
+      }
+    },
+    typography: {
+      title: "排版控制",
+      fontSize: "字體大小",
+      lineHeight: "行高",
+      fontFamily: "字體系列"
+    },
+    snippets: {
+      title: "片段庫",
+      add: "添加片段",
+      save: "保存片段",
+      cancel: "取消",
+      name: "名稱",
+      content: "內容"
+    },
+    keyboardShortcuts: {
+      title: "鍵盤快捷鍵",
+      description: "使用這些快捷鍵提高您的工作效率"
+    }
   }
 }
