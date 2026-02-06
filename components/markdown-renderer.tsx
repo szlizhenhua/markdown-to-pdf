@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, memo } from "react"
 import { marked } from "marked"
-import type { RendererThis, Tokens } from "marked"
 import hljs from 'highlight.js'
 import javascript from 'highlight.js/lib/languages/javascript'
 import typescript from 'highlight.js/lib/languages/typescript'
