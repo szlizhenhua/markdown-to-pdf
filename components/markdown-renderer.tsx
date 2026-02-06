@@ -192,14 +192,16 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
               </a>`
     }
 
-    renderer.heading = ({ text, depth }: { text: string; depth: number }) => {
-      const textString = text
-      // 使用工具函数清理文本并生成 ID
-      const cleanText = cleanHtmlText(textString)
-      const id = generateSafeId(textString, depth, headings.length)
+    renderer.heading = function (this: any, token: { text: string; depth: number; tokens?: unknown[] }) {
+      const rawText = token.text || ''
+      const renderedText = token.tokens ? this.parser.parseInline(token.tokens) : escapeHtml(rawText)
 
-      headings.push({ id, text: cleanText, level: depth })
-      return `<h${depth} id="${id}" class="heading-${depth}" style="margin: 1em 0;">${textString}</h${depth}>`
+      // 使用工具函数清理文本并生成 ID
+      const cleanText = cleanHtmlText(rawText)
+      const id = generateSafeId(rawText, token.depth, headings.length)
+
+      headings.push({ id, text: cleanText, level: token.depth })
+      return `<h${token.depth} id="${id}" class="heading-${token.depth}" style="margin: 1em 0;">${renderedText}</h${token.depth}>`
     }
 
     // 自定义渲染器，处理数学公式和代码高亮
