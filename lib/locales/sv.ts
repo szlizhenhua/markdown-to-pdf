@@ -184,7 +184,7 @@ export const sv = {
     dailyStandup: "Dagligt Standup",
     featureRequest: "Funktionsbegäran",
     codeReview: "Kodgranskning",
-    projectReadme: "Project README"
+    projectReadme: "Projekt-README"
   },
   textTransform: {
     title: "Transformera Text",
@@ -287,7 +287,7 @@ export const sv = {
     tables: "Tabeller"
   },
 
-  // Default Content (shortened for brevity - same structure as Polish)
+  // Default Content
   defaultContent: `# Markdown till PDF-konverterare
 
 > 🎯 **Konvertera dina Markdown-dokument till professionella PDF-filer med matematiska formler, flödesdiagram, kodmarkering och flera teman**
@@ -308,6 +308,15 @@ export const sv = {
 **Blockformel**:
 $$\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}$$
 
+**Komplex formel**:
+$$\\sum_{i=1}^{n} x_i = x_1 + x_2 + \\cdots + x_n$$
+
+**Matrisrepresentation**:
+$$\\begin{bmatrix}
+a & b \\\\
+c & d
+\\end{bmatrix}$$
+
 ### 📈 **Diagramritning (Mermaid)**
 
 #### Flödesdiagram
@@ -318,6 +327,13 @@ graph TD
     B -->|Nej| D[Utför B]
     C --> E[Slut]
     D --> E
+\`\`\`
+
+#### Grafdiagram
+\`\`\`mermaid
+graph LR
+    A[Användare] --> B[System]
+    B --> A[Svar]
 \`\`\`
 
 #### Sekvensdiagram
@@ -334,13 +350,375 @@ sequenceDiagram
     W-->>U: Ladda ner fil
 \`\`\`
 
-[... rest of Swedish content follows same structure as Polish ...]`,
+#### Gantt
+\`\`\`mermaid
+gantt
+    title Projektplan (Exempel)
+    dateFormat  YYYY-MM-DD
+    section Planering
+    Krav        :a1, 2026-02-01, 3d
+    Granskning              :a2, 2026-02-04, 1d
+    section Leverans
+    Redigerarfunktioner     :b1, 2026-02-05, 5d
+    PDF-export polish   :b2, 2026-02-10, 3d
+\`\`\`
+
+#### Klassdiagram
+\`\`\`mermaid
+classDiagram
+    class MarkdownRenderer {
+      +render(markdown) HTML
+      +renderMermaid() void
+    }
+    class PdfExporter {
+      +export(html) PDF
+    }
+    MarkdownRenderer --> PdfExporter : tillhandahåller HTML
+\`\`\`
+
+#### Tillståndsdiagram
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> Inaktiv
+    Inaktiv --> Redigering : skriv
+    Redigering --> Förhandsgranskning : förhandsgranska
+    Förhandsgranskning --> Exporterar : exportera
+    Exporterar --> Inaktiv : klar
+\`\`\`
+
+#### Tårtdiagram
+\`\`\`mermaid
+pie title Riskfördelning (Exempel)
+    "Hög" : 15
+    "Medel" : 35
+    "Låg" : 50
+\`\`\`
+
+#### Mindmap
+\`\`\`mermaid
+mindmap
+  root((Risk))
+    Identifiera
+      Hot
+      Möjligheter
+    Bedöm
+      Påverkan
+      Sannolikhet
+    Svara
+      Mildra
+      Överför
+      Acceptera
+\`\`\`
+
+#### Tidslinje
+\`\`\`mermaid
+timeline
+    title Releasefrekvens (Exempel)
+    2026-02 : v1.0 lansering
+    2026-03 : mallbibliotek
+    2026-04 : samarbete & historik
+\`\`\`
+
+#### Radardiagram (Anpassat)
+\`\`\`mermaid
+radar-chart
+    title Teamkompetensradar (Exempel 1)
+    axis Kommunikation, Design, Utveckling, QA, Dokumentation
+    series Plan A [80, 70, 90, 60, 75]
+    series Plan B [65, 85, 70, 80, 60]
+\`\`\`
+
+\`\`\`mermaid
+radar
+    title Produktmätvärdesradar (Exempel 2)
+    axis Hastighet, Stabilitet, UX, Underhåll
+    v1 [70, 60, 80, 65]
+\`\`\`
+
+#### Kvadrantdiagram (Anpassat)
+\`\`\`mermaid
+quadrant-chart
+    title Risk vs Timing-matris
+    x-axis "Kontrollerbarhet" --> "Känslighet"
+    y-axis "Mognad" --> "Brådska"
+    quadrant-1 "Strategiskt fönster"
+    quadrant-2 "Observation & förberedelse"
+    quadrant-3 "Undvik"
+    quadrant-4 "Accelerera"
+    "Lokal fördjupning": [0.75, 0.85]
+    "SEA-sondering": [0.45, 0.65]
+    "Dubbla spår": [0.35, 0.55]
+    "Konkurrentledning": [0.60, 0.31]
+\`\`\`
+
+### 💻 **Kodmarkering**
+
+#### JavaScript-exempel
+\`\`\`javascript
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Användningsexempel
+console.log(fibonacci(10)); // Output: 55
+\`\`\`
+
+#### Python-exempel
+\`\`\`python
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quicksort(left) + middle + quicksort(right)
+\`\`\`
+
+### 📋 **Tabellfunktioner**
+
+| Funktion | Status | Beskrivning | Genväg |
+|---------|:------:|-------------|----------|
+| Matematiska formler | ✅ | Fullt KaTeX-stöd | \`$...\$ |
+| Flödesdiagram | ✅ | Mermaid-diagram | \`mermaid |
+| Kodmarkering | ✅ | Flerspråksstöd | \`lang |
+| Tabeller | ✅ | Komplett tabellfunktionalitet | \| \| \| |
+| Länkar | ✅ | Automatisk länkigenkänning | [text](url) |
+
+---
+
+## 📖 Användarguide
+
+### 🚀 **Snabbstart**
+
+1. **Redigera innehåll**
+   - Skriv eller klistra in Markdown-innehåll i den vänstra redigeraren
+   - Realtidsförhandsgranskning med WYSIWYG
+
+2. **Ladda upp filer**
+   - Klicka på "Ladda upp"-knappen för att välja .md eller .txt filer
+   - Eller dra och släpp filer direkt i redigerarområdet
+
+3. **Anpassa stilar**
+   - Välj temastil (Standard/Akademisk/Modern/Minimalistisk)
+   - Justera pappersstorlek och teckenstorlek
+   - Realtidsförhandsgranskning av effekter
+
+4. **Exportera PDF**
+   - Klicka på "Hämta PDF"-knappen
+   - Ladda automatiskt ner genererat PDF-dokument
+   - Filnamn genereras automatiskt baserat på dokumenttitel
+
+### ⌨️ **Markdown-syntax Fuskblad**
+
+#### Grundläggande syntax
+\`\`\`markdown
+# Nivå 1 Rubrik
+## Nivå 2 Rubrik
+### Nivå 3 Rubrik
+
+**Fet text** eller __Fet text__
+*Kursiv text* eller _Kursiv text__
+~~Genomstruken~~
+
+- Oordnad listpost
+  - Nästlad listpost
+
+1. Ordnad listpost
+2. Andra post
+   1. Nästlad ordnad post
+
+> Citattext
+>> Nästlat citat
+
+[Länktext](https://example.com)
+![Bildbeskrivning](image.jpg)
+
+\`Inline-kod\`
+
+\`\`\`språk
+Kodblock
+\`\`\`
+\`\`\`
+
+### 💡 **Användningstips**
+
+1. **Matematiska formler**
+   - Använd \`$...\` för inline formler
+   - Använd \`$$...$$\` för block formler
+   - Fullt LaTeX-matematiksyntax stöds
+
+2. **Kodblock**
+   - Ange språk för syntaxmarkering: \`\`\`javascript
+   - Språk som stöds: JavaScript, Python, JSON, Bash, etc.
+
+3. **Diagramritning**
+   - Använd Mermaid-syntax för att skapa flödesdiagram, grafer, etc.
+   - Stöd för flera diagramtyper: graph, flowchart, etc.
+
+4. **Tabellformatering**
+   - Använd \`|\` för att separera kolumner
+   - Använd \`-\` för att separera rubriker och innehåll
+   - Stöd för justering: \`:---\` (vänster), \`---:\` (höger), \`:---:\` (centrerad)
+
+---
+
+## ❓ Vanliga frågor (FAQ)
+
+### F1: Vilken Markdown-syntax stöds?
+**S**: Detta verktyg stöder standard Markdown-syntax och GitHub Flavored Markdown (GFM) tillägg, inklusive tabeller, uppgiftslistor, genomstrukning, etc. Det stöder också matematiska formler (KaTeX) och diagramritning (Mermaid).
+
+### F2: Vad gör jag om matematiska formler inte visas?
+**S**: Se till att du använder rätt syntax:
+- Inline formler: \`$formel$\`
+- Block formler: \`$$formel$$\`
+Om de fortfarande inte visas, kontrollera om formelsyntaxen är korrekt.
+
+### F3: Hur är kvaliteten på exporterade PDF-filer?
+**S**: Vi använder professionella PDF-genereringsmotorer för att säkerstlla utmatningskvalitet:
+- High definition vektorgrafik
+- Tydlig textrendering
+- Korrekt sidpaginering
+- Behåll originalformatering
+
+### F4: Är mina data säkra?
+**S**: Helt säkert! All bearbetning sker lokalt i din webbläsare:
+- Inga data uppladdade till någon server
+- Ingen lagring av ditt dokumentinnehåll
+- Data rensas automatiskt efter bearbetning
+
+### F5: Vilka webbläsare stöds?
+**S**: Stöder alla moderna webbläsare:
+- Chrome 65+
+- Firefox 60+
+- Safari 12+
+- Edge 79+
+
+### F6: Hur hanterar jag stora dokument?
+**S**: För stora dokument rekommenderar vi:
+- Bearbeta i sektioner
+- Justera teckenstorlek lämpligt
+- Använd sidbrytningar för rimlig segmentering
+- Förhandsgranska för att bekräfta effekter före export
+
+### F7: Vad är det exporterade PDF-filnamnet?
+**S**: Filnamn genereras automatiskt baserat på dokumentets första rubrik, till exempel:
+- Rubrik "Projektrapport" → "Projektrapport.pdf"
+- Använd "document.pdf" när ingen rubrik
+
+---
+
+## 📞 Teknisk support
+
+### 🔧 **Teknisk stack**
+- **Next.js** - React-ramverk
+- **Tailwind CSS** - Stilramverk
+- **Marked** - Markdown-tolk
+- **KaTeX** - Matematisk formelrendering
+- **Mermaid** - Diagramritning
+- **html2pdf.js** - PDF-generering
+- **Highlight.js** - Kodmarkering
+
+### 📧 **Kontakta oss**
+[Open Source](https://github.com/szlizhenhua/markdown-to-pdf). För frågor eller förslag, kontakta oss via:
+- GitHub Issues: Rapportera problem eller begär funktioner
+- E-postfeedback: support@markdown-to-pdf.org
+
+### 🔄 **Ändringslogg**
+- **v1.0.0** - Första utgåva
+- KaTeX matematisk formelstöd
+- Mermaid diagramstöd
+- Flera temastilsval
+- Responsiv designoptimering
+
+---
+
+<div style="text-align: center; margin-top: 3em; padding: 2em; border-top: 1px solid #eee; color: #666;">
+  <p><strong>Markdown till PDF-konverterare</strong></p>
+  <p>Professionellt Markdown till PDF-konverteringsverktyg</p>
+  <p style="font-size: 0.9em; margin-top: 1em;">
+    Gjord med ❤️ | Integritet först
+  </p>
+  <p style="font-size: 0.8em; margin-top: 0.5em;">
+    © 2025 Markdown to PDF. Alla rättigheter förbehållna.
+  </p>
+</div>`,
 
   // SEO
   seo: {
     title: "Markdown till PDF-konverterare | Professionell Dokumentexport",
     description: "Konvertera Markdown till professionella PDF-dokument med matematik, kod, diagram, innehållsförteckning, teman. Publiceringskvalitet output för akademisk och kommersiell användning.",
     keywords: "Markdown, PDF, konverterare, KaTeX, Mermaid, kodmarkering, innehållsförteckning, teman, export, akademisk, professionell"
+  },
+
+  // SEO Content
+  seoContent: {
+    whyChooseUs: {
+      label: "Varför välja oss",
+      title: "Varför använda vår Markdown till PDF-konverterare?",
+      subtitle: "En Apple-liknande upplevelse för publicering: ren, snabb och vackrt konsekvent från utkast till PDF.",
+      features: {
+        privacy: {
+          title: "Integritetsfokuserad",
+          description: "Dina data är säkra hos oss. Alla konverteringar sker lokalt i din webbläsare. Vi laddar aldrig upp dina Markdown-filer till någon server."
+        },
+        instant: {
+          title: "Omedelbar konvertering",
+          description: "Inga köer. Vår optimerade motor konverterar dina dokument omedelbart och stöder stora filer utan problem."
+        },
+        richSupport: {
+          title: "Rikt stöd",
+          description: "Fullt stöd för GFM (GitHub Flavored Markdown), KaTeX matematiska formler, Mermaid-diagram och kodsyntaxmarkering."
+        }
+      }
+    },
+    howToConvert: {
+      label: "Enkelt arbetsflöde",
+      title: "Hur man konverterar Markdown till PDF",
+      subtitle: "Ett lugnt, trestegsflöde designat för att hålla dig fokuserad och få en polish PDF på sekunder.",
+      steps: {
+        step1: {
+          title: "Skriv eller klistra in Markdown",
+          description: "Skriv direkt i vår realtidsredigerare eller klistra in din befintliga Markdown-kod. Du kan också dra och släppa .md-filer."
+        },
+        step2: {
+          title: "Anpassa stil",
+          description: "Välj från våra professionella teman (Akademisk, Modern, etc.) och justera teckenstorlek, marginaler och pappersstorlek (A4, Letter)."
+        },
+        step3: {
+          title: "Ladda ner PDF",
+          description: "Klicka på exportknappen för att omedelbart få ditt formaterade PDF-dokument, redo för delning eller utskrift."
+        }
+      }
+    },
+    faq: {
+      label: "Vanliga frågor",
+      title: "Vanliga frågor",
+      items: {
+        isFree: {
+          question: "Är detta verktyg gratis?",
+          answer: "Ja, vår Markdown till PDF-konverterare är 100% gratis för både personlig och kommersiell användning."
+        },
+        dataStorage: {
+          question: "Lagrar ni mina data?",
+          answer: "Nej. Vi bearbetar allt i din webbläsare. Dina dokument lämnar aldrig din enhet."
+        },
+        mathSupport: {
+          question: "Stöder den matematiska ekvationer?",
+          answer: "Ja! Vi använder KaTeX för att vackert rendera komplexa matematiska formler och ekvationer."
+        },
+        diagrams: {
+          question: "Kan jag skapa diagram?",
+          answer: "Absolut. Vi stöder Mermaid.js för att skapa flödesdiagram, sekvensdiagram och gantt-diagram från text."
+        }
+      }
+    },
+    comprehensive: {
+      title: "Omfattande Markdown-lösning",
+      description1: "Oavsett om du är student som skriver en uppsats, utvecklare som dokumenterar kod eller författare som skriver en roman, ger vår Markdown-redigerare verktygen du behöver. Med funktioner som realtidsförhandsgranskning, ordräknings-spårare och fokusläge kan du skriva utan distraktioner.",
+      description2: "Vår konverterare hanterar all standard Markdown-syntax inklusive rubriker, listor, länkar, bilder och blockcitat. Avancerade användare kommer att uppskatta stödet för kodblock med språkspecifik syntaxmarkering, fotnoter och uppgiftslistor."
+    }
   },
 
   // Footer
@@ -504,10 +882,10 @@ sequenceDiagram
       fontFamily: "Typsnittsfamilj"
     },
     snippets: {
-      title: "Snuttbibliotek",
+      title: "Kodsnuttbibliotek",
       description: "Snabb åtkomst till återanvändbara Markdown-mönster och mallar",
-      add: "Lägg till snutt",
-      save: "Spara snutt",
+      add: "Lägg till kodsnutt",
+      save: "Spara kodsnutt",
       cancel: "Avbryt",
       name: "Namn",
       content: "Innehåll"
