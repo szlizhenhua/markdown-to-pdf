@@ -724,15 +724,31 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       recentSessions: "Recente sessies"
     },
     pomodoro: {
-      title: "Pomodoro-timer",
+      title: "Timer Pomodoro",
       description: "Użyj techniki Pomodoro do skoncentrowanych sesji pisania",
-      start: "Starten",
-      pause: "Pauzeren",
-      reset: "Resetten",
-      work: "Werk",
-      shortBreak: "Korte pauze",
-      longBreak: "Lange pauze",
-      sessions: "Voltooide sessies"
+      start: "Rozpocznij",
+      pause: "Pauza",
+      reset: "Resetuj",
+      work: "Praca",
+      shortBreak: "Krótka przerwa",
+      longBreak: "Długa przerwa",
+      sessions: "Ukończone sesje"
+    },
+    performance: {
+      title: "Ustawienia wydajności",
+      debounceTime: "Czas debouncingu",
+      description: "Dostosuj wydajność renderowania"
+    },
+    autosave: {
+      title: "Ustawienia autonomicznego zapisu",
+      interval: "Interwał zapisu",
+      description: "Jak często automatycznie zapisywać pracę",
+      status: {
+        saved: "Zapisano",
+        saving: "Zapisywanie...",
+        unsaved: "Niezapisane zmiany",
+        error: "Błąd zapisu"
+      }
     },
     typography: {
       title: "Kontrolki typografii",
@@ -749,6 +765,10 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       cancel: "Anuluj",
       name: "Nazwa",
       content: "Zawartość"
+    },
+    keyboardShortcuts: {
+      title: "Skróty klawiaturowe",
+      description: "Przyspiesz swoją pracę tymi skrótami"
     }
   }
 }

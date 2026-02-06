@@ -772,6 +772,7 @@ def quicksort(arr):
       save: "Сохранить фрагмент",
       cancel: "Отмена",
       name: "Название",
+      content: "Содержимое"
     },
     keyboardShortcuts: {
       title: "Горячие клавиши",

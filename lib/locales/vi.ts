@@ -724,15 +724,31 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       recentSessions: "Recente sessies"
     },
     pomodoro: {
-      title: "Pomodoro-timer",
+      title: "Bộ đếm Pomodoro",
       description: "Sử dụng kỹ thuật Pomodoro cho các phiên viết tập trung",
-      start: "Starten",
-      pause: "Pauzeren",
-      reset: "Resetten",
-      work: "Werk",
-      shortBreak: "Korte pauze",
-      longBreak: "Lange pauze",
-      sessions: "Voltooide sessies"
+      start: "Bắt đầu",
+      pause: "Tạm dừng",
+      reset: "Đặt lại",
+      work: "Làm việc",
+      shortBreak: "Nghỉ ngắn",
+      longBreak: "Nghỉ dài",
+      sessions: "Phiên đã hoàn thành"
+    },
+    performance: {
+      title: "Cài đặt hiệu suất",
+      debounceTime: "Thời gian debounce",
+      description: "Điều chỉnh hiệu suất kết xuất"
+    },
+    autosave: {
+      title: "Cài đặt tự động lưu",
+      interval: "Khoảng lưu",
+      description: "Tần suất tự động lưu công việc của bạn",
+      status: {
+        saved: "Đã lưu",
+        saving: "Đang lưu...",
+        unsaved: "Thay đổi chưa lưu",
+        error: "Lỗi lưu"
+      }
     },
     typography: {
       title: "Kiểm soát typography",
@@ -749,6 +765,10 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       cancel: "Hủy",
       name: "Tên",
       content: "Nội dung"
+    },
+    keyboardShortcuts: {
+      title: "Phím tắt",
+      description: "Tăng tốc quy trình làm việc của bạn với các phím tắt này"
     }
   }
 }

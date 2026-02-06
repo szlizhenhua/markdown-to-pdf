@@ -772,6 +772,7 @@ def quicksort(arr):
       save: "스니펫 저장",
       cancel: "취소",
       name: "이름",
+      content: "콘텐츠"
     },
     keyboardShortcuts: {
       title: "키보드 단축키",

@@ -772,6 +772,7 @@ def quicksort(arr):
       save: "スニペットを保存",
       cancel: "キャンセル",
       name: "名前",
+      content: "コンテンツ"
     },
     keyboardShortcuts: {
       title: "キーボードショートカット",

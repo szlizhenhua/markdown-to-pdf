@@ -772,6 +772,7 @@ Hala görünmüyorsa, formül sözdiziminin doğru olup olmadığını kontrol e
       save: "Parçacığı kaydet",
       cancel: "İptal",
       name: "Ad",
+      content: "İçerik"
     },
     keyboardShortcuts: {
       title: "Klavye Kısayolları",

@@ -726,13 +726,29 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
     pomodoro: {
       title: "Pomodoro-timer",
       description: "Använd Pomodoro-tekniken för fokuserade skrivsessioner",
-      start: "Starten",
-      pause: "Pauzeren",
-      reset: "Resetten",
-      work: "Werk",
-      shortBreak: "Korte pauze",
-      longBreak: "Lange pauze",
-      sessions: "Voltooide sessies"
+      start: "Starta",
+      pause: "Paus",
+      reset: "Återställ",
+      work: "Arbete",
+      shortBreak: "Kort rast",
+      longBreak: "Lång rast",
+      sessions: "Slutförda sessioner"
+    },
+    performance: {
+      title: "Prestandainställningar",
+      debounceTime: "Debounce-tid",
+      description: "Justera renderingsprestanda"
+    },
+    autosave: {
+      title: "Inställningar för autospar",
+      interval: "Sparinterval",
+      description: "Hur ofta ditt arbete sparas automatiskt",
+      status: {
+        saved: "Sparad",
+        saving: "Sparar...",
+        unsaved: "Osparade ändringar",
+        error: "Sparning misslyckades"
+      }
     },
     typography: {
       title: "Typografikontroller",
@@ -749,6 +765,10 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       cancel: "Avbryt",
       name: "Namn",
       content: "Innehåll"
+    },
+    keyboardShortcuts: {
+      title: "Tangentbordsgenvägar",
+      description: "Onska din arbetsflöde med dessa genvägar"
     }
   }
 }

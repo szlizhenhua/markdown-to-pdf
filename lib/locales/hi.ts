@@ -772,6 +772,7 @@ def quicksort(arr):
       save: "स्निपेट सहेजें",
       cancel: "रद्द करें",
       name: "नाम",
+      content: "सामग्री"
     },
     keyboardShortcuts: {
       title: "कीबोर्ड शॉर्टकट",

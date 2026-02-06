@@ -734,6 +734,22 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       longBreak: "Lange pauze",
       sessions: "Voltooide sessies"
     },
+    performance: {
+      title: "Prestatie-instellingen",
+      debounceTime: "Debounce-tijd",
+      description: "Rendering-prestaties aanpassen"
+    },
+    autosave: {
+      title: "Automatische opslaginstellingen",
+      interval: "Opslaginterval",
+      description: "Hoe vaak uw werk automatisch opslaan",
+      status: {
+        saved: "Opgeslagen",
+        saving: "Opslaan...",
+        unsaved: "Niet opgeslagen wijzigingen",
+        error: "Opslaan mislukt"
+      }
+    },
     typography: {
       title: "Typografiebesturing",
       description: "Pas de weergave van de voorbeeldtekst aan",
@@ -749,6 +765,10 @@ Als ze nog steeds niet worden weergegeven, controleer dan of de formulesyntaxis 
       cancel: "Annuleren",
       name: "Naam",
       content: "Inhoud"
+    },
+    keyboardShortcuts: {
+      title: "Sneltoetsen",
+      description: "Versnel uw workflow met deze sneltoetsen"
     }
   }
 }

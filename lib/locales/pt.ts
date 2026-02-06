@@ -772,10 +772,11 @@ Se ainda não forem exibidas, verifique se a sintaxe da fórmula está correta.
       save: "Salvar snippet",
       cancel: "Cancelar",
       name: "Nome",
+      content: "Conteúdo"
     },
     keyboardShortcuts: {
       title: "Atalhos de teclado",
       description: "Acelere seu fluxo de trabalho com estes atalhos"
     }
-  },
+  }
 }

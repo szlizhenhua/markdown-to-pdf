@@ -772,6 +772,7 @@ def quicksort(arr):
       save: "حفظ القصاصة",
       cancel: "إلغاء",
       name: "الاسم",
+      content: "المحتوى"
     },
     keyboardShortcuts: {
       title: "اختصارات لوحة المفاتيح",
