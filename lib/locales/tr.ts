@@ -336,6 +336,121 @@ graph LR
     B --> A[Yanıt]
 \`\`\`
 
+#### Sıra Diyagramı
+\`\`\`mermaid
+sequenceDiagram
+    participant U as Kullanıcı
+    participant W as Web Uygulaması
+    participant S as PDF Hizmeti
+    U->>W: Markdown Yapıştır/Düzenle
+    W-->>U: Canlı önizleme
+    U->>W: "PDF Al" tıkla
+    W->>S: Render & PDF oluştur
+    S-->>W: PDF döndür
+    W-->>U: Dosyayı indir
+\`\`\`
+
+#### Gantt Diyagramı
+\`\`\`mermaid
+gantt
+    title Proje Planı (Örnek)
+    dateFormat  YYYY-MM-DD
+    section Planlama
+    Gereksinimler        :a1, 2026-02-01, 3d
+    Gözden Geçirme          :a2, 2026-02-04, 1d
+    section Teslimat
+    Editör özellikleri     :b1, 2026-02-05, 5d
+    PDF dışa aktarma cilası   :b2, 2026-02-10, 3d
+\`\`\`
+
+#### Sınıf Diyagramı
+\`\`\`mermaid
+classDiagram
+    class MarkdownRenderer {
+      +render(markdown) HTML
+      +renderMermaid() void
+    }
+    class PdfExporter {
+      +export(html) PDF
+    }
+    MarkdownRenderer --> PdfExporter : HTML sağlar
+\`\`\`
+
+#### Durum Diyagramı
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> Boşta
+    Boşta --> Düzenleme : yaz
+    Düzenleme --> Önizleme : önizleme
+    Önizleme --> Dışa Aktarma : dışa aktar
+    Dışa Aktarma --> Boşta : tamamlandı
+\`\`\`
+
+#### Pasta Diyagramı
+\`\`\`mermaid
+pie title Risk Dağılımı (Örnek)
+    "Yüksek" : 15
+    "Orta" : 35
+    "Düşük" : 50
+\`\`\`
+
+#### Zihin Haritası
+\`\`\`mermaid
+mindmap
+  root((Risk))
+    Tanımla
+      Tehditler
+      Fırsatlar
+    Değerlendir
+      Etki
+      Olasılık
+    Yanıt
+    Azalt
+      Transfer
+      Kabul
+\`\`\`
+
+#### Zaman Çizelgesi
+\`\`\`mermaid
+timeline
+    title Yayın kadansı (Örnek)
+    2026-02 : v1.0 lansman
+    2026-03 : şablon kütüphanesi
+    2026-04 : işbirliği ve geçmiş
+\`\`\`
+
+#### Radar Grafiği (Özel)
+\`\`\`mermaid
+radar-chart
+    title Takım yetenekleri radarı (Örnek 1)
+    axis İletişim, Tasarım, Geliştirme, QA, Dokümantasyon
+    series Plan A [80, 70, 90, 60, 75]
+    series Plan B [65, 85, 70, 80, 60]
+\`\`\`
+
+\`\`\`mermaid
+radar
+    title Ürün metrikleri radarı (Örnek 2)
+    axis Hız, Kararlılık, UX, Sürdürülebilirlik
+    v1 [70, 60, 80, 65]
+\`\`\`
+
+#### Dörtlü Grafik (Özel)
+\`\`\`mermaid
+quadrant-chart
+    title Risk vs Zaman Matrisi
+    x-axis "Kontrol edilebilirlik" --> "Hassasiyet"
+    y-axis "Olgunluk" --> "Aciliyet"
+    quadrant-1 "Stratejik pencere"
+    quadrant-2 "Gözlemle & hazırlan"
+    quadrant-3 "Kaçın"
+    quadrant-4 "Hızlandır"
+    "Yerel derinleşme": [0.75, 0.85]
+    "SEA keşfi": [0.45, 0.65]
+    "Çift轨道": [0.35, 0.55]
+    "Rakip liderliği": [0.60, 0.31]
+\`\`\`
+
 ### 💻 **Kod Vurgulama**
 
 #### JavaScript Örneği

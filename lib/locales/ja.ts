@@ -336,6 +336,121 @@ graph LR
     B --> A[応答]
 \`\`\`
 
+#### シーケンス図
+\`\`\`mermaid
+sequenceDiagram
+    participant U as ユーザー
+    participant W as Webアプリ
+    participant S as PDFサービス
+    U->>W: Markdownを貼り付け/編集
+    W-->>U: ライブプレビュー
+    U->>W: 「PDF取得」をクリック
+    W->>S: レンダリングしてPDFを生成
+    S-->>W: PDFを返す
+    W-->>U: ファイルをダウンロード
+\`\`\`
+
+#### ガント図
+\`\`\`mermaid
+gantt
+    title プロジェクト計画（例）
+    dateFormat  YYYY-MM-DD
+    section 計画
+    要件        :a1, 2026-02-01, 3d
+    レビュー          :a2, 2026-02-04, 1d
+    section 納品
+    エディター機能     :b1, 2026-02-05, 5d
+    PDF出力の仕上げ   :b2, 2026-02-10, 3d
+\`\`\`
+
+#### クラス図
+\`\`\`mermaid
+classDiagram
+    class MarkdownRenderer {
+      +render(markdown) HTML
+      +renderMermaid() void
+    }
+    class PdfExporter {
+      +export(html) PDF
+    }
+    MarkdownRenderer --> PdfExporter : HTMLを提供
+\`\`\`
+
+#### 状態図
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> アイドル
+    アイドル --> 編集中 : タイプ
+    編集中 --> プレビュー : プレビュー
+    プレビュー --> エクスポート中 : エクスポート
+    エクスポート中 --> アイドル : 完了
+\`\`\`
+
+#### 円グラフ
+\`\`\`mermaid
+pie title リスク分割（例）
+    "高" : 15
+    "中" : 35
+    "低" : 50
+\`\`\`
+
+#### マインドマップ
+\`\`\`mermaid
+mindmap
+  root((リスク))
+    特定
+      脅威
+      機会
+    評価
+      影響
+      可能性
+    対応
+      軽減
+      移転
+      受入
+\`\`\`
+
+#### タイムライン
+\`\`\`mermaid
+timeline
+    title リリース cadence（例）
+    2026-02 : v1.0 ローンチ
+    2026-03 : テンプレートライブラリ
+    2026-04 : コラボレーションと履歴
+\`\`\`
+
+#### レーダーチャート（カスタム）
+\`\`\`mermaid
+radar-chart
+    title チームスキルレーダー（例 1）
+    axis コミュニケーション, デザイン, 開発, QA, ドキュメント
+    series プランA [80, 70, 90, 60, 75]
+    series プランB [65, 85, 70, 80, 60]
+\`\`\`
+
+\`\`\`mermaid
+radar
+    title 製品メトリクスレーダー（例 2）
+    axis 速度, 安定性, UX, 保守性
+    v1 [70, 60, 80, 65]
+\`\`\`
+
+#### 四象限チャート（カスタム）
+\`\`\`mermaid
+quadrant-chart
+    title リスク vs タイミングマトリックス
+    x-axis "制御可能性" --> "感度"
+    y-axis "成熟度" --> "緊急度"
+    quadrant-1 "戦略的ウィンドウ"
+    quadrant-2 "観察と準備"
+    quadrant-3 "回避"
+    quadrant-4 "加速"
+    "ローカル深化": [0.75, 0.85]
+    "SEA探査": [0.45, 0.65]
+    "二重トラック": [0.35, 0.55]
+    "競合先行": [0.60, 0.31]
+\`\`\`
+
 ### 💻 **コードハイライト**
 
 #### JavaScript の例

@@ -336,6 +336,121 @@ graph LR
     B --> A[Antwoord]
 \`\`\`
 
+#### Sơ đồ Trình tự
+\`\`\`mermaid
+sequenceDiagram
+    participant U as Người dùng
+    participant W as Ứng dụng Web
+    participant S as Dịch vụ PDF
+    U->>W: Dán/Chỉnh sửa Markdown
+    W-->>U: Xem trước trực tiếp
+    U->>W: Nhấp "Lấy PDF"
+    W->>S: Kết xuất & tạo PDF
+    S-->>W: Trả về PDF
+    W-->>U: Tải xuống tệp
+\`\`\`
+
+#### Sơ đồ Gantt
+\`\`\`mermaid
+gantt
+    title Kế hoạch Dự án (Ví dụ)
+    dateFormat  YYYY-MM-DD
+    section Lập kế hoạch
+    Yêu cầu        :a1, 2026-02-01, 3d
+    Xem xét          :a2, 2026-02-04, 1d
+    section Giao hàng
+    Tính năng trình soạn thảo     :b1, 2026-02-05, 5d
+    Hoàn thiện xuất PDF   :b2, 2026-02-10, 3d
+\`\`\`
+
+#### Sơ đồ Lớp
+\`\`\`mermaid
+classDiagram
+    class MarkdownRenderer {
+      +render(markdown) HTML
+      +renderMermaid() void
+    }
+    class PdfExporter {
+      +export(html) PDF
+    }
+    MarkdownRenderer --> PdfExporter : cung cấp HTML
+\`\`\`
+
+#### Sơ đồ Trạng thái
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> Nhàn rỗi
+    Nhàn rỗi --> Chỉnh sửa : nhập
+    Chỉnh sửa --> Xem trước : xem trước
+    Xem trước --> Xuất : xuất
+    Xuất --> Nhàn rỗi : hoàn thành
+\`\`\`
+
+#### Sơ đồ Tròn
+\`\`\`mermaid
+pie title Phân bổ Rủi ro (Ví dụ)
+    "Cao" : 15
+    "Trung bình" : 35
+    "Thấp" : 50
+\`\`\`
+
+#### Sơ đồ Tư duy
+\`\`\`mermaid
+mindmap
+  root((Rủi ro))
+    Xác định
+      Mối đe dọa
+      Cơ hội
+    Đánh giá
+      Tác động
+      Khả năng
+    Phản hồi
+      Giảm thiểu
+      Chuyển nhượng
+      Chấp nhận
+\`\`\`
+
+#### Dòng thời gian
+\`\`\`mermaid
+timeline
+    title Tần suất Phát hành (Ví dụ)
+    2026-02 : ra mắt v1.0
+    2026-03 : thư viện mẫu
+    2026-04 : cộng tác & lịch sử
+\`\`\`
+
+#### Sơ đồ Radar (Tùy chỉnh)
+\`\`\`mermaid
+radar-chart
+    title Radar Kỹ năng Đội (Ví dụ 1)
+    axis Giao tiếp, Thiết kế, Phát triển, QA, Tài liệu
+    series Kế hoạch A [80, 70, 90, 60, 75]
+    series Kế hoạch B [65, 85, 70, 80, 60]
+\`\`\`
+
+\`\`\`mermaid
+radar
+    title Radar Chỉ số Sản phẩm (Ví dụ 2)
+    axis Tốc độ, Ổn định, UX, Khả năng bảo trì
+    v1 [70, 60, 80, 65]
+\`\`\`
+
+#### Sơ đồ Tứ phân đoạn (Tùy chỉnh)
+\`\`\`mermaid
+quadrant-chart
+    title Ma trận Rủi ro vs Thời điểm
+    x-axis "Khả năng kiểm soát" --> "Độ nhạy cảm"
+    y-axis "Độ trưởng thành" --> "Tính cấp thiết"
+    quadrant-1 "Cửa sổ chiến lược"
+    quadrant-2 "Quan sát & chuẩn bị"
+    quadrant-3 "Tránh"
+    quadrant-4 "Thúc đẩy"
+    "Đi sâu địa phương": [0.75, 0.85]
+    "Khảo sát SEA": [0.45, 0.65]
+    "Đôi đường": [0.35, 0.55]
+    "Dẫn đầu đối thủ": [0.60, 0.31]
+\`\`\`
+
 ### 💻 **Code Highlighting**
 
 #### JavaScript Voorbeeld

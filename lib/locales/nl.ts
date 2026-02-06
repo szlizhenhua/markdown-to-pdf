@@ -336,6 +336,121 @@ graph LR
     B --> A[Antwoord]
 \`\`\`
 
+#### Sequencediagram
+\`\`\`mermaid
+sequenceDiagram
+    participant U as Gebruiker
+    participant W as Web App
+    participant S as PDF Service
+    U->>W: Plak/Bewerk Markdown
+    W-->>U: Live voorbeeld
+    U->>W: Klik "Get PDF"
+    W->>S: Renderen & genereer PDF
+    S-->>W: Returneer PDF
+    W-->>U: Download bestand
+\`\`\`
+
+#### Gantt Diagram
+\`\`\`mermaid
+gantt
+    title Projectplan (Voorbeeld)
+    dateFormat  YYYY-MM-DD
+    section Planning
+    Vereisten        :a1, 2026-02-01, 3d
+    Review          :a2, 2026-02-04, 1d
+    section Levering
+    Editor functies     :b1, 2026-02-05, 5d
+    PDF export polish   :b2, 2026-02-10, 3d
+\`\`\`
+
+#### Klassendiagram
+\`\`\`mermaid
+classDiagram
+    class MarkdownRenderer {
+      +render(markdown) HTML
+      +renderMermaid() void
+    }
+    class PdfExporter {
+      +export(html) PDF
+    }
+    MarkdownRenderer --> PdfExporter : levert HTML
+\`\`\`
+
+#### Toestandsdiagram
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> Inactief
+    Inactief --> Bewerken : typ
+    Bewerken --> Voorbeeld : voorbeeld
+    Voorbeeld --> Exporteren : exporteer
+    Exporteren --> Inactief : klaar
+\`\`\`
+
+#### Cirkeldiagram
+\`\`\`mermaid
+pie title Risicosplit (Voorbeeld)
+    "Hoog" : 15
+    "Middel" : 35
+    "Laag" : 50
+\`\`\`
+
+#### Mindmap
+\`\`\`mermaid
+mindmap
+  root((Risico))
+    Identificeren
+      Bedreigingen
+      Kansen
+    Beoordelen
+      Impact
+      Waarschijnlijkheid
+    Reageren
+      Mitigeren
+      Overdragen
+      Accepteren
+\`\`\`
+
+#### Tijdlijn
+\`\`\`mermaid
+timeline
+    title Release cadence (Voorbeeld)
+    2026-02 : v1.0 lancering
+    2026-03 : sjablonenbibliotheek
+    2026-04 : samenwerking & geschiedenis
+\`\`\`
+
+#### Radardiagram (Aangepast)
+\`\`\`mermaid
+radar-chart
+    title Team vaardigheden radar (Voorbeeld 1)
+    axis Communicatie, Ontwerp, Ontwikkeling, QA, Docs
+    series Plan A [80, 70, 90, 60, 75]
+    series Plan B [65, 85, 70, 80, 60]
+\`\`\`
+
+\`\`\`mermaid
+radar
+    title Product metrics radar (Voorbeeld 2)
+    axis Snelheid, Stabiliteit, UX, Onderhoudbaarheid
+    v1 [70, 60, 80, 65]
+\`\`\`
+
+#### Quadrant Diagram (Aangepast)
+\`\`\`mermaid
+quadrant-chart
+    title Risico vs Timing Matrix
+    x-axis "Controleerbaarheid" --> "Gevoeligheid"
+    y-axis "Volwassenheid" --> "Urgentie"
+    quadrant-1 "Strategisch venster"
+    quadrant-2 "Observeren & voorbereiden"
+    quadrant-3 "Vermijden"
+    quadrant-4 "Versnellen"
+    "Lokale verdieping": [0.75, 0.85]
+    "SEA verkenning": [0.45, 0.65]
+    "Twee sporen": [0.35, 0.55]
+    "Concurrentie voorsprong": [0.60, 0.31]
+\`\`\`
+
 ### 💻 **Code Highlighting**
 
 #### JavaScript Voorbeeld

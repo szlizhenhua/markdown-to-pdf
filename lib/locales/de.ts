@@ -336,6 +336,121 @@ graph LR
     B --> A[Antwort]
 \`\`\`
 
+#### Sequenzdiagramm
+\`\`\`mermaid
+sequenceDiagram
+    participant U as Benutzer
+    participant W as Webanwendung
+    participant S as PDF-Service
+    U->>W: Einfügen/Bearbeiten Markdown
+    W-->>U: Live-Vorschau
+    U->>W: Klick "PDF abrufen"
+    W->>S: Rendern & PDF generieren
+    S-->>W: PDF zurückgeben
+    W-->>U: Datei herunterladen
+\`\`\`
+
+#### Gantt-Diagramm
+\`\`\`mermaid
+gantt
+    title Projektplan (Beispiel)
+    dateFormat  YYYY-MM-DD
+    section Planung
+    Anforderungen        :a1, 2026-02-01, 3d
+    Überprüfung          :a2, 2026-02-04, 1d
+    section Bereitstellung
+    Editor-Funktionen     :b1, 2026-02-05, 5d
+    PDF-Export-Politur   :b2, 2026-02-10, 3d
+\`\`\`
+
+#### Klassendiagramm
+\`\`\`mermaid
+classDiagram
+    class MarkdownRenderer {
+      +render(markdown) HTML
+      +renderMermaid() void
+    }
+    class PdfExporter {
+      +export(html) PDF
+    }
+    MarkdownRenderer --> PdfExporter : stellt HTML bereit
+\`\`\`
+
+#### Zustandsdiagramm
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> Leerlauf
+    Leerlauf --> Bearbeitung : tippen
+    Bearbeitung --> Vorschau : vorschau
+    Vorschau --> Exportieren : exportieren
+    Exportieren --> Leerlauf : fertig
+\`\`\`
+
+#### Kreisdiagramm
+\`\`\`mermaid
+pie title Risikoaufteilung (Beispiel)
+    "Hoch" : 15
+    "Mittel" : 35
+    "Niedrig" : 50
+\`\`\`
+
+#### Mindmap
+\`\`\`mermaid
+mindmap
+  root((Risiko))
+    Identifizieren
+      Bedrohungen
+      Chancen
+    Bewerten
+      Auswirkung
+      Wahrscheinlichkeit
+    Reagieren
+      Mindern
+      Übertragen
+      Akzeptieren
+\`\`\`
+
+#### Zeitleiste
+\`\`\`mermaid
+timeline
+    title Veröffentlichungs-Rhythmus (Beispiel)
+    2026-02 : v1.0 Start
+    2026-03 : Vorlagen-Bibliothek
+    2026-04 : Zusammenarbeit & Verlauf
+\`\`\`
+
+#### Radar-Diagramm (Benutzerdefiniert)
+\`\`\`mermaid
+radar-chart
+    title Teamfähigkeiten-Radar (Beispiel 1)
+    axis Kommunikation, Design, Entwicklung, QA, Dokumentation
+    series Plan A [80, 70, 90, 60, 75]
+    series Plan B [65, 85, 70, 80, 60]
+\`\`\`
+
+\`\`\`mermaid
+radar
+    title Produktmetriken-Radar (Beispiel 2)
+    axis Geschwindigkeit, Stabilität, UX, Wartbarkeit
+    v1 [70, 60, 80, 65]
+\`\`\`
+
+#### Quadrant-Diagramm (Benutzerdefiniert)
+\`\`\`mermaid
+quadrant-chart
+    title Risiko-vs-Zeitraum-Matrix
+    x-axis "Kontrollierbarkeit" --> "Sensibilität"
+    y-axis "Reife" --> "Dringlichkeit"
+    quadrant-1 "Strategisches Fenster"
+    quadrant-2 "Beobachten & vorbereiten"
+    quadrant-3 "Vermeiden"
+    quadrant-4 "Beschleunigen"
+    "Lokale Vertiefung": [0.75, 0.85]
+    "ASE-Erkundung": [0.45, 0.65]
+    "Zweigleisig": [0.35, 0.55]
+    "Wettbewerbsvorsprung": [0.60, 0.31]
+\`\`\`
+
 ### 💻 **Code-Hervorhebung**
 
 #### JavaScript-Beispiel

@@ -336,6 +336,121 @@ graph LR
     B --> A[Antwoord]
 \`\`\`
 
+#### Sekvensdiagram
+\`\`\`mermaid
+sequenceDiagram
+    participant U as Användare
+    participant W as Webbapp
+    participant S as PDF-tjänst
+    U->>W: Klistra in/Redigera Markdown
+    W-->>U: Live förhandsgranskning
+    U->>W: Klicka "Hämta PDF"
+    W->>S: Rendera & generera PDF
+    S-->>W: Returnera PDF
+    W-->>U: Ladda ner fil
+\`\`\`
+
+#### Gantt-diagram
+\`\`\`mermaid
+gantt
+    title Projektplan (Exempel)
+    dateFormat  YYYY-MM-DD
+    section Planering
+    Krav        :a1, 2026-02-01, 3d
+    Granskning          :a2, 2026-02-04, 1d
+    section Leverans
+    Redigerarfunktioner     :b1, 2026-02-05, 5d
+    PDF-export polish   :b2, 2026-02-10, 3d
+\`\`\`
+
+#### Klassdiagram
+\`\`\`mermaid
+classDiagram
+    class MarkdownRenderer {
+      +render(markdown) HTML
+      +renderMermaid() void
+    }
+    class PdfExporter {
+      +export(html) PDF
+    }
+    MarkdownRenderer --> PdfExporter : tillhandahåller HTML
+\`\`\`
+
+#### Tillståndsdiagram
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> Inaktiv
+    Inaktiv --> Redigera : skriv
+    Redigera --> Förhandsgranska : förhandsgranska
+    Förhandsgranska --> Exportera : exportera
+    Exportera --> Inaktiv : klar
+\`\`\`
+
+#### Tårtdiagram
+\`\`\`mermaid
+pie title Riskfördelning (Exempel)
+    "Hög" : 15
+    "Medel" : 35
+    "Låg" : 50
+\`\`\`
+
+#### Mindmap
+\`\`\`mermaid
+mindmap
+  root((Risk))
+    Identifiera
+      Hot
+      Möjligheter
+    Bedöm
+      Påverkan
+      Sannolikhet
+    Svara
+      Mildra
+      Överför
+      Acceptera
+\`\`\`
+
+#### Tidslinje
+\`\`\`mermaid
+timeline
+    title Release cadence (Exempel)
+    2026-02 : v1.0 lansering
+    2026-03 : mallbibliotek
+    2026-04 : samarbete & historik
+\`\`\`
+
+#### Radardiagram (Anpassat)
+\`\`\`mermaid
+radar-chart
+    title Team färdigheter radar (Exempel 1)
+    axis Kommunikation, Design, Utveckling, QA, Docs
+    series Plan A [80, 70, 90, 60, 75]
+    series Plan B [65, 85, 70, 80, 60]
+\`\`\`
+
+\`\`\`mermaid
+radar
+    title Produkt metrics radar (Exempel 2)
+    axis Hastighet, Stabilitet, UX, Underhåll
+    v1 [70, 60, 80, 65]
+\`\`\`
+
+#### Kvadrantdiagram (Anpassat)
+\`\`\`mermaid
+quadrant-chart
+    title Risk vs Timing Matrix
+    x-axis "Styrbarhet" --> "Känslighet"
+    y-axis "Mognad" --> "Brådska"
+    quadrant-1 "Strategiskt fönster"
+    quadrant-2 "Observera & förbered"
+    quadrant-3 "Undvik"
+    quadrant-4 "Accelerera"
+    "Lokal fördjupning": [0.75, 0.85]
+    "SEA utforskning": [0.45, 0.65]
+    "Dubbel spår": [0.35, 0.55]
+    "Konkurrent ledning": [0.60, 0.31]
+\`\`\`
+
 ### 💻 **Code Highlighting**
 
 #### JavaScript Förhandsgranskning

@@ -336,6 +336,121 @@ graph LR
     B --> A[응답]
 \`\`\`
 
+#### 시퀀스 다이어그램
+\`\`\`mermaid
+sequenceDiagram
+    participant U as 사용자
+    participant W as 웹 앱
+    participant S as PDF 서비스
+    U->>W: Markdown 붙여넣기/편집
+    W-->>U: 라이브 미리보기
+    U->>W: "PDF 가져오기" 클릭
+    W->>S: 렌더링 및 PDF 생성
+    S-->>W: PDF 반환
+    W-->>U: 파일 다운로드
+\`\`\`
+
+#### 간트 차트
+\`\`\`mermaid
+gantt
+    title 프로젝트 계획 (예시)
+    dateFormat  YYYY-MM-DD
+    section 계획
+    요구사항        :a1, 2026-02-01, 3d
+    검토          :a2, 2026-02-04, 1d
+    section 전달
+    편집기 기능     :b1, 2026-02-05, 5d
+    PDF 내보내기 다듬기   :b2, 2026-02-10, 3d
+\`\`\`
+
+#### 클래스 다이어그램
+\`\`\`mermaid
+classDiagram
+    class MarkdownRenderer {
+      +render(markdown) HTML
+      +renderMermaid() void
+    }
+    class PdfExporter {
+      +export(html) PDF
+    }
+    MarkdownRenderer --> PdfExporter : HTML 제공
+\`\`\`
+
+#### 상태 다이어그램
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> 유휴
+    유휴 --> 편집 : 입력
+    편집 --> 미리보기 : 미리보기
+    미리보기 --> 내보내기 : 내보내기
+    내보내기 --> 유휴 : 완료
+\`\`\`
+
+#### 파이 차트
+\`\`\`mermaid
+pie title 위험 분할 (예시)
+    "높음" : 15
+    "중간" : 35
+    "낮음" : 50
+\`\`\`
+
+#### 마인드맵
+\`\`\`mermaid
+mindmap
+  root((위험))
+    식별
+      위협
+      기회
+    평가
+      영향
+      가능성
+    대응
+      완화
+      전송
+      수락
+\`\`\`
+
+#### 타임라인
+\`\`\`mermaid
+timeline
+    title 릴리스 주기 (예시)
+    2026-02 : v1.0 출시
+    2026-03 : 템플릿 라이브러리
+    2026-04 : 협업 및 기록
+\`\`\`
+
+#### 레이더 차트 (사용자 정의)
+\`\`\`mermaid
+radar-chart
+    title 팀 스킬 레이더 (예시 1)
+    axis 커뮤니케이션, 디자인, 개발, QA, 문서화
+    series 계획 A [80, 70, 90, 60, 75]
+    series 계획 B [65, 85, 70, 80, 60]
+\`\`\`
+
+\`\`\`mermaid
+radar
+    title 제품 메트릭 레이더 (예시 2)
+    axis 속도, 안정성, UX, 유지 보수성
+    v1 [70, 60, 80, 65]
+\`\`\`
+
+#### 4분면 차트 (사용자 정의)
+\`\`\`mermaid
+quadrant-chart
+    title 위험 vs 타이밍 매트릭스
+    x-axis "제어 가능성" --> "민감도"
+    y-axis "성숙도" --> "긴급성"
+    quadrant-1 "전략적 창"
+    quadrant-2 "관찰 및 준비"
+    quadrant-3 "회피"
+    quadrant-4 "가속"
+    "현지 심화": [0.75, 0.85]
+    "SEA 탐색": [0.45, 0.65]
+    "이중 트랙": [0.35, 0.55]
+    "경쟁사 선도": [0.60, 0.31]
+\`\`\`
+
 ### 💻 **코드 강조 표시**
 
 #### JavaScript 예시

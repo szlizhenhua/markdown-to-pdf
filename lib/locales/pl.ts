@@ -336,6 +336,121 @@ graph LR
     B --> A[Antwoord]
 \`\`\`
 
+#### Diagram Sekwencyjny
+\`\`\`mermaid
+sequenceDiagram
+    participant U as Użytkownik
+    participant W as Aplikacja Web
+    participant S as Serwis PDF
+    U->>W: Wklej/Edytuj Markdown
+    W-->>U: Podgląd na żywo
+    U->>W: Kliknij "Pobierz PDF"
+    W->>S: Renderuj i wygeneruj PDF
+    S-->>W: Zwróć PDF
+    W-->>U: Pobierz plik
+\`\`\`
+
+#### Diagram Gantta
+\`\`\`mermaid
+gantt
+    title Plan Projektu (Przykład)
+    dateFormat  YYYY-MM-DD
+    section Planowanie
+    Wymagania        :a1, 2026-02-01, 3d
+    Przegląd          :a2, 2026-02-04, 1d
+    section Dostawa
+    Funkcje edytora     :b1, 2026-02-05, 5d
+    Udoskonalenie eksportu PDF   :b2, 2026-02-10, 3d
+\`\`\`
+
+#### Diagram Klas
+\`\`\`mermaid
+classDiagram
+    class MarkdownRenderer {
+      +render(markdown) HTML
+      +renderMermaid() void
+    }
+    class PdfExporter {
+      +export(html) PDF
+    }
+    MarkdownRenderer --> PdfExporter : dostarcza HTML
+\`\`\`
+
+#### Diagram Stanów
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> Bezczynny
+    Bezczynny --> Edycja : pisz
+    Edycja --> Podgląd : podgląd
+    Podgląd --> Eksportowanie : eksportuj
+    Eksportowanie --> Bezczynny : gotowe
+\`\`\`
+
+#### Diagram Kołowy
+\`\`\`mermaid
+pie title Podział Ryzyka (Przykład)
+    "Wysokie" : 15
+    "Średnie" : 35
+    "Niskie" : 50
+\`\`\`
+
+#### Mapa Myśli
+\`\`\`mermaid
+mindmap
+  root((Ryzyko))
+    Identyfikacja
+      Zagrożenia
+      Szanse
+    Ocena
+      Wpływ
+      Prawdopodobieństwo
+    Reakcja
+      Łagodzenie
+      Transfer
+      Akceptacja
+\`\`\`
+
+#### Oś Czasu
+\`\`\`mermaid
+timeline
+    title Rytm Wydań (Przykład)
+    2026-02 : premiera v1.0
+    2026-03 : biblioteka szablonów
+    2026-04 : współpraca i historia
+\`\`\`
+
+#### Wykres Radarowy (Niestandardowy)
+\`\`\`mermaid
+radar-chart
+    title Radar Umiejętności Zespołu (Przykład 1)
+    axis Komunikacja, Design, Rozwój, QA, Dokumentacja
+    series Plan A [80, 70, 90, 60, 75]
+    series Plan B [65, 85, 70, 80, 60]
+\`\`\`
+
+\`\`\`mermaid
+radar
+    title Radar Metryk Produktu (Przykład 2)
+    axis Szybkość, Stabilność, UX, Utrzymanie
+    v1 [70, 60, 80, 65]
+\`\`\`
+
+#### Wykres Kwadrantów (Niestandardowy)
+\`\`\`mermaid
+quadrant-chart
+    title Macierz Ryzyko vs Czas
+    x-axis "Kontrolowalność" --> "Wrażliwość"
+    y-axis "Dojrzałość" --> "Urgentność"
+    quadrant-1 "Okno strategiczne"
+    quadrant-2 "Obserwuj i przygotuj"
+    quadrant-3 "Unikaj"
+    quadrant-4 "Przyspiesz"
+    "Lokalna pogłębia": [0.75, 0.85]
+    "Sonda SEA": [0.45, 0.65]
+    "Podwójny tor": [0.35, 0.55]
+    "Przewaga konkurencji": [0.60, 0.31]
+\`\`\`
+
 ### 💻 **Code Highlighting**
 
 #### JavaScript Voorbeeld
