@@ -554,7 +554,13 @@ const renderMermaidInContainer = async (root?: HTMLElement | null): Promise<void
 
   const mermaidModule = await import('mermaid')
   const mermaid = (mermaidModule.default ?? mermaidModule) as Mermaid
-  mermaid.initialize({ startOnLoad: false, theme: 'neutral' })
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'neutral',
+    gantt: {
+      axisFormat: '%m-%d',
+    },
+  })
 
   candidates.forEach((codeBlock) => {
     const classList = Array.from(codeBlock.classList || [])
