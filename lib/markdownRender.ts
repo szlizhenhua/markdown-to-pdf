@@ -35,6 +35,14 @@ interface QuadrantChartData {
   points: QuadrantPoint[]
 }
 
+const parseFenceInfo = (line: string): { info: string; lang: string } | null => {
+  const match = line.match(/^\s*```(?:\s*([^\n`]*))?\s*$/)
+  if (!match) return null
+  const info = (match[1] ?? '').trim()
+  const lang = info ? info.split(/\s+/)[0].toLowerCase() : ''
+  return { info, lang }
+}
+
 const stripOuterMarkdownFence = (content: string): string => {
   let result = content
   let changed = true
@@ -56,10 +64,10 @@ const stripOuterMarkdownFence = (content: string): string => {
       return result
     }
 
-    const startMatch = lines[start].match(/^\s*```(?:\s*([\w-]+))?\s*$/)
-    const lang = (startMatch?.[1] ?? '').toLowerCase()
+    const startFence = parseFenceInfo(lines[start])
+    const lang = startFence?.lang ?? ''
 
-    if (!startMatch || !MARKDOWN_FENCE_LANGS.has(lang)) {
+    if (!startFence || !MARKDOWN_FENCE_LANGS.has(lang)) {
       return result
     }
 
@@ -91,11 +99,12 @@ const normalizeMarkdown = (content?: string): string => {
   const isMarkdownFence = (lang: string) => MARKDOWN_FENCE_LANGS.has(lang)
 
   for (const line of lines) {
-    const fenceMatch = line.match(/^\s*```(?:\s*([\w-]+))?\s*$/)
-    const lang = (fenceMatch?.[1] ?? '').toLowerCase()
+    const fenceInfo = parseFenceInfo(line)
+    const lang = fenceInfo?.lang ?? ''
+    const hasInfo = Boolean(fenceInfo?.info)
 
     if (!inMarkdownFence) {
-      if (fenceMatch && isMarkdownFence(lang)) {
+      if (fenceInfo && isMarkdownFence(lang)) {
         inMarkdownFence = true
         nestedFenceDepth = 0
         continue
@@ -104,8 +113,8 @@ const normalizeMarkdown = (content?: string): string => {
       continue
     }
 
-    if (fenceMatch) {
-      if (lang) {
+    if (fenceInfo) {
+      if (hasInfo) {
         nestedFenceDepth += 1
         output.push(line)
         continue
@@ -134,8 +143,8 @@ const looksLikeTable = (lines: string[]): boolean => {
 
 const preprocessMarkdown = (content?: string): string => {
   const normalized = normalizeMarkdown(content ?? '')
-  return normalized.replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, body) => {
-    const normalizedLang = (lang ?? '').toLowerCase()
+  return normalized.replace(/```([^\n`]*)\n([\s\S]*?)```/g, (match, lang, body) => {
+    const normalizedLang = (lang ?? '').trim().split(/\s+/)[0].toLowerCase()
     if (normalizedLang) return match
 
     const bodyLines = body.split(/\r?\n/)
