@@ -559,6 +559,7 @@ const renderMermaidInContainer = async (root?: HTMLElement | null): Promise<void
     theme: 'neutral',
     gantt: {
       axisFormat: '%m-%d',
+      fontSize: 6,
     },
   })
 
