@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, memo } from "react"
 import { marked } from "marked"
+import type { RendererThis, Tokens } from "marked"
 import hljs from 'highlight.js'
 import javascript from 'highlight.js/lib/languages/javascript'
 import typescript from 'highlight.js/lib/languages/typescript'
@@ -192,13 +193,12 @@ function MarkdownRendererComponent({ content, language, theme, paperSizes, fontS
               </a>`
     }
 
-    renderer.heading = function (this: any, token: { text: string; depth: number; tokens?: unknown[] }) {
-      const rawText = token.text || ''
-      const renderedText = token.tokens ? this.parser.parseInline(token.tokens) : escapeHtml(rawText)
+    renderer.heading = function (this: RendererThis, token: Tokens.Heading) {
+      const renderedText = this.parser.parseInline(token.tokens)
 
       // 使用工具函数清理文本并生成 ID
-      const cleanText = cleanHtmlText(rawText)
-      const id = generateSafeId(rawText, token.depth, headings.length)
+      const cleanText = cleanHtmlText(renderedText)
+      const id = generateSafeId(renderedText, token.depth, headings.length)
 
       headings.push({ id, text: cleanText, level: token.depth })
       return `<h${token.depth} id="${id}" class="heading-${token.depth}" style="margin: 1em 0;">${renderedText}</h${token.depth}>`
