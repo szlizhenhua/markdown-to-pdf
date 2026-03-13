@@ -93,21 +93,35 @@ export async function POST(request: Request) {
     })
 
     const page = await browser.newPage()
+    page.setDefaultTimeout(15000)
+    page.setDefaultNavigationTimeout(15000)
 
-    // 设置HTML内容，增强对中文的支持
+    // 设置HTML内容，使用离线内联样式避免外部资源阻塞
     const html = generatePDFHTML(htmlContent, { fontSize, theme, highlightTheme: '' })
-    await page.setContent(html)
-
-    // 等待页面加载完成，特别是确保字体加载完成
-    await page.waitForNetworkIdle({ idleTime: 1000 })
-
-    // 等待字体加载完成（对中文和emoji特别重要）
-    await page.evaluate(() => {
-      return document.fonts.ready
+    await page.setContent(html, {
+      waitUntil: 'domcontentloaded',
+      timeout: 15000,
     })
 
-    // 额外等待时间确保 emoji 字体完全加载
-    await new Promise(resolve => setTimeout(resolve, 500))
+    // 等待文档和字体进入稳定状态，但不要因为外部资源卡住整个导出
+    await page.waitForFunction(() => document.readyState === 'interactive' || document.readyState === 'complete', {
+      timeout: 5000,
+    })
+
+    try {
+      await page.evaluate(async () => {
+        if (!('fonts' in document)) return
+
+        await Promise.race([
+          document.fonts.ready,
+          new Promise((resolve) => setTimeout(resolve, 2000)),
+        ])
+      })
+    } catch (fontError) {
+      console.warn('字体等待超时，继续生成 PDF:', fontError)
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 150))
 
     // 验证字体是否已正确加载
     await page.evaluate(() => {

@@ -6,6 +6,15 @@ import { useState, useRef, useCallback, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Progress } from "@/components/ui/progress"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -31,17 +40,73 @@ import { useToast } from "@/lib/hooks/use-toast"
 import { useRecentFiles } from "@/lib/hooks/use-recent-files"
 import { useEditorHistory } from "@/lib/hooks/use-editor-history"
 import { useSyncScroll } from "@/lib/hooks/use-sync-scroll"
+import { renderMermaidInContainer } from "@/lib/markdownRender"
+import { renderMarkdownToHtml } from "@/lib/render-markdown-html"
 import type { LocaleTranslations } from "@/lib/locales/types"
 import { locales } from "@/lib/locales"
 
 import Head from 'next/head'
 import Image from 'next/image'
-import { Settings, Download, Loader2, Upload, Eye, FileText, FileUp, Code, File, FileEdit, SlidersHorizontal } from 'lucide-react'
+import { Settings, Download, Loader2, Upload, Eye, FileText, FileUp, Code, File, FileEdit, SlidersHorizontal, FolderOpen, Files } from 'lucide-react'
 
 // Constants
 const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
 const ALLOWED_FILE_EXTENSIONS = ['.md', '.txt', '.markdown']
 const ALLOWED_MIME_TYPES = ['text/markdown', 'text/plain', 'text/x-markdown']
+const BATCH_FILE_EXTENSIONS = ['.md', '.markdown']
+
+interface BrowserWritableStream {
+  write: (data: Blob) => Promise<void>
+  close: () => Promise<void>
+}
+
+interface BrowserWritableFileHandle {
+  createWritable: () => Promise<BrowserWritableStream>
+}
+
+interface BrowserFileHandle {
+  getFile: () => Promise<File>
+}
+
+interface BrowserDirectoryHandle {
+  name?: string
+  entries: () => AsyncIterable<[string, BrowserFileHandle | BrowserDirectoryHandle]>
+  getFileHandle: (
+    name: string,
+    options?: { create?: boolean }
+  ) => Promise<BrowserWritableFileHandle>
+}
+
+interface BrowserPickerWindow extends Window {
+  showOpenFilePicker?: (options?: {
+    multiple?: boolean
+    excludeAcceptAllOption?: boolean
+    types?: Array<{
+      description?: string
+      accept: Record<string, string[]>
+    }>
+  }) => Promise<BrowserFileHandle[]>
+  showDirectoryPicker?: (options?: { mode?: "read" | "readwrite" }) => Promise<BrowserDirectoryHandle>
+}
+
+interface BatchSourceFile {
+  file: File
+  relativePath: string
+}
+
+interface BatchFailure {
+  fileName: string
+  message: string
+}
+
+interface BatchResult {
+  successCount: number
+  failureCount: number
+  failures: BatchFailure[]
+  outputFolderName: string
+}
+
+type BatchDialogStep = "source" | "output" | "processing" | "result"
 
 // Helper function to validate file
 const validateFile = (file: File, t: LocaleTranslations): { valid: boolean; error?: string } => {
@@ -84,6 +149,287 @@ const readFileContent = (file: File): Promise<string> => {
   })
 }
 
+const isChineseLanguage = (language: string) =>
+  language === 'zh' || language === 'zh-cn' || language === 'zh-tw'
+
+const getBatchCopy = (language: string) => {
+  const zh = isChineseLanguage(language)
+  return {
+    button: zh ? '批量转 PDF' : 'Batch PDF',
+    buttonShort: zh ? '批量' : 'Batch',
+    dialogTitle: zh ? '批量转换 Markdown' : 'Batch convert Markdown',
+    dialogDescription: zh
+      ? '选择一个文件夹，或一次选择多个 .md 文件。完成后再选择输出文件夹，系统会依次生成 PDF。'
+      : 'Choose a folder or select multiple .md files, then choose an output folder to generate the PDFs one by one.',
+    selectFolder: zh ? '选择文件夹' : 'Choose folder',
+    selectFiles: zh ? '选择多个文件' : 'Choose files',
+    outputTitle: zh ? '选择输出文件夹' : 'Choose output folder',
+    outputDescription: zh
+      ? '已找到 {count} 个 Markdown 文件。下一步选择输出文件夹并开始转换。'
+      : 'Found {count} Markdown files. Choose an output folder and start the conversion.',
+    duplicateHint: zh
+      ? '如果输出目录里已有同名 PDF，系统会自动追加序号，避免覆盖现有文件。'
+      : 'If a PDF with the same name already exists in the output folder, a numeric suffix will be added to avoid overwriting it.',
+    folderHint: zh ? '递归扫描文件夹及其子目录中的 Markdown 文件' : 'Recursively scan the selected folder and its subfolders',
+    filesHint: zh ? '一次选择多个 .md 文件' : 'Select multiple .md files at once',
+    chooseOutput: zh ? '选择输出文件夹并开始' : 'Choose output folder and start',
+    processingTitle: zh ? '批量转换中' : 'Batch conversion in progress',
+    processingDescription: zh
+      ? '正在顺序生成 PDF，请保持当前页面打开。'
+      : 'Generating PDFs sequentially. Keep this page open.',
+    currentFile: zh ? '当前文件' : 'Current file',
+    completed: zh ? '已完成' : 'Completed',
+    resultTitle: zh ? '批量转换完成' : 'Batch conversion complete',
+    resultSummary: zh ? '{success} 个成功，{failed} 个失败。' : '{success} succeeded, {failed} failed.',
+    outputFolder: zh ? '输出文件夹' : 'Output folder',
+    selectedFiles: zh ? '已选文件' : 'Selected files',
+    failedFiles: zh ? '失败文件' : 'Failed files',
+    moreFiles: zh ? '更多文件' : 'more files',
+    close: zh ? '关闭' : 'Close',
+    cancel: zh ? '取消' : 'Cancel',
+    unsupported: zh
+      ? '当前浏览器不支持批量选择和写入文件夹。请使用最新版 Chrome、Edge 或其他 Chromium 浏览器。'
+      : 'This browser does not support folder-based batch conversion. Use a recent Chromium-based browser such as Chrome or Edge.',
+    noMarkdownFiles: zh
+      ? '所选内容中没有可转换的 Markdown 文件。'
+      : 'No Markdown files were found in the selected source.',
+    skippedFiles: zh
+      ? '已跳过 {count} 个不符合条件的文件。'
+      : 'Skipped {count} files that did not meet the requirements.',
+    finishedToast: zh ? '批量转换完成' : 'Batch conversion complete',
+    partialFailureToast: zh ? '部分文件转换失败' : 'Some files failed to convert',
+  }
+}
+
+const isBatchMarkdownFile = (fileName: string) =>
+  BATCH_FILE_EXTENSIONS.some((extension) => fileName.toLowerCase().endsWith(extension))
+
+const validateBatchFile = (file: File, t: LocaleTranslations): { valid: boolean; error?: string } => {
+  if (!isBatchMarkdownFile(file.name)) {
+    return {
+      valid: false,
+      error: t.messages.invalidFileType,
+    }
+  }
+
+  if (file.size > MAX_FILE_SIZE) {
+    return {
+      valid: false,
+      error: t.messages.fileTooLarge,
+    }
+  }
+
+  return { valid: true }
+}
+
+const getBrowserPickerWindow = () => window as BrowserPickerWindow
+
+const isPickerAbortError = (error: unknown) =>
+  error instanceof DOMException && error.name === 'AbortError'
+
+const sanitizeFileName = (value: string) =>
+  value
+    .replace(/[\\/:*?"<>|]/g, '-')
+    .replace(/\s+/g, '-')
+    .replace(/-{2,}/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+const getPdfFileNameForSource = (sourceFileName: string) => {
+  const baseName = sourceFileName.replace(/\.[^.]+$/, '')
+  return `${sanitizeFileName(baseName) || 'document'}.pdf`
+}
+
+const getErrorMessage = (error: unknown, t: LocaleTranslations) => {
+  if (error instanceof Error) {
+    if (error.message.includes('fetch') || error.message.includes('network')) {
+      return t.messages.networkError
+    }
+    return error.message
+  }
+  return t.messages.unknownError
+}
+
+const downloadBlob = (blob: Blob, fileName: string) => {
+  const url = window.URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = fileName
+
+  try {
+    document.body.appendChild(link)
+    link.click()
+  } finally {
+    if (document.body.contains(link)) {
+      document.body.removeChild(link)
+    }
+    window.URL.revokeObjectURL(url)
+  }
+}
+
+const buildPreviewHtmlForPdf = async (content: string, t: LocaleTranslations) => {
+  const { html } = await renderMarkdownToHtml(content, t)
+
+  const offscreenPreview = document.createElement('div')
+  offscreenPreview.className = 'markdown-preview-pdf prose prose-lg'
+  offscreenPreview.style.position = 'fixed'
+  offscreenPreview.style.left = '-200vw'
+  offscreenPreview.style.top = '0'
+  offscreenPreview.style.width = '800px'
+  offscreenPreview.style.opacity = '0'
+  offscreenPreview.style.pointerEvents = 'none'
+  offscreenPreview.style.background = '#ffffff'
+
+  const body = document.createElement('div')
+  body.className = 'markdown-body'
+  body.style.padding = '20px'
+  body.style.maxWidth = '800px'
+  body.style.margin = '0 auto'
+  body.innerHTML = html
+
+  offscreenPreview.appendChild(body)
+  document.body.appendChild(offscreenPreview)
+
+  try {
+    await renderMermaidInContainer(offscreenPreview)
+    return offscreenPreview.innerHTML
+  } finally {
+    if (document.body.contains(offscreenPreview)) {
+      document.body.removeChild(offscreenPreview)
+    }
+  }
+}
+
+const requestPdfBlob = async ({
+  htmlContent,
+  fileName,
+  theme,
+  paperSize,
+  fontSize,
+  language,
+  allowBrowserPrintFallback = false,
+}: {
+  htmlContent: string
+  fileName: string
+  theme: string
+  paperSize: string
+  fontSize: string
+  language: string
+  allowBrowserPrintFallback?: boolean
+}): Promise<Blob | null> => {
+  const response = await fetch('/api/export-pdf', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify({
+      htmlContent,
+      fileName,
+      theme,
+      paperSize,
+      fontSize,
+      language,
+    }),
+  })
+
+  if (!response.ok) {
+    const errorText = await response.text()
+    throw new Error(`PDF生成失败 (${response.status}): ${errorText}`)
+  }
+
+  const contentType = response.headers.get('content-type')
+  if (contentType && contentType.includes('application/json')) {
+    const result = await response.json()
+    if (result.useBrowserPrint) {
+      if (allowBrowserPrintFallback) {
+        return null
+      }
+      throw new Error('Batch conversion does not support browser print fallback.')
+    }
+    throw new Error(result.error || 'PDF生成失败')
+  }
+
+  const blob = await response.blob()
+  if (blob.type !== 'application/pdf') {
+    const text = await blob.text()
+    throw new Error(text || '服务器返回了无效的PDF文件')
+  }
+
+  return blob
+}
+
+const collectMarkdownFilesFromDirectory = async (
+  directoryHandle: BrowserDirectoryHandle,
+  parentPath = ''
+): Promise<BatchSourceFile[]> => {
+  const files: BatchSourceFile[] = []
+
+  for await (const [entryName, entry] of directoryHandle.entries()) {
+    const relativePath = parentPath ? `${parentPath}/${entryName}` : entryName
+
+    if ('getFile' in entry) {
+      const file = await entry.getFile()
+      if (isBatchMarkdownFile(file.name)) {
+        files.push({ file, relativePath })
+      }
+      continue
+    }
+
+    const nestedFiles = await collectMarkdownFilesFromDirectory(entry, relativePath)
+    files.push(...nestedFiles)
+  }
+
+  return files
+}
+
+const fileExistsInDirectory = async (
+  directoryHandle: BrowserDirectoryHandle,
+  fileName: string
+) => {
+  try {
+    await directoryHandle.getFileHandle(fileName)
+    return true
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'NotFoundError') {
+      return false
+    }
+    throw error
+  }
+}
+
+const getUniqueOutputFileName = async (
+  directoryHandle: BrowserDirectoryHandle,
+  desiredFileName: string,
+  reservedNames: Set<string>
+) => {
+  const extension = desiredFileName.toLowerCase().endsWith('.pdf') ? '.pdf' : ''
+  const baseName = extension ? desiredFileName.slice(0, -extension.length) : desiredFileName
+
+  let candidate = desiredFileName
+  let suffix = 1
+
+  while (
+    reservedNames.has(candidate.toLowerCase()) ||
+    (await fileExistsInDirectory(directoryHandle, candidate))
+  ) {
+    candidate = `${baseName}-${suffix}${extension || '.pdf'}`
+    suffix += 1
+  }
+
+  reservedNames.add(candidate.toLowerCase())
+  return candidate
+}
+
+const writeBlobToDirectory = async (
+  directoryHandle: BrowserDirectoryHandle,
+  fileName: string,
+  blob: Blob
+) => {
+  const fileHandle = await directoryHandle.getFileHandle(fileName, { create: true })
+  const writable = await fileHandle.createWritable()
+  await writable.write(blob)
+  await writable.close()
+}
+
 // Theme options
 const themes = [
   { id: "default", description: "Clean and professional" },
@@ -113,6 +459,7 @@ export default function MarkdownToPDF() {
   const { addToast } = useToast()
   const { addRecentFile } = useRecentFiles()
   const { pushState, undo, redo, canUndo, canRedo } = useEditorHistory()
+  const batchCopy = getBatchCopy(language)
 
   // 递归覆盖所有子元素样式，彻底移除oklch影响
   const [markdown, setMarkdown] = useState(t.defaultContent)
@@ -151,6 +498,7 @@ export default function MarkdownToPDF() {
   const [showSettings, setShowSettings] = useState(false)
   const [showToc, setShowToc] = useState(false)
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false)
+  const [isBatchProcessing, setIsBatchProcessing] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [isLoaded, setIsLoaded] = useState(false)
   const [editorFontSize, setEditorFontSize] = useState(14)
@@ -167,6 +515,11 @@ export default function MarkdownToPDF() {
   const [showFindReplace, setShowFindReplace] = useState(false)
   const [showEditorTools, setShowEditorTools] = useState(false)
   const [prevMarkdownLength, setPrevMarkdownLength] = useState(0)
+  const [batchDialogOpen, setBatchDialogOpen] = useState(false)
+  const [batchDialogStep, setBatchDialogStep] = useState<BatchDialogStep>('source')
+  const [batchFiles, setBatchFiles] = useState<BatchSourceFile[]>([])
+  const [batchProgress, setBatchProgress] = useState({ current: 0, total: 0, currentFile: '' })
+  const [batchResult, setBatchResult] = useState<BatchResult | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const dropRef = useRef<HTMLDivElement>(null)
   const settingsRef = useRef<HTMLDivElement>(null)
@@ -237,7 +590,7 @@ export default function MarkdownToPDF() {
       // Ctrl/Cmd + S: Save/Export PDF
       if ((e.ctrlKey || e.metaKey) && e.key === 's') {
         e.preventDefault()
-        if (!isGeneratingPDF) {
+        if (!isGeneratingPDF && !isBatchProcessing) {
           handleDownloadPDF()
         }
       }
@@ -303,7 +656,7 @@ export default function MarkdownToPDF() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [showSettings, showToc, showPreview, showFindReplace, isGeneratingPDF]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [showSettings, showToc, showPreview, showFindReplace, isGeneratingPDF, isBatchProcessing]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // 点击外部关闭菜单
   useEffect(() => {
@@ -403,113 +756,253 @@ export default function MarkdownToPDF() {
     window.print()
   }
 
+  const openBatchDialog = () => {
+    setBatchResult(null)
+    setBatchFiles([])
+    setBatchProgress({ current: 0, total: 0, currentFile: '' })
+    setBatchDialogStep('source')
+    setBatchDialogOpen(true)
+  }
+
+  const prepareBatchSelection = (sourceFiles: BatchSourceFile[]) => {
+    const validFiles: BatchSourceFile[] = []
+    let skippedCount = 0
+
+    sourceFiles.forEach((sourceFile) => {
+      const validation = validateBatchFile(sourceFile.file, t)
+      if (validation.valid) {
+        validFiles.push(sourceFile)
+      } else {
+        skippedCount += 1
+      }
+    })
+
+    if (!validFiles.length) {
+      addToast({
+        type: 'error',
+        title: batchCopy.dialogTitle,
+        message: batchCopy.noMarkdownFiles,
+      })
+      return
+    }
+
+    if (skippedCount > 0) {
+      addToast({
+        type: 'warning',
+        title: batchCopy.dialogTitle,
+        message: batchCopy.skippedFiles.replace('{count}', String(skippedCount)),
+      })
+    }
+
+    validFiles.sort((left, right) => left.relativePath.localeCompare(right.relativePath))
+    setBatchFiles(validFiles)
+    setBatchResult(null)
+    setBatchDialogStep('output')
+  }
+
+  const handleBatchSelectFiles = async () => {
+    try {
+      const pickerWindow = getBrowserPickerWindow()
+      const handles = await pickerWindow.showOpenFilePicker?.({
+        multiple: true,
+        excludeAcceptAllOption: false,
+        types: [
+          {
+            description: 'Markdown',
+            accept: {
+              'text/markdown': ['.md', '.markdown'],
+              'text/plain': ['.md', '.markdown'],
+            },
+          },
+        ],
+      })
+
+      if (!handles?.length) {
+        return
+      }
+
+      const selectedFiles = await Promise.all(
+        handles.map(async (handle) => {
+          const file = await handle.getFile()
+          return {
+            file,
+            relativePath: file.name,
+          }
+        })
+      )
+
+      prepareBatchSelection(selectedFiles)
+    } catch (error) {
+      if (isPickerAbortError(error)) {
+        return
+      }
+
+      addToast({
+        type: 'error',
+        title: batchCopy.dialogTitle,
+        message: getErrorMessage(error, t),
+      })
+    }
+  }
+
+  const handleBatchSelectFolder = async () => {
+    try {
+      const pickerWindow = getBrowserPickerWindow()
+      const directoryHandle = await pickerWindow.showDirectoryPicker?.({ mode: 'read' })
+      if (!directoryHandle) {
+        return
+      }
+
+      const selectedFiles = await collectMarkdownFilesFromDirectory(directoryHandle)
+      prepareBatchSelection(selectedFiles)
+    } catch (error) {
+      if (isPickerAbortError(error)) {
+        return
+      }
+
+      addToast({
+        type: 'error',
+        title: batchCopy.dialogTitle,
+        message: getErrorMessage(error, t),
+      })
+    }
+  }
+
+  const handleBatchChooseOutputFolder = async () => {
+    if (!batchFiles.length) {
+      return
+    }
+
+    try {
+      const pickerWindow = getBrowserPickerWindow()
+      const outputDirectory = await pickerWindow.showDirectoryPicker?.({ mode: 'readwrite' })
+      if (!outputDirectory) {
+        return
+      }
+
+      setBatchDialogStep('processing')
+      setIsBatchProcessing(true)
+      setBatchProgress({ current: 0, total: batchFiles.length, currentFile: '' })
+
+      const reservedNames = new Set<string>()
+      const failures: BatchFailure[] = []
+      let successCount = 0
+
+      for (let index = 0; index < batchFiles.length; index += 1) {
+        const sourceFile = batchFiles[index]
+        setBatchProgress({
+          current: index,
+          total: batchFiles.length,
+          currentFile: sourceFile.relativePath,
+        })
+
+        try {
+          const content = await readFileContent(sourceFile.file)
+          const htmlContent = await buildPreviewHtmlForPdf(content, t)
+          const outputFileName = await getUniqueOutputFileName(
+            outputDirectory,
+            getPdfFileNameForSource(sourceFile.file.name),
+            reservedNames
+          )
+          const blob = await requestPdfBlob({
+            htmlContent,
+            fileName: outputFileName,
+            theme: selectedTheme,
+            paperSize: selectedPaperSize,
+            fontSize: selectedFontSize,
+            language,
+          })
+
+          if (!blob) {
+            throw new Error('Batch conversion does not support browser print fallback.')
+          }
+
+          await writeBlobToDirectory(outputDirectory, outputFileName, blob)
+          successCount += 1
+        } catch (error) {
+          failures.push({
+            fileName: sourceFile.relativePath,
+            message: getErrorMessage(error, t),
+          })
+        } finally {
+          setBatchProgress({
+            current: index + 1,
+            total: batchFiles.length,
+            currentFile: sourceFile.relativePath,
+          })
+        }
+      }
+
+      const result: BatchResult = {
+        successCount,
+        failureCount: failures.length,
+        failures,
+        outputFolderName: outputDirectory.name || '',
+      }
+
+      setBatchResult(result)
+      setBatchDialogStep('result')
+
+      addToast({
+        type: failures.length > 0 ? 'warning' : 'success',
+        title: failures.length > 0 ? batchCopy.partialFailureToast : batchCopy.finishedToast,
+        message: batchCopy.resultSummary
+          .replace('{success}', String(successCount))
+          .replace('{failed}', String(failures.length)),
+      })
+    } catch (error) {
+      if (isPickerAbortError(error)) {
+        setBatchDialogStep('output')
+        return
+      }
+
+      addToast({
+        type: 'error',
+        title: batchCopy.dialogTitle,
+        message: getErrorMessage(error, t),
+      })
+      setBatchDialogStep('output')
+    } finally {
+      setIsBatchProcessing(false)
+    }
+  }
+
   const handleDownloadPDF = async () => {
     setIsGeneratingPDF(true)
     try {
-      const previewCard = document.querySelector('.markdown-preview-pdf') as HTMLElement;
+      const previewCard = document.querySelector('.markdown-preview-pdf') as HTMLElement
       if (!previewCard) {
-        throw new Error('找不到预览内容容器');
+        throw new Error('找不到预览内容容器')
       }
 
-      // 生成文件名，基于第一行标题或默认
-      const firstLine = markdown.split('\n')[0]?.replace(/^#+\s*/, '') || 'document';
+      const firstLine = markdown.split('\n')[0]?.replace(/^#+\s*/, '') || 'document'
       const safeBaseName = firstLine
         .trim()
         .replace(/[\\/:*?"<>|]/g, '-')
         .replace(/\s+/g, '-')
         .replace(/-{2,}/g, '-')
         .replace(/^-+|-+$/g, '') || 'document'
-      const fileName = `${safeBaseName}.pdf`;
+      const fileName = `${safeBaseName}.pdf`
+      const blob = await requestPdfBlob({
+        htmlContent: previewCard.innerHTML,
+        fileName,
+        theme: selectedTheme,
+        paperSize: selectedPaperSize,
+        fontSize: selectedFontSize,
+        language,
+        allowBrowserPrintFallback: true,
+      })
 
-      // 获取HTML内容并确保正确编码
-      const htmlContent = previewCard.innerHTML;
-
-      // 调试信息：输出HTML内容长度和语言
-      //console.log('PDF导出调试信息:');
-      //console.log('- 当前语言:', language);
-      //console.log('- HTML内容长度:', htmlContent.length);
-      //console.log('- 文件名:', fileName);
-
-      // 调用API生成PDF
-      const response = await fetch('/api/export-pdf', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-        body: JSON.stringify({
-          htmlContent,
-          fileName,
-          theme: selectedTheme,
-          paperSize: selectedPaperSize,
-          fontSize: selectedFontSize,
-          language // 添加语言参数
-        }),
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('服务器响应错误:', errorText);
-        throw new Error(`PDF生成失败 (${response.status}): ${errorText}`);
+      if (!blob) {
+        handlePrint()
+        return
       }
 
-      // 检查响应类型
-      const contentType = response.headers.get('content-type');
-
-      if (contentType && contentType.includes('application/json')) {
-        // 如果返回的是JSON，说明需要使用浏览器打印
-        const result = await response.json();
-        console.log('API返回JSON响应:', result);
-
-        if (result.useBrowserPrint) {
-          console.log('使用浏览器打印功能');
-          handlePrint();
-          return;
-        }
-
-        // 如果不是useBrowserPrint，则抛出错误
-        throw new Error(result.error || 'PDF生成失败');
-      }
-
-      // 如果返回的是PDF文件
-      const blob = await response.blob();
-
-      // 检查blob类型
-      if (blob.type !== 'application/pdf') {
-        // 如果不是PDF类型，尝试读取为文本查看错误信息
-        const text = await blob.text();
-        console.error('收到非PDF响应:', text);
-        throw new Error('服务器返回了无效的PDF文件');
-      }
-
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = fileName;
-
-      // Safely append and click the download link
-      try {
-        document.body.appendChild(a);
-        a.click();
-      } finally {
-        // Always clean up, even if click fails
-        if (document.body.contains(a)) {
-          document.body.removeChild(a);
-        }
-        window.URL.revokeObjectURL(url);
-      }
-
-      console.log('PDF导出成功');
+      downloadBlob(blob, fileName)
       addToast({ type: 'success', title: 'PDF exported', message: fileName })
     } catch (error) {
-      console.error('PDF导出错误:', error);
-      let errorMessage = t.messages.unknownError;
-      if (error instanceof Error) {
-        if (error.message.includes('fetch') || error.message.includes('network')) {
-          errorMessage = t.messages.networkError;
-        } else {
-          errorMessage = error.message;
-        }
-      }
+      console.error('PDF导出错误:', error)
+      const errorMessage = getErrorMessage(error, t)
       addToast({ type: 'error', title: t.messages.pdfGenerationError, message: errorMessage })
     } finally {
       setIsGeneratingPDF(false)
@@ -777,6 +1270,11 @@ ${previewCard.innerHTML}
     }
   }
 
+  const supportsBatchConversion =
+    typeof window !== 'undefined' &&
+    typeof getBrowserPickerWindow().showOpenFilePicker === 'function' &&
+    typeof getBrowserPickerWindow().showDirectoryPicker === 'function'
+
   return (
     <>
       <Head>
@@ -863,7 +1361,7 @@ ${previewCard.innerHTML}
                 <Button
                   onClick={handleDownloadPDF}
                   className="cta-button text-sm sm:text-base relative group"
-                  disabled={isGeneratingPDF}
+                  disabled={isGeneratingPDF || isBatchProcessing}
                   aria-label={isGeneratingPDF ? t.buttons.generatingPDF : t.buttons.getPDF}
                   title="Ctrl/Cmd + S"
                 >
@@ -926,7 +1424,7 @@ ${previewCard.innerHTML}
                   onClick={handleDownloadPDF}
                   className="cta-button text-xs px-3 py-2 min-w-[64px] min-h-[44px] touch-manipulation active:scale-95 transition-transform"
                   size="sm"
-                  disabled={isGeneratingPDF}
+                  disabled={isGeneratingPDF || isBatchProcessing}
                   aria-label={isGeneratingPDF ? t.buttons.generatingPDF : t.buttons.getPDF}
                 >
                   {isGeneratingPDF ? (
@@ -1150,9 +1648,22 @@ ${previewCard.innerHTML}
                           onClick={() => fileInputRef.current?.click()}
                           className="w-full sm:w-auto btn-upload"
                           aria-label={t.buttons.upload}
+                          disabled={isBatchProcessing}
                         >
                           <Upload className="h-4 w-4 mr-2" />
                           {t.buttons.upload}
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={openBatchDialog}
+                          className="w-full sm:w-auto transition-colors hover:!bg-primary/10 hover:!text-primary hover:!border-primary/40"
+                          aria-label={batchCopy.button}
+                          disabled={isGeneratingPDF || isBatchProcessing}
+                        >
+                          <Files className="h-4 w-4 mr-2" />
+                          <span className="hidden sm:inline">{batchCopy.button}</span>
+                          <span className="sm:hidden">{batchCopy.buttonShort}</span>
                         </Button>
                         <Button
                           variant="outline"
@@ -1342,6 +1853,166 @@ ${previewCard.innerHTML}
         </div>
         )}
       </div>
+
+      <Dialog
+        open={batchDialogOpen}
+        onOpenChange={(open) => {
+          if (!open && isBatchProcessing) {
+            return
+          }
+
+          setBatchDialogOpen(open)
+          if (!open) {
+            setBatchDialogStep('source')
+            setBatchFiles([])
+            setBatchProgress({ current: 0, total: 0, currentFile: '' })
+            setBatchResult(null)
+          }
+        }}
+      >
+        <DialogContent className="sm:max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>
+              {batchDialogStep === 'source' && batchCopy.dialogTitle}
+              {batchDialogStep === 'output' && batchCopy.outputTitle}
+              {batchDialogStep === 'processing' && batchCopy.processingTitle}
+              {batchDialogStep === 'result' && batchCopy.resultTitle}
+            </DialogTitle>
+            <DialogDescription>
+              {batchDialogStep === 'source' && batchCopy.dialogDescription}
+              {batchDialogStep === 'output' &&
+                batchCopy.outputDescription.replace('{count}', String(batchFiles.length))}
+              {batchDialogStep === 'processing' && batchCopy.processingDescription}
+              {batchDialogStep === 'result' &&
+                batchCopy.resultSummary
+                  .replace('{success}', String(batchResult?.successCount ?? 0))
+                  .replace('{failed}', String(batchResult?.failureCount ?? 0))}
+            </DialogDescription>
+          </DialogHeader>
+
+          {batchDialogStep === 'source' && (
+            <div className="space-y-4">
+              {!supportsBatchConversion && (
+                <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
+                  {batchCopy.unsupported}
+                </div>
+              )}
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="h-auto justify-start gap-3 p-4 text-left"
+                  onClick={handleBatchSelectFolder}
+                  disabled={!supportsBatchConversion}
+                >
+                  <FolderOpen className="h-5 w-5 shrink-0" />
+                  <div>
+                    <div className="font-medium">{batchCopy.selectFolder}</div>
+                    <div className="text-xs text-muted-foreground">{batchCopy.folderHint}</div>
+                  </div>
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="h-auto justify-start gap-3 p-4 text-left"
+                  onClick={handleBatchSelectFiles}
+                  disabled={!supportsBatchConversion}
+                >
+                  <Files className="h-5 w-5 shrink-0" />
+                  <div>
+                    <div className="font-medium">{batchCopy.selectFiles}</div>
+                    <div className="text-xs text-muted-foreground">{batchCopy.filesHint}</div>
+                  </div>
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {batchDialogStep === 'output' && (
+            <div className="space-y-4">
+              <div className="rounded-lg border bg-muted/30 p-3 text-sm text-muted-foreground">
+                {batchCopy.duplicateHint}
+              </div>
+              <div className="space-y-2">
+                <div className="text-sm font-medium">{batchCopy.selectedFiles}</div>
+                <div className="max-h-56 space-y-2 overflow-auto rounded-lg border p-3">
+                  {batchFiles.slice(0, 12).map((sourceFile) => (
+                    <div key={sourceFile.relativePath} className="text-sm">
+                      {sourceFile.relativePath}
+                    </div>
+                  ))}
+                  {batchFiles.length > 12 && (
+                    <div className="text-sm text-muted-foreground">
+                      + {batchFiles.length - 12} {batchCopy.moreFiles}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <DialogFooter>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setBatchDialogStep('source')}
+                >
+                  {batchCopy.cancel}
+                </Button>
+                <Button type="button" onClick={handleBatchChooseOutputFolder}>
+                  {batchCopy.chooseOutput}
+                </Button>
+              </DialogFooter>
+            </div>
+          )}
+
+          {batchDialogStep === 'processing' && (
+            <div className="space-y-4">
+              <Progress value={batchProgress.current} max={Math.max(batchProgress.total, 1)} />
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span>
+                  {batchCopy.completed}: {batchProgress.current}/{batchProgress.total}
+                </span>
+              </div>
+              <div className="rounded-lg border bg-muted/30 p-3 text-sm">
+                <div className="font-medium">{batchCopy.currentFile}</div>
+                <div className="mt-1 break-all text-muted-foreground">
+                  {batchProgress.currentFile || '-'}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {batchDialogStep === 'result' && (
+            <div className="space-y-4">
+              {batchResult?.outputFolderName && (
+                <div className="rounded-lg border bg-muted/30 p-3 text-sm">
+                  <div className="font-medium">{batchCopy.outputFolder}</div>
+                  <div className="mt-1 break-all text-muted-foreground">
+                    {batchResult.outputFolderName}
+                  </div>
+                </div>
+              )}
+              {batchResult && batchResult.failures.length > 0 && (
+                <div className="space-y-2">
+                  <div className="text-sm font-medium">{batchCopy.failedFiles}</div>
+                  <div className="max-h-56 space-y-3 overflow-auto rounded-lg border p-3">
+                    {batchResult.failures.map((failure) => (
+                      <div key={`${failure.fileName}-${failure.message}`} className="text-sm">
+                        <div className="font-medium break-all">{failure.fileName}</div>
+                        <div className="text-muted-foreground break-all">{failure.message}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <DialogFooter>
+                <Button type="button" onClick={() => setBatchDialogOpen(false)}>
+                  {batchCopy.close}
+                </Button>
+              </DialogFooter>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <SeoContent />
       <SiteFooter />

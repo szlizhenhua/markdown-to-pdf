@@ -1,7 +1,61 @@
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { pathToFileURL } from 'node:url'
+
 export interface PDFStyleOptions {
   fontSize: string
   theme: string
   highlightTheme: string
+}
+
+let cachedKatexCss: string | null = null
+let cachedKatexBaseHref: string | null = null
+
+function resolveExistingKatexCssPath(): string {
+  const candidates = [resolve(process.cwd(), 'node_modules/katex/dist/katex.min.css')]
+
+  const pnpmRoot = resolve(process.cwd(), 'node_modules/.pnpm')
+  if (existsSync(pnpmRoot)) {
+    const katexPackageDir = readdirSync(pnpmRoot).find((entry) => entry.startsWith('katex@'))
+    if (katexPackageDir) {
+      candidates.push(resolve(pnpmRoot, katexPackageDir, 'node_modules/katex/dist/katex.min.css'))
+    }
+  }
+
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) {
+      return candidate
+    }
+  }
+
+  throw new Error(`Unable to locate katex.min.css. Checked: ${candidates.join(', ')}`)
+}
+
+function getLocalKatexCss(): string {
+  if (cachedKatexCss !== null) {
+    return cachedKatexCss
+  }
+
+  try {
+    const katexCssPath = resolveExistingKatexCssPath()
+    cachedKatexCss = readFileSync(katexCssPath, 'utf8')
+    cachedKatexBaseHref = pathToFileURL(`${dirname(katexCssPath)}/`).href
+  } catch (error) {
+    console.warn('Failed to load local KaTeX CSS for PDF export:', error)
+    cachedKatexCss = ''
+    cachedKatexBaseHref = ''
+  }
+
+  return cachedKatexCss
+}
+
+function getLocalKatexBaseHref(): string {
+  if (cachedKatexBaseHref !== null) {
+    return cachedKatexBaseHref
+  }
+
+  getLocalKatexCss()
+  return cachedKatexBaseHref || ''
 }
 
 /**
@@ -554,6 +608,8 @@ export function generatePDFHTML(htmlContent: string, options: PDFStyleOptions): 
   const { theme, fontSize } = options
   const highlightTheme = getHighlightThemeFilename(theme)
   const styles = generatePDFStyles({ fontSize, theme, highlightTheme })
+  const katexCss = getLocalKatexCss()
+  const baseHref = getLocalKatexBaseHref()
 
   return `
       <!DOCTYPE html>
@@ -562,12 +618,10 @@ export function generatePDFHTML(htmlContent: string, options: PDFStyleOptions): 
           <meta charset="UTF-8">
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <link rel="preconnect" href="https://fonts.googleapis.com">
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-          <!-- 始终加载中文字体支持，确保任何语言下都能正确显示中文 -->
-          <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&family=Inter:wght@400;500;700&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/${highlightTheme}">
+          ${baseHref ? `<base href="${baseHref}">` : ''}
+          <style>
+            ${katexCss}
+          </style>
           <style>
             ${styles}
           </style>
