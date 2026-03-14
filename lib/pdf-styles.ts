@@ -8,8 +8,7 @@ export interface PDFStyleOptions {
 }
 
 let cachedKatexCss: string | null = null
-const GOOGLE_PDF_FONT_STYLESHEET =
-  'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap'
+let cachedNotoSansScCss: string | null = null
 
 function resolveExistingKatexCssPath(): string {
   const candidates = [resolve(process.cwd(), 'node_modules/katex/dist/katex.min.css')]
@@ -31,6 +30,26 @@ function resolveExistingKatexCssPath(): string {
   throw new Error(`Unable to locate katex.min.css. Checked: ${candidates.join(', ')}`)
 }
 
+function resolveExistingNotoSansScCssPath(fileName: string): string {
+  const candidates = [resolve(process.cwd(), `node_modules/@fontsource/noto-sans-sc/${fileName}`)]
+
+  const pnpmRoot = resolve(process.cwd(), 'node_modules/.pnpm')
+  if (existsSync(pnpmRoot)) {
+    const fontPackageDir = readdirSync(pnpmRoot).find((entry) => entry.startsWith('@fontsource+noto-sans-sc@'))
+    if (fontPackageDir) {
+      candidates.push(resolve(pnpmRoot, fontPackageDir, 'node_modules/@fontsource/noto-sans-sc', fileName))
+    }
+  }
+
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) {
+      return candidate
+    }
+  }
+
+  throw new Error(`Unable to locate ${fileName}. Checked: ${candidates.join(', ')}`)
+}
+
 function getLocalKatexCss(): string {
   if (cachedKatexCss !== null) {
     return cachedKatexCss
@@ -46,6 +65,33 @@ function getLocalKatexCss(): string {
   }
 
   return cachedKatexCss
+}
+
+function getLocalNotoSansScCss(): string {
+  if (cachedNotoSansScCss !== null) {
+    return cachedNotoSansScCss
+  }
+
+  try {
+    const cssFiles = [
+      'chinese-simplified-400.css',
+      'chinese-simplified-500.css',
+      'chinese-simplified-700.css',
+    ]
+
+    cachedNotoSansScCss = cssFiles
+      .map((fileName) => {
+        const cssPath = resolveExistingNotoSansScCssPath(fileName)
+        const rawCss = readFileSync(cssPath, 'utf8')
+        return inlineRelativeAssetUrls(rawCss, dirname(cssPath))
+      })
+      .join('\n')
+  } catch (error) {
+    console.warn('Failed to load local Noto Sans SC CSS for PDF export:', error)
+    cachedNotoSansScCss = ''
+  }
+
+  return cachedNotoSansScCss
 }
 
 function getMimeType(filePath: string): string {
@@ -644,6 +690,7 @@ export function generatePDFHTML(htmlContent: string, options: PDFStyleOptions): 
   const highlightTheme = getHighlightThemeFilename(theme)
   const styles = generatePDFStyles({ fontSize, theme, highlightTheme })
   const katexCss = getLocalKatexCss()
+  const notoSansScCss = getLocalNotoSansScCss()
 
   return `
       <!DOCTYPE html>
@@ -652,9 +699,9 @@ export function generatePDFHTML(htmlContent: string, options: PDFStyleOptions): 
           <meta charset="UTF-8">
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <link rel="preconnect" href="https://fonts.googleapis.com">
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-          <link href="${GOOGLE_PDF_FONT_STYLESHEET}" rel="stylesheet">
+          <style>
+            ${notoSansScCss}
+          </style>
           <style>
             ${katexCss}
           </style>

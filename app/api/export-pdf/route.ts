@@ -110,7 +110,8 @@ export async function POST(request: Request) {
 
         const fontCandidates = [
           '400 12pt "Noto Sans SC"',
-          '400 12pt "Noto Serif SC"',
+          '500 12pt "Noto Sans SC"',
+          '700 12pt "Noto Sans SC"',
           '400 12pt "KaTeX_Main"',
           '400 12pt "KaTeX_Math"',
         ]
