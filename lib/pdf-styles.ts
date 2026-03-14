@@ -9,8 +9,10 @@ export interface PDFStyleOptions {
 
 let cachedKatexCss: string | null = null
 let cachedNotoSansScCss: string | null = null
+let cachedNotoColorEmojiCss: string | null = null
 const LOCAL_KATEX_DIR = resolve(process.cwd(), 'assets/katex')
 const LOCAL_NOTO_SANS_SC_DIR = resolve(process.cwd(), 'assets/fonts/noto-sans-sc')
+const LOCAL_NOTO_COLOR_EMOJI_DIR = resolve(process.cwd(), 'assets/fonts/noto-color-emoji')
 
 function resolveExistingKatexCssPath(): string {
   const candidates = [resolve(LOCAL_KATEX_DIR, 'katex.min.css')]
@@ -26,6 +28,18 @@ function resolveExistingKatexCssPath(): string {
 
 function resolveExistingNotoSansScCssPath(fileName: string): string {
   const candidates = [resolve(LOCAL_NOTO_SANS_SC_DIR, fileName)]
+
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) {
+      return candidate
+    }
+  }
+
+  throw new Error(`Unable to locate ${fileName}. Checked: ${candidates.join(', ')}`)
+}
+
+function resolveExistingNotoColorEmojiCssPath(fileName: string): string {
+  const candidates = [resolve(LOCAL_NOTO_COLOR_EMOJI_DIR, fileName)]
 
   for (const candidate of candidates) {
     if (existsSync(candidate)) {
@@ -78,6 +92,23 @@ function getLocalNotoSansScCss(): string {
   }
 
   return cachedNotoSansScCss
+}
+
+function getLocalNotoColorEmojiCss(): string {
+  if (cachedNotoColorEmojiCss !== null) {
+    return cachedNotoColorEmojiCss
+  }
+
+  try {
+    const cssPath = resolveExistingNotoColorEmojiCssPath('emoji.css')
+    const rawCss = readFileSync(cssPath, 'utf8')
+    cachedNotoColorEmojiCss = inlineRelativeAssetUrls(rawCss, dirname(cssPath))
+  } catch (error) {
+    console.warn('Failed to load local Noto Color Emoji CSS for PDF export:', error)
+    cachedNotoColorEmojiCss = ''
+  }
+
+  return cachedNotoColorEmojiCss
 }
 
 function getMimeType(filePath: string): string {
@@ -677,6 +708,7 @@ export function generatePDFHTML(htmlContent: string, options: PDFStyleOptions): 
   const styles = generatePDFStyles({ fontSize, theme, highlightTheme })
   const katexCss = getLocalKatexCss()
   const notoSansScCss = getLocalNotoSansScCss()
+  const notoColorEmojiCss = getLocalNotoColorEmojiCss()
 
   return `
       <!DOCTYPE html>
@@ -687,6 +719,9 @@ export function generatePDFHTML(htmlContent: string, options: PDFStyleOptions): 
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <style>
             ${notoSansScCss}
+          </style>
+          <style>
+            ${notoColorEmojiCss}
           </style>
           <style>
             ${katexCss}

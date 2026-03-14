@@ -15,6 +15,7 @@ const nextConfig = {
     '/api/export-pdf': [
       './assets/katex/**/*',
       './assets/fonts/noto-sans-sc/**/*',
+      './assets/fonts/noto-color-emoji/**/*',
     ],
   },
 }

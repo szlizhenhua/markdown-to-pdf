@@ -40,6 +40,7 @@ async function waitForDocumentAndFonts(page: Page) {
         '400 12pt "Noto Sans SC"',
         '500 12pt "Noto Sans SC"',
         '700 12pt "Noto Sans SC"',
+        '400 12pt "Noto Color Emoji"',
         '400 12pt "KaTeX_Main"',
         '400 12pt "KaTeX_Math"',
       ]
