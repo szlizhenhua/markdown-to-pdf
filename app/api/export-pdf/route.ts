@@ -1,10 +1,112 @@
 import { NextResponse } from 'next/server'
 import chromium from '@sparticuz/chromium'
 import puppeteer from 'puppeteer-core'
+import type { Page } from 'puppeteer-core'
 import { generatePDFHTML } from '@/lib/pdf-styles'
 
 export const runtime = 'nodejs'
 export const maxDuration = 60
+
+const CONTENT_TIMEOUT_MS = 15000
+const FONT_TIMEOUT_MS = 5000
+const IMAGE_TIMEOUT_MS = 8000
+
+async function waitForDocumentAndFonts(page: Page) {
+  await page.evaluate(
+    async ({ fontTimeoutMs }) => {
+      const raceWithTimeout = <T,>(promise: Promise<T>, timeoutMs: number) =>
+        Promise.race([
+          promise,
+          new Promise<null>((resolve) => setTimeout(() => resolve(null), timeoutMs)),
+        ])
+
+      await raceWithTimeout(
+        new Promise<void>((resolve) => {
+          if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            resolve()
+            return
+          }
+
+          document.addEventListener('DOMContentLoaded', () => resolve(), { once: true })
+        }),
+        2000
+      )
+
+      if (!('fonts' in document)) {
+        return
+      }
+
+      const fontCandidates = [
+        '400 12pt "Noto Sans SC"',
+        '500 12pt "Noto Sans SC"',
+        '700 12pt "Noto Sans SC"',
+        '400 12pt "KaTeX_Main"',
+        '400 12pt "KaTeX_Math"',
+      ]
+
+      await Promise.allSettled(
+        fontCandidates.map((font) =>
+          raceWithTimeout(document.fonts.load(font), fontTimeoutMs)
+        )
+      )
+
+      await raceWithTimeout(document.fonts.ready, fontTimeoutMs)
+    },
+    { fontTimeoutMs: FONT_TIMEOUT_MS }
+  )
+}
+
+async function waitForImages(page: Page) {
+  const imageSummary = await page.evaluate(
+    async ({ imageTimeoutMs }) => {
+      const images = Array.from(document.images)
+
+      for (const image of images) {
+        image.loading = 'eager'
+        image.decoding = 'sync'
+      }
+
+      const waitForSingleImage = (image: HTMLImageElement) =>
+        new Promise<'loaded' | 'failed' | 'timeout'>((resolve) => {
+          if (image.complete) {
+            resolve(image.naturalWidth > 0 ? 'loaded' : 'failed')
+            return
+          }
+
+          let settled = false
+          const finalize = (status: 'loaded' | 'failed' | 'timeout') => {
+            if (settled) return
+            settled = true
+            clearTimeout(timer)
+            image.removeEventListener('load', handleLoad)
+            image.removeEventListener('error', handleError)
+            resolve(status)
+          }
+
+          const handleLoad = () => finalize('loaded')
+          const handleError = () => finalize('failed')
+          const timer = window.setTimeout(() => finalize('timeout'), imageTimeoutMs)
+
+          image.addEventListener('load', handleLoad, { once: true })
+          image.addEventListener('error', handleError, { once: true })
+        })
+
+      const results = await Promise.all(images.map((image) => waitForSingleImage(image)))
+
+      return {
+        total: images.length,
+        loaded: results.filter((status) => status === 'loaded').length,
+        failed: results.filter((status) => status === 'failed').length,
+        timedOut: results.filter((status) => status === 'timeout').length,
+      }
+    },
+    { imageTimeoutMs: IMAGE_TIMEOUT_MS }
+  )
+
+  if (imageSummary.failed > 0 || imageSummary.timedOut > 0) {
+    console.warn('PDF export image wait summary:', imageSummary)
+  }
+}
 
 export async function POST(request: Request) {
   let browser = null
@@ -91,42 +193,36 @@ export async function POST(request: Request) {
     const page = await browser.newPage()
     page.setDefaultTimeout(20000)
     page.setDefaultNavigationTimeout(20000)
+    page.on('requestfailed', (failedRequest) => {
+      const url = failedRequest.url()
+      if (url.startsWith('data:')) {
+        return
+      }
 
-    // 设置HTML内容。KaTeX 字体走内联，中文字体通过 Google Fonts 明确加载。
-    const html = generatePDFHTML(htmlContent, { fontSize, theme, highlightTheme: '' })
-    await page.setContent(html, {
-      waitUntil: ['domcontentloaded', 'load', 'networkidle0'],
-      timeout: 20000,
+      console.warn('PDF resource request failed:', {
+        url,
+        method: failedRequest.method(),
+        errorText: failedRequest.failure()?.errorText ?? 'unknown',
+      })
     })
 
-    // 等待文档和字体进入稳定状态，但不要因为外部资源卡住整个导出。
-    await page.waitForFunction(() => document.readyState === 'complete', {
-      timeout: 5000,
+    // 设置 HTML 内容。不要等待 networkidle0，否则远程图片或慢资源会直接拖垮导出。
+    const html = generatePDFHTML(htmlContent, { fontSize, theme, highlightTheme: '' })
+    await page.setContent(html, {
+      waitUntil: 'domcontentloaded',
+      timeout: CONTENT_TIMEOUT_MS,
     })
 
     try {
-      await page.evaluate(async () => {
-        if (!('fonts' in document)) return
-
-        const fontCandidates = [
-          '400 12pt "Noto Sans SC"',
-          '500 12pt "Noto Sans SC"',
-          '700 12pt "Noto Sans SC"',
-          '400 12pt "KaTeX_Main"',
-          '400 12pt "KaTeX_Math"',
-        ]
-
-        await Promise.allSettled(
-          fontCandidates.map((font) => document.fonts.load(font))
-        )
-
-        await Promise.race([
-          document.fonts.ready,
-          new Promise((resolve) => setTimeout(resolve, 5000)),
-        ])
-      })
+      await waitForDocumentAndFonts(page)
     } catch (fontError) {
       console.warn('字体等待超时，继续生成 PDF:', fontError)
+    }
+
+    try {
+      await waitForImages(page)
+    } catch (imageError) {
+      console.warn('图片等待超时，继续生成 PDF:', imageError)
     }
 
     await new Promise(resolve => setTimeout(resolve, 300))
