@@ -34,3 +34,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# temporary local PDF font bundles
+/assets/fonts/noto-sans/
+/assets/fonts/noto-sans-arabic/
+/assets/fonts/noto-sans-devanagari/
+/assets/fonts/noto-sans-jp/
+/assets/fonts/noto-sans-kr/
+/assets/fonts/noto-sans-tc/

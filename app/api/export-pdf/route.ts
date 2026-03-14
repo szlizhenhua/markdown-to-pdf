@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import chromium from '@sparticuz/chromium'
 import puppeteer from 'puppeteer-core'
 import type { Page } from 'puppeteer-core'
+import { getPdfFontCss } from '@/lib/pdf-fonts'
 import { generatePDFHTML } from '@/lib/pdf-styles'
 
 export const runtime = 'nodejs'
@@ -11,9 +12,9 @@ const CONTENT_TIMEOUT_MS = 15000
 const FONT_TIMEOUT_MS = 5000
 const IMAGE_TIMEOUT_MS = 8000
 
-async function waitForDocumentAndFonts(page: Page) {
+async function waitForDocumentAndFonts(page: Page, fontFamilies: string[]) {
   await page.evaluate(
-    async ({ fontTimeoutMs }) => {
+    async ({ fontTimeoutMs, fontFamilies }) => {
       const raceWithTimeout = <T,>(promise: Promise<T>, timeoutMs: number) =>
         Promise.race([
           promise,
@@ -36,20 +37,14 @@ async function waitForDocumentAndFonts(page: Page) {
         return
       }
 
-      const fontCandidates = [
-        '400 12pt "Noto Sans"',
-        '400 12pt "Noto Sans SC"',
-        '500 12pt "Noto Sans SC"',
-        '700 12pt "Noto Sans SC"',
-        '400 12pt "Noto Sans TC"',
-        '400 12pt "Noto Sans JP"',
-        '400 12pt "Noto Sans KR"',
-        '400 12pt "Noto Sans Arabic"',
-        '400 12pt "Noto Sans Devanagari"',
-        '400 12pt "Noto Color Emoji"',
-        '400 12pt "KaTeX_Main"',
-        '400 12pt "KaTeX_Math"',
-      ]
+      const fontCandidates = Array.from(
+        new Set([
+          ...fontFamilies.flatMap((family) => [`400 12pt "${family}"`, `700 12pt "${family}"`]),
+          '400 12pt "Noto Color Emoji"',
+          '400 12pt "KaTeX_Main"',
+          '400 12pt "KaTeX_Math"',
+        ])
+      )
 
       await Promise.allSettled(
         fontCandidates.map((font) =>
@@ -59,7 +54,7 @@ async function waitForDocumentAndFonts(page: Page) {
 
       await raceWithTimeout(document.fonts.ready, fontTimeoutMs)
     },
-    { fontTimeoutMs: FONT_TIMEOUT_MS }
+    { fontTimeoutMs: FONT_TIMEOUT_MS, fontFamilies }
   )
 }
 
@@ -119,7 +114,14 @@ export async function POST(request: Request) {
   let browser = null
 
   try {
-    const { htmlContent, fileName = 'document.pdf', theme = 'default', paperSize = 'a4', fontSize = '12' } = await request.json()
+    const {
+      htmlContent,
+      fileName = 'document.pdf',
+      theme = 'default',
+      paperSize = 'a4',
+      fontSize = '12',
+      language = 'en',
+    } = await request.json()
 
     const normalizedFileName = fileName && fileName.trim().length > 0 ? fileName.trim() : 'document.pdf'
     const fallbackFileName = normalizedFileName
@@ -214,14 +216,21 @@ export async function POST(request: Request) {
     })
 
     // 设置 HTML 内容。不要等待 networkidle0，否则远程图片或慢资源会直接拖垮导出。
-    const html = generatePDFHTML(htmlContent, { fontSize, theme, highlightTheme: '' })
+    const { css: fontCss, fontFamilies } = await getPdfFontCss(htmlContent, language)
+    const html = generatePDFHTML(htmlContent, {
+      fontSize,
+      theme,
+      highlightTheme: '',
+      language,
+      fontCss,
+    })
     await page.setContent(html, {
       waitUntil: 'domcontentloaded',
       timeout: CONTENT_TIMEOUT_MS,
     })
 
     try {
-      await waitForDocumentAndFonts(page)
+      await waitForDocumentAndFonts(page, fontFamilies)
     } catch (fontError) {
       console.warn('字体等待超时，继续生成 PDF:', fontError)
     }
