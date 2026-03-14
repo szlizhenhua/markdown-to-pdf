@@ -8,11 +8,18 @@ export interface PDFStyleOptions {
 }
 
 let cachedKatexCss: string | null = null
-let cachedNotoSansScCss: string | null = null
-let cachedNotoColorEmojiCss: string | null = null
+const localFontCssCache = new Map<string, string>()
 const LOCAL_KATEX_DIR = resolve(process.cwd(), 'assets/katex')
+const LOCAL_NOTO_SANS_DIR = resolve(process.cwd(), 'assets/fonts/noto-sans')
 const LOCAL_NOTO_SANS_SC_DIR = resolve(process.cwd(), 'assets/fonts/noto-sans-sc')
+const LOCAL_NOTO_SANS_TC_DIR = resolve(process.cwd(), 'assets/fonts/noto-sans-tc')
+const LOCAL_NOTO_SANS_JP_DIR = resolve(process.cwd(), 'assets/fonts/noto-sans-jp')
+const LOCAL_NOTO_SANS_KR_DIR = resolve(process.cwd(), 'assets/fonts/noto-sans-kr')
+const LOCAL_NOTO_SANS_ARABIC_DIR = resolve(process.cwd(), 'assets/fonts/noto-sans-arabic')
+const LOCAL_NOTO_SANS_DEVANAGARI_DIR = resolve(process.cwd(), 'assets/fonts/noto-sans-devanagari')
 const LOCAL_NOTO_COLOR_EMOJI_DIR = resolve(process.cwd(), 'assets/fonts/noto-color-emoji')
+const PDF_SANS_FONT_STACK = '"Noto Sans", "Noto Sans SC", "Noto Sans TC", "Noto Sans JP", "Noto Sans KR", "Noto Sans Arabic", "Noto Sans Devanagari", "Helvetica Neue", "Arial", "Inter", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Heiti SC", "Noto Serif SC", "SimSun", "STHeiti", "Arial Unicode MS", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif'
+const PDF_MONO_FONT_STACK = '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Sans", "Noto Sans SC", "Noto Sans TC", "Noto Sans JP", "Noto Sans KR", "Noto Sans Arabic", "Noto Sans Devanagari", "PingFang SC", "Microsoft YaHei", "Noto Color Emoji", monospace'
 
 function resolveExistingKatexCssPath(): string {
   const candidates = [resolve(LOCAL_KATEX_DIR, 'katex.min.css')]
@@ -26,8 +33,8 @@ function resolveExistingKatexCssPath(): string {
   throw new Error(`Unable to locate katex.min.css. Checked: ${candidates.join(', ')}`)
 }
 
-function resolveExistingNotoSansScCssPath(fileName: string): string {
-  const candidates = [resolve(LOCAL_NOTO_SANS_SC_DIR, fileName)]
+function resolveExistingLocalAssetPath(baseDir: string, fileName: string, label: string): string {
+  const candidates = [resolve(baseDir, fileName)]
 
   for (const candidate of candidates) {
     if (existsSync(candidate)) {
@@ -35,19 +42,32 @@ function resolveExistingNotoSansScCssPath(fileName: string): string {
     }
   }
 
-  throw new Error(`Unable to locate ${fileName}. Checked: ${candidates.join(', ')}`)
+  throw new Error(`Unable to locate ${label} asset "${fileName}". Checked: ${candidates.join(', ')}`)
 }
 
-function resolveExistingNotoColorEmojiCssPath(fileName: string): string {
-  const candidates = [resolve(LOCAL_NOTO_COLOR_EMOJI_DIR, fileName)]
-
-  for (const candidate of candidates) {
-    if (existsSync(candidate)) {
-      return candidate
-    }
+function getLocalFontBundleCss(baseDir: string, cssFiles: string[], label: string): string {
+  const cacheKey = `${baseDir}:${cssFiles.join('|')}`
+  const cachedCss = localFontCssCache.get(cacheKey)
+  if (cachedCss !== undefined) {
+    return cachedCss
   }
 
-  throw new Error(`Unable to locate ${fileName}. Checked: ${candidates.join(', ')}`)
+  try {
+    const css = cssFiles
+      .map((fileName) => {
+        const cssPath = resolveExistingLocalAssetPath(baseDir, fileName, label)
+        const rawCss = readFileSync(cssPath, 'utf8')
+        return inlineRelativeAssetUrls(rawCss, dirname(cssPath))
+      })
+      .join('\n')
+
+    localFontCssCache.set(cacheKey, css)
+    return css
+  } catch (error) {
+    console.warn(`Failed to load local ${label} CSS for PDF export:`, error)
+    localFontCssCache.set(cacheKey, '')
+    return ''
+  }
 }
 
 function getLocalKatexCss(): string {
@@ -67,48 +87,91 @@ function getLocalKatexCss(): string {
   return cachedKatexCss
 }
 
-function getLocalNotoSansScCss(): string {
-  if (cachedNotoSansScCss !== null) {
-    return cachedNotoSansScCss
-  }
-
-  try {
-    const cssFiles = [
-      'chinese-simplified-400.css',
-      'chinese-simplified-500.css',
-      'chinese-simplified-700.css',
-    ]
-
-    cachedNotoSansScCss = cssFiles
-      .map((fileName) => {
-        const cssPath = resolveExistingNotoSansScCssPath(fileName)
-        const rawCss = readFileSync(cssPath, 'utf8')
-        return inlineRelativeAssetUrls(rawCss, dirname(cssPath))
-      })
-      .join('\n')
-  } catch (error) {
-    console.warn('Failed to load local Noto Sans SC CSS for PDF export:', error)
-    cachedNotoSansScCss = ''
-  }
-
-  return cachedNotoSansScCss
-}
-
-function getLocalNotoColorEmojiCss(): string {
-  if (cachedNotoColorEmojiCss !== null) {
-    return cachedNotoColorEmojiCss
-  }
-
-  try {
-    const cssPath = resolveExistingNotoColorEmojiCssPath('emoji.css')
-    const rawCss = readFileSync(cssPath, 'utf8')
-    cachedNotoColorEmojiCss = inlineRelativeAssetUrls(rawCss, dirname(cssPath))
-  } catch (error) {
-    console.warn('Failed to load local Noto Color Emoji CSS for PDF export:', error)
-    cachedNotoColorEmojiCss = ''
-  }
-
-  return cachedNotoColorEmojiCss
+function getLocalPdfFontCss(): string {
+  return [
+    getLocalFontBundleCss(
+      LOCAL_NOTO_SANS_DIR,
+      [
+        'latin-400.css',
+        'latin-500.css',
+        'latin-700.css',
+        'latin-ext-400.css',
+        'latin-ext-500.css',
+        'latin-ext-700.css',
+        'cyrillic-400.css',
+        'cyrillic-500.css',
+        'cyrillic-700.css',
+        'cyrillic-ext-400.css',
+        'cyrillic-ext-500.css',
+        'cyrillic-ext-700.css',
+        'vietnamese-400.css',
+        'vietnamese-500.css',
+        'vietnamese-700.css',
+      ],
+      'Noto Sans'
+    ),
+    getLocalFontBundleCss(
+      LOCAL_NOTO_SANS_SC_DIR,
+      [
+        'chinese-simplified-400.css',
+        'chinese-simplified-500.css',
+        'chinese-simplified-700.css',
+      ],
+      'Noto Sans SC'
+    ),
+    getLocalFontBundleCss(
+      LOCAL_NOTO_SANS_TC_DIR,
+      [
+        'chinese-traditional-400.css',
+        'chinese-traditional-500.css',
+        'chinese-traditional-700.css',
+      ],
+      'Noto Sans TC'
+    ),
+    getLocalFontBundleCss(
+      LOCAL_NOTO_SANS_JP_DIR,
+      [
+        'japanese-400.css',
+        'japanese-500.css',
+        'japanese-700.css',
+      ],
+      'Noto Sans JP'
+    ),
+    getLocalFontBundleCss(
+      LOCAL_NOTO_SANS_KR_DIR,
+      [
+        'korean-400.css',
+        'korean-500.css',
+        'korean-700.css',
+      ],
+      'Noto Sans KR'
+    ),
+    getLocalFontBundleCss(
+      LOCAL_NOTO_SANS_ARABIC_DIR,
+      [
+        'arabic-400.css',
+        'arabic-500.css',
+        'arabic-700.css',
+      ],
+      'Noto Sans Arabic'
+    ),
+    getLocalFontBundleCss(
+      LOCAL_NOTO_SANS_DEVANAGARI_DIR,
+      [
+        'devanagari-400.css',
+        'devanagari-500.css',
+        'devanagari-700.css',
+      ],
+      'Noto Sans Devanagari'
+    ),
+    getLocalFontBundleCss(
+      LOCAL_NOTO_COLOR_EMOJI_DIR,
+      ['emoji.css'],
+      'Noto Color Emoji'
+    ),
+  ]
+    .filter(Boolean)
+    .join('\n')
 }
 
 function getMimeType(filePath: string): string {
@@ -167,7 +230,7 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
 
   return `
             body {
-              font-family: "Helvetica Neue", "Arial", "Inter", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Heiti SC", "Noto Serif SC", "SimSun", "STHeiti", "Arial Unicode MS", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+              font-family: ${PDF_SANS_FONT_STACK};
               padding: 20px;
               line-height: 1.6;
               color: #24292e;
@@ -225,7 +288,7 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
               background: #282c34;
               color: #abb2bf;
               border-radius: 6px;
-              font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", monospace;
+              font-family: ${PDF_MONO_FONT_STACK};
               font-size: ${Math.max(0.8, parseInt(fontSize) * 0.08)}em;
               line-height: 1.5;
               margin: 1em 0;
@@ -251,7 +314,7 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
             .hljs-comment,
             .hljs-string,
             .hljs-title {
-              font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", monospace !important;
+              font-family: ${PDF_MONO_FONT_STACK} !important;
               letter-spacing: 0.02em;
             }
 
@@ -288,7 +351,7 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
 
             /* 行内代码样式 */
             code {
-              font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", monospace;
+              font-family: ${PDF_MONO_FONT_STACK};
               font-size: 85%;
               background-color: rgba(175, 184, 193, 0.2);
               padding: 0.2em 0.4em;
@@ -332,7 +395,7 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
               margin: 1em 0;
               text-align: center;
               page-break-inside: avoid;
-              font-family: "Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif;
+              font-family: ${PDF_SANS_FONT_STACK};
             }
 
             .mermaid-diagram svg,
@@ -358,7 +421,7 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
               white-space: normal;
               line-height: 1.3;
               font-size: ${mermaidFontSize}px;
-              font-family: "Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif;
+              font-family: ${PDF_SANS_FONT_STACK};
             }
 
             .mermaid foreignObject {
@@ -707,8 +770,7 @@ export function generatePDFHTML(htmlContent: string, options: PDFStyleOptions): 
   const highlightTheme = getHighlightThemeFilename(theme)
   const styles = generatePDFStyles({ fontSize, theme, highlightTheme })
   const katexCss = getLocalKatexCss()
-  const notoSansScCss = getLocalNotoSansScCss()
-  const notoColorEmojiCss = getLocalNotoColorEmojiCss()
+  const localFontCss = getLocalPdfFontCss()
 
   return `
       <!DOCTYPE html>
@@ -718,10 +780,7 @@ export function generatePDFHTML(htmlContent: string, options: PDFStyleOptions): 
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <style>
-            ${notoSansScCss}
-          </style>
-          <style>
-            ${notoColorEmojiCss}
+            ${localFontCss}
           </style>
           <style>
             ${katexCss}

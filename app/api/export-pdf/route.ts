@@ -37,9 +37,15 @@ async function waitForDocumentAndFonts(page: Page) {
       }
 
       const fontCandidates = [
+        '400 12pt "Noto Sans"',
         '400 12pt "Noto Sans SC"',
         '500 12pt "Noto Sans SC"',
         '700 12pt "Noto Sans SC"',
+        '400 12pt "Noto Sans TC"',
+        '400 12pt "Noto Sans JP"',
+        '400 12pt "Noto Sans KR"',
+        '400 12pt "Noto Sans Arabic"',
+        '400 12pt "Noto Sans Devanagari"',
         '400 12pt "Noto Color Emoji"',
         '400 12pt "KaTeX_Main"',
         '400 12pt "KaTeX_Math"',

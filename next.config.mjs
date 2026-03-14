@@ -13,9 +13,14 @@ const nextConfig = {
   outputFileTracingRoot: process.cwd(), // 使用当前目录作为根目录
   outputFileTracingIncludes: {
     '/api/export-pdf': [
-      './assets/katex/**/*',
-      './assets/fonts/noto-sans-sc/**/*',
-      './assets/fonts/noto-color-emoji/**/*',
+      './assets/katex/**/*.css',
+      './assets/katex/**/*.woff',
+      './assets/katex/**/*.woff2',
+      './assets/katex/**/*.ttf',
+      './assets/fonts/**/*.css',
+      './assets/fonts/**/*.woff',
+      './assets/fonts/**/*.woff2',
+      './assets/fonts/**/*.ttf',
     ],
   },
 }
