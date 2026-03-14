@@ -35,6 +35,9 @@ interface QuadrantChartData {
   points: QuadrantPoint[]
 }
 
+const MERMAID_SVG_FONT_STACK =
+  '"Noto Sans SC", "Noto Sans TC", "Noto Sans JP", "Noto Sans KR", "Noto Sans", "Noto Sans Arabic", "Noto Sans Devanagari", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif'
+
 const parseFenceInfo = (line: string): { info: string; lang: string } | null => {
   const match = line.match(/^\s*```(?:\s*([^\n`]*))?\s*$/)
   if (!match) return null
@@ -380,6 +383,7 @@ const buildRadarChartElement = (raw: string): HTMLElement => {
     `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Radar chart" class="radar-svg">`
   )
   svgParts.push(`<style>
+    svg { font-family: ${MERMAID_SVG_FONT_STACK}; }
     .radar-grid polygon { fill: none; stroke: #CBD5E1; stroke-width: 1; }
     .radar-axes line { stroke: #CBD5E1; stroke-width: 1; }
     .radar-axes text { fill: #1F2937; font-size: 12px; font-weight: 600; }
@@ -468,7 +472,7 @@ const buildQuadrantChartElement = (raw: string): HTMLElement => {
   const svgParts: string[] = []
   svgParts.push(`<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Quadrant chart">`)
   svgParts.push(`<style>
-    svg { font-family: "Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif; }
+    svg { font-family: ${MERMAID_SVG_FONT_STACK}; }
     .quad-bg { fill: var(--card, #ffffff); stroke: var(--border, #CBD5E1); stroke-width: 1.5; }
     .quad-divider { stroke: var(--border, #CBD5E1); stroke-width: 1; }
     .quad-label { fill: var(--foreground, #334155); font-size: 16px; font-weight: 700; }

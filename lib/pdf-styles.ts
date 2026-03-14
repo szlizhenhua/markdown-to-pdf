@@ -38,6 +38,34 @@ function getPdfMonoFontStack(language?: string): string {
   return `"SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Sans", ${cjkFamilies}, "Noto Sans Arabic", "Noto Sans Devanagari", "Noto Sans Hebrew", "Noto Sans Thai", "Noto Sans Symbols 2", "Noto Sans Math", "PingFang SC", "Microsoft YaHei", "Noto Color Emoji", monospace`
 }
 
+function getLatePdfSvgOverrideStyles(language?: string): string {
+  const sansFontStack = getPdfSansFontStack(language)
+
+  return `
+            .mermaid,
+            .mermaid-radar,
+            .mermaid-quadrant {
+              font-family: ${sansFontStack} !important;
+            }
+
+            .mermaid svg,
+            .mermaid svg *,
+            .mermaid-radar svg,
+            .mermaid-radar svg *,
+            .mermaid-quadrant svg,
+            .mermaid-quadrant svg * {
+              font-family: ${sansFontStack} !important;
+              text-rendering: optimizeLegibility;
+            }
+
+            .mermaid foreignObject div,
+            .mermaid foreignObject span,
+            .mermaid foreignObject p {
+              font-family: ${sansFontStack} !important;
+            }
+  `
+}
+
 function resolveExistingKatexCssPath(): string {
   const candidates = [resolve(LOCAL_KATEX_DIR, 'katex.min.css')]
 
@@ -661,10 +689,11 @@ export function getHighlightThemeFilename(theme: string): string {
  * Generate complete HTML for PDF generation
  */
 export function generatePDFHTML(htmlContent: string, options: PDFStyleOptions): string {
-  const { theme, fontSize, fontCss = '' } = options
+  const { theme, fontSize, fontCss = '', language } = options
   const highlightTheme = getHighlightThemeFilename(theme)
   const styles = generatePDFStyles({ ...options, fontSize, theme, highlightTheme })
   const katexCss = getLocalKatexCss()
+  const lateSvgOverrideStyles = getLatePdfSvgOverrideStyles(language)
 
   return `
       <!DOCTYPE html>
@@ -685,6 +714,9 @@ export function generatePDFHTML(htmlContent: string, options: PDFStyleOptions): 
         </head>
         <body>
           ${htmlContent}
+          <style>
+            ${lateSvgOverrideStyles}
+          </style>
         </body>
       </html>
     `
