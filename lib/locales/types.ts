@@ -504,4 +504,36 @@ export interface LocaleTranslations {
     quotes: string
     tables: string
   }
+  // Batch conversion translations
+  batchConversion: {
+    button: string
+    buttonShort: string
+    dialogTitle: string
+    dialogDescription: string
+    selectFolder: string
+    selectFiles: string
+    outputTitle: string
+    outputDescription: string
+    duplicateHint: string
+    folderHint: string
+    filesHint: string
+    chooseOutput: string
+    processingTitle: string
+    processingDescription: string
+    currentFile: string
+    completed: string
+    resultTitle: string
+    resultSummary: string
+    outputFolder: string
+    selectedFiles: string
+    failedFiles: string
+    moreFiles: string
+    close: string
+    cancel: string
+    unsupported: string
+    noMarkdownFiles: string
+    skippedFiles: string
+    finishedToast: string
+    partialFailureToast: string
+  }
 }

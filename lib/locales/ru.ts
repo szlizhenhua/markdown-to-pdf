@@ -287,6 +287,39 @@ export const ru = {
     tables: "Таблицы"
   },
 
+  // Batch Conversion
+  batchConversion: {
+    button: "Пакетный PDF",
+    buttonShort: "Пакет",
+    dialogTitle: "Пакетное преобразование Markdown",
+    dialogDescription: "Выберите папку или несколько файлов .md, затем выберите выходную папку для генерации PDF по одному.",
+    selectFolder: "Выбрать папку",
+    selectFiles: "Выбрать файлы",
+    outputTitle: "Выбрать выходную папку",
+    outputDescription: "Найдено файлов Markdown: {count}. Выберите выходную папку и начните преобразование.",
+    duplicateHint: "Если в выходной папке уже существует PDF с таким же именем, будет добавлен числовой суффикс во избежание перезаписи.",
+    folderHint: "Рекурсивное сканирование выбранной папки и её подпапок",
+    filesHint: "Выбрать несколько файлов .md одновременно",
+    chooseOutput: "Выбрать выходную папку и начать",
+    processingTitle: "Выполняется пакетное преобразование",
+    processingDescription: "Последовательная генерация PDF. Держите эту страницу открытой.",
+    currentFile: "Текущий файл",
+    completed: "Завершено",
+    resultTitle: "Пакетное преобразование завершено",
+    resultSummary: "{success} успешно, {failed} не удалось.",
+    outputFolder: "Выходная папка",
+    selectedFiles: "Выбранные файлы",
+    failedFiles: "Неудачные файлы",
+    moreFiles: "ещё файлы",
+    close: "Закрыть",
+    cancel: "Отмена",
+    unsupported: "Этот браузер не поддерживает пакетное преобразование на основе папок. Используйте современный браузер на базе Chromium, такой как Chrome или Edge.",
+    noMarkdownFiles: "Файлы Markdown не найдены в выбранном источнике.",
+    skippedFiles: "Пропущено файлов, не соответствующих требованиям: {count}.",
+    finishedToast: "Пакетное преобразование завершено",
+    partialFailureToast: "Некоторые файлы не удалось преобразовать"
+  },
+
   // Default Content
   defaultContent: `# Конвертер Markdown в PDF
 

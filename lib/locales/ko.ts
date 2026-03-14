@@ -287,6 +287,39 @@ export const ko = {
     tables: "표"
   },
 
+  // Batch Conversion
+  batchConversion: {
+    button: "일괄 PDF",
+    buttonShort: "일괄",
+    dialogTitle: "Markdown 일괄 변환",
+    dialogDescription: "폴더 또는 여러 .md 파일을 선택한 다음 출력 폴더를 선택하여 PDF를 순차적으로 생성합니다.",
+    selectFolder: "폴더 선택",
+    selectFiles: "파일 선택",
+    outputTitle: "출력 폴더 선택",
+    outputDescription: "{count}개의 Markdown 파일을 찾았습니다. 출력 폴더를 선택하고 변환을 시작하세요.",
+    duplicateHint: "출력 폴더에 동일한 이름의 PDF가 있는 경우 덮어쓰기를 방지하기 위해 숫자 접미사가 추가됩니다.",
+    folderHint: "선택한 폴더와 하위 폴더를 재귀적으로 스캔",
+    filesHint: "여러 .md 파일을 한 번에 선택",
+    chooseOutput: "출력 폴더를 선택하고 시작",
+    processingTitle: "일괄 변환 진행 중",
+    processingDescription: "PDF를 순차적으로 생성 중입니다. 이 페이지를 열어두세요.",
+    currentFile: "현재 파일",
+    completed: "완료됨",
+    resultTitle: "일괄 변환 완료",
+    resultSummary: "{success}개 성공, {failed}개 실패.",
+    outputFolder: "출력 폴더",
+    selectedFiles: "선택된 파일",
+    failedFiles: "실패한 파일",
+    moreFiles: "더 많은 파일",
+    close: "닫기",
+    cancel: "취소",
+    unsupported: "이 브라우저는 폴더 기반 일괄 변환을 지원하지 않습니다. Chrome 또는 Edge와 같은 최신 Chromium 기반 브라우저를 사용하세요.",
+    noMarkdownFiles: "선택한 소스에서 Markdown 파일을 찾을 수 없습니다.",
+    skippedFiles: "요구 사항을 충족하지 않는 {count}개의 파일을 건너뛰었습니다.",
+    finishedToast: "일괄 변환 완료",
+    partialFailureToast: "일부 파일 변환 실패"
+  },
+
   // Default Content
   defaultContent: `# Markdown에서 PDF로 변환기
 

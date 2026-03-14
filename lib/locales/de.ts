@@ -287,6 +287,39 @@ export const de = {
     tables: "Tabellen"
   },
 
+  // Batch Conversion
+  batchConversion: {
+    button: "Batch-PDF",
+    buttonShort: "Batch",
+    dialogTitle: "Markdown Batch-Konvertierung",
+    dialogDescription: "Wählen Sie einen Ordner oder mehrere .md-Dateien aus, wählen Sie dann einen Ausgabeordner, um die PDFs nacheinander zu generieren.",
+    selectFolder: "Ordner auswählen",
+    selectFiles: "Dateien auswählen",
+    outputTitle: "Ausgabeordner auswählen",
+    outputDescription: "{count} Markdown-Dateien gefunden. Wählen Sie einen Ausgabeordner und starten Sie die Konvertierung.",
+    duplicateHint: "Wenn im Ausgabeordner bereits ein PDF mit demselben Namen vorhanden ist, wird ein numerisches Suffix hinzugefügt, um ein Überschreiben zu vermeiden.",
+    folderHint: "Rekursives Scannen des ausgewählten Ordners und seiner Unterordner",
+    filesHint: "Mehrere .md-Dateien auf einmal auswählen",
+    chooseOutput: "Ausgabeordner auswählen und starten",
+    processingTitle: "Batch-Konvertierung läuft",
+    processingDescription: "PDFs werden sequenziell generiert. Halten Sie diese Seite geöffnet.",
+    currentFile: "Aktuelle Datei",
+    completed: "Abgeschlossen",
+    resultTitle: "Batch-Konvertierung abgeschlossen",
+    resultSummary: "{success} erfolgreich, {failed} fehlgeschlagen.",
+    outputFolder: "Ausgabeordner",
+    selectedFiles: "Ausgewählte Dateien",
+    failedFiles: "Fehlgeschlagene Dateien",
+    moreFiles: "weitere Dateien",
+    close: "Schließen",
+    cancel: "Abbrechen",
+    unsupported: "Dieser Browser unterstützt keine ordnerbasierte Batch-Konvertierung. Verwenden Sie einen aktuellen Chromium-basierten Browser wie Chrome oder Edge.",
+    noMarkdownFiles: "Keine Markdown-Dateien in der ausgewählten Quelle gefunden.",
+    skippedFiles: "{count} Dateien, die die Anforderungen nicht erfüllen, wurden übersprungen.",
+    finishedToast: "Batch-Konvertierung abgeschlossen",
+    partialFailureToast: "Einige Dateien konnten nicht konvertiert werden"
+  },
+
   // Default Content
   defaultContent: `# Markdown zu PDF Konverter
 

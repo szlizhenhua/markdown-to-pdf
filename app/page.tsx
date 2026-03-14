@@ -149,56 +149,8 @@ const readFileContent = (file: File): Promise<string> => {
   })
 }
 
-const isChineseLanguage = (language: string) =>
-  language === 'zh' || language === 'zh-cn' || language === 'zh-tw'
-
-const getBatchCopy = (language: string) => {
-  const zh = isChineseLanguage(language)
-  return {
-    button: zh ? '批量转 PDF' : 'Batch PDF',
-    buttonShort: zh ? '批量' : 'Batch',
-    dialogTitle: zh ? '批量转换 Markdown' : 'Batch convert Markdown',
-    dialogDescription: zh
-      ? '选择一个文件夹，或一次选择多个 .md 文件。完成后再选择输出文件夹，系统会依次生成 PDF。'
-      : 'Choose a folder or select multiple .md files, then choose an output folder to generate the PDFs one by one.',
-    selectFolder: zh ? '选择文件夹' : 'Choose folder',
-    selectFiles: zh ? '选择多个文件' : 'Choose files',
-    outputTitle: zh ? '选择输出文件夹' : 'Choose output folder',
-    outputDescription: zh
-      ? '已找到 {count} 个 Markdown 文件。下一步选择输出文件夹并开始转换。'
-      : 'Found {count} Markdown files. Choose an output folder and start the conversion.',
-    duplicateHint: zh
-      ? '如果输出目录里已有同名 PDF，系统会自动追加序号，避免覆盖现有文件。'
-      : 'If a PDF with the same name already exists in the output folder, a numeric suffix will be added to avoid overwriting it.',
-    folderHint: zh ? '递归扫描文件夹及其子目录中的 Markdown 文件' : 'Recursively scan the selected folder and its subfolders',
-    filesHint: zh ? '一次选择多个 .md 文件' : 'Select multiple .md files at once',
-    chooseOutput: zh ? '选择输出文件夹并开始' : 'Choose output folder and start',
-    processingTitle: zh ? '批量转换中' : 'Batch conversion in progress',
-    processingDescription: zh
-      ? '正在顺序生成 PDF，请保持当前页面打开。'
-      : 'Generating PDFs sequentially. Keep this page open.',
-    currentFile: zh ? '当前文件' : 'Current file',
-    completed: zh ? '已完成' : 'Completed',
-    resultTitle: zh ? '批量转换完成' : 'Batch conversion complete',
-    resultSummary: zh ? '{success} 个成功，{failed} 个失败。' : '{success} succeeded, {failed} failed.',
-    outputFolder: zh ? '输出文件夹' : 'Output folder',
-    selectedFiles: zh ? '已选文件' : 'Selected files',
-    failedFiles: zh ? '失败文件' : 'Failed files',
-    moreFiles: zh ? '更多文件' : 'more files',
-    close: zh ? '关闭' : 'Close',
-    cancel: zh ? '取消' : 'Cancel',
-    unsupported: zh
-      ? '当前浏览器不支持批量选择和写入文件夹。请使用最新版 Chrome、Edge 或其他 Chromium 浏览器。'
-      : 'This browser does not support folder-based batch conversion. Use a recent Chromium-based browser such as Chrome or Edge.',
-    noMarkdownFiles: zh
-      ? '所选内容中没有可转换的 Markdown 文件。'
-      : 'No Markdown files were found in the selected source.',
-    skippedFiles: zh
-      ? '已跳过 {count} 个不符合条件的文件。'
-      : 'Skipped {count} files that did not meet the requirements.',
-    finishedToast: zh ? '批量转换完成' : 'Batch conversion complete',
-    partialFailureToast: zh ? '部分文件转换失败' : 'Some files failed to convert',
-  }
+const getBatchCopy = (t: LocaleTranslations) => {
+  return t.batchConversion
 }
 
 const isBatchMarkdownFile = (fileName: string) =>
@@ -469,7 +421,7 @@ export default function MarkdownToPDF() {
   const { addToast } = useToast()
   const { addRecentFile } = useRecentFiles()
   const { pushState, undo, redo, canUndo, canRedo } = useEditorHistory()
-  const batchCopy = getBatchCopy(language)
+  const batchCopy = getBatchCopy(t)
 
   // 递归覆盖所有子元素样式，彻底移除oklch影响
   const [markdown, setMarkdown] = useState(t.defaultContent)

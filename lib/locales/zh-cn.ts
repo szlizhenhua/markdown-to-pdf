@@ -891,5 +891,37 @@ def quicksort(arr):
     images: "图片",
     quotes: "引用",
     tables: "表格"
+  },
+  // 批量转换
+  batchConversion: {
+    button: "批量转 PDF",
+    buttonShort: "批量",
+    dialogTitle: "批量转换 Markdown",
+    dialogDescription: "选择一个文件夹，或一次选择多个 .md 文件。完成后再选择输出文件夹，系统会依次生成 PDF。",
+    selectFolder: "选择文件夹",
+    selectFiles: "选择多个文件",
+    outputTitle: "选择输出文件夹",
+    outputDescription: "已找到 {count} 个 Markdown 文件。下一步选择输出文件夹并开始转换。",
+    duplicateHint: "如果输出目录里已有同名 PDF，系统会自动追加序号，避免覆盖现有文件。",
+    folderHint: "递归扫描文件夹及其子目录中的 Markdown 文件",
+    filesHint: "一次选择多个 .md 文件",
+    chooseOutput: "选择输出文件夹并开始",
+    processingTitle: "批量转换中",
+    processingDescription: "正在顺序生成 PDF，请保持当前页面打开。",
+    currentFile: "当前文件",
+    completed: "已完成",
+    resultTitle: "批量转换完成",
+    resultSummary: "{success} 个成功， {failed} 个失败。",
+    outputFolder: "输出文件夹",
+    selectedFiles: "已选文件",
+    failedFiles: "失败文件",
+    moreFiles: "更多文件",
+    close: "关闭",
+    cancel: "取消",
+    unsupported: "当前浏览器不支持批量选择和写入文件夹。请使用最新版 Chrome、Edge 或其他 Chromium 浏览器。",
+    noMarkdownFiles: "所选内容中没有可转换的 Markdown 文件。",
+    skippedFiles: "已跳过 {count} 个不符合条件的文件。",
+    finishedToast: "批量转换完成",
+    partialFailureToast: "部分文件转换失败"
   }
 }

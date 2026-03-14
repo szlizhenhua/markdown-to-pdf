@@ -287,6 +287,39 @@ export const nl = {
     tables: "Tabellen"
   },
 
+  // Batch Conversion
+  batchConversion: {
+    button: "Batch PDF",
+    buttonShort: "Batch",
+    dialogTitle: "Markdown Batch Conversie",
+    dialogDescription: "Kies een map of selecteer meerdere .md-bestanden, kies dan een uitvoermap om de PDF's één voor één te genereren.",
+    selectFolder: "Kies map",
+    selectFiles: "Kies bestanden",
+    outputTitle: "Kies uitvoermap",
+    outputDescription: "{count} Markdown-bestanden gevonden. Kies een uitvoermap en start de conversie.",
+    duplicateHint: "Als er al een PDF met dezelfde naam bestaat in de uitvoermap, wordt er een numeriek achtervoegsel toegevoegd om overschrijving te voorkomen.",
+    folderHint: "Recursief scannen van de geselecteerde map en zijn submappen",
+    filesHint: "Selecteer meerdere .md-bestanden tegelijk",
+    chooseOutput: "Kies uitvoermap en start",
+    processingTitle: "Batch conversie bezig",
+    processingDescription: "PDF's worden sequentieel gegenereerd. Houd deze pagina open.",
+    currentFile: "Huidige bestand",
+    completed: "Voltooid",
+    resultTitle: "Batch conversie voltooid",
+    resultSummary: "{success} succesvol, {failed} mislukt.",
+    outputFolder: "Uitvoermap",
+    selectedFiles: "Geselecteerde bestanden",
+    failedFiles: "Mislukte bestanden",
+    moreFiles: "meer bestanden",
+    close: "Sluiten",
+    cancel: "Annuleren",
+    unsupported: "Deze browser ondersteunt geen map-gebaseerde batch conversie. Gebruik een recente Chromium-gebaseerde browser zoals Chrome of Edge.",
+    noMarkdownFiles: "Geen Markdown-bestanden gevonden in de geselecteerde bron.",
+    skippedFiles: "{count} bestanden die niet aan de eisen voldeden werden overgeslagen.",
+    finishedToast: "Batch conversie voltooid",
+    partialFailureToast: "Sommige bestanden konden niet worden geconverteerd"
+  },
+
   // Default Content
   defaultContent: `# Markdown naar PDF Converter
 

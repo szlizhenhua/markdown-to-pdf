@@ -287,6 +287,39 @@ export const hi = {
     tables: "तालिकाएं"
   },
 
+  // Batch Conversion
+  batchConversion: {
+    button: "बैच PDF",
+    buttonShort: "बैच",
+    dialogTitle: "मार्कडाउन बैच रूपांतरण",
+    dialogDescription: "एक फ़ोल्डर या कई .md फ़ाइलें चुनें, फिर एक-एक करके PDF बनाने के लिए एक आउटपुट फ़ोल्डर चुनें।",
+    selectFolder: "फ़ोल्डर चुनें",
+    selectFiles: "फ़ाइलें चुनें",
+    outputTitle: "आउटपुट फ़ोल्डर चुनें",
+    outputDescription: "{count} मार्कडाउन फ़ाइलें मिलीं। एक आउटपुट फ़ोल्डर चुनें और रूपांतरण शुरू करें।",
+    duplicateHint: "यदि आउटपुट फ़ोल्डर में एक PDF पहले से मौजूद है, तो अधिलेखन से बचने के लिए एक संख्यात्मक प्रत्यय जोड़ा जाएगा।",
+    folderHint: "चयनित फ़ोल्डर और इसके उप-फ़ोल्डर्स का पुनरावर्ती स्कैन",
+    filesHint: "एक साथ कई .md फ़ाइलें चुनें",
+    chooseOutput: "आउटपुट फ़ोल्डर चुनें और शुरू करें",
+    processingTitle: "बैच रूपांतरण जारी है",
+    processingDescription: "क्रमिक रूप से PDF बनाए जा रहे हैं। इस पृष्ठ को खुला रखें।",
+    currentFile: "वर्तमान फ़ाइल",
+    completed: "पूर्ण",
+    resultTitle: "बैच रूपांतरण पूर्ण",
+    resultSummary: "{success} सफल, {failed} असफल।",
+    outputFolder: "आउटपुट फ़ोल्डर",
+    selectedFiles: "चयनित फ़ाइलें",
+    failedFiles: "असफल फ़ाइलें",
+    moreFiles: "और फ़ाइलें",
+    close: "बंद करें",
+    cancel: "रद्द करें",
+    unsupported: "यह ब्राउज़र फ़ोल्डर-आधारित बैच रूपांतरण का समर्थन नहीं करता है। क्रोम या एज जैसे किसी नवीनतम क्रोमियम-आधारित ब्राउज़र का उपयोग करें।",
+    noMarkdownFiles: "चयनित स्रोत में कोई मार्कडाउन फ़ाइलें नहीं मिलीं।",
+    skippedFiles: "आवश्यकताओं को पूरा न करने वाली {count} फ़ाइलों को छोड़ दिया गया।",
+    finishedToast: "बैच रूपांतरण पूर्ण",
+    partialFailureToast: "कुछ फ़ाइलों का रूपांतरण विफल"
+  },
+
   // Default Content
   defaultContent: `# Markdown से PDF कनवर्टर
 

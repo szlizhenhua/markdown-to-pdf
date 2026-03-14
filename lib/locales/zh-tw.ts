@@ -287,6 +287,39 @@ export const zhTW = {
     tables: "表格"
   },
 
+  // Batch Conversion
+  batchConversion: {
+    button: "批量 PDF",
+    buttonShort: "批量",
+    dialogTitle: "批量轉換 Markdown",
+    dialogDescription: "選擇資料夾或多個 .md 檔案，然後選擇輸出資料夾以逐一生成 PDF。",
+    selectFolder: "選擇資料夾",
+    selectFiles: "選擇檔案",
+    outputTitle: "選擇輸出資料夾",
+    outputDescription: "找到 {count} 個 Markdown 檔案。選擇輸出資料夾並開始轉換。",
+    duplicateHint: "如果輸出資料夾中已存在同名 PDF，將添加數字後綴以避免覆蓋。",
+    folderHint: "遞歸掃描選定資料夾及其子資料夾",
+    filesHint: "一次選擇多個 .md 檔案",
+    chooseOutput: "選擇輸出資料夾並開始",
+    processingTitle: "批量轉換進行中",
+    processingDescription: "正在按順序生成 PDF。請保持此頁面打開。",
+    currentFile: "當前檔案",
+    completed: "已完成",
+    resultTitle: "批量轉換完成",
+    resultSummary: "{success} 成功，{failed} 失敗。",
+    outputFolder: "輸出資料夾",
+    selectedFiles: "已選檔案",
+    failedFiles: "失敗檔案",
+    moreFiles: "更多檔案",
+    close: "關閉",
+    cancel: "取消",
+    unsupported: "此瀏覽器不支持基於資料夾的批量轉換。請使用最新的基於 Chromium 的瀏覽器，如 Chrome 或 Edge。",
+    noMarkdownFiles: "在選定的源中未找到 Markdown 檔案。",
+    skippedFiles: "跳過了 {count} 個不符合要求的檔案。",
+    finishedToast: "批量轉換完成",
+    partialFailureToast: "部分檔案轉換失敗"
+  },
+
   // Default Content
   defaultContent: `# Markdown 轉 PDF 轉換器
 

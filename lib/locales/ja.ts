@@ -287,6 +287,39 @@ export const ja = {
     tables: "テーブル"
   },
 
+  // Batch Conversion
+  batchConversion: {
+    button: "一括PDF",
+    buttonShort: "一括",
+    dialogTitle: "Markdownの一括変換",
+    dialogDescription: "フォルダーまたは複数の.mdファイルを選択し、出力フォルダーを選択してPDFを順次生成します。",
+    selectFolder: "フォルダーを選択",
+    selectFiles: "ファイルを選択",
+    outputTitle: "出力フォルダーを選択",
+    outputDescription: "{count}個のMarkdownファイルが見つかりました。出力フォルダーを選択して変換を開始します。",
+    duplicateHint: "出力フォルダーに同じ名前のPDFが存在する場合、上書きを避けるために数値の接尾辞が追加されます。",
+    folderHint: "選択したフォルダーとサブフォルダーを再帰的にスキャン",
+    filesHint: "複数の.mdファイルを一度に選択",
+    chooseOutput: "出力フォルダーを選択して開始",
+    processingTitle: "一括変換の進行中",
+    processingDescription: "PDFを順次生成中です。このページを開いたままにしてください。",
+    currentFile: "現在のファイル",
+    completed: "完了",
+    resultTitle: "一括変換完了",
+    resultSummary: "{success}成功、{failed}失敗。",
+    outputFolder: "出力フォルダー",
+    selectedFiles: "選択されたファイル",
+    failedFiles: "失敗したファイル",
+    moreFiles: "さらにファイル",
+    close: "閉じる",
+    cancel: "キャンセル",
+    unsupported: "このブラウザーはフォルダーベースの一括変換をサポートしていません。ChromeやEdgeなどの最新のChromiumベースのブラウザーを使用してください。",
+    noMarkdownFiles: "選択されたソースでMarkdownファイルが見つかりませんでした。",
+    skippedFiles: "要件を満たさない{count}個のファイルをスキップしました。",
+    finishedToast: "一括変換完了",
+    partialFailureToast: "一部のファイルの変換に失敗しました"
+  },
+
   // Default Content
   defaultContent: `# Markdown から PDF へのコンバーター
 

@@ -287,6 +287,39 @@ export const ar = {
     tables: "الجداول"
   },
 
+  // Batch Conversion
+  batchConversion: {
+    button: "PDF دفعي",
+    buttonShort: "دفعي",
+    dialogTitle: "تحويل Markdown الدفعي",
+    dialogDescription: "اختر مجلدًا أو حدد ملفات .md متعددة، ثم اختر مجلد إخراج لإنشاء ملفات PDF واحدة تلو الأخرى.",
+    selectFolder: "اختر مجلد",
+    selectFiles: "اختر ملفات",
+    outputTitle: "اختر مجلد الإخراج",
+    outputDescription: "تم العثور على {count} ملف Markdown. اختر مجلد إخراج وابدأ التحويل.",
+    duplicateHint: "إذا كان هناك PDF بنفس الاسم موجود بالفعل في مجلد الإخراج، سيتم إضافة لاحقة رقمية لتجنب الكتابة فوقه.",
+    folderHint: "المسح التكراري للمجلد المختار والمجلدات الفرعية الخاصة به",
+    filesHint: "تحديد ملفات .md متعددة في وقت واحد",
+    chooseOutput: "اختر مجلد الإخراج وابدأ",
+    processingTitle: "جارٍ التحويل الدفعي",
+    processingDescription: "جارٍ إنشاء ملفات PDF بشكل تسلسلي. احتفظ بهذه الصفحة مفتوحة.",
+    currentFile: "الملف الحالي",
+    completed: "مكتمل",
+    resultTitle: "اكتمل التحويل الدفعي",
+    resultSummary: "{success} نجح، {failed} فشل.",
+    outputFolder: "مجلد الإخراج",
+    selectedFiles: "الملفات المحددة",
+    failedFiles: "الملفات الفاشلة",
+    moreFiles: "ملفات أخرى",
+    close: "إغلاق",
+    cancel: "إلغاء",
+    unsupported: "هذا المتصفح لا يدعم التحويل الدفعي القائم على المجلدات. استخدم متصفح Chromium حديث مثل Chrome أو Edge.",
+    noMarkdownFiles: "لم يتم العثور على ملفات Markdown في المصدر المحدد.",
+    skippedFiles: "تم تخطي {count} ملف لا تستوفي المتطلبات.",
+    finishedToast: "اكتمل التحويل الدفعي",
+    partialFailureToast: "فشل تحويل بعض الملفات"
+  },
+
   // Default Content
   defaultContent: `# محول Markdown إلى PDF
 

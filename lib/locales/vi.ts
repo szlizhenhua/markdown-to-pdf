@@ -898,5 +898,38 @@ Nếu vẫn không hiển thị, hãy kiểm tra xem cú pháp công thức có 
     images: "Hình ảnh",
     quotes: "Trích dẫn",
     tables: "Bảng"
+  },
+
+  // Batch Conversion
+  batchConversion: {
+    button: "PDF Hàng Loạt",
+    buttonShort: "Hàng loạt",
+    dialogTitle: "Chuyển đổi Markdown Hàng Loạt",
+    dialogDescription: "Chọn một thư mục hoặc nhiều tệp .md, sau đó chọn thư mục đầu ra để tạo các PDF từng cái một.",
+    selectFolder: "Chọn thư mục",
+    selectFiles: "Chọn tệp",
+    outputTitle: "Chọn thư mục đầu ra",
+    outputDescription: "Tìm thấy {count} tệp Markdown. Chọn một thư mục đầu ra và bắt đầu chuyển đổi.",
+    duplicateHint: "Nếu một PDF có cùng tên đã tồn tại trong thư mục đầu ra, một hậu tố số sẽ được thêm vào để tránh ghi đè.",
+    folderHint: "Quét đệ quy thư mục đã chọn và các thư mục con của nó",
+    filesHint: "Chọn nhiều tệp .md cùng lúc",
+    chooseOutput: "Chọn thư mục đầu ra và bắt đầu",
+    processingTitle: "Đang chuyển đổi hàng loạt",
+    processingDescription: "Đang tạo PDF tuần tự. Giữ trang này mở.",
+    currentFile: "Tệp hiện tại",
+    completed: "Hoàn thành",
+    resultTitle: "Chuyển đổi hàng loạt hoàn thành",
+    resultSummary: "{success} thành công, {failed} thất bại.",
+    outputFolder: "Thư mục đầu ra",
+    selectedFiles: "Tệp đã chọn",
+    failedFiles: "Tệp thất bại",
+    moreFiles: "tệp khác",
+    close: "Đóng",
+    cancel: "Hủy",
+    unsupported: "Trình duyệt này không hỗ trợ chuyển đổi hàng loạt dựa trên thư mục. Sử dụng trình duyệt Chromium gần đây như Chrome hoặc Edge.",
+    noMarkdownFiles: "Không tìm thấy tệp Markdown nào trong nguồn đã chọn.",
+    skippedFiles: "Đã bỏ qua {count} tệp không đáp ứng yêu cầu.",
+    finishedToast: "Chuyển đổi hàng loạt hoàn thành",
+    partialFailureToast: "Một số tệp không chuyển đổi được"
   }
 }

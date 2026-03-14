@@ -287,6 +287,39 @@ export const tr = {
     tables: "Tablolar"
   },
 
+  // Batch Conversion
+  batchConversion: {
+    button: "Toplu PDF",
+    buttonShort: "Toplu",
+    dialogTitle: "Markdown Toplu Dönüştürme",
+    dialogDescription: "Bir klasör veya birden fazla .md dosyası seçin, ardından PDF'leri tek tek oluşturmak için bir çıktı klasörü seçin.",
+    selectFolder: "Klasör seç",
+    selectFiles: "Dosya seç",
+    outputTitle: "Çıktı klasörü seç",
+    outputDescription: "{count} Markdown dosyası bulundu. Bir çıktı klasörü seçin ve dönüştürmeyi başlatın.",
+    duplicateHint: "Çıktı klasöründe aynı adda bir PDF zaten varsa, üzerine yazmayı önlemek için sayısal bir sonek eklenir.",
+    folderHint: "Seçilen klasörün ve alt klasörlerinin özyinelemeli taraması",
+    filesHint: "Birden fazla .md dosyasını aynı anda seçin",
+    chooseOutput: "Çıktı klasörü seçin ve başlatın",
+    processingTitle: "Toplu dönüştürme devam ediyor",
+    processingDescription: "PDF'ler sırayla oluşturuluyor. Bu sayfayı açık tutun.",
+    currentFile: "Mevcut dosya",
+    completed: "Tamamlandı",
+    resultTitle: "Toplu dönüştürme tamamlandı",
+    resultSummary: "{success} başarılı, {failed} başarısız.",
+    outputFolder: "Çıktı klasörü",
+    selectedFiles: "Seçilen dosyalar",
+    failedFiles: "Başarısız dosyalar",
+    moreFiles: "daha fazla dosya",
+    close: "Kapat",
+    cancel: "İptal",
+    unsupported: "Bu tarayıcı klasör tabanlı toplu dönüştürmeyi desteklemiyor. Chrome veya Edge gibi güncel bir Chromium tabanlı tarayıcı kullanın.",
+    noMarkdownFiles: "Seçilen kaynaktan hiç Markdown dosyası bulunamadı.",
+    skippedFiles: "Gereksinimleri karşılamayan {count} dosya atlandı.",
+    finishedToast: "Toplu dönüştürme tamamlandı",
+    partialFailureToast: "Bazı dosyalar dönüştürülemedi"
+  },
+
   // Default Content
   defaultContent: `# Markdown'dan PDF'e Dönüştürücü
 

@@ -287,6 +287,39 @@ export const sv = {
     tables: "Tabeller"
   },
 
+  // Batch Conversion
+  batchConversion: {
+    button: "Batch PDF",
+    buttonShort: "Batch",
+    dialogTitle: "Markdown Batch-konvertering",
+    dialogDescription: "Välj en mapp eller välj flera .md-filer, välj sedan en utmatningsmapp för att generera PDF-filerna ett och ett.",
+    selectFolder: "Välj mapp",
+    selectFiles: "Välj filer",
+    outputTitle: "Välj utmatningsmapp",
+    outputDescription: "{count} Markdown-filer hittade. Välj en utmatningsmapp och starta konverteringen.",
+    duplicateHint: "Om en PDF med samma namn redan finns i utmatningsmappen kommer ett numeriskt suffix att läggas till för att undvika överskrivning.",
+    folderHint: "Rekursiv skanning av den valda mappen och dess undermappar",
+    filesHint: "Välj flera .md-filer samtidigt",
+    chooseOutput: "Välj utmatningsmapp och starta",
+    processingTitle: "Batch-konvertering pågår",
+    processingDescription: "Genererar PDF-filer sekventiellt. Håll denna sida öppen.",
+    currentFile: "Aktuell fil",
+    completed: "Slutförd",
+    resultTitle: "Batch-konvertering slutförd",
+    resultSummary: "{success} lyckades, {failed} misslyckades.",
+    outputFolder: "Utmatningsmapp",
+    selectedFiles: "Valda filer",
+    failedFiles: "Misslyckade filer",
+    moreFiles: " fler filer",
+    close: "Stäng",
+    cancel: "Avbryt",
+    unsupported: "Denna webbläsare stöder inte mappbaserad batch-konvertering. Använd en nyare Chromium-baserad webbläsare som Chrome eller Edge.",
+    noMarkdownFiles: "Inga Markdown-filer hittades i den valda källan.",
+    skippedFiles: "{count} filer som inte uppfyllde kraven hoppades över.",
+    finishedToast: "Batch-konvertering slutförd",
+    partialFailureToast: "Vissa filer kunde inte konverteras"
+  },
+
   // Default Content
   defaultContent: `# Markdown till PDF-konverterare
 

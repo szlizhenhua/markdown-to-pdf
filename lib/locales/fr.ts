@@ -287,6 +287,39 @@ export const fr = {
     tables: "Tableaux"
   },
 
+  // Batch Conversion
+  batchConversion: {
+    button: "PDF par Lots",
+    buttonShort: "Lots",
+    dialogTitle: "Convertir Markdown par Lots",
+    dialogDescription: "Choisissez un dossier ou sélectionnez plusieurs fichiers .md, puis choisissez un dossier de sortie pour générer les PDFs un par un.",
+    selectFolder: "Choisir dossier",
+    selectFiles: "Choisir fichiers",
+    outputTitle: "Choisir dossier de sortie",
+    outputDescription: "{count} fichiers Markdown trouvés. Choisissez un dossier de sortie et lancez la conversion.",
+    duplicateHint: "Si un PDF avec le même nom existe déjà dans le dossier de sortie, un suffixe numérique sera ajouté pour éviter l'écrasement.",
+    folderHint: "Scanner récursivement le dossier sélectionné et ses sous-dossiers",
+    filesHint: "Sélectionner plusieurs fichiers .md à la fois",
+    chooseOutput: "Choisir dossier de sortie et démarrer",
+    processingTitle: "Conversion par lots en cours",
+    processingDescription: "Génération séquentielle des PDFs. Gardez cette page ouverte.",
+    currentFile: "Fichier actuel",
+    completed: "Terminé",
+    resultTitle: "Conversion par lots terminée",
+    resultSummary: "{success} réussis, {failed} échoués.",
+    outputFolder: "Dossier de sortie",
+    selectedFiles: "Fichiers sélectionnés",
+    failedFiles: "Fichiers échoués",
+    moreFiles: "plus de fichiers",
+    close: "Fermer",
+    cancel: "Annuler",
+    unsupported: "Ce navigateur ne prend pas en charge la conversion par lots basée sur les dossiers. Utilisez un navigateur Chromium récent comme Chrome ou Edge.",
+    noMarkdownFiles: "Aucun fichier Markdown trouvé dans la source sélectionnée.",
+    skippedFiles: "{count} fichiers ne répondant pas aux exigences ont été ignorés.",
+    finishedToast: "Conversion par lots terminée",
+    partialFailureToast: "Certains fichiers ont échoué lors de la conversion"
+  },
+
   // Default Content
   defaultContent: `# Convertisseur Markdown vers PDF
 

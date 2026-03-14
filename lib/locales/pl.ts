@@ -287,6 +287,39 @@ export const pl = {
     tables: "Tabele"
   },
 
+  // Batch Conversion
+  batchConversion: {
+    button: "Wsadowy PDF",
+    buttonShort: "Wsad",
+    dialogTitle: "Wsadowa konwersja Markdown",
+    dialogDescription: "Wybierz folder lub wiele plików .md, a następnie wybierz folder wyjściowy, aby wygenerować pliki PDF jeden po drugim.",
+    selectFolder: "Wybierz folder",
+    selectFiles: "Wybierz pliki",
+    outputTitle: "Wybierz folder wyjściowy",
+    outputDescription: "Znaleziono {count} plików Markdown. Wybierz folder wyjściowy i rozpocznij konwersję.",
+    duplicateHint: "Jeśli w folderze wyjściowym istnieje już PDF o tej samej nazwie, zostanie dodana numeryczna końcówka, aby uniknąć nadpisania.",
+    folderHint: "Rekurencyjne skanowanie wybranego folderu i jego podfolderów",
+    filesHint: "Wybierz wiele plików .md jednocześnie",
+    chooseOutput: "Wybierz folder wyjściowy i rozpocznij",
+    processingTitle: "Wsadowa konwersja w toku",
+    processingDescription: "Generowanie plików PDF sekwencyjnie. Zachowaj tę stronę otwartą.",
+    currentFile: "Aktualny plik",
+    completed: "Ukończone",
+    resultTitle: "Wsadowa konwersja ukończona",
+    resultSummary: "{success} udanych, {failed} nieudanych.",
+    outputFolder: "Folder wyjściowy",
+    selectedFiles: "Wybrane pliki",
+    failedFiles: "Nieudane pliki",
+    moreFiles: "więcej plików",
+    close: "Zamknij",
+    cancel: "Anuluj",
+    unsupported: "Ta przeglądarka nie obsługuje wsadowej konwersji opartej na folderach. Użyj najnowszej przeglądarki opartej na Chromium, takiej jak Chrome lub Edge.",
+    noMarkdownFiles: "Nie znaleziono plików Markdown w wybranym źródle.",
+    skippedFiles: "Pominięto {count} plików, które nie spełniały wymagań.",
+    finishedToast: "Wsadowa konwersja ukończona",
+    partialFailureToast: "Niektóre pliki nie zostały przekonwertowane"
+  },
+
   // Default Content
   defaultContent: `# Konwerter Markdown na PDF
 

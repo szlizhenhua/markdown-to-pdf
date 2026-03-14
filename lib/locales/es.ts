@@ -287,6 +287,39 @@ export const es = {
     tables: "Tablas"
   },
 
+  // Batch Conversion
+  batchConversion: {
+    button: "PDF por Lotes",
+    buttonShort: "Lotes",
+    dialogTitle: "Convertir Markdown por Lotes",
+    dialogDescription: "Elige una carpeta o selecciona múltiples archivos .md, luego elige una carpeta de salida para generar los PDFs uno por uno.",
+    selectFolder: "Elegir carpeta",
+    selectFiles: "Elegir archivos",
+    outputTitle: "Elegir carpeta de salida",
+    outputDescription: "Se encontraron {count} archivos Markdown. Elige una carpeta de salida e inicia la conversión.",
+    duplicateHint: "Si ya existe un PDF con el mismo nombre en la carpeta de salida, se añadirá un sufijo numérico para evitar sobrescribirlo.",
+    folderHint: "Escanear recursivamente la carpeta seleccionada y sus subcarpetas",
+    filesHint: "Seleccionar múltiples archivos .md a la vez",
+    chooseOutput: "Elegir carpeta de salida e iniciar",
+    processingTitle: "Conversión por lotes en progreso",
+    processingDescription: "Generando PDFs secuencialmente. Mantén esta página abierta.",
+    currentFile: "Archivo actual",
+    completed: "Completado",
+    resultTitle: "Conversión por lotes completa",
+    resultSummary: "{success} exitosos, {failed} fallidos.",
+    outputFolder: "Carpeta de salida",
+    selectedFiles: "Archivos seleccionados",
+    failedFiles: "Archivos fallidos",
+    moreFiles: "más archivos",
+    close: "Cerrar",
+    cancel: "Cancelar",
+    unsupported: "Este navegador no soporta la conversión por lotes basada en carpetas. Usa un navegador reciente basado en Chromium como Chrome o Edge.",
+    noMarkdownFiles: "No se encontraron archivos Markdown en la fuente seleccionada.",
+    skippedFiles: "Se omitieron {count} archivos que no cumplían con los requisitos.",
+    finishedToast: "Conversión por lotes completa",
+    partialFailureToast: "Algunos archivos fallaron en la conversión"
+  },
+
   // Default Content
   defaultContent: `# Conversor de Markdown a PDF
 

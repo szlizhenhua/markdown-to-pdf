@@ -891,5 +891,37 @@ If still not displaying, please check if the formula syntax is correct.
     images: "Images",
     quotes: "Quotes",
     tables: "Tables"
+  },
+  // Batch Conversion
+  batchConversion: {
+    button: "Batch PDF",
+    buttonShort: "Batch",
+    dialogTitle: "Batch convert Markdown",
+    dialogDescription: "Choose a folder or select multiple .md files, then choose an output folder to generate the PDFs one by one.",
+    selectFolder: "Choose folder",
+    selectFiles: "Choose files",
+    outputTitle: "Choose output folder",
+    outputDescription: "Found {count} Markdown files. Choose an output folder and start the conversion.",
+    duplicateHint: "If a PDF with the same name already exists in the output folder, a numeric suffix will be added to avoid overwriting it.",
+    folderHint: "Recursively scan the selected folder and its subfolders",
+    filesHint: "Select multiple .md files at once",
+    chooseOutput: "Choose output folder and start",
+    processingTitle: "Batch conversion in progress",
+    processingDescription: "Generating PDFs sequentially. Keep this page open.",
+    currentFile: "Current file",
+    completed: "Completed",
+    resultTitle: "Batch conversion complete",
+    resultSummary: "{success} succeeded, {failed} failed.",
+    outputFolder: "Output folder",
+    selectedFiles: "Selected files",
+    failedFiles: "Failed files",
+    moreFiles: "more files",
+    close: "Close",
+    cancel: "Cancel",
+    unsupported: "This browser does not support folder-based batch conversion. Use a recent Chromium-based browser such as Chrome or Edge.",
+    noMarkdownFiles: "No Markdown files were found in the selected source.",
+    skippedFiles: "Skipped {count} files that did not meet the requirements.",
+    finishedToast: "Batch conversion complete",
+    partialFailureToast: "Some files failed to convert"
   }
 }
