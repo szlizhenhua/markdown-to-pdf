@@ -50,6 +50,7 @@ const NUMBER_RE = /\p{Number}/u
 const PUNCTUATION_RE = /\p{Punctuation}/u
 const SEPARATOR_RE = /\p{Separator}/u
 const MARK_RE = /\p{Mark}/u
+const CJK_PUNCTUATION_RE = /[\u3000-\u303F\uFE10-\uFE1F\uFE30-\uFE4F\uFF01-\uFF0F\uFF1A-\uFF20\uFF3B-\uFF40\uFF5B-\uFF65]/u
 
 type FontRequest = {
   family: string
@@ -84,6 +85,7 @@ export async function getPdfFontCss(htmlContent: string, language?: string): Pro
 
 function buildFontRequests(text: string, language?: string): FontRequest[] {
   const familySets = new Map<string, Set<string>>()
+  const characters = Array.from(text)
   const hasJapaneseSignal = HIRAGANA_RE.test(text) || KATAKANA_RE.test(text)
   const hasKoreanSignal = HANGUL_RE.test(text)
   const preferredHanFamily = hasJapaneseSignal
@@ -92,12 +94,19 @@ function buildFontRequests(text: string, language?: string): FontRequest[] {
       ? 'Noto Sans KR'
       : getPreferredHanFamily(language)
 
-  for (const char of text) {
+  for (let index = 0; index < characters.length; index += 1) {
+    const char = characters[index]
     if (isIgnorableCharacter(char)) {
       continue
     }
 
     if (isEmojiCharacter(char)) {
+      continue
+    }
+
+    const cjkPunctuationFamily = getCjkPunctuationFamily(characters, index, preferredHanFamily)
+    if (cjkPunctuationFamily) {
+      addCharToFamily(familySets, cjkPunctuationFamily, char)
       continue
     }
 
@@ -271,6 +280,76 @@ function addCharToFamily(target: Map<string, Set<string>>, family: string, char:
   }
 
   target.set(family, new Set([char]))
+}
+
+function getCjkPunctuationFamily(characters: readonly string[], index: number, preferredHanFamily: string): string | null {
+  const char = characters[index]
+  if (!char) {
+    return null
+  }
+
+  const adjacentCjkFamily = getAdjacentCjkFamily(characters, index, preferredHanFamily)
+
+  if (CJK_PUNCTUATION_RE.test(char)) {
+    return adjacentCjkFamily ?? preferredHanFamily
+  }
+
+  if (PUNCTUATION_RE.test(char) && adjacentCjkFamily) {
+    return adjacentCjkFamily
+  }
+
+  return null
+}
+
+function getAdjacentCjkFamily(characters: readonly string[], index: number, preferredHanFamily: string): string | null {
+  const previousChar = getAdjacentMeaningfulChar(characters, index, -1)
+  const nextChar = getAdjacentMeaningfulChar(characters, index, 1)
+
+  for (const candidate of [previousChar, nextChar]) {
+    const family = getCjkFamilyForChar(candidate, preferredHanFamily)
+    if (family) {
+      return family
+    }
+  }
+
+  return null
+}
+
+function getAdjacentMeaningfulChar(characters: readonly string[], startIndex: number, direction: -1 | 1): string | null {
+  for (let index = startIndex + direction; index >= 0 && index < characters.length; index += direction) {
+    const candidate = characters[index]
+    if (!candidate || isIgnorableCharacter(candidate)) {
+      continue
+    }
+
+    if (SEPARATOR_RE.test(candidate)) {
+      continue
+    }
+
+    return candidate
+  }
+
+  return null
+}
+
+function getCjkFamilyForChar(char: string | null, preferredHanFamily: string): string | null {
+  if (!char) {
+    return null
+  }
+
+  if (HAN_RE.test(char)) {
+    return preferredHanFamily
+  }
+
+  if (HIRAGANA_RE.test(char) || KATAKANA_RE.test(char)) {
+    return 'Noto Sans JP'
+  }
+
+  if (HANGUL_RE.test(char)) {
+    return 'Noto Sans KR'
+  }
+
+  return null
 }
 
 function isIgnorableCharacter(char: string): boolean {
