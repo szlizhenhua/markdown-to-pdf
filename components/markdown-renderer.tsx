@@ -60,8 +60,10 @@ function MarkdownRendererComponent({
       dangerouslySetInnerHTML={{ __html: renderedHtml }}
       style={{
         padding: "20px",
+        width: "100%",
         maxWidth: "800px",
         margin: "0 auto",
+        boxSizing: "border-box",
       }}
     />
   )

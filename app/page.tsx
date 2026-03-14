@@ -1268,25 +1268,71 @@ ${previewCard.innerHTML}
       >
         Skip to editor
       </a>
-      <div className="min-h-screen bg-background" id="main-content">
+      <div className="min-h-screen bg-background overflow-x-hidden" id="main-content">
         {/* Top header with controls */}
         <header className="border-b bg-card no-print relative">
           <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                <Image
-                  src="/placeholder-logo.png"
-                  alt="logo"
-                  width={32}
-                  height={32}
-                  className="rounded flex-shrink-0 sm:w-10 sm:h-10"
-                />
-                <div className="font-medium text-sm sm:text-base truncate hidden sm:block">
-                  {t.title}
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                  <Image
+                    src="/placeholder-logo.png"
+                    alt="logo"
+                    width={32}
+                    height={32}
+                    className="rounded flex-shrink-0 sm:w-10 sm:h-10"
+                  />
+                  <div className="font-medium text-sm sm:text-base truncate hidden sm:block">
+                    {t.title}
+                  </div>
+                  {/* Mobile logo-only fallback */}
+                  <div className="font-medium text-sm sm:hidden">
+                    MD→PDF
+                  </div>
                 </div>
-                {/* Mobile logo-only fallback */}
-                <div className="font-medium text-sm sm:hidden">
-                  MD→PDF
+
+                <div className="flex sm:hidden items-center gap-1.5 shrink-0">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowToc(!showToc)}
+                    className="text-muted-foreground hover:text-foreground p-2 min-h-[44px] min-w-[44px] touch-manipulation active:scale-95 transition-transform"
+                    aria-label={t.buttons.tableOfContents}
+                    aria-expanded={showToc}
+                    type="button"
+                  >
+                    <FileText className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowSettings(!showSettings)}
+                    className="text-muted-foreground hover:text-foreground p-2 min-h-[44px] min-w-[44px] touch-manipulation active:scale-95 transition-transform"
+                    aria-label={t.buttons.settings}
+                    aria-expanded={showSettings}
+                    type="button"
+                  >
+                    <Settings className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    onClick={handleDownloadPDF}
+                    className="cta-button text-xs px-3 py-2 min-w-[72px] min-h-[44px] touch-manipulation active:scale-95 transition-transform"
+                    size="sm"
+                    disabled={isGeneratingPDF || isBatchProcessing}
+                    aria-label={isGeneratingPDF ? t.buttons.generatingPDF : t.buttons.getPDF}
+                  >
+                    {isGeneratingPDF ? (
+                      <>
+                        <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+                        PDF
+                      </>
+                    ) : (
+                      <>
+                        <Download className="h-3 w-3 mr-1" />
+                        PDF
+                      </>
+                    )}
+                  </Button>
                 </div>
               </div>
 
@@ -1355,52 +1401,11 @@ ${previewCard.innerHTML}
               </div>
 
               {/* Mobile controls */}
-              <div className="flex sm:hidden items-center gap-1">
+              <div className="flex sm:hidden flex-wrap items-center gap-2">
                 <LanguageSwitcher />
                 <ThemeToggle />
                 <TemplateSelector onSelectTemplate={handleSelectTemplate} />
                 <HelpDialog />
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowSettings(!showSettings)}
-                  className="text-muted-foreground hover:text-foreground p-2 min-h-[44px] min-w-[44px] touch-manipulation active:scale-95 transition-transform"
-                  aria-label={t.buttons.settings}
-                  aria-expanded={showSettings}
-                  type="button"
-                >
-                  <Settings className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowToc(!showToc)}
-                  className="text-muted-foreground hover:text-foreground p-2 min-h-[44px] min-w-[44px] touch-manipulation active:scale-95 transition-transform"
-                  aria-label={t.buttons.tableOfContents}
-                  aria-expanded={showToc}
-                  type="button"
-                >
-                  <FileText className="h-4 w-4" />
-                </Button>
-                <Button
-                  onClick={handleDownloadPDF}
-                  className="cta-button text-xs px-3 py-2 min-w-[64px] min-h-[44px] touch-manipulation active:scale-95 transition-transform"
-                  size="sm"
-                  disabled={isGeneratingPDF || isBatchProcessing}
-                  aria-label={isGeneratingPDF ? t.buttons.generatingPDF : t.buttons.getPDF}
-                >
-                  {isGeneratingPDF ? (
-                    <>
-                      <Loader2 className="h-3 w-3 mr-1 animate-spin" />
-                      PDF
-                    </>
-                  ) : (
-                    <>
-                      <Download className="h-3 w-3 mr-1" />
-                      PDF
-                    </>
-                  )}
-                </Button>
                 <Button
                   variant="outline"
                   size="sm"
@@ -1417,7 +1422,7 @@ ${previewCard.innerHTML}
 
           {/* Settings Popover */}
           {showSettings && (
-            <div ref={settingsRef} className="absolute right-2 sm:right-4 top-14 sm:top-16 z-50 w-[calc(100vw-16px)] sm:w-80 bg-popover text-popover-foreground shadow-2xl rounded-lg border border-primary/15 max-h-[80vh] overflow-auto">
+            <div ref={settingsRef} className="absolute right-2 sm:right-4 top-full mt-2 z-50 w-[calc(100vw-16px)] sm:w-80 bg-popover text-popover-foreground shadow-2xl rounded-lg border border-primary/15 max-h-[80vh] overflow-auto">
               <div className="p-4">
                 <h3 className="font-medium mb-3">{t.settings.title}</h3>
                 <div className="space-y-4">
@@ -1525,7 +1530,7 @@ ${previewCard.innerHTML}
 
           {/* Table of Contents Popover */}
           {showToc && (
-            <div ref={tocRef} className="absolute right-16 sm:right-24 top-14 sm:top-16 z-50 w-[calc(100vw-100px)] sm:w-80 max-w-[300px] bg-popover text-popover-foreground shadow-2xl rounded-lg border border-primary/15 max-h-[70vh] overflow-auto">
+            <div ref={tocRef} className="absolute left-2 right-2 top-full mt-2 z-50 sm:left-auto sm:right-24 sm:w-80 sm:max-w-[300px] bg-popover text-popover-foreground shadow-2xl rounded-lg border border-primary/15 max-h-[70vh] overflow-auto">
               <div className="p-4">
                 <h3 className="font-medium mb-3">{t.toc.title}</h3>
                 <div className="space-y-1">
@@ -1550,9 +1555,9 @@ ${previewCard.innerHTML}
           )}
         </header>
 
-      <div className="container mx-auto px-2 py-4 sm:px-4 sm:py-6">
+      <div className="container mx-auto overflow-x-hidden px-2 py-4 sm:px-4 sm:py-6">
         {isLoading ? (
-          <div className="flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-6">
+          <div className="flex flex-col gap-4 overflow-x-hidden md:grid md:grid-cols-2 md:gap-6">
             <div className="md:col-span-3 flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-6">
               <div className="flex flex-col h-[60vh] md:h-[70vh]">
                 <Card className="flex-1 h-full">
@@ -1588,9 +1593,9 @@ ${previewCard.innerHTML}
         ) : (
           <div className="flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-6">
             {/* Main Content */}
-            <div className={showPreview ? (isVerticalView ? "flex flex-col" : "md:col-span-3 flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-6") + " order-1 md:order-2" : "md:col-span-3 order-1 md:order-2"}>
+            <div className={showPreview ? (isVerticalView ? "flex min-w-0 flex-col" : "md:col-span-3 flex min-w-0 flex-col md:grid md:grid-cols-2 gap-4 md:gap-6") + " order-1 md:order-2" : "md:col-span-3 min-w-0 order-1 md:order-2"}>
             {/* Editor */}
-            <div className={showPreview ? (isVerticalView ? "flex flex-col h-[60vh] md:h-[70vh]" : "flex flex-col h-[60vh] md:h-[70vh]") : "max-w-4xl mx-auto flex flex-col h-[60vh] md:h-[70vh]"}>
+            <div className={showPreview ? (isVerticalView ? "flex min-w-0 flex-col h-[60vh] md:h-[70vh]" : "flex min-w-0 flex-col h-[60vh] md:h-[70vh]") : "mx-auto flex min-w-0 max-w-4xl flex-col h-[60vh] md:h-[70vh]"}>
               <Card
                 className={`flex-1 h-full no-print overflow-auto card-editor transition-all duration-200 ${isDragging ? 'ring-2 ring-primary ring-offset-2 scale-[1.02]' : ''}`}
                 onDragEnter={handleDragEnter}
@@ -1776,22 +1781,22 @@ ${previewCard.innerHTML}
             {/* Preview */}
             {showPreview && (
               <div className={isVerticalView ? "flex flex-col h-[60vh] md:h-[70vh]" : "flex flex-col h-[60vh] md:h-[70vh]"}>
-                <Card className="flex-1 h-full overflow-auto card-editor">
+                <Card className="card-editor flex h-full min-w-0 flex-1 overflow-hidden">
                   <CardHeader className="no-print">
-                    <CardTitle className="flex items-center gap-2">
+                    <CardTitle className="flex min-w-0 flex-wrap items-center gap-2">
                       <Eye className="h-5 w-5" />
-                      {t.preview.title}
-                      <Badge variant="secondary" className="ml-auto">
+                      <span className="min-w-0 truncate">{t.preview.title}</span>
+                      <Badge variant="secondary" className="max-w-full sm:ml-auto">
                         {t.themes[selectedTheme as keyof typeof t.themes]} {t.preview.theme}
                       </Badge>
-                      <ZoomControl onZoomChange={setPreviewZoom} className="ml-2" />
+                      <ZoomControl onZoomChange={setPreviewZoom} className="sm:ml-2" />
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="print:p-0 h-full">
+                  <CardContent className="h-full overflow-x-hidden print:p-0">
                     {/* PDF导出专用容器，动态应用主题 */}
                     <div
                       ref={previewRef}
-                      className="markdown-preview-pdf prose prose-lg"
+                      className="markdown-preview-pdf prose prose-lg max-w-full overflow-x-hidden"
                       style={{ fontSize: `${previewFontSize}px`, lineHeight: previewLineHeight, fontFamily: previewFontFamily, transform: `scale(${previewZoom / 100})`, transformOrigin: 'top left' }}
                       role="region"
                       aria-label={t.preview.title}
