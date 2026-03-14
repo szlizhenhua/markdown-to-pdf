@@ -251,8 +251,12 @@ function buildFontRequests(text: string, language?: string): FontRequest[] {
 }
 
 function getFontWeightsForFamily(family: string): number[] {
-  if (family === 'Noto Sans') {
-    return [400, 700]
+  if (family === 'Noto Sans Math' || family === 'Noto Sans Symbols 2') {
+    return [400]
+  }
+
+  if (family === 'Noto Sans' || family.startsWith('Noto Sans ')) {
+    return [400, 500, 700]
   }
 
   return [400]

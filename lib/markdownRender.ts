@@ -37,6 +37,19 @@ interface QuadrantChartData {
 
 const MERMAID_SVG_FONT_STACK =
   '"Noto Sans SC", "Noto Sans TC", "Noto Sans JP", "Noto Sans KR", "Noto Sans", "Noto Sans Arabic", "Noto Sans Devanagari", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif'
+const RTL_TEXT_RE = /[\p{Script=Arabic}\p{Script=Hebrew}]/u
+
+const escapeHtmlText = (value: string): string =>
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+
+const getTextDirAttribute = (value: string): string => (RTL_TEXT_RE.test(value) ? 'rtl' : 'auto')
+const getSvgTextDirectionAttributes = (value: string): string =>
+  RTL_TEXT_RE.test(value) ? ' direction="rtl" unicode-bidi="plaintext"' : ''
 
 const parseFenceInfo = (line: string): { info: string; lang: string } | null => {
   const match = line.match(/^\s*```(?:\s*([^\n`]*))?\s*$/)
@@ -404,7 +417,7 @@ const buildRadarChartElement = (raw: string): HTMLElement => {
     svgParts.push(`<line x1="${centerX}" y1="${centerY}" x2="${point.x}" y2="${point.y}" />`)
     const labelX = centerX + Math.cos(point.angle) * (radius + 14)
     const labelY = centerY + Math.sin(point.angle) * (radius + 14)
-    svgParts.push(`<text x="${labelX}" y="${labelY}" text-anchor="middle">${axes[index]}</text>`)
+    svgParts.push(`<text x="${labelX}" y="${labelY}" text-anchor="middle"${getSvgTextDirectionAttributes(axes[index])}>${escapeHtmlText(axes[index])}</text>`)
   })
   svgParts.push('</g>')
 
@@ -424,7 +437,7 @@ const buildRadarChartElement = (raw: string): HTMLElement => {
   svgParts.push('</svg>')
   if (title) {
     svgParts.unshift(
-      `<div class="radar-title" style="font-weight:600; margin-bottom:4px;">${title}</div>`
+      `<div class="radar-title" dir="${getTextDirAttribute(title)}" style="font-weight:600; margin-bottom:4px;">${escapeHtmlText(title)}</div>`
     )
   }
 
@@ -441,7 +454,7 @@ const buildRadarChartElement = (raw: string): HTMLElement => {
     entry.style.display = 'flex'
     entry.style.alignItems = 'center'
     entry.style.gap = '6px'
-    entry.innerHTML = `<span class="swatch" style="background:${color};width:10px;height:10px;border-radius:999px;display:inline-block;"></span><span>${item.name}</span>`
+    entry.innerHTML = `<span class="swatch" style="background:${color};width:10px;height:10px;border-radius:999px;display:inline-block;"></span><span dir="${getTextDirAttribute(item.name)}">${escapeHtmlText(item.name)}</span>`
     legend.appendChild(entry)
   })
 
@@ -498,25 +511,25 @@ const buildQuadrantChartElement = (raw: string): HTMLElement => {
   labels.forEach((item) => {
     if (quadrants[item.key]) {
       svgParts.push(
-        `<text class="quad-label" x="${item.x}" y="${item.y}" text-anchor="middle">${quadrants[item.key]}</text>`
+        `<text class="quad-label" x="${item.x}" y="${item.y}" text-anchor="middle"${getSvgTextDirectionAttributes(quadrants[item.key])}>${escapeHtmlText(quadrants[item.key])}</text>`
       )
     }
   })
 
   if (xAxis.length >= 2) {
     svgParts.push(
-      `<text class="axis-label" x="${originX}" y="${originY + size + 20}" text-anchor="start">${xAxis[0]}</text>`
+      `<text class="axis-label" x="${originX}" y="${originY + size + 20}" text-anchor="start"${getSvgTextDirectionAttributes(xAxis[0])}>${escapeHtmlText(xAxis[0])}</text>`
     )
     svgParts.push(
-      `<text class="axis-label" x="${originX + size}" y="${originY + size + 20}" text-anchor="end">${xAxis[1]}</text>`
+      `<text class="axis-label" x="${originX + size}" y="${originY + size + 20}" text-anchor="end"${getSvgTextDirectionAttributes(xAxis[1])}>${escapeHtmlText(xAxis[1])}</text>`
     )
   }
   if (yAxis.length >= 2) {
     svgParts.push(
-      `<text class="axis-label" x="${originX - 8}" y="${originY + size}" text-anchor="end">${yAxis[0]}</text>`
+      `<text class="axis-label" x="${originX - 8}" y="${originY + size}" text-anchor="end"${getSvgTextDirectionAttributes(yAxis[0])}>${escapeHtmlText(yAxis[0])}</text>`
     )
     svgParts.push(
-      `<text class="axis-label" x="${originX - 8}" y="${originY + 12}" text-anchor="end">${yAxis[1]}</text>`
+      `<text class="axis-label" x="${originX - 8}" y="${originY + 12}" text-anchor="end"${getSvgTextDirectionAttributes(yAxis[1])}>${escapeHtmlText(yAxis[1])}</text>`
     )
   }
 
@@ -527,13 +540,13 @@ const buildQuadrantChartElement = (raw: string): HTMLElement => {
     const y = originY + (1 - yNorm) * size
     const color = palette[index % palette.length]
     svgParts.push(`<circle cx="${x}" cy="${y}" r="5" fill="${color}" />`)
-    svgParts.push(`<text class="point-label" x="${x + 8}" y="${y - 6}">${point.label}</text>`)
+    svgParts.push(`<text class="point-label" x="${x + 8}" y="${y - 6}"${getSvgTextDirectionAttributes(point.label)}>${escapeHtmlText(point.label)}</text>`)
   })
 
   svgParts.push('</svg>')
 
   if (title) {
-    svgParts.unshift(`<div class="quadrant-title">${title}</div>`)
+    svgParts.unshift(`<div class="quadrant-title" dir="${getTextDirAttribute(title)}">${escapeHtmlText(title)}</div>`)
   }
 
   container.innerHTML = svgParts.join('')
