@@ -84,23 +84,23 @@ export async function POST(request: Request) {
     browser = await puppeteer.launch({
       args,
       executablePath,
-      headless: true,
+      headless: process.env.VERCEL ? 'shell' : true,
       defaultViewport: { width: 1280, height: 800 }
     })
 
     const page = await browser.newPage()
-    page.setDefaultTimeout(15000)
-    page.setDefaultNavigationTimeout(15000)
+    page.setDefaultTimeout(20000)
+    page.setDefaultNavigationTimeout(20000)
 
-    // 设置HTML内容，使用离线内联样式避免外部资源阻塞
+    // 设置HTML内容。KaTeX 字体走内联，中文字体通过 Google Fonts 明确加载。
     const html = generatePDFHTML(htmlContent, { fontSize, theme, highlightTheme: '' })
     await page.setContent(html, {
-      waitUntil: 'domcontentloaded',
-      timeout: 15000,
+      waitUntil: ['domcontentloaded', 'load', 'networkidle0'],
+      timeout: 20000,
     })
 
-    // 等待文档和字体进入稳定状态，但不要因为外部资源卡住整个导出
-    await page.waitForFunction(() => document.readyState === 'interactive' || document.readyState === 'complete', {
+    // 等待文档和字体进入稳定状态，但不要因为外部资源卡住整个导出。
+    await page.waitForFunction(() => document.readyState === 'complete', {
       timeout: 5000,
     })
 
@@ -108,16 +108,27 @@ export async function POST(request: Request) {
       await page.evaluate(async () => {
         if (!('fonts' in document)) return
 
+        const fontCandidates = [
+          '400 12pt "Noto Sans SC"',
+          '400 12pt "Noto Serif SC"',
+          '400 12pt "KaTeX_Main"',
+          '400 12pt "KaTeX_Math"',
+        ]
+
+        await Promise.allSettled(
+          fontCandidates.map((font) => document.fonts.load(font))
+        )
+
         await Promise.race([
           document.fonts.ready,
-          new Promise((resolve) => setTimeout(resolve, 2000)),
+          new Promise((resolve) => setTimeout(resolve, 5000)),
         ])
       })
     } catch (fontError) {
       console.warn('字体等待超时，继续生成 PDF:', fontError)
     }
 
-    await new Promise(resolve => setTimeout(resolve, 150))
+    await new Promise(resolve => setTimeout(resolve, 300))
 
     // 验证字体是否已正确加载
     await page.evaluate(() => {

@@ -1,6 +1,5 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
-import { dirname, resolve } from 'node:path'
-import { pathToFileURL } from 'node:url'
+import { dirname, extname, resolve } from 'node:path'
 
 export interface PDFStyleOptions {
   fontSize: string
@@ -9,7 +8,8 @@ export interface PDFStyleOptions {
 }
 
 let cachedKatexCss: string | null = null
-let cachedKatexBaseHref: string | null = null
+const GOOGLE_PDF_FONT_STYLESHEET =
+  'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap'
 
 function resolveExistingKatexCssPath(): string {
   const candidates = [resolve(process.cwd(), 'node_modules/katex/dist/katex.min.css')]
@@ -38,24 +38,60 @@ function getLocalKatexCss(): string {
 
   try {
     const katexCssPath = resolveExistingKatexCssPath()
-    cachedKatexCss = readFileSync(katexCssPath, 'utf8')
-    cachedKatexBaseHref = pathToFileURL(`${dirname(katexCssPath)}/`).href
+    const rawKatexCss = readFileSync(katexCssPath, 'utf8')
+    cachedKatexCss = inlineRelativeAssetUrls(rawKatexCss, dirname(katexCssPath))
   } catch (error) {
     console.warn('Failed to load local KaTeX CSS for PDF export:', error)
     cachedKatexCss = ''
-    cachedKatexBaseHref = ''
   }
 
   return cachedKatexCss
 }
 
-function getLocalKatexBaseHref(): string {
-  if (cachedKatexBaseHref !== null) {
-    return cachedKatexBaseHref
-  }
+function getMimeType(filePath: string): string {
+  const extension = extname(filePath).toLowerCase()
 
-  getLocalKatexCss()
-  return cachedKatexBaseHref || ''
+  switch (extension) {
+    case '.woff2':
+      return 'font/woff2'
+    case '.woff':
+      return 'font/woff'
+    case '.ttf':
+      return 'font/ttf'
+    case '.otf':
+      return 'font/otf'
+    case '.svg':
+      return 'image/svg+xml'
+    default:
+      return 'application/octet-stream'
+  }
+}
+
+function toDataUri(filePath: string): string {
+  const mimeType = getMimeType(filePath)
+  const encoded = readFileSync(filePath).toString('base64')
+  return `data:${mimeType};base64,${encoded}`
+}
+
+function inlineRelativeAssetUrls(css: string, assetBaseDir: string): string {
+  return css.replace(/url\((['"]?)(?!data:|https?:|file:)([^'")]+)\1\)/g, (match, _quote, assetPath) => {
+    const normalizedAssetPath = assetPath.trim().split('#')[0].split('?')[0]
+    if (!normalizedAssetPath) {
+      return match
+    }
+
+    const absoluteAssetPath = resolve(assetBaseDir, normalizedAssetPath)
+    if (!existsSync(absoluteAssetPath)) {
+      return match
+    }
+
+    try {
+      return `url("${toDataUri(absoluteAssetPath)}")`
+    } catch (error) {
+      console.warn(`Failed to inline PDF asset: ${absoluteAssetPath}`, error)
+      return match
+    }
+  })
 }
 
 /**
@@ -608,7 +644,6 @@ export function generatePDFHTML(htmlContent: string, options: PDFStyleOptions): 
   const highlightTheme = getHighlightThemeFilename(theme)
   const styles = generatePDFStyles({ fontSize, theme, highlightTheme })
   const katexCss = getLocalKatexCss()
-  const baseHref = getLocalKatexBaseHref()
 
   return `
       <!DOCTYPE html>
@@ -617,7 +652,9 @@ export function generatePDFHTML(htmlContent: string, options: PDFStyleOptions): 
           <meta charset="UTF-8">
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          ${baseHref ? `<base href="${baseHref}">` : ''}
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+          <link href="${GOOGLE_PDF_FONT_STYLESHEET}" rel="stylesheet">
           <style>
             ${katexCss}
           </style>
