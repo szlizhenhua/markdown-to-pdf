@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, readdirSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { dirname, extname, resolve } from 'node:path'
 
 export interface PDFStyleOptions {
@@ -9,17 +9,11 @@ export interface PDFStyleOptions {
 
 let cachedKatexCss: string | null = null
 let cachedNotoSansScCss: string | null = null
+const LOCAL_KATEX_DIR = resolve(process.cwd(), 'assets/katex')
+const LOCAL_NOTO_SANS_SC_DIR = resolve(process.cwd(), 'assets/fonts/noto-sans-sc')
 
 function resolveExistingKatexCssPath(): string {
-  const candidates = [resolve(process.cwd(), 'node_modules/katex/dist/katex.min.css')]
-
-  const pnpmRoot = resolve(process.cwd(), 'node_modules/.pnpm')
-  if (existsSync(pnpmRoot)) {
-    const katexPackageDir = readdirSync(pnpmRoot).find((entry) => entry.startsWith('katex@'))
-    if (katexPackageDir) {
-      candidates.push(resolve(pnpmRoot, katexPackageDir, 'node_modules/katex/dist/katex.min.css'))
-    }
-  }
+  const candidates = [resolve(LOCAL_KATEX_DIR, 'katex.min.css')]
 
   for (const candidate of candidates) {
     if (existsSync(candidate)) {
@@ -31,15 +25,7 @@ function resolveExistingKatexCssPath(): string {
 }
 
 function resolveExistingNotoSansScCssPath(fileName: string): string {
-  const candidates = [resolve(process.cwd(), `node_modules/@fontsource/noto-sans-sc/${fileName}`)]
-
-  const pnpmRoot = resolve(process.cwd(), 'node_modules/.pnpm')
-  if (existsSync(pnpmRoot)) {
-    const fontPackageDir = readdirSync(pnpmRoot).find((entry) => entry.startsWith('@fontsource+noto-sans-sc@'))
-    if (fontPackageDir) {
-      candidates.push(resolve(pnpmRoot, fontPackageDir, 'node_modules/@fontsource/noto-sans-sc', fileName))
-    }
-  }
+  const candidates = [resolve(LOCAL_NOTO_SANS_SC_DIR, fileName)]
 
   for (const candidate of candidates) {
     if (existsSync(candidate)) {

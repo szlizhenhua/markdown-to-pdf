@@ -9,9 +9,9 @@ import { Toast } from '@/components/ui/toast'
 import { ErrorBoundary } from '@/components/error-boundary'
 import { ThemeProvider } from '@/components/theme-provider'
 import 'katex/dist/katex.min.css'
-import '@fontsource/noto-sans-sc/chinese-simplified-400.css'
-import '@fontsource/noto-sans-sc/chinese-simplified-500.css'
-import '@fontsource/noto-sans-sc/chinese-simplified-700.css'
+import '@/assets/fonts/noto-sans-sc/chinese-simplified-400.css'
+import '@/assets/fonts/noto-sans-sc/chinese-simplified-500.css'
+import '@/assets/fonts/noto-sans-sc/chinese-simplified-700.css'
 import './globals.css'
 import Script from "next/script";
 
