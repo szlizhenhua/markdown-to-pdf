@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Globe, Languages } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
+import type { CSSProperties } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import type { Language } from '@/lib/locales'
 
@@ -12,7 +13,9 @@ export function LanguageSwitcher() {
   const { language, setLanguage, availableLanguages } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [isCompact, setIsCompact] = useState(false)
+  const [dropdownStyle, setDropdownStyle] = useState<CSSProperties>()
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const pathname = usePathname()
 
@@ -52,21 +55,57 @@ export function LanguageSwitcher() {
     }
   }, [])
 
+  useEffect(() => {
+    if (!isCompact || !isOpen) {
+      return
+    }
+
+    const updateDropdownPosition = () => {
+      const triggerRect = triggerRef.current?.getBoundingClientRect()
+      if (!triggerRect) {
+        return
+      }
+
+      const top = Math.round(triggerRect.bottom + 8)
+      const bottomPadding = 8
+
+      setDropdownStyle({
+        top,
+        maxHeight: `calc(100dvh - ${top + bottomPadding}px)`,
+      })
+    }
+
+    updateDropdownPosition()
+
+    window.addEventListener('resize', updateDropdownPosition)
+    window.addEventListener('scroll', updateDropdownPosition, true)
+
+    return () => {
+      window.removeEventListener('resize', updateDropdownPosition)
+      window.removeEventListener('scroll', updateDropdownPosition, true)
+    }
+  }, [isCompact, isOpen])
+
   if (isCompact) {
     return (
       <div className="relative" ref={dropdownRef}>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setIsOpen(!isOpen)}
-          className="text-muted-foreground hover:text-foreground"
-          aria-label="Language"
-        >
-          <Languages className="h-4 w-4" />
-        </Button>
+        <div ref={triggerRef}>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-muted-foreground hover:text-foreground"
+            aria-label="Language"
+          >
+            <Languages className="h-4 w-4" />
+          </Button>
+        </div>
 
         {isOpen && (
-          <div className="absolute right-0 top-10 z-50 bg-popover text-popover-foreground border border-primary/15 shadow-lg rounded-lg min-w-[140px]">
+          <div
+            className="fixed inset-x-2 z-50 overflow-y-auto rounded-lg border border-primary/15 bg-popover text-popover-foreground shadow-lg"
+            style={dropdownStyle}
+          >
             <div className="p-1">
               {availableLanguages.map((lang) => (
                 <button
