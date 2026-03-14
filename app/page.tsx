@@ -224,6 +224,16 @@ const validateBatchFile = (file: File, t: LocaleTranslations): { valid: boolean;
 
 const getBrowserPickerWindow = () => window as BrowserPickerWindow
 
+const detectBatchConversionSupport = () => {
+  if (typeof window === 'undefined') return false
+
+  const pickerWindow = getBrowserPickerWindow()
+  return (
+    typeof pickerWindow.showOpenFilePicker === 'function' &&
+    typeof pickerWindow.showDirectoryPicker === 'function'
+  )
+}
+
 const isPickerAbortError = (error: unknown) =>
   error instanceof DOMException && error.name === 'AbortError'
 
@@ -520,6 +530,7 @@ export default function MarkdownToPDF() {
   const [batchFiles, setBatchFiles] = useState<BatchSourceFile[]>([])
   const [batchProgress, setBatchProgress] = useState({ current: 0, total: 0, currentFile: '' })
   const [batchResult, setBatchResult] = useState<BatchResult | null>(null)
+  const [supportsBatchConversion, setSupportsBatchConversion] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const dropRef = useRef<HTMLDivElement>(null)
   const settingsRef = useRef<HTMLDivElement>(null)
@@ -537,6 +548,10 @@ export default function MarkdownToPDF() {
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 500)
     return () => clearTimeout(timer)
+  }, [])
+
+  useEffect(() => {
+    setSupportsBatchConversion(detectBatchConversionSupport())
   }, [])
 
   // Auto-save markdown content to localStorage
@@ -1269,11 +1284,6 @@ ${previewCard.innerHTML}
       }
     }
   }
-
-  const supportsBatchConversion =
-    typeof window !== 'undefined' &&
-    typeof getBrowserPickerWindow().showOpenFilePicker === 'function' &&
-    typeof getBrowserPickerWindow().showDirectoryPicker === 'function'
 
   return (
     <>
