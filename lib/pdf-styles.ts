@@ -68,8 +68,7 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
 
   return `
             body {
-              /* 使用包含中英文支持的字体栈，确保任何语言下都能正确显示中文 */
-              font-family: "Noto Sans SC", "Noto Serif SC", "Inter", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Heiti SC", "SimSun", "STHeiti", "Arial Unicode MS", "Helvetica Neue", "Arial", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+              font-family: "Helvetica Neue", "Arial", "Inter", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Heiti SC", "Noto Serif SC", "SimSun", "STHeiti", "Arial Unicode MS", "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
               padding: 20px;
               line-height: 1.6;
               color: #24292e;
@@ -81,6 +80,7 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
               -moz-osx-font-smoothing: grayscale;
               text-rendering: optimizeLegibility;
               font-weight: 400;
+              font-variant-numeric: normal;
             }
 
             /* 确保中文字符正确显示 */
@@ -88,6 +88,7 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
               font-synthesis: none;
               -webkit-font-variant-ligatures: no-common-ligatures;
               font-variant-ligatures: no-common-ligatures;
+              text-autospace: no-autospace;
             }
 
             /* 优化 emoji 显示 */
@@ -101,8 +102,8 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
               -moz-osx-font-smoothing: grayscale;
             }
 
-            /* 全局 emoji 支持 */
-            body, .hljs, code, pre {
+            /* 全局 emoji 支持 - 仅在 emoji 元素上使用，避免影响数字渲染 */
+            .emoji {
               font-variant-emoji: emoji;
             }
 
@@ -125,8 +126,7 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
               background: #282c34;
               color: #abb2bf;
               border-radius: 6px;
-              /* 使用包含中英文支持的等宽字体栈 */
-              font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace;
+              font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", monospace;
               font-size: ${Math.max(0.8, parseInt(fontSize) * 0.08)}em;
               line-height: 1.5;
               margin: 1em 0;
@@ -152,7 +152,7 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
             .hljs-comment,
             .hljs-string,
             .hljs-title {
-              font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace !important;
+              font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", monospace !important;
               letter-spacing: 0.02em;
             }
 
@@ -189,8 +189,7 @@ export function generatePDFStyles(options: PDFStyleOptions): string {
 
             /* 行内代码样式 */
             code {
-              /* 使用包含中英文支持的等宽字体栈 */
-              font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", monospace;
+              font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", monospace;
               font-size: 85%;
               background-color: rgba(175, 184, 193, 0.2);
               padding: 0.2em 0.4em;

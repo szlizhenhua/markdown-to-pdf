@@ -37,11 +37,8 @@ export async function POST(request: Request) {
         ...chromium.args,
         '--font-render-hinting=medium',
         '--disable-lcd-text-aa',
-        '--enable-pixel-hit-testing',
         '--enable-font-antialiasing',
-        '--enable-subpixel-font-rendering',
-        '--force-color-profile=srgb',
-        '--disable-gpu-driver-bug-workarounds'
+        '--force-color-profile=srgb'
       ]
     } else {
       // 本地开发环境，查找系统安装的 Chrome
@@ -77,7 +74,6 @@ export async function POST(request: Request) {
           '--disable-dev-shm-usage',
           '--font-render-hinting=medium',
           '--enable-font-antialiasing',
-          '--enable-subpixel-font-rendering',
           '--force-color-profile=srgb'
         ]
       } catch {
