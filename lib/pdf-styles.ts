@@ -63,6 +63,24 @@ function getLatePdfSvgOverrideStyles(language?: string): string {
             .mermaid foreignObject p {
               font-family: ${sansFontStack} !important;
             }
+
+            .mermaid-gantt {
+              display: block;
+              padding-bottom: 26px;
+            }
+
+            .mermaid-gantt svg {
+              overflow: visible !important;
+            }
+
+            .mermaid-gantt .grid .tick text {
+              font-size: 10px !important;
+              letter-spacing: 0 !important;
+              text-anchor: end !important;
+              transform: translate(-2px, 10px) rotate(-35deg);
+              transform-box: fill-box;
+              transform-origin: center;
+            }
   `
 }
 

@@ -36,8 +36,10 @@ interface QuadrantChartData {
 }
 
 const MERMAID_SVG_FONT_STACK =
-  '"Noto Sans SC", "Noto Sans TC", "Noto Sans JP", "Noto Sans KR", "Noto Sans", "Noto Sans Arabic", "Noto Sans Devanagari", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif'
+  '"Noto Sans Arabic", "Noto Sans Hebrew", "Noto Sans Devanagari", "Noto Sans SC", "Noto Sans TC", "Noto Sans JP", "Noto Sans KR", "Noto Sans", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif'
 const RTL_TEXT_RE = /[\p{Script=Arabic}\p{Script=Hebrew}]/u
+const RADAR_LABEL_BOX_WIDTH = 108
+const RADAR_LABEL_BOX_HEIGHT = 52
 
 const escapeHtmlText = (value: string): string =>
   value
@@ -50,6 +52,27 @@ const escapeHtmlText = (value: string): string =>
 const getTextDirAttribute = (value: string): string => (RTL_TEXT_RE.test(value) ? 'rtl' : 'auto')
 const getSvgTextDirectionAttributes = (value: string): string =>
   RTL_TEXT_RE.test(value) ? ' direction="rtl" unicode-bidi="plaintext"' : ''
+const clampNumber = (value: number, min: number, max: number): number => Math.min(max, Math.max(min, value))
+
+const renderSvgHtmlLabel = ({
+  className,
+  text,
+  x,
+  y,
+  width,
+  height,
+}: {
+  className: string
+  text: string
+  x: number
+  y: number
+  width: number
+  height: number
+}): string => {
+  const dir = getTextDirAttribute(text)
+
+  return `<foreignObject x="${x}" y="${y}" width="${width}" height="${height}" overflow="visible"><div xmlns="http://www.w3.org/1999/xhtml" class="${className}" dir="${dir}">${escapeHtmlText(text)}</div></foreignObject>`
+}
 
 const parseFenceInfo = (line: string): { info: string; lang: string } | null => {
   const match = line.match(/^\s*```(?:\s*([^\n`]*))?\s*$/)
@@ -366,17 +389,18 @@ const buildRadarChartElement = (raw: string): HTMLElement => {
   container.style.flexDirection = 'column'
   container.style.alignItems = 'center'
   container.style.gap = '12px'
+  container.style.fontFamily = MERMAID_SVG_FONT_STACK
 
   if (!axes.length || !series.length) {
     container.textContent = raw
     return container
   }
 
-  const width = 360
-  const height = 360
-  const padding = 36
+  const width = 420
+  const height = 420
+  const padding = 84
   const centerX = width / 2
-  const centerY = height / 2 + 8
+  const centerY = height / 2 + 10
   const radius = Math.min(width, height) / 2 - padding
   const maxValue = Math.max(1, ...series.flatMap((item) => item.values))
   const levels = 5
@@ -399,7 +423,23 @@ const buildRadarChartElement = (raw: string): HTMLElement => {
     svg { font-family: ${MERMAID_SVG_FONT_STACK}; }
     .radar-grid polygon { fill: none; stroke: #CBD5E1; stroke-width: 1; }
     .radar-axes line { stroke: #CBD5E1; stroke-width: 1; }
-    .radar-axes text { fill: #1F2937; font-size: 12px; font-weight: 600; }
+    .radar-axis-label {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #1F2937;
+      font-family: ${MERMAID_SVG_FONT_STACK};
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.25;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      unicode-bidi: plaintext;
+    }
     .radar-shape { fill-opacity: 0.25; stroke-width: 2; }
   </style>`)
   svgParts.push('<g class="radar-grid">')
@@ -415,9 +455,20 @@ const buildRadarChartElement = (raw: string): HTMLElement => {
   svgParts.push('<g class="radar-axes">')
   axisPoints.forEach((point, index) => {
     svgParts.push(`<line x1="${centerX}" y1="${centerY}" x2="${point.x}" y2="${point.y}" />`)
-    const labelX = centerX + Math.cos(point.angle) * (radius + 14)
-    const labelY = centerY + Math.sin(point.angle) * (radius + 14)
-    svgParts.push(`<text x="${labelX}" y="${labelY}" text-anchor="middle"${getSvgTextDirectionAttributes(axes[index])}>${escapeHtmlText(axes[index])}</text>`)
+    const labelX = centerX + Math.cos(point.angle) * (radius + 26)
+    const labelY = centerY + Math.sin(point.angle) * (radius + 26)
+    const boxX = clampNumber(labelX - RADAR_LABEL_BOX_WIDTH / 2, 8, width - RADAR_LABEL_BOX_WIDTH - 8)
+    const boxY = clampNumber(labelY - RADAR_LABEL_BOX_HEIGHT / 2, 8, height - RADAR_LABEL_BOX_HEIGHT - 8)
+    svgParts.push(
+      renderSvgHtmlLabel({
+        className: 'radar-axis-label',
+        text: axes[index],
+        x: boxX,
+        y: boxY,
+        width: RADAR_LABEL_BOX_WIDTH,
+        height: RADAR_LABEL_BOX_HEIGHT,
+      })
+    )
   })
   svgParts.push('</g>')
 
@@ -467,6 +518,7 @@ const buildQuadrantChartElement = (raw: string): HTMLElement => {
   const { title, xAxis, yAxis, quadrants, points } = parseQuadrantChart(raw)
   const container = document.createElement('div')
   container.className = 'mermaid-quadrant'
+  container.style.fontFamily = MERMAID_SVG_FONT_STACK
 
   if (!points.length) {
     container.textContent = raw
@@ -575,8 +627,11 @@ const renderMermaidInContainer = async (root?: HTMLElement | null): Promise<void
     startOnLoad: false,
     theme: 'neutral',
     gantt: {
-      axisFormat: '%m-%d',
-      fontSize: 6,
+      axisFormat: '%m/%d',
+      fontSize: 10,
+      leftPadding: 84,
+      rightPadding: 28,
+      topPadding: 40,
     },
   })
 
@@ -601,6 +656,9 @@ const renderMermaidInContainer = async (root?: HTMLElement | null): Promise<void
     }
     const container = document.createElement('div')
     container.className = 'mermaid'
+    if (/^\s*gantt\b/i.test(raw)) {
+      container.classList.add('mermaid-gantt')
+    }
     container.dataset.raw = raw
     container.textContent = raw.replace(/^\s*quadrant[-\s]?chart/i, 'quadrantChart')
     pre.replaceWith(container)

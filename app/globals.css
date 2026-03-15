@@ -815,12 +815,48 @@
 .mermaid-container {
   margin: 1em 0;
   text-align: center;
-  font-family: "Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif;
+  font-family: "Noto Sans Arabic", "Noto Sans Hebrew", "Noto Sans Devanagari", "Noto Sans SC", "Noto Sans TC", "Noto Sans JP", "Noto Sans KR", "Noto Sans", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif;
 }
 
 .mermaid-diagram {
   display: inline-block;
   position: relative;
+}
+
+.mermaid,
+.mermaid-radar,
+.mermaid-quadrant {
+  font-family: "Noto Sans Arabic", "Noto Sans Hebrew", "Noto Sans Devanagari", "Noto Sans SC", "Noto Sans TC", "Noto Sans JP", "Noto Sans KR", "Noto Sans", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif;
+}
+
+.mermaid svg,
+.mermaid svg *,
+.mermaid-radar svg,
+.mermaid-radar svg *,
+.mermaid-quadrant svg,
+.mermaid-quadrant svg *,
+.mermaid foreignObject div,
+.mermaid-radar foreignObject div,
+.mermaid-quadrant foreignObject div {
+  font-family: "Noto Sans Arabic", "Noto Sans Hebrew", "Noto Sans Devanagari", "Noto Sans SC", "Noto Sans TC", "Noto Sans JP", "Noto Sans KR", "Noto Sans", "Inter", "PingFang SC", "Microsoft YaHei", "Heiti SC", sans-serif !important;
+}
+
+.mermaid-gantt {
+  display: block;
+  padding-bottom: 26px;
+}
+
+.mermaid-gantt svg {
+  overflow: visible !important;
+}
+
+.mermaid-gantt .grid .tick text {
+  font-size: 10px !important;
+  letter-spacing: 0 !important;
+  text-anchor: end !important;
+  transform: translate(-2px, 10px) rotate(-35deg);
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .mermaid-loading {
