@@ -40,6 +40,7 @@ const MERMAID_SVG_FONT_STACK =
 const RTL_TEXT_RE = /[\p{Script=Arabic}\p{Script=Hebrew}]/u
 const RADAR_LABEL_BOX_WIDTH = 108
 const RADAR_LABEL_BOX_HEIGHT = 52
+const LIST_SEPARATOR_RE = /[,，、،؛;]+/
 
 const escapeHtmlText = (value: string): string =>
   value
@@ -53,6 +54,25 @@ const getTextDirAttribute = (value: string): string => (RTL_TEXT_RE.test(value) 
 const getSvgTextDirectionAttributes = (value: string): string =>
   RTL_TEXT_RE.test(value) ? ' direction="rtl" unicode-bidi="plaintext"' : ''
 const clampNumber = (value: number, min: number, max: number): number => Math.min(max, Math.max(min, value))
+
+const normalizeNumericToken = (value: string): string =>
+  value
+    .replace(/[٠-٩]/g, (digit) => String(digit.charCodeAt(0) - 0x0660))
+    .replace(/[۰-۹]/g, (digit) => String(digit.charCodeAt(0) - 0x06f0))
+    .replace(/٪/g, '%')
+    .replace(/٫/g, '.')
+    .replace(/٬/g, '')
+
+const splitListItems = (value: string): string[] =>
+  value
+    .split(LIST_SEPARATOR_RE)
+    .map((item) => item.trim())
+    .filter(Boolean)
+
+const parseNumericList = (value: string): number[] =>
+  splitListItems(value)
+    .map((item) => Number.parseFloat(normalizeNumericToken(item).replace('%', '').trim()))
+    .filter((item) => !Number.isNaN(item))
 
 const renderSvgHtmlLabel = ({
   className,
@@ -266,9 +286,8 @@ const parseAxisLabels = (line: string): string[] => {
     return arrowParts
   }
   const fallback = cleaned
-    .split(/[,，、]/)
-    .map((part) => part.trim())
-    .filter(Boolean)
+    ? splitListItems(cleaned)
+    : []
   return fallback.length >= 2 ? fallback : []
 }
 
@@ -332,20 +351,13 @@ const parseRadarChart = (raw: string): RadarChartData => {
       return
     }
     if (/^axis\s+/i.test(line) || /^axes\s+/i.test(line)) {
-      axes = line
-        .replace(/^axes?\s*[:：]?\s*/i, '')
-        .split(/[,，、]/)
-        .map((item) => item.trim())
-        .filter(Boolean)
+      axes = splitListItems(line.replace(/^axes?\s*[:：]?\s*/i, ''))
       return
     }
     const match = line.match(/^series\s+(.+?)\s*[\[{](.+)[}\]]\s*$/i)
     if (match) {
       const name = match[1].trim()
-      const values = match[2]
-        .split(/[,，、]/)
-        .map((value) => Number.parseFloat(value.replace('%', '').trim()))
-        .filter((value) => !Number.isNaN(value))
+      const values = parseNumericList(match[2])
       series.push({ name, values })
       return
     }
@@ -353,10 +365,7 @@ const parseRadarChart = (raw: string): RadarChartData => {
       const altMatch = line.match(/^(.+?)\s*[\[{](.+)[}\]]\s*$/)
       if (altMatch) {
         const name = altMatch[1].trim()
-        const values = altMatch[2]
-          .split(/[,，、]/)
-          .map((value) => Number.parseFloat(value.replace('%', '').trim()))
-          .filter((value) => !Number.isNaN(value))
+        const values = parseNumericList(altMatch[2])
         if (values.length) {
           series.push({ name, values })
         }
