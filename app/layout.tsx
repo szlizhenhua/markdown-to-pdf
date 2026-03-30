@@ -145,14 +145,14 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        {/* monetag 广告脚本 */}
+        {/* monetag 广告脚本
         <Script
           id="monetag-multitag"
           src="https://quge5.com/88/tag.min.js"
           data-zone="193056"
           data-cfasync="false"
           strategy="afterInteractive"
-        />
+        /> */}
       </head>
       <body
         className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}
